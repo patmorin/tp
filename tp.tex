@@ -74,7 +74,7 @@
 \newrobustcmd{\onesub}{\mathord{\includegraphics{figs/one-sub}}}
 \newrobustcmd{\leftup}{\mathord{\includegraphics{figs/left-up}}}
 
-\title{\MakeUppercase{Bad News for Product Structure}\thanks{This research was partly funded by NSERC.}}
+\title{\MakeUppercase{Bad News for Product Structure of Bounded-Degree Graphs}\thanks{This research was partly funded by NSERC.}}
 % \author{Prosenjit~Bose, Vida~Dujmović, Hussein~Houdrouge, Mehrnoosh~Javarsineh, and Pat~Morin}
 \author{TBD}
 
@@ -95,12 +95,50 @@
 
 \section{Introduction}
 
-We make use of the following theorem, due to \citet{ding.oporowski:some} (see also \citet{wood:on}).\footnote{References \cite{ding.oporowski:some,wood:on} state \cref{tree_partition_theorem} in terms of tree partition width. It is straightforward to verify, using only the definitions of tree partition width and strong product that the two statements are equivalent.}
+For two graphs $G_1$ and $G_2$ we use the notation $G_1=G_2$ to mean that $G_1$ and $G_2$ are isomorphic and the notation $G_1\subseteq G_2$ to mean that $G_1$ is isomorphic to some subgraph of $G_2$.  Note that, with this definition, the strong product of graphs is commutative, i.e., $G_1\boxtimes G_2=G_2\boxtimes G_1$.
+
+We say that a graph $G$ is a \emph{max-degree-$\Delta$ graph} if $\Delta \le \max\{\deg_G(v):v\in V(G)\}$.
+
+For any positive integer $p$, $K_p$ denotes the complete graph on $p$ vertices.  Note that for any positive integers $p$ and $q$, $K_{p}\boxtimes K_{q}=K_{pq}$.
+
+\begin{thm}\label{treewidth_1_bounded_degree}
+  For every integer $n\ge 1$, there exists an $n$-vertex max-degree-$5$ planar graph $G$ such that, for any treewidth-$t$ max-degree-$\Delta$ graph $H$, $G\subseteq T\boxtimes P\boxtimes K_r$ implies that $r\ge n^{1-O(\log (t\Delta)/\log\log n)}$.
+\end{thm}
+
+To obtain a short proof of \cref{treewidth_1_bounded_degree}, we make use of the following theorem, due to \citet{ding.oporowski:some} (see also \citet{wood:on}).\footnote{References \cite{ding.oporowski:some,wood:on} state \cref{tree_partition_theorem} in terms of tree partition width. It is straightforward to verify, using only the definitions of tree partition width and strong product that the two statements are equivalent.}
 
 \begin{thm}[\citet{ding.oporowski:some}]\label{tree_partition_theorem}
-  There exists a constants $a,b>0$ such that, for any graph $G$ of treewidth $t$ and any maximum degree $\Delta$, there exists a tree $T$ of maximum degree $at\Delta$ such that $G$ is a subgraph of $T\boxtimes K_{bt\Delta}$.\todo{Is this true for }
+  There exists a constants $a,b>0$ such that, for any treewidth-$t$ max-degree-$\Delta$ graph $G$, there exists a max-degree-$at\Delta$ tree $T$ such that $G\subseteq T\boxtimes K_{bt\Delta}$.\todo{\cite{ding.oporowski:some,wood:on} don't mention the degree of $T$. Reference?}
 \end{thm}
 
 
+\begin{cor}
+  There exists a constants $a,b>0$ such that, for any treewidth-$t$ maximum-degree-$\Delta$ graph of $H$, any path $P$, and any $r\ge 1$, there exists a max-degree-$at\Delta$ tree $T$ such that
+  $H\boxtimes P\boxtimes K_r = T\boxtimes P\boxtimes K_{rbt\Delta}$.
+\end{cor}
+
+\begin{proof}
+  Apply \cref{tree_partition_theorem} to $H$ to obtain a maximum-degree-$a\Delta$ tree $T$ such that $H\subseteq T\boxtimes K_{bt\Delta}$.  Then $H\boxtimes P\boxtimes K_{c} = T\boxtimes K_{bt\Delta}\boxtimes P\boxtimes K_c=T\boxtimes P\boxtimes K_{cbt\Delta}$.
+\end{proof}
+
+\begin{lem}\label{easy_version}
+  There exists an $n$-vertex max-degree-$5$ planar graph $G$ such that, for any max-degree-$\Delta$ tree $T$, $G\subseteq T\boxtimes P\boxtimes K_r$ implies that $r\ge n^{1-O(\log\Delta/\log\log n)}$.
+\end{lem}
+
+Before proving \cref{easy_version}, we show how it implies \cref{treewidth_1_bounded_degree}.
+
+\begin{proof}[Proof of \cref{treewidth_1_bounded_degree}]
+  Let $G$ be the graph whose existence is the subject of \cref{easy_version}.
+  Let $H$ be a treewidth-$t$ max-degree-$\Delta$ graph such that $G\subseteq H\boxtimes P\boxtimes K_r$.  Then, by \cref{easy_version}, there exists a max-degree-$at\Delta$ tree $T$ such that $G\subseteq T\boxtimes P\boxtimes K_{brt\Delta}$.  Then $brt\Delta = n^{1-O(\log\Delta/\log\log n)}$, so $r\ge n^{1-O(\log (t\Delta)/\log\log n)}$.
+\end{proof}
+
+\begin{proof}[Proof of \cref{easy_version}]
+  For simplicity, let $n=2^{h+1}-1$, and let $G_0$ be the complete ordered binary tree of height $H$ (so $G_0$ has exactly $n$ vertices).  Define $G$ to be the supergraph of $G_0$ obtained by adding the edges of a path $P_i$ through all the nodes of depth $h-i$ in $G_0$, for each $i\in\{0,\ldots,h-1\}$.\todo{Show figure}.  Suppose $G\subseteq T\boxtimes P\boxtimes K_r$.  Fix an injection $\rho:V(G)\to V(T\boxtimes P\boxtimes K_r)$ that witnesses the fact that $G$ is a subgraph of $T\boxtimes P\boxtimes K_r$. Consider the path $P_0$ 
+\end{proof}
+
+
+
+\bibliographystyle{plainurlnat}
+\bibliography{tp}
 
 \end{document}
