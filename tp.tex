@@ -1,0 +1,106 @@
+\documentclass{patmorin}
+\listfiles
+\usepackage{pat}
+\usepackage{paralist}
+\usepackage{dsfont}  % for \mathds{A}
+\usepackage[utf8x]{inputenc}
+\usepackage{skull}
+\usepackage{paralist}
+\usepackage{graphicx}
+\usepackage[noend]{algorithmic}
+\usepackage{bbm}  % needed for \mathbbm{1}
+\usepackage{listings}
+
+\usepackage[normalem]{ulem}
+\usepackage{cancel}
+%\usepackage{enumitem}
+
+\usepackage{todonotes}
+
+% etoolbox allows for robust commands that don't need \protect, e.g.
+% \newrobustcmd{\onesub}{\mathord{\includegraphics{figs/one-sub}}}
+% \subsection{Approximate Voronoi Diagrams in $G^{\onesub}_k$}
+\usepackage{etoolbox}
+
+\usepackage[longnamesfirst,numbers,sort&compress]{natbib}
+
+\usepackage[mathlines]{lineno}
+\setlength{\linenumbersep}{2em}
+% \linenumbers
+% \rightlinenumbers
+% \linenumbers
+\newcommand*\patchAmsMathEnvironmentForLineno[1]{%
+ \expandafter\let\csname old#1\expandafter\endcsname\csname #1\endcsname
+ \expandafter\let\csname oldend#1\expandafter\endcsname\csname end#1\endcsname
+ \renewenvironment{#1}%
+    {\linenomath\csname old#1\endcsname}%
+    {\csname oldend#1\endcsname\endlinenomath}}%
+\newcommand*\patchBothAmsMathEnvironmentsForLineno[1]{%
+ \patchAmsMathEnvironmentForLineno{#1}%
+ \patchAmsMathEnvironmentForLineno{#1*}}%
+\AtBeginDocument{%
+\patchBothAmsMathEnvironmentsForLineno{equation}%
+\patchBothAmsMathEnvironmentsForLineno{align}%
+\patchBothAmsMathEnvironmentsForLineno{flalign}%
+\patchBothAmsMathEnvironmentsForLineno{alignat}%
+\patchBothAmsMathEnvironmentsForLineno{gather}%
+\patchBothAmsMathEnvironmentsForLineno{multline}%
+}
+
+\newcommand{\vol}[1]{\boxplus_{#1}}
+
+
+\DeclareMathOperator{\interior}{Int}
+
+% Taken from
+% https://tex.stackexchange.com/questions/42726/align-but-show-one-equation-number-at-the-end
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\definecolor{brightmaroon}{rgb}{0.76, 0.13, 0.28}
+\definecolor{linkblue}{rgb}{0, 0.337, 0.227}
+\newcommand{\defin}[1]{\emph{\color{brightmaroon}#1}}
+\setlength{\parskip}{1ex}
+
+% Document-specific commands and math operators
+\DeclareMathOperator{\tw}{tw}
+\DeclareMathOperator{\td}{td}
+\DeclareMathOperator{\chicen}{\chi_{\mathrm{cen}}}
+\DeclareMathOperator{\chilin}{\chi_{\mathrm{lin}}}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\vor}{Vor}
+
+\DeclareMathOperator{\binomial}{binomial}
+
+\newrobustcmd{\onesub}{\mathord{\includegraphics{figs/one-sub}}}
+\newrobustcmd{\leftup}{\mathord{\includegraphics{figs/left-up}}}
+
+\title{\MakeUppercase{Bad News for Product Structure}\thanks{This research was partly funded by NSERC.}}
+% \author{Prosenjit~Bose, Vida~Dujmović, Hussein~Houdrouge, Mehrnoosh~Javarsineh, and Pat~Morin}
+\author{TBD}
+
+\DeclareMathOperator{\VE}{\mathit{VE}}
+
+\date{}
+
+
+\begin{document}
+
+\maketitle
+\renewcommand{\E}{\mathbb{E}}
+\renewcommand{\Pr}{\mathbb{P}}
+
+\begin{abstract}
+  We give an example of a family $\mathcal{G}$ of planar graphs of maximum degree $5$ such that, for any tree $T$, any path $P$, and any clique $K$, there exists a member of $\mathcal{G}$ that is not isomorphic to any subgraph of $T\boxtimes P\boxtimes K$.
+\end{abstract}
+
+\section{Introduction}
+
+We make use of the following theorem, due to \citet{ding.oporowski:some} (see also \citet{wood:on}).\footnote{References \cite{ding.oporowski:some,wood:on} state \cref{tree_partition_theorem} in terms of tree partition width. It is straightforward to verify, using only the definitions of tree partition width and strong product that the two statements are equivalent.}
+
+\begin{thm}[\citet{ding.oporowski:some}]\label{tree_partition_theorem}
+  There exists a constants $a,b>0$ such that, for any graph $G$ of treewidth $t$ and any maximum degree $\Delta$, there exists a tree $T$ of maximum degree $at\Delta$ such that $G$ is a subgraph of $T\boxtimes K_{bt\Delta}$.\todo{Is this true for }
+\end{thm}
+
+
+
+\end{document}
