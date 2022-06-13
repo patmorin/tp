@@ -75,9 +75,17 @@
 \newrobustcmd{\onesub}{\mathord{\includegraphics{figs/one-sub}}}
 \newrobustcmd{\leftup}{\mathord{\includegraphics{figs/left-up}}}
 
-\title{\MakeUppercase{Bad News for Product Structure of Bounded-Degree Graphs}\thanks{This research was partly funded by NSERC.}}
+\title{\MakeUppercase{Bad News for Product Structure of Bounded-Degree Graphs}}
 % \author{Prosenjit~Bose, Vida~Dujmović, Hussein~Houdrouge, Mehrnoosh~Javarsineh, and Pat~Morin}
-\author{TBD}
+\author{%
+  Prosenjit Bose\thanks{School of Computer Science, Carleton University, Ottawa, Canada}\, \thanks{Research partly supported by NSERC.} \quad
+  Gwenaël Joret\thanks{Affilation/funding} \quad
+  Vida Dujmović\thanks{Department of Computer Science and Electrical Engineering, University of Ottawa, Ottawa, Canada.}\,\, \footnotemark[2] \quad
+  Piotr Micek\thanks{Affilation/funding}\quad
+  Pat Morin\footnotemark[1]\, \footnotemark[2] \quad
+  
+  David R. Wood\thanks{School of Mathematics, Monash University, Melbourne, Australia (\texttt{david.wood@monash.edu}). Research supported by the Australian Research Council.
+}}
 
 \DeclareMathOperator{\VE}{\mathit{VE}}
 
@@ -101,13 +109,14 @@ Recently, product structure theorems and the related notion of row treewidth hav
   \item for each $v\in V(H)$, the induced subgraph $T[x\in V(T):v\in B_x]$ is connected; and
   \item for each edge $vw\in E(H)$, there exists some $x\in V(T)$ with $\{v,w\}\subseteq B_x$.
 \end{inparaenum}
-The \defin{width} of a tree decomposition of $\mathcal{T}$ is $\max\{|B_x|:x\in V(T)\}-1$. The \defin{treewidth} of $H$ is the minimum width of any tree decomposition of $H$.}  This is typically written as $G\subseteq H\boxtimes P\boxtimes K$.\footnote{The \defin{strong product} $G_1\boxtimes G_2$ of two graphs $G_1$ and $G_2$ is the graph with vertex set $V(G_1\boxtimes G_2):=V(G_1)\times V(G_2)$ and that includes the edge with endpoints $(v,x)$ and $(w,y)$ if and only if
+The \defin{width} of a tree decomposition of $\mathcal{T}$ is $\max\{|B_x|:x\in V(T)\}-1$. The \defin{treewidth} of $H$ is the minimum width of any tree decomposition of $H$.}\footnote{The \defin{strong product} $G_1\boxtimes G_2$ of two graphs $G_1$ and $G_2$ is the graph with vertex set $V(G_1\boxtimes G_2):=V(G_1)\times V(G_2)$ and that includes the edge with endpoints $(v,x)$ and $(w,y)$ if and only if
 \begin{inparaenum}[(i)]
   \item $vw\in E(G_1)$ and $x=y$;
   \item $v=w$ and $xy\in E(G_2)$; or
   \item $vw\in E(G_1)$ and $xy\in E(G_2)$.
 \end{inparaenum}
 }
+This is typically written as $G\subseteq H\boxtimes P\boxtimes K$, where the notation $G_1\subseteq G_2$ is used to mean that $G_1$ is isomorphic to some subgraph of $G_2$.
 
 In applications of product structure theorems, it is often helpful if, in addition to having treewidth $t$, the graph $H$ has additional useful properties, possibly inherited from $G$.  For example, one very useful version of the planar product structure theorem states that for every planar graph $G$ there exists $H$ and $P$ with $G\subseteq H\boxtimes P\boxtimes K_3$ where the treewidth of $H$ is at most $3$ and $H$ is also \emph{planar}.  The planarity of $H$ in this result has been leveraged to obtain better constants and even asymptotic improvements for a number of graph colouring and layout problems.
 
@@ -119,7 +128,7 @@ In this note we show that, unfortunately, the answer to this question is no, by 
 % , even with $\Delta=5$.  We give a family of max-degree-$5$ planar graphs such that if an $n$-vertex member of this family is a subgraph of $H\boxtimes P\boxtimes K$ where $H$ has treewidth $t$, $H$ has maximum degree $\Delta$, and $K$ is a clique of order $r$, then $\log(r\Delta t)\in\Omega(\log\log n)$. In particular, we prove the following theorem:
 
 \begin{thm}\label{treewidth_1_bounded_degree}
-  For infinitely many integers $n\ge 1$, there exists an $n$-vertex max-degree-$5$ planar graph $G$ such that, for any treewidth-$t$ max-degree-$\Delta$ graph $H$, any path $P$, and any integer $r$,  $G\subseteq T\boxtimes P\boxtimes K_r$ implies that $\log(t\Delta r)\in\Omega(\log n)$.
+  For infinitely many integers $n\ge 1$, there exists an $n$-vertex max-degree-$5$ planar graph $G$ such that, for any treewidth-$t$ max-degree-$\Delta$ graph $H$, any path $P$, and any integer $r$,  if $G\subseteq H\boxtimes P\boxtimes K_r$ then $\log(t\Delta r)\in\Omega(\log n)$.
 \end{thm}
 
 \section{Proof of \cref{treewidth_1_bounded_degree}}
@@ -134,7 +143,7 @@ To obtain a short proof of \cref{treewidth_1_bounded_degree}, we make use of the
   There exists a constant $c>0$ such that, for any treewidth-$t$ max-degree-$\Delta$ graph $G$, there exists a max-degree-$ct\Delta^2$ tree $T$ such that $G\subseteq T\boxtimes K_{ct\Delta}$.\todo{\cite{ding.oporowski:some,wood:on} don't mention the degree of $T$, but $ct\Delta^2$ is obvious, easy, and good enough. Reference?}
 \end{thm}
 
-\cref{tree_partition_theorem} allows us to prove \cref{treewidth_1_bounded_degree} by focusing on case in which $H$ has treewidth $1$, because of the following corollary:
+\cref{tree_partition_theorem} allows us to prove \cref{treewidth_1_bounded_degree} by focusing on the case in which $H$ has treewidth $1$, because of the following corollary:
 
 \begin{cor}\label{tree_partition_corollary}
   There exists a constant $c>0$ such that, for any treewidth-$t$ maximum-degree-$\Delta$ graph $H$, any path $P$, and any $r\ge 1$, there exists a max-degree-$ct\Delta^2$ tree $T$ such that $H\boxtimes P\boxtimes K_r \subseteq T\boxtimes P\boxtimes K_{crt\Delta}$.
@@ -147,7 +156,7 @@ To obtain a short proof of \cref{treewidth_1_bounded_degree}, we make use of the
 Thus, we establish \cref{treewidth_1_bounded_degree} using the following lemma.
 
 \begin{lem}\label{easy_version}
-  For infinitely many positive integers $n$, there exists an $n$-vertex max-degree-$5$ planar graph $G$ such that, for any max-degree-$\Delta$ tree $T$, $G\subseteq T\boxtimes P\boxtimes K_r$ implies that $\log (\Delta r)\ge (1-o(1))\log n$.
+  For infinitely many positive integers $n$, there exists an $n$-vertex max-degree-$5$ planar graph $G$ such that, for any max-degree-$\Delta$ tree $T$, if $G\subseteq T\boxtimes P\boxtimes K_r$ then $\log (\Delta r)\ge (1-o(1))\log n$.
 \end{lem}
 
 Before proving \cref{easy_version}, we show how it implies \cref{treewidth_1_bounded_degree}.
@@ -159,7 +168,7 @@ Before proving \cref{easy_version}, we show how it implies \cref{treewidth_1_bou
 \begin{proof}[Proof of \cref{easy_version}]
   Let $n:=2^{h+1}-1$ for some large positive integer $h$, and let $G_0$ be a complete binary tree of height $h$ (so $G_0$ has exactly $n$ vertices and $2^h$ leaves).  Define $G$ to be the supergraph of $G_0$ obtained by adding, for each $i\in\{0,\ldots,h\}$, the edges of a path $P_i$ that contains all $2^{h-i}$ nodes of depth $h-i$ in $G_0$.  Observe that $\diam(G)\le\diam(G_0)=2h$.
 
-  Now suppose $G\subseteq T\boxtimes P\boxtimes K_r$ and fix a homomorphism $\rho:V(G)\to V(T\boxtimes P\boxtimes K_r)$.  For two vertices $v$ and $w$ of $G$ with $\rho(v):=(v_1,v_2,v_3)$ and $\rho(w):=(w_1,w_2,w_3)$ we call $v_1$, $v_2$, and $v_3$ the \defin{projections} of $v$ onto $T$, $P$, and $K_r$, respectively.  For simplicity, we define $\dist_T(v,w):=\dist_T(v_1,w_1)$ and $\dist_P(v,w):=\dist_P(v_2,w_2)$.  Then, by the definition of strong product, $\dist_G(v,w)\ge \max\{\dist_T(v,w),\dist_P(v,w)\}$.  Since $\diam(G)\le 2h$, this allows us to assume that $\diam(P)\le 2h$ and that $\diam(T)\le 2h$.  The former inequality implies that $|V(P)|\le 2h+1$.  However, the latter inequality only implies that $|V(T)|\in O(n^2)$, which is insufficient for our purposes.
+  Now suppose $G\subseteq T\boxtimes P\boxtimes K_r$ and fix an injective homomorphism $\rho:V(G)\to V(T\boxtimes P\boxtimes K_r)$.  For two vertices $v$ and $w$ of $G$ with $\rho(v):=(v_1,v_2,v_3)$ and $\rho(w):=(w_1,w_2,w_3)$ we call $v_1$, $v_2$, and $v_3$ the \defin{projections} of $v$ onto $T$, $P$, and $K_r$, respectively.  For simplicity, we define $\dist_T(v,w):=\dist_T(v_1,w_1)$ and $\dist_P(v,w):=\dist_P(v_2,w_2)$.  Then, by the definition of strong product, $\dist_G(v,w)\ge \max\{\dist_T(v,w),\dist_P(v,w)\}$.  Since $\diam(G)\le 2h$, this allows us to assume that $\diam(P)\le 2h$ and that $\diam(T)\le 2h$.  The former inequality implies that $|V(P)|\le 2h+1$.  However, the latter inequality only implies that $|V(T)|\in O(n^2)$, which is insufficient for our purposes.
 
   Our strategy will be to show that the projection of $P_0$ onto $T$ defines a subtree $T'\subseteq T$ with $|V(T')|\le \Delta^{O(h/\log h)}$.  Since $\rho$ is injective, $2^h=|V(P_0)|\le |V(T'\boxtimes P\boxtimes K_r)|$. Therefore,
   \[
@@ -197,7 +206,7 @@ Before proving \cref{easy_version}, we show how it implies \cref{treewidth_1_bou
 By \cref{tree_partition_theorem}, \cref{treewidth_1_bounded_degree} is equivalent to \cref{easy_version}, which states that there are planar max-degree-$5$ graphs $G$ that are not subgraphs of $T\boxtimes P\boxtimes K_r$ unless the degree $\Delta$ of $T$ is large or the order $r$ of the clique $K_r$ is large.  In this section, we strengthen \cref{treewidth_1_bounded_degree} by showing that the result holds even if we allow the degree $\Delta$ of $T$ to be arbitrarily large.
 
 \begin{lem}\label{hard_version}
-  There exists a constant $\epsilon >0$ such that, for infinitely many positive integers $n$, there exists an $n$-vertex max-degree-$5$ planar graph $G$ such that, for any tree $T$, $G\subseteq T\boxtimes P\boxtimes K_r$ implies that $r\in\Omega(\log^\varepsilon n)$.
+  There exists a constant $\epsilon >0$ such that, for infinitely many positive integers $n$, there exists an $n$-vertex max-degree-$5$ planar graph $G$ such that, for any tree $T$, if $G\subseteq T\boxtimes P\boxtimes K_r$ then $r\in\Omega(\log^\varepsilon n)$.
 \end{lem}
 
 \begin{proof}
@@ -246,7 +255,7 @@ By \cref{tree_partition_theorem}, \cref{treewidth_1_bounded_degree} is equivalen
 We know that every planar graph $G$ is contained in a product of the form $H\boxtimes P\boxtimes K_3$ where $\tw(H)\le 3$. \cref{hard_version} states that, for any $r$, there exists a max-degree-$5$ planar that is not contained in any product of the form $T\boxtimes P\boxtimes K_r$ where $T$ is a tree.  This leaves the treewidth-$2$ case open:
 
 \begin{quote}
-  Is it the case that any max-degree-$\Delta$ planar graph $G$ is contained in a product of the form $H\boxtimes P\boxtimes K_r$ where $\tw(H)\le 2$ and $r$ is upper by functions of $\Delta$?
+  Is it the case that any max-degree-$\Delta$ planar graph $G$ is contained in a product of the form $H\boxtimes P\boxtimes K_r$ where $\tw(H)\le 2$ and $r$ is upper by some function of $\Delta$?
 \end{quote}
 
 \bibliographystyle{plainurlnat}
