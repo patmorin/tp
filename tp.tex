@@ -205,9 +205,12 @@ Before proving \cref{easy_version}, we show how it implies \cref{treewidth_1_bou
 
 By \cref{tree_partition_theorem}, \cref{treewidth_1_bounded_degree} is equivalent to \cref{easy_version}, which states that there are planar max-degree-$5$ graphs $G$ that are not subgraphs of $T\boxtimes P\boxtimes K_r$ unless the degree $\Delta$ of $T$ is large or the order $r$ of the clique $K_r$ is large.  In this section, we strengthen \cref{treewidth_1_bounded_degree} by showing that the result holds even if we allow the degree $\Delta$ of $T$ to be arbitrarily large.
 
+
 \begin{lem}\label{hard_version}
   There exists a constant $\epsilon >0$ such that, for infinitely many positive integers $n$, there exists an $n$-vertex max-degree-$5$ planar graph $G$ such that, for any tree $T$, if $G\subseteq T\boxtimes P\boxtimes K_r$ then $r\in\Omega(\log^\varepsilon n)$.
 \end{lem}
+
+\todo[inline]{This whole section could use some work.  At the very least, we probably want a lemma/observation which states that if $W_{i-1}$ crosses an edge $vw$ of $T$ then $W_i$ visits at least one of $v$ or $w$.}
 
 \begin{proof}
   Let $G$, $P_0,\ldots,P_h$, and $d_0,\ldots,d_h$, $\rho$, and $T'$ be exactly as in the proof of \cref{easy_version}.  The same arguments used there also apply here to establish that $|V(P)|\le 2h+1$ and that $\diam(T')\in O(h/\log h)$.  However, without any bound on the maximum degree of $T$, it is no longer possible to establish a useful upper bound on $|V(T')|$.
