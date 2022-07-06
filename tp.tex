@@ -70,6 +70,8 @@
 \DeclareMathOperator{\diam}{diam}
 \DeclareMathOperator{\vor}{Vor}
 
+% \newcommand{\SS}{\mathcal{S}}
+
 \DeclareMathOperator{\binomial}{binomial}
 
 \newrobustcmd{\onesub}{\mathord{\includegraphics{figs/one-sub}}}
@@ -83,9 +85,8 @@
   Vida Dujmović\thanks{Department of Computer Science and Electrical Engineering, University of Ottawa, Ottawa, Canada.}\,\, \footnotemark[2] \quad
   Piotr Micek\thanks{Affilation/funding}\quad
   Pat Morin\footnotemark[1]\, \footnotemark[2] \quad
-  
-  David R. Wood\thanks{School of Mathematics, Monash University, Melbourne, Australia (\texttt{david.wood@monash.edu}). Research supported by the Australian Research Council.
-}}
+  David R. Wood\thanks{School of Mathematics, Monash University, Melbourne, Australia (\texttt{david.wood@monash.edu}). Research supported by the Australian Research Council.}
+}
 
 \DeclareMathOperator{\VE}{\mathit{VE}}
 
@@ -128,8 +129,83 @@ In this note we show that, unfortunately, the answer to this question is no, by 
 % , even with $\Delta=5$.  We give a family of max-degree-$5$ planar graphs such that if an $n$-vertex member of this family is a subgraph of $H\boxtimes P\boxtimes K$ where $H$ has treewidth $t$, $H$ has maximum degree $\Delta$, and $K$ is a clique of order $r$, then $\log(r\Delta t)\in\Omega(\log\log n)$. In particular, we prove the following theorem:
 
 \begin{thm}\label{treewidth_1_bounded_degree}
-  For infinitely many integers $n\ge 1$, there exists an $n$-vertex max-degree-$5$ planar graph $G$ such that, for any treewidth-$t$ max-degree-$\Delta$ graph $H$, any path $P$, and any integer $r$,  if $G\subseteq H\boxtimes P\boxtimes K_r$ then $\log(t\Delta r)\in\Omega(\log n)$.
+  For infinitely many integers $n\ge 1$, there exists an $n$-vertex max-degree-$5$\todo{change this} planar graph $G$ such that, for any treewidth-$t$ max-degree-$\Delta$ graph $H$, any path $P$, and any integer $r$,  if $G\subseteq H\boxtimes P\boxtimes K_r$ then $\log(t\Delta r)\in\Omega(\log n)$.
 \end{thm}
+
+\section{The New Proof}
+
+Let $G_0$ be a complete $b$-ary tree of height $h$ and let $G$ be a planar supergraph of $G_0$ obtained by adding a path $P_i$ that contains all vertices of depth $i$, for each $i\in\{1,\ldots,h\}$.  For each $i\in\{0,\ldots,h\}$ let $V_i$ denote the set of $b^i$ vertices that have depth $i$ in $G_0$.  The following basic property of $G$ will be useful.
+
+\begin{lem}\label{subtree_splitting}
+  Let $p\in\{1,\ldots,h\}$, let $\{v_1,\ldots,v_r\}$ be a set of vertices of $G_0$, none of which is an ancestor of any other.  For each $i\in\{1,\ldots,r\}$ let $d_i\le h-p$ be the depth of $v_i$ and let $T_i$ be a subgraph of $G_0$ consisting of a complete $3$-ary tree of height $h-d_i$ rooted at $v_i$ and let $v_{i,1},v_{i,2},v_{i,3}$ be the three children of $v_i$ in $T_i$ and let $T_{i,1},T_{i,2},T_{i,3}$ denote the corresponding subtrees.  Let $S\subseteq V(G)\setminus(\bigcup_{j=1}^3\bigcup_{i=1}^r V(T_{i,j}))$ be such that no component of $G-S$ contains $T_{i,1},T_{i,2},T_{i+3},\ldots,T_{i+q-1,1},T_{i+q-1,2},T_{i+q-1,3}\}$ for any $i\in\{1,\ldots,r-q+1\}$.  Then $|S|\cap V_t\ge \lfloor r/q\rfloor$ for each $t\in\{h-p+1,\ldots,h\}$.
+\end{lem}
+
+\begin{proof}
+  Since none of $v_1,\ldots,v_r$ is an ancestor of any other, there is a natural left to right order on the subtrees $T_1,\ldots,T_r$. More precisely, we may assume that all the leaves of $T_i$ appear in $P_h$ before all the leaves of $T_{i+1}$, for each $i\in\{1,\ldots,r-1\}$.
+
+  Since $S$ contains no vertices of $T_{i,j}$, $T_{i,j}$ is contained in a single component of $G-S$, for each $i,j\in\{1,\ldots,r\}\times\{1,2,3\}$.   Observe that, for each $i\in\{1,\ldots,r-1\}$, $G$ contains a set $X_{i,3}$ of $p$ vertex disjoint paths that begin at a vertex of $T_{i,3}$ and end at a vertex of $T_{i+1,1}$. There is one such path contained in $V_j$, for each $j\in\{h-p+1,h-p+1,\ldots,h\}$.  Similarly, $G$ contains a set $X_{i,j}$ of $p$ vertex disjoint paths that begin at a vertex of $T_{i,j}$ and end at a vertex of $T_{i,j+1}$ for each $i,j\in\{1,\ldots,r\}\times\{1,2\}$.\todo{make figure}  
+
+  Furthermore, for any $i,j\neq i',j'$ the paths in $X_{i,j}$ and $X_{i',j'}$ have no common internal vertices.  For any $t\in\{0,\ldots,\rfloor r/q\rfloor-1\}$, Since $T_{tq+1,1},T_{tq+1,2},T_{tq+1,3},\ldots,T_{(t+1)q,1},T_{(t+1)q,2},T_{(t+1)q,3}$ are not contained in a single component of $G-S$, $S$ must contain at least one internal vertex from each of the $p$ paths in $X_{i,j}$ for some $(i,j)\in\{tq+1,\ldots,(t+1)q\}\times\{1,2,3\}$.  Therefore $|S|\cap V_t\ge \lfloor r/q\rfloor$ for each $t\in\{h-p+1,\ldots,h\}$.\todo{Write the whole proof better. Probably not with $3$.}
+\end{proof}
+
+A set $\mathcal{R}:=\{R_1,\ldots,R_r\}$ of subsets of $V(G_0)$ is \defin{$k$-great}\todo{pick a better name} if it has the following properties:
+
+\begin{compactenum}
+  \item For each $i\in\{1,\ldots,r\}$, $|R_i|\ge k$.
+  \item For each $i\in\{1,\ldots,r\}$, all nodes in $R_i$ have the same depth $d_i$.
+  \item For each $1\le i<j\le r$, no node in $R_i$ is ancestor or descendant of a node in $R_j$.
+\end{compactenum}
+
+We say that a node $x\in V(T)$ is \defin{compatible} with a set $S\subseteq V(G_0)$ if the component of $G_0-(S\setminus\{x\})$ that contains $x$ contains at least $3^j$ depth-$(j-d_i)$ descendants of $x$, for each $j\in\{d_i,\ldots,h\}$.  (In other words, $G_0-(S\setminus\{x\})$ contains a complete ternary tree of height $h-d_i$ rooted at $x$.)  We say that $\mathcal{R}$ is compatible with $S$ if $\cup\mathcal{R}\subseteq S$ and $x$ is compatible with $S$ for each $x\in\cup\mathcal{R}$.  
+
+
+\begin{lem}\label{compatible_set}
+  Let $\mathcal{R}:=\{R_1,\ldots,R_r\}$ be a $k$-great set and let $S\supseteq \cup\mathcal{R}$ contain at most $w$\todo{condition on $w$} nodes of depth $i$, for each $i\in\{0,\ldots,h\}$.  Then there exists a $k/2$-great set $\mathcal{R}':=\{R_1',\ldots,R_r'\}$ that is compatible with $S$ and such that, for each $i\in\{1,\ldots,r\}$, the depth of the nodes in $R_i'$ exceeds the depth of the nodes in $R_i$ by at most $\log_2(w/k)\cdot\log_3(w/k(b-3))$.
+\end{lem}
+
+\begin{proof}
+  Suppose that $S$ is not compatible with $\mathcal{R}$ because $R_i$ contains fewer than $k/2$ nodes that are compatible with $S$.  Since $|R_i|\ge k$, this implies that at least $|R_i|/2$ nodes in $R_i$ are not compatible with $S$. Let $d_i$ be the depth of the nodes in $R_i$.  
+
+  Observe that, if $x\in R_i$ is not compatible with $S$ then, for some $\ell\ge 1$, $S$ contains $3^{\ell-1}(b-3)$ descendants of $x$ of depth $d+\ell$.  In this case we say that $x$ is an \defin{$\ell$-failure}. Since $S$ contains at most $w$ nodes of depth $d+\ell$, the number of $\ell$-failures is 
+  $f_\ell \le w/3^{\ell-1}(b-3)$.  This implies that there are no $\ell$-failures for any $\ell > \log_3 (w/(b-3)) + 1$.  Let $z:= \lfloor\log_3 (w/(b-3))\rfloor + 1$.
+
+  We claim that, for some $\ell\in\{1,\ldots,z\}$, $f_\ell \ge 8|R_i|/3^{\ell}(b-3)$.  Indeed, otherwise
+  \[
+    |R_i|/2 \le \sum_{\ell=1}^{z} f_\ell \le \frac{6|R_i|}{b-3}\cdot \sum_{\ell=1}^z 3^{-\ell} < \frac{6|R_i|}{b-3}\cdot \sum_{\ell=1}^\infty 3^{-\ell}
+    = \frac{6|R_i|}{2(b-3)}  \le  |R_i|/2
+  \]
+  for $b\ge 9$. Therefore, for some $\ell\in\{1,\ldots,z\}$, $f_\ell\cdot 3^{\ell-1}(b-3) \ge 2|R_i|$.  When this happens, we replace $R_i$ by the subset of $S$ containing the depth $d+\ell$ descendants of nodes in $R_i$.  This operation ensures that $\mathcal{R}$ is a $k$-great set, that $S\supseteq \cup\mathcal{R}$, that the size of $R_i$ increases by a factor of at least $2$ and increases the depth of $R_i$ by at most $z$. The new set $R_i$ may still have fewer than $k/2$ elements that are compatible with $S$, in which case we can repeat this operation.  Since $R_i\subseteq S$ and all nodes in $R_i$ have the same depth, we can repeat this process at most $\log_2(w/k)$ times before it must stop.  At this point, the resulting set $R_i$ contains at least $k/2$ elements that compatible with $S$ and has depth at most $z\log_2(w/k)$. By applying this procedure to each set $R_i$ that contains fewer than $k/2$ elements compatible with $S$ we obtain the desired $(k/2)$-great set $\mathcal{R}'$.
+\end{proof}
+
+For a vertex $v$ of $G$, let $N^\downarrow_{G}(v)$ denote the set of children of $v$ in $G_0$ and for a subset $S\subseteq V(G_0)$, let $N^\downarrow_G(S):=\bigcup_{v\in S}N^\downarrow_G(v)\setminus S$.
+
+\begin{obs}
+  Let $\mathcal{R}:=\{R_1,\ldots,R_r\}$ be a $k$-great that is compatible with some $S\supseteq \cup \mathcal{R}$ and where each $R_i$ has depth less than $h$.  Then $\mathcal{R}^{\downarrow}\{N^{\downarrow}_G(R_1),\ldots,N^{\downarrow}_G(R_r)\}$ is a $bk$-great set.
+\end{obs}
+
+
+
+% \begin{lem}
+%   Let $\mathcal{R}:=\{R_1,\ldots,R_r\}$ be a $k$-great that is compatible with some $S\supseteq \cup \mathcal{R}$ and such that $S$ contains at most $w$ elements of depth $i$ in $G_0$, for each $i\in\{0,\ldots,h\}$.  Then $G-\cup\mathcal{R}$ contains a component $C$
+% \end{lem}
+
+
+
+It is not difficult to show that $G$ has treewidth (and even pathwidth) at most $h$.  Therefore, by \cref{ding_opo}, $G\subseteq T\boxtimes K_{ch}$ for some tree $T$ and some fixed constant $c$.
+
+\begin{lem}
+  Let $L_0,\ldots,L_{2h}$ be any layering of $G$ and let $\phi:V(G)\to V(T\boxtimes K_{ch})$ be an injective homomorphism from $G$ to $T\boxtimes K_{ch}$. For each $x\in V(T)$, let $B_x := \phi^{-1}(\{x\}\times V(K_{ch}))$ be the set of vertices in $G$ that project onto $x$ in $T$.  Then exists some $x\in V(T)$ and some $i\in\{0,\ldots,2h\}$ such that $B_x\cap L_i\ge h^{\epsilon}$.\todo{Define $\epsilon$}
+\end{lem}
+
+\begin{proof}
+  We first consider the simpler case in which $L_0,\ldots,L_{2h}$ is the breadth-first layering in which $L_i$ contains all nodes of distance $i$ to the root of $G_0$.  (In this layering, $L_{h+1},\ldots,L_{2h}$ are all empty.)
+
+  It is well known, and easy to prove, that $T$ contains a node $x_{-1}$ such that $G-B_{x_{-1}}$ has no component of order greater than $2|V(T)|/3$.
+  Since $B_{x_{-1}}\cap V_h \le w$, there exists a subpath of $P_h$ of length at least $(b^h-w)/(w+1)$ that contains no vertices of $B_{x_{-1}}$.  Let $C$ be the component of $G-B_{x_{-1}}$ that contains this subpath.  We claim that $C$ contains $r\ge ah$ vertices $v_1,\ldots,v_r$ whose $G_0$ parents are in $B_{x_{-1}}$ and each having depth at most $(1-a)h$.\todo{Prove this.}  By definition, $v_1,\ldots,v_r$ are contained in $S_0:=B_{x_0}$ for some neighbour $x_0$ of $x_{-1}$.  Also by definition, $\{\{v_1\},\ldots,\{v_r\}\}$ is a $1$-great set $\mathcal{R}_0'$ contained in $S_0$.  Let $y:=\log_2(w)\cdot\log_3(w/(b-3))$.  Now apply \cref{compatible_set} to obtain a $1$-great set $\mathcal{R}_0$ that is compatible with $S_0$\todo{Put a ceiling in the statement and proof of \cref{compatible_set}} and in which every vertex has $G_0$-depth at most $(1-a)h+y$.  
+
+  For each vertex $v$ in $\mathcal{R}_0$, let $T_v$ denote the ternary tree guaranteed by the definition of compatibility and, for each $j\in\{1,2,3\}$, let $T_{v,j}$ denote the three maximal subtrees of $T_v$ rooted at the three children of $v$ in $T_v$.  By \cref{subtree_splitting}, there exists $r_1\ge r/(w+1)$ vertices $v$ in $\mathcal{R}_0$ and a component $C_1$ of $G-S_0$ such that $T_{v,1},T_{v,2},T_{v,3}$ are all contained in $C_1$.  Form the set $\mathcal{R}_1'$ from $\mathcal{R}_0$ by replacing each such $v$ with the three roots of $T_{v,1}$, $T_{v,2}$, and $T_{v,3}$.  Since each vertex of $\mathcal{R}_1'$ obtained this way is in $C_1$ and is ajacent to a vertex of $S_0$, $x_0$ has a neighbour $x_1$ in $T$ such that $S_1:=B_{x_1}$ contains $\cup\mathcal{R}_1'$.  That is, $\mathcal{R}_1$ is $3$-great set contained in $S_1$.  Now apply \cref{compatible_set} to obtain a $\lceil 3/2\rceil$-great set $\mathcal{R}_1$ that is compatible with $S_1$ and whose elements have depth at most $(1-a)h+2y$.  We can now iterate this process of obtaining $\mathcal{R}_{i+1}$ from $\mathcal{R}_i$.  After $t-1\le ah/y$ such iterations we obtain a $\lceil(3/2)^t\rceil$-great set $\mathcal{R}_t$ whose elements all belong to some $S_t:=B_{x_{t}}$ for some node $x_t$ of $T$.  But this means  
+\end{proof}
+
 
 \section{Proof of \cref{treewidth_1_bounded_degree}}
 
@@ -198,7 +274,7 @@ Before proving \cref{easy_version}, we show how it implies \cref{treewidth_1_bou
   \[
     d_0 \le 2^{h-\lfloor d_0/4\rfloor} + d_0/2 \le 2^{h-d_0/4+1} + d_0/2 \enspace .
   \]
-  Rewriting and simplifying gives $d_02^{d_0/4}\le 2^h$ which implies that $d_0 = O(h/\log h)$.  This completes the proof.
+  Rewriting and simplifying gives $d_02^{d_0/4}\le 2^h$ which implies that $d_0 = O(h/\log h)$.\todo{Big dumb mistake right here!}  This completes the proof.
 \end{proof}
 
 \section{A Strengthening of \cref{treewidth_1_bounded_degree}}
