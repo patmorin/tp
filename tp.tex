@@ -62,6 +62,7 @@
 \setlength{\parskip}{1ex}
 
 % Document-specific commands and math operators
+\DeclareMathOperator{\depth}{depth}
 \DeclareMathOperator{\tw}{tw}
 \DeclareMathOperator{\td}{td}
 \DeclareMathOperator{\chicen}{\chi_{\mathrm{cen}}}
@@ -144,36 +145,37 @@ In this note we show that, unfortunately, the answer to this question is no, by 
 \end{proof}
 
 
-Let $b\ge 9$ be an integer.  We will construct a family $\mathcal{G}:=\{G_h:h\in\N\}$ of planar graphs with the following property:  There exists a fixed $\epsilon >0$ such that, for any tree $T$, any path $P$, $G_h\subseteq T\boxtimes P\boxtimes K_c$ implies that $c\ge h^\epsilon$.  To define $G_h$, let $G_h^-$ be an ordered complete $b$-ary tree of height $h$ and let $G_h$ be a planar supergraph of $G_h^-$ obtained by adding a path $P_i$ that contains all vertices of depth $i$, in order for each $i\in\{1,\ldots,h\}$.   In the following, we drop the subscript $h$, so $G:=G_h$ and $G^-:=G^-_h$.
+Let $b\ge 9$ be an integer.  We will construct a family $\mathcal{G}:=\{G_h:h\in\N\}$ of planar graphs with the following property:  There exists a fixed $\epsilon >0$ such that, for any tree $T$, any path $P$, $G_h\subseteq T\boxtimes P\boxtimes K_c$ implies that $c\ge h^\epsilon$.  To define $G_h$, let $G_h^-$ be an ordered complete $b$-ary tree of height $h$ and let $G_h$ be a planar supergraph of $G_h^-$ obtained by adding a path $P_i$ that contains all vertices of depth $i$, in order, for each $i\in\{1,\ldots,h\}$.   In the following, we drop the subscript $h$, so $G:=G_h$ and $\Gamma:=\Gamma_h$.
 
 We now list some properties of $G$ that will be useful.  The following observation is an immediate consequence of \cref{diameter_spread}.
 
 \begin{obs}\label{ancestor_spread}
-  Let $R$ be a subset of $V(P_{i+\ell})$ having a common $G^-$-ancestor in $V(P_i)$.  Then, for any layering $\mathcal{L}$ of $G$, there exists a layer $L\in\mathcal{L}$ such that $|R\cap L|\ge |R|/(2\ell+1)$. 
+  Let $R$ be a subset of $V(P_{i+\ell})$ having a common $\Gamma$-ancestor in $V(P_i)$.  Then, for any layering $\mathcal{L}$ of $G$, there exists a layer $L\in\mathcal{L}$ such that $|R\cap L|\ge |R|/(2\ell+1)$. 
 \end{obs}
 
 
-\begin{lem}
+\begin{lem}\label{startup}
   For any $c>0$ there exists $\alpha,\beta>0$ such that the following is true.
   Let $\mathcal{T}:=(B_x:x\in V(T))$ be a tree partition of $G$ width at most $ch$.  Then there exists a node $x\in V(T)$ and a subset $R_0\subseteq B_x$ such that
   \begin{inparaenum}[(i)]
     \item no vertex in $R_0$ is an ancestor of any vertex in $R_0$; and
     \item $|R_0|\ge \alpha h$
-    \item Each node in $R_0$ has $G^-$-depth at most $(1-\beta)h$ 
+    \item Each node in $R_0$ has $\Gamma$-depth at most $(1-\beta)h$ 
   \end{inparaenum}
+  \todo{Prove this!}
 \end{lem}
 
 % \begin{proof}
-%   It is well-known and easy to show that there exists a node $x$ of $T$ such that $G-B_x$ has no component with more than $|G|/2$ vertices.  Since $B_x$ has size at most $ch$, there exists a subpath of $P_h$ having at least $b^h/(ch+1)-1$ vertices, so the component $C$ that contains this subpath has $b^h/(ch+1)-1\le |C|\ge |G|/2$.  We say that a vertex in $C$ is a \defin{boundary vertex} if it is adjacent to a vertex in $S$ and let $B$ be the set of boundary vertices in $C$.   We say that a vertex $v\in B$ is \defin{orphaned} if none $v$'s $G^-$-ancestors are in $C$ and $v$ is \defin{supervised} otherwise.  Observe that the set of orphaned vertices in $B$ satisifies requirement \label{genetically_indep}
+%   It is well-known and easy to show that there exists a node $x$ of $T$ such that $G-B_x$ has no component with more than $|G|/2$ vertices.  Since $B_x$ has size at most $ch$, there exists a subpath of $P_h$ having at least $b^h/(ch+1)-1$ vertices, so the component $C$ that contains this subpath has $b^h/(ch+1)-1\le |C|\ge |G|/2$.  We say that a vertex in $C$ is a \defin{boundary vertex} if it is adjacent to a vertex in $S$ and let $B$ be the set of boundary vertices in $C$.   We say that a vertex $v\in B$ is \defin{orphaned} if none $v$'s $\Gamma$-ancestors are in $C$ and $v$ is \defin{supervised} otherwise.  Observe that the set of orphaned vertices in $B$ satisifies requirement \label{genetically_indep}
 
 %   We claim that $|B|\ge a\log n$\todo{Specify $a$ and prove this.}  If at least $|B|/2$ vertices are orphans.
 
 % \end{proof}
 
-The next lemma is a more technical result.  Given two vertices $v,w\in V(T)$ neither of which is an ancestor of the other, we say that $v$ is \defin{left} of $w$ if the leaf descendants of $v$ appear in $P_h$ before the leaf descendants of $w$.
+The next lemma is a more technical result.  Given two vertices $v,w\in V(\Gamma)$ neither of which is an ancestor of the other, we say that $v$ is \defin{left} of $w$ if the leaf descendants of $v$ appear in $P_h$ before the leaf descendants of $w$.
 
 \begin{lem}\label{subtree_splitting}
-  Let $p\in\{1,\ldots,h\}$, let $\{v_1,\ldots,v_r\}$ be a set of vertices of $G_h^-$, none of which is an ancestor of any other, ordered left to right.  For each $i\in\{1,\ldots,r\}$ let $d_i\le h-p$ be the depth of $v_i$ and let $T_i$ be a subgraph of $G_h^-$ consisting of a complete $3$-ary tree of height $h-d_i$ rooted at $v_i$.  Let $S\subseteq V(G)$ be a set that contains no vertex of $\bigcup_{i=1}^r V(T_i-v_i)$ and such that no component of $G-S$ contains $T_i-v_i\cup\cdots T_{i+q-1}-v_{i+q-1}$ for any $i\in r-q+1$.  Then $|S\cap V_t|\ge \lfloor r/q\rfloor$ for each $t\in\{h-p+1,\ldots,h\}$.
+  Let $p\in\{1,\ldots,h\}$, let $\{v_1,\ldots,v_r\}$ be a set of vertices of $G_h^-$, none of which is an ancestor of any other, ordered left to right.  For each $i\in\{1,\ldots,r\}$ let $d_i\le h-p$ be the depth of $v_i$ and let $T_i$ be a subgraph of $\Gamma$ consisting of a complete $3$-ary tree of height $h-d_i$ rooted at $v_i$.  Let $S\subseteq V(G)$ be a set that contains no vertex of $\bigcup_{i=1}^r V(T_i-v_i)$ and such that no component of $G-S$ contains $(T_i-v_i)\cup\cdots\cup (T_{i+q-1}-v_{i+q-1})$ for each $i\in\{1,\ldots,r-q+1\}$.  Then $|S\cap V_t|\ge \lfloor r/q\rfloor$ for each $t\in\{h-p+1,\ldots,h\}$.
 \end{lem}
 
 \begin{proof}
@@ -182,36 +184,38 @@ The next lemma is a more technical result.  Given two vertices $v,w\in V(T)$ nei
   Furthermore, for any $i\neq j$, the paths $X_i$ and $X_j$ have no internal vertices in common.  Since $T'_{3qt+1},\ldots,T'_{3q(t+1)}=T_{qt+1}-v_{qt+1},\ldots,T_{q(t+1)}-v_{q(t+1)}$ are not contained in a single component of $G-S$, there are two consective trees $T'_i$ and $T'_{i+1}$ that are separted by $S$ for some $i\in\{3qt+1,\ldots,3q(t+1)-1\}$.  Therefore, $S$ must contain at least one internal vertex from each of the $p$ paths in $X_{i}$.  Therefore $|S\cap V_t|\ge \lfloor r/q\rfloor$ for each $t\in\{h-p+1,\ldots,h\}$.\todo{Write the whole proof better. Probably not with $3$.}
 \end{proof}
 
-A set $\mathcal{R}:=\{R_1,\ldots,R_r\}$ of subsets of $V(G_h^-)$ is \defin{$k$-great}\todo{pick a better name} if it has the following properties:
+A set $\mathcal{R}:=\{R_1,\ldots,R_r\}$ of subsets of $V(\Gamma)$ is \defin{$k$-great}\todo{pick a better name} if it has the following properties:
 
 \begin{compactenum}
   \item For each $i\in\{1,\ldots,r\}$, $|R_i|\ge k$.
-  \item For each $i\in\{1,\ldots,r\}$, all nodes in $R_i$ have the same depth $d_i$.
+  \item For each $i\in\{1,\ldots,r\}$, all nodes in $R_i$ have the same depth $d_i$ (so $R_i\subseteq V(P_{d_i})$.
   \item For each $1\le i<j\le r$, no node in $R_i$ is ancestor or descendant of a node in $R_j$.
 \end{compactenum}
 
-We say that a node $x\in V(T)$ is \defin{compatible} with a set $S\subseteq V(G_h^-)$ if the component of $G_h^--(S\setminus\{x\})$ that contains $x$ contains at least $3^j$ depth-$(j-d_i)$ descendants of $x$, for each $j\in\{d_i,\ldots,h\}$.  (In other words, $G_h^--(S\setminus\{x\})$ contains a complete ternary tree of height $h-d_i$ rooted at $x$.)  We say that $\mathcal{R}$ is compatible with $S$ if $\cup\mathcal{R}\subseteq S$ and $x$ is compatible with $S$ for each $x\in\cup\mathcal{R}$.  
+For a subset $S\subseteq V(\Gamma)$ and a depth-$d$ vertex $v\in S$, we say that $v$ is \defin{compatible} with $S$ if the component of $\Gamma-(S\setminus\{x\})$ contains a complete ternary tree of height $h-d$ rooted at $x$.  We say that $\mathcal{R}$ is compatible with $S$ if $\cup\mathcal{R}\subseteq S$ and $x$ is compatible with $S$ for each $x\in\cup\mathcal{R}$.  
 
 
 \begin{lem}\label{compatible_set}
-  Let $\mathcal{R}:=\{R_1,\ldots,R_r\}$ be a $k$-great set and let $S\supseteq \cup\mathcal{R}$ contain at most $w$\todo{condition on $w$} nodes of depth $i$, for each $i\in\{0,\ldots,h\}$.  Then there exists a $k/2$-great set $\mathcal{R}':=\{R_1',\ldots,R_r'\}$ that is compatible with $S$ and such that, for each $i\in\{1,\ldots,r\}$, the depth of the nodes in $R_i'$ exceeds the depth of the vertices in $R_i$ by at most $\log_2(w)\cdot\log_3(w/(b-3))$ and each vertex in $R_i'$ has an ancestor in $R_i$.
+  For any $k$-great set $\mathcal{R}:=\{R_1,\ldots,R_r\}$ and any $S\supseteq \cup\mathcal{R}$, there exists a $\lceil k/2\rceil$-great set $\mathcal{R}':=\{R_1',\ldots,R_r'\}$ that is compatible with $S$ and such that, for each $i\in\{1,\ldots,r\}$ each vertex $v'\in R_i'$ has an ancestor $v\in R_i$ and $\depth_{\Gamma}(v')-\depth_{\Gamma}(v) \le \log_2|S|\cdot\log_3(w/(b-3))$.
 \end{lem}
 
 \begin{proof}
-  Suppose that $S$ is not compatible with $\mathcal{R}$ because $R_i$ contains fewer than $k/2$ nodes that are compatible with $S$.  Since $|R_i|\ge k$, this implies that at least $|R_i|/2$ nodes in $R_i$ are not compatible with $S$. Let $d_i$ be the depth of the nodes in $R_i$.  
+  If each $R_i$ contains a subset $R_i'$ of at least $\lceil k/2\rceil$ vertices that are compatible with $S$, then there is nothing to prove.  Suppose, therefore, that some $R_i$ contains fewer than $\lceil k/2\rceil$ vertices that are compatible with $S$.  Since $|R_i|\ge k$, this implies that more than $|R_i|/2$ vertices of $R_i$ are not compatible with $S$. Let $d_i$ be the depth of the nodes in $R_i$.  
 
-  Observe that, if $x\in R_i$ is not compatible with $S$ then, for some $\ell\ge 1$, $S$ contains $3^{\ell-1}(b-3)$ descendants of $x$ of depth $d+\ell$.  In this case we say that $x$ is an \defin{$\ell$-failure}. Since $S$ contains at most $w$ nodes of depth $d+\ell$, the number of $\ell$-failures is 
-  $f_\ell \le w/3^{\ell-1}(b-3)$.  This implies that there are no $\ell$-failures for any $\ell > \log_3 (w/(b-3)) + 1$.  Let $z:= \lfloor\log_3 (w/(b-3))\rfloor + 1$.
+  Suppose $x\in R_i$ is not compatible with $S$ and let $\ell\ge 1$ be the minimum integer such that $\Gamma-(S\setminus\{x\})$ does not contains a complete ternary tree of height $\ell$ rooted at $x$.  Observe that $S$ contains $3^{\ell-1}(b-3)$ descendants of $x$ of depth $d+\ell$ since, otherwise, the ternary tree of height $\ell-1$ rooted at $x$ could be extended to a ternary tree of height $\ell$.  When this occurs, we say that $x$ is an \defin{$\ell$-failure} and we let $f_\ell$ denote the number of $\ell$-failures in $R_i$.  Every vertex in $R_i$ that is incompatible with $S$ is an $\ell$-failure for some $\ell\ge 1$, so $|R_i|/2 < \sum_{\ell=1}^\infty f_\ell$.
 
-  We claim that, for some $\ell\in\{1,\ldots,z\}$, $f_\ell \ge 8|R_i|/3^{\ell}(b-3)$.  Indeed, otherwise
+  Since $S$ contains at most $w$ nodes of depth $d+\ell$, the number of $\ell$-failures is $f_\ell \le w/3^{\ell-1}(b-3)$.  This implies that there are no $\ell$-failures for any $\ell > \log_3 (w/(b-3)) + 1$.  
+  Let $z:= \lfloor\log_3 (w/(b-3))\rfloor + 1$.
+
+  We claim that, for some $\ell\in\{1,\ldots,z\}$, $f_\ell \ge 6|R_i|/3^{\ell}(b-3)$.  Indeed, otherwise
   \[
-    |R_i|/2 \le \sum_{\ell=1}^{z} f_\ell \le \frac{6|R_i|}{b-3}\cdot \sum_{\ell=1}^z 3^{-\ell} < \frac{6|R_i|}{b-3}\cdot \sum_{\ell=1}^\infty 3^{-\ell}
+    |R_i|/2 < \sum_{\ell=1}^{\infty} f_\ell \le \frac{6|R_i|}{b-3}\cdot \sum_{\ell=1}^\infty 3^{-\ell} < \frac{6|R_i|}{b-3}\cdot \sum_{\ell=1}^\infty 3^{-\ell}
     = \frac{6|R_i|}{2(b-3)}  \le  |R_i|/2
   \]
-  for $b\ge 9$. Therefore, for some $\ell\in\{1,\ldots,z\}$, $f_\ell\cdot 3^{\ell-1}(b-3) \ge 2|R_i|$.  When this happens, we replace $R_i$ by the subset of $S$ containing the depth $d+\ell$ descendants of nodes in $R_i$.  This operation ensures that $\mathcal{R}$ is a $k$-great set, that $S\supseteq \cup\mathcal{R}$, that the size of $R_i$ increases by a factor of at least $2$ and the depth of $R_i$ increases by at most $z$. The new set $R_i$ may still have fewer than $k/2$ elements that are compatible with $S$, in which case we can repeat this operation.  Since $R_i\subseteq S$ and all nodes in $R_i$ have the same depth, we can repeat this process at most $\log_2(w/k)\le \log_2(w)$ times before it must stop.  At this point, the resulting set $R_i$ contains at least $k/2$ elements that compatible with $S$ and has depth at most $z\log_2(w)$. By applying this procedure to each set $R_i$ that contains fewer than $k/2$ elements compatible with $S$ we obtain the desired $(k/2)$-great set $\mathcal{R}'$.
+  for $b\ge 9$. Therefore, for some $\ell\in\{1,\ldots,z\}$, $f_\ell\cdot 3^{\ell-1}(b-3) \ge 2|R_i|$.  When this happens, we replace $R_i$ by the subset of $S$ containing the depth $d+\ell$ descendants of nodes in $R_i$.  This operation ensures that $\mathcal{R}$ is a $k$-great set, that $S\supseteq \cup\mathcal{R}$, that the size of $R_i$ increases by a factor of at least $2$ and that the depth of $R_i$ increases by at most $z$. The new set $R_i$ may still have fewer than $k/2$ elements that are compatible with $S$, in which case we can repeat this operation.  Since $R_i\subseteq S$, all nodes in $R_i$ have the same depth $d_i$, and $|S\cap V(P_i)|\le w$ we can repeat this process at most $\log_2(w/k)\le \log_2(w)$ times before it must stop.  At this point, the resulting set $R_i$ contains at least $\lceil|R_i|/2\rceil\ge \lceil k/2\rceil$ elements that compatible with $S$ and has depth at most $z\log_2(w)$. By applying this procedure to each set $R_i$ that contains fewer than $k/2$ elements compatible with $S$ we obtain the desired $(k/2)$-great set $\mathcal{R}'$.
 \end{proof}
 
-For a vertex $v$ of $G$, let $N^\downarrow_{G}(v)$ denote the set of children of $v$ in $G_h^-$ and for a subset $S\subseteq V(G_h^-)$, let $N^\downarrow_G(S):=\bigcup_{v\in S}N^\downarrow_G(v)\setminus S$.
+For a vertex $v$ of $G$, let $N^\downarrow_{G}(v)$ denote the set of children of $v$ in $\Gamma$ and for a subset $S\subseteq V(\Gamma)$, let $N^\downarrow_G(S):=\bigcup_{v\in S}N^\downarrow_G(v)\setminus S$.
 
 % \begin{obs}
 %   Let $\mathcal{R}:=\{R_1,\ldots,R_r\}$ be a $k$-great that is compatible with some $S\supseteq \cup \mathcal{R}$ and where each $R_i$ has depth less than $h$.  Then $\mathcal{R}^{\downarrow}\{N^{\downarrow}_G(R_1),\ldots,N^{\downarrow}_G(R_r)\}$ is a $bk$-great set.
@@ -220,144 +224,148 @@ For a vertex $v$ of $G$, let $N^\downarrow_{G}(v)$ denote the set of children of
 
 
 % \begin{lem}
-%   Let $\mathcal{R}:=\{R_1,\ldots,R_r\}$ be a $k$-great that is compatible with some $S\supseteq \cup \mathcal{R}$ and such that $S$ contains at most $w$ elements of depth $i$ in $G_h^-$, for each $i\in\{0,\ldots,h\}$.  Then $G-\cup\mathcal{R}$ contains a component $C$
+%   Let $\mathcal{R}:=\{R_1,\ldots,R_r\}$ be a $k$-great that is compatible with some $S\supseteq \cup \mathcal{R}$ and such that $S$ contains at most $w$ elements of depth $i$ in $\Gamma$, for each $i\in\{0,\ldots,h\}$.  Then $G-\cup\mathcal{R}$ contains a component $C$
 % \end{lem}
 
 
 \begin{lem}
-  Let $L_0,\ldots,L_{2h}$ be any layering of $G$ and let $\phi:V(G)\to V(T\boxtimes K_{ch})$ be an injective homomorphism from $G$ to $T\boxtimes K_{ch}$. For each $x\in V(T)$, let $B_x := \phi^{-1}(\{x\}\times V(K_{ch}))$ be the set of vertices in $G$ that project onto $x$ in $T$.  Then there exists some $x\in V(T)$ and some $i\in\{0,\ldots,2h\}$ such that $B_x\cap L_i\ge h^{\epsilon}$.\todo{Define $\epsilon$}
+  Let $L_0,\ldots,L_{2h}$ be any layering of $G$ and let $(B_x:x\in V(T))$ be a tree partition of $G$ of width at most $ch$.  Then there exists some $x\in V(T)$ and some $i\in\{0,\ldots,2h\}$ such that $B_x\cap L_i\ge h^{\epsilon}$.\todo{Define $\epsilon$}
 \end{lem}
 
 \begin{proof}
-  We first consider the simpler case in which $L_0,\ldots,L_{2h}$ is the breadth-first layering in which $L_i$ contains all nodes of distance $i$ to the root of $G_h^-$.  (In this layering, $L_{h+1},\ldots,L_{2h}$ are all empty.)
+  By \cref{startup}, $T$ contains a node $x$ such that $B_x$ contains a set $R$ of size $|R|\ge \alpha h$ where each vertex in $R$ has $\Gamma$-depth at most $(1-\beta)h$ and no vertex in $R$ is a $\Gamma$-ancestor of any other vertex in $R$.  Let $S_0:=B_x$ and $\mathcal{R}_0':=\{\{v\}:v\in R\}$.  By definition $\mathcal{R}_0'$ is a $1$-great set.
 
-  It is well known, and easy to prove, that $T$ contains a node $x_{-1}$ such that $G-B_{x_{-1}}$ has no component of order greater than $2|V(T)|/3$.
-  Since $B_{x_{-1}}\cap V_h \le w$, there exists a subpath of $P_h$ of length at least $(b^h-w)/(w+1)$ that contains no vertices of $B_{x_{-1}}$.  Let $C$ be the component of $G-B_{x_{-1}}$ that contains this subpath.  We claim that $C$ contains $r\ge ah$ vertices $v_1,\ldots,v_r$ whose $G_h^-$ parents are in $B_{x_{-1}}$ and each having depth at most $(1-a)h$.\todo{Prove this.}  By definition, $v_1,\ldots,v_r$ are contained in $S_0:=B_{x_0}$ for some neighbour $x_0$ of $x_{-1}$.  Also by definition, $\{\{v_1\},\ldots,\{v_r\}\}$ is a $1$-great set $\mathcal{R}_0'$ contained in $S_0$.  Let $y:=\log_2(w)\cdot\log_3(w/(b-3))$.  Now apply \cref{compatible_set} to obtain a $1$-great set $\mathcal{R}_0$ that is compatible with $S_0$\todo{Put a ceiling in the statement and proof of \cref{compatible_set}} and in which every vertex has $G_h^-$-depth at most $(1-a)h+y$.  
+  % It is well known, and easy to prove, that $T$ contains a node $x_{-1}$ such that $G-B_{x_{-1}}$ has no component of order greater than $2|V(T)|/3$.
+  % Since $B_{x_{-1}}\cap V_h \le w$, there exists a subpath of $P_h$ of length at least $(b^h-w)/(w+1)$ that contains no vertices of $B_{x_{-1}}$.  Let $C$ be the component of $G-B_{x_{-1}}$ that contains this subpath.  We claim that $C$ contains $r\ge ah$ vertices $v_1,\ldots,v_r$ whose $\Gamma$ parents are in $B_{x_{-1}}$ and each having depth at most $(1-a)h$.\todo{Prove this.}  
 
-  For each vertex $v$ in $\mathcal{R}_0$, let $T_v$ denote the ternary tree guaranteed by the definition of compatibility and, for each $j\in\{1,2,3\}$, let $T_{v,j}$ denote the three maximal subtrees of $T_v$ rooted at the three children of $v$ in $T_v$.  By \cref{subtree_splitting}, there exists $r_1\ge r/(w+1)$ vertices $v$ in $\mathcal{R}_0$ and a component $C_1$ of $G-S_0$ such that $T_{v,1},T_{v,2},T_{v,3}$ are all contained in $C_1$.  Form the set $\mathcal{R}_1'$ from $\mathcal{R}_0$ by replacing each such $v$ with the three roots of $T_{v,1}$, $T_{v,2}$, and $T_{v,3}$.  Since each vertex of $\mathcal{R}_1'$ obtained this way is in $C_1$ and is ajacent to a vertex of $S_0$, $x_0$ has a neighbour $x_1$ in $T$ such that $S_1:=B_{x_1}$ contains $\cup\mathcal{R}_1'$.  That is, $\mathcal{R}_1$ is $3$-great set contained in $S_1$.  Now apply \cref{compatible_set} to obtain a $\lceil 3/2\rceil$-great set $\mathcal{R}_1$ that is compatible with $S_1$ and whose elements have depth at most $(1-a)h+2y$.  We can now iterate this process of obtaining $\mathcal{R}_{i+1}$ from $\mathcal{R}_i$.  After $t-1\le ah/y$ such iterations we obtain a $\lceil(3/2)^t\rceil$-great set $\mathcal{R}_t$ whose elements all belong to some $S_t:=B_{x_{t}}$ for some node $x_t$ of $T$.  But this means  
+  % By definition, $v_1,\ldots,v_r$ are contained in $S_0:=B_{x_0}$ for some neighbour $x_0$ of $x_{-1}$.  Also by definition, $\{\{v_1\},\ldots,\{v_r\}\}$ is a $1$-great set $\mathcal{R}_0'$ contained in $S_0$.  
+
+  Let $y:=\log_2(w)\cdot\log_3(w/(b-3))$.  By \cref{compatible_set} (applied to $\mathcal{R}_0'$ and $S_0$) $S_0$ contains a $1$-great set $\mathcal{R}_0$ that is compatible with $S_0$ and in which every vertex has $\Gamma$-depth at most $(1-a)h+y$.  
+
+  For each vertex $v$ in $\mathcal{R}_0$, let $T_v$ denote the ternary tree rooted at $v$ that is guaranteed by the definition of compatibility. By \cref{subtree_splitting}, there exists $r_1\ge r/a\alpha$\todo{Check the factors here!} vertices $v$ in $\mathcal{R}_0$ and a component $C_1$ of $G-S_0$ such that the three trees in $T_v-v$ are contained in $C_1$.  Form the set $\mathcal{R}_1'$ from $\mathcal{R}_0$ by replacing each such $v$ with the three roots of $T_v-\{v\}$.   Since each vertex of $\mathcal{R}_1'$ obtained this way is in $C_1$ and is ajacent to a vertex of $S_0$, $x_0$ has a neighbour $x_1$ in $T$ such that $S_1:=B_{x_1}$ contains $\cup\mathcal{R}_1'$.  That is, $\mathcal{R}_1$ is a $3$-great set contained in $S_1$.  Now apply \cref{compatible_set} to obtain a $\lceil 3/2\rceil$-great set $\mathcal{R}_1$ that is compatible with $S_1$ and whose elements have depth at most $(1-a)h+2y$.  We can now iterate this process of obtaining $\mathcal{R}_{i+1}$ from $\mathcal{R}_i$.  After $t-1\le ah/y$ such iterations we obtain a $\lceil(3/2)^t\rceil$-great set $\mathcal{R}_t$ with at containing at least one set $R$whose elements all belong to some $S_t:=B_{x_{t}}$ for some node $x_t$ of $T$.  Furthermore, each element in $R$ has an ancestor 
 \end{proof}
 
 
-\section{Proof of \cref{treewidth_1_bounded_degree}}
+% \section{Proof of \cref{treewidth_1_bounded_degree}}
 
-In this paper, all graphs are finite, undirected, and simple.  For two graphs $G_1$ and $G_2$ we use the notation $G_1=G_2$ to mean that $G_1$ and $G_2$ are isomorphic and the notation $G_1\subseteq G_2$ to mean that $G_1$ is isomorphic to some subgraph of $G_2$.  Note that, with this definition, the strong product of graphs is commutative, i.e., $G_1\boxtimes G_2=G_2\boxtimes G_1$.  Furthermore for any positive integers $p$ and $q$, $K_{p}\boxtimes K_{q}=K_{pq}$.
+% In this paper, all graphs are finite, undirected, and simple.  For two graphs $G_1$ and $G_2$ we use the notation $G_1=G_2$ to mean that $G_1$ and $G_2$ are isomorphic and the notation $G_1\subseteq G_2$ to mean that $G_1$ is isomorphic to some subgraph of $G_2$.  Note that, with this definition, the strong product of graphs is commutative, i.e., $G_1\boxtimes G_2=G_2\boxtimes G_1$.  Furthermore for any positive integers $p$ and $q$, $K_{p}\boxtimes K_{q}=K_{pq}$.
 
-We say that a graph $G$ is a \defin{max-degree-$\Delta$ graph} if it contains no vertex of degree greater than $\Delta$.  For a connected graph $G$ and two vertices $v,w\in V(G)$, $\dist_G(v,w)$ denotes the length of a shortest path in $G$ with endpoints $v$ and $w$.  The \defin{diameter} of $G$ is denoted $\diam(G):=\max\{\dist_G(v,w):v,w\in V(G)\}$.
+% We say that a graph $G$ is a \defin{max-degree-$\Delta$ graph} if it contains no vertex of degree greater than $\Delta$.  For a connected graph $G$ and two vertices $v,w\in V(G)$, $\dist_G(v,w)$ denotes the length of a shortest path in $G$ with endpoints $v$ and $w$.  The \defin{diameter} of $G$ is denoted $\diam(G):=\max\{\dist_G(v,w):v,w\in V(G)\}$.
 
-To obtain a short proof of \cref{treewidth_1_bounded_degree}, we make use of the following theorem, due to \citet{ding.oporowski:some} (see also \citet{wood:on}).\footnote{References \cite{ding.oporowski:some,wood:on} state \cref{tree_partition_theorem} in terms of tree partition width. It is straightforward to verify, using only the definitions of tree partition width and strong product that the two statements are equivalent.}
+% To obtain a short proof of \cref{treewidth_1_bounded_degree}, we make use of the following theorem, due to \citet{ding.oporowski:some} (see also \citet{wood:on}).\footnote{References \cite{ding.oporowski:some,wood:on} state \cref{tree_partition_theorem} in terms of tree partition width. It is straightforward to verify, using only the definitions of tree partition width and strong product that the two statements are equivalent.}
 
-\begin{thm}[\citet{ding.oporowski:some}]\label{tree_partition_theorem}
-  There exists a constant $c>0$ such that, for any treewidth-$t$ max-degree-$\Delta$ graph $G$, there exists a max-degree-$ct\Delta^2$ tree $T$ such that $G\subseteq T\boxtimes K_{ct\Delta}$.\todo{\cite{ding.oporowski:some,wood:on} don't mention the degree of $T$, but $ct\Delta^2$ is obvious, easy, and good enough. Reference?}
-\end{thm}
+% \begin{thm}[\citet{ding.oporowski:some}]\label{tree_partition_theorem}
+%   There exists a constant $c>0$ such that, for any treewidth-$t$ max-degree-$\Delta$ graph $G$, there exists a max-degree-$ct\Delta^2$ tree $T$ such that $G\subseteq T\boxtimes K_{ct\Delta}$.\todo{\cite{ding.oporowski:some,wood:on} don't mention the degree of $T$, but $ct\Delta^2$ is obvious, easy, and good enough. Reference?}
+% \end{thm}
 
-\cref{tree_partition_theorem} allows us to prove \cref{treewidth_1_bounded_degree} by focusing on the case in which $H$ has treewidth $1$, because of the following corollary:
+% \cref{tree_partition_theorem} allows us to prove \cref{treewidth_1_bounded_degree} by focusing on the case in which $H$ has treewidth $1$, because of the following corollary:
 
-\begin{cor}\label{tree_partition_corollary}
-  There exists a constant $c>0$ such that, for any treewidth-$t$ maximum-degree-$\Delta$ graph $H$, any path $P$, and any $r\ge 1$, there exists a max-degree-$ct\Delta^2$ tree $T$ such that $H\boxtimes P\boxtimes K_r \subseteq T\boxtimes P\boxtimes K_{crt\Delta}$.
-\end{cor}
+% \begin{cor}\label{tree_partition_corollary}
+%   There exists a constant $c>0$ such that, for any treewidth-$t$ maximum-degree-$\Delta$ graph $H$, any path $P$, and any $r\ge 1$, there exists a max-degree-$ct\Delta^2$ tree $T$ such that $H\boxtimes P\boxtimes K_r \subseteq T\boxtimes P\boxtimes K_{crt\Delta}$.
+% \end{cor}
 
-\begin{proof}
-  Apply \cref{tree_partition_theorem} to $H$ to obtain a maximum-degree-$ct\Delta^2$ tree $T$ such that $H\subseteq T\boxtimes K_{ct\Delta}$.  Then $H\boxtimes P\boxtimes K_{r} \subseteq T\boxtimes K_{ct\Delta}\boxtimes P\boxtimes K_r=T\boxtimes P\boxtimes K_{crt\Delta}$.
-\end{proof}
+% \begin{proof}
+%   Apply \cref{tree_partition_theorem} to $H$ to obtain a maximum-degree-$ct\Delta^2$ tree $T$ such that $H\subseteq T\boxtimes K_{ct\Delta}$.  Then $H\boxtimes P\boxtimes K_{r} \subseteq T\boxtimes K_{ct\Delta}\boxtimes P\boxtimes K_r=T\boxtimes P\boxtimes K_{crt\Delta}$.
+% \end{proof}
 
-Thus, we establish \cref{treewidth_1_bounded_degree} using the following lemma.
+% Thus, we establish \cref{treewidth_1_bounded_degree} using the following lemma.
 
-\begin{lem}\label{easy_version}
-  For infinitely many positive integers $n$, there exists an $n$-vertex max-degree-$5$ planar graph $G$ such that, for any max-degree-$\Delta$ tree $T$, if $G\subseteq T\boxtimes P\boxtimes K_r$ then $\log (\Delta r)\ge (1-o(1))\log n$.
-\end{lem}
+% \begin{lem}\label{easy_version}
+%   For infinitely many positive integers $n$, there exists an $n$-vertex max-degree-$5$ planar graph $G$ such that, for any max-degree-$\Delta$ tree $T$, if $G\subseteq T\boxtimes P\boxtimes K_r$ then $\log (\Delta r)\ge (1-o(1))\log n$.
+% \end{lem}
 
-Before proving \cref{easy_version}, we show how it implies \cref{treewidth_1_bounded_degree}.
+% Before proving \cref{easy_version}, we show how it implies \cref{treewidth_1_bounded_degree}.
 
-\begin{proof}[Proof of \cref{treewidth_1_bounded_degree}]
-  Let $G$ be an $n$-vertex graph whose existence is the subject of \cref{easy_version}.  Let $H$ be a treewidth-$t$ max-degree-$\Delta$ graph such that $G\subseteq H\boxtimes P\boxtimes K_r$.  Then, by \cref{easy_version}, there exists a max-degree-$ct\Delta^2$ tree $T$ such that $G\subseteq T\boxtimes P\boxtimes K_{crt\Delta}$.  Since $G$ comes from \cref{easy_version}, $\log(c^2rt^2\Delta^3)\ge (1-o(1))\log n$. \cref{treewidth_1_bounded_degree} now, since $\log(t\Delta r)\in\Omega(\log crt^2\Delta^3)$.
-\end{proof}
+% \begin{proof}[Proof of \cref{treewidth_1_bounded_degree}]
+%   Let $G$ be an $n$-vertex graph whose existence is the subject of \cref{easy_version}.  Let $H$ be a treewidth-$t$ max-degree-$\Delta$ graph such that $G\subseteq H\boxtimes P\boxtimes K_r$.  Then, by \cref{easy_version}, there exists a max-degree-$ct\Delta^2$ tree $T$ such that $G\subseteq T\boxtimes P\boxtimes K_{crt\Delta}$.  Since $G$ comes from \cref{easy_version}, $\log(c^2rt^2\Delta^3)\ge (1-o(1))\log n$. \cref{treewidth_1_bounded_degree} now, since $\log(t\Delta r)\in\Omega(\log crt^2\Delta^3)$.
+% \end{proof}
 
-\begin{proof}[Proof of \cref{easy_version}]
-  Let $n:=2^{h+1}-1$ for some large positive integer $h$, and let $G_h^-$ be a complete binary tree of height $h$ (so $G_h^-$ has exactly $n$ vertices and $2^h$ leaves).  Define $G$ to be the supergraph of $G_h^-$ obtained by adding, for each $i\in\{0,\ldots,h\}$, the edges of a path $P_i$ that contains all $2^{h-i}$ nodes of depth $h-i$ in $G_h^-$.  Observe that $\diam(G)\le\diam(G_h^-)=2h$.
+% \begin{proof}[Proof of \cref{easy_version}]
+%   Let $n:=2^{h+1}-1$ for some large positive integer $h$, and let $\Gamma$ be a complete binary tree of height $h$ (so $\Gamma$ has exactly $n$ vertices and $2^h$ leaves).  Define $G$ to be the supergraph of $\Gamma$ obtained by adding, for each $i\in\{0,\ldots,h\}$, the edges of a path $P_i$ that contains all $2^{h-i}$ nodes of depth $h-i$ in $\Gamma$.  Observe that $\diam(G)\le\diam(\Gamma)=2h$.
 
-  Now suppose $G\subseteq T\boxtimes P\boxtimes K_r$ and fix an injective homomorphism $\rho:V(G)\to V(T\boxtimes P\boxtimes K_r)$.  For two vertices $v$ and $w$ of $G$ with $\rho(v):=(v_1,v_2,v_3)$ and $\rho(w):=(w_1,w_2,w_3)$ we call $v_1$, $v_2$, and $v_3$ the \defin{projections} of $v$ onto $T$, $P$, and $K_r$, respectively.  For simplicity, we define $\dist_T(v,w):=\dist_T(v_1,w_1)$ and $\dist_P(v,w):=\dist_P(v_2,w_2)$.  Then, by the definition of strong product, $\dist_G(v,w)\ge \max\{\dist_T(v,w),\dist_P(v,w)\}$.  Since $\diam(G)\le 2h$, this allows us to assume that $\diam(P)\le 2h$ and that $\diam(T)\le 2h$.  The former inequality implies that $|V(P)|\le 2h+1$.  However, the latter inequality only implies that $|V(T)|\in O(n^2)$, which is insufficient for our purposes.
+%   Now suppose $G\subseteq T\boxtimes P\boxtimes K_r$ and fix an injective homomorphism $\rho:V(G)\to V(T\boxtimes P\boxtimes K_r)$.  For two vertices $v$ and $w$ of $G$ with $\rho(v):=(v_1,v_2,v_3)$ and $\rho(w):=(w_1,w_2,w_3)$ we call $v_1$, $v_2$, and $v_3$ the \defin{projections} of $v$ onto $T$, $P$, and $K_r$, respectively.  For simplicity, we define $\dist_T(v,w):=\dist_T(v_1,w_1)$ and $\dist_P(v,w):=\dist_P(v_2,w_2)$.  Then, by the definition of strong product, $\dist_G(v,w)\ge \max\{\dist_T(v,w),\dist_P(v,w)\}$.  Since $\diam(G)\le 2h$, this allows us to assume that $\diam(P)\le 2h$ and that $\diam(T)\le 2h$.  The former inequality implies that $|V(P)|\le 2h+1$.  However, the latter inequality only implies that $|V(T)|\in O(n^2)$, which is insufficient for our purposes.
 
-  Our strategy will be to show that the projection of $P_0$ onto $T$ defines a subtree $T'\subseteq T$ with $|V(T')|\le \Delta^{O(h/\log h)}$.  Since $\rho$ is injective, $2^h=|V(P_0)|\le |V(T'\boxtimes P\boxtimes K_r)|$. Therefore,
-  \[
-    2^h = |V(P_0)| \le |V(T'\boxtimes P\boxtimes K_r)| \le r(2h+1)\Delta^{O(h/\log h)} = r\Delta\cdot 2^{O(\log h + h/\log h)}
-  \]
-  and rewriting this gives $\log(r\Delta) \ge h-O(\log h+h/\log h)=(1-o(1))\log n$, as required.  All that remains is to prove that $|V(T')|\le\Delta^{O(h/\log h)}$.  Since $T$ is max-degree-$\Delta$, so is $T'$, so it suffices to show that $\diam(T')=O(h/\log h)$, which we do next.
+%   Our strategy will be to show that the projection of $P_0$ onto $T$ defines a subtree $T'\subseteq T$ with $|V(T')|\le \Delta^{O(h/\log h)}$.  Since $\rho$ is injective, $2^h=|V(P_0)|\le |V(T'\boxtimes P\boxtimes K_r)|$. Therefore,
+%   \[
+%     2^h = |V(P_0)| \le |V(T'\boxtimes P\boxtimes K_r)| \le r(2h+1)\Delta^{O(h/\log h)} = r\Delta\cdot 2^{O(\log h + h/\log h)}
+%   \]
+%   and rewriting this gives $\log(r\Delta) \ge h-O(\log h+h/\log h)=(1-o(1))\log n$, as required.  All that remains is to prove that $|V(T')|\le\Delta^{O(h/\log h)}$.  Since $T$ is max-degree-$\Delta$, so is $T'$, so it suffices to show that $\diam(T')=O(h/\log h)$, which we do next.
 
-  For each $i\in\{0,\ldots,h-1\}$, let
-  Let $d_i=\max\{\dist_T(v,w):v,w\in V(P_i)\}$.  Since $P_i$ is a path that contains exactly $2^{h-i}$ vertices, $d_i \le \diam(P_i) = 2^{h-i}-1$. Let $v$ and $w$ be two vertices of $P_i$ such that $\dist_T(v,w)=d_i$.  Observe that $P_{i+1}$ contains two vertices $x,y$ with $xv, yw\in E(G)$, which implies that $\dist_T(x,v)\le 1$ and $\dist_T(y,w)\le 1$.  By the triangle inequality, we have
-  \[
-    \dist_T(v,w) \le \dist_T(v,x)+\dist_T(x,y)+\dist_T(y,w) \le \dist_T(x,y)+2 \enspace .
-  \]
-  Therefore,
-  \[
-     d_{i+1} \ge \dist_T(x,y) \ge \dist_T(v,w)-2= d_i-2 \enspace ,
-  \]
-  for each $i\in\{0,\ldots,h-1\}$.  Beginning at $i=0$ and iterating this inequality implies that $d_i \ge d_0-2i$ for each $i\in\{0,\ldots,h\}$.
-  Putting these upper and lower bounds together, we find that
-  \[
-    2^{h-i} \ge d_i \ge d_0-2i \enspace ,
-  \]
-  so
-  \begin{equation}
-    d_0 \le 2^{h-i}+2i  \label{d_i_bound}
-  \end{equation}
-  for each $i\in\{0,\ldots,h\}$.  Since $0\le d_0\le\diam(T)\le 2h$ it follows that $\lfloor d_0/4\rfloor\in\{0,\ldots,h\}$ so applying \cref{d_i_bound} with $i=\lfloor d_0/4\rfloor$ we obtain
-  \[
-    d_0 \le 2^{h-\lfloor d_0/4\rfloor} + d_0/2 \le 2^{h-d_0/4+1} + d_0/2 \enspace .
-  \]
-  Rewriting and simplifying gives $d_02^{d_0/4}\le 2^h$ which implies that $d_0 = O(h/\log h)$.\todo{Big dumb mistake right here!}  This completes the proof.
-\end{proof}
+%   For each $i\in\{0,\ldots,h-1\}$, let
+%   Let $d_i=\max\{\dist_T(v,w):v,w\in V(P_i)\}$.  Since $P_i$ is a path that contains exactly $2^{h-i}$ vertices, $d_i \le \diam(P_i) = 2^{h-i}-1$. Let $v$ and $w$ be two vertices of $P_i$ such that $\dist_T(v,w)=d_i$.  Observe that $P_{i+1}$ contains two vertices $x,y$ with $xv, yw\in E(G)$, which implies that $\dist_T(x,v)\le 1$ and $\dist_T(y,w)\le 1$.  By the triangle inequality, we have
+%   \[
+%     \dist_T(v,w) \le \dist_T(v,x)+\dist_T(x,y)+\dist_T(y,w) \le \dist_T(x,y)+2 \enspace .
+%   \]
+%   Therefore,
+%   \[
+%      d_{i+1} \ge \dist_T(x,y) \ge \dist_T(v,w)-2= d_i-2 \enspace ,
+%   \]
+%   for each $i\in\{0,\ldots,h-1\}$.  Beginning at $i=0$ and iterating this inequality implies that $d_i \ge d_0-2i$ for each $i\in\{0,\ldots,h\}$.
+%   Putting these upper and lower bounds together, we find that
+%   \[
+%     2^{h-i} \ge d_i \ge d_0-2i \enspace ,
+%   \]
+%   so
+%   \begin{equation}
+%     d_0 \le 2^{h-i}+2i  \label{d_i_bound}
+%   \end{equation}
+%   for each $i\in\{0,\ldots,h\}$.  Since $0\le d_0\le\diam(T)\le 2h$ it follows that $\lfloor d_0/4\rfloor\in\{0,\ldots,h\}$ so applying \cref{d_i_bound} with $i=\lfloor d_0/4\rfloor$ we obtain
+%   \[
+%     d_0 \le 2^{h-\lfloor d_0/4\rfloor} + d_0/2 \le 2^{h-d_0/4+1} + d_0/2 \enspace .
+%   \]
+%   Rewriting and simplifying gives $d_02^{d_0/4}\le 2^h$ which implies that $d_0 = O(h/\log h)$.\todo{Big dumb mistake right here!}  This completes the proof.
+% \end{proof}
 
-\section{A Strengthening of \cref{treewidth_1_bounded_degree}}
+% \section{A Strengthening of \cref{treewidth_1_bounded_degree}}
 
-By \cref{tree_partition_theorem}, \cref{treewidth_1_bounded_degree} is equivalent to \cref{easy_version}, which states that there are planar max-degree-$5$ graphs $G$ that are not subgraphs of $T\boxtimes P\boxtimes K_r$ unless the degree $\Delta$ of $T$ is large or the order $r$ of the clique $K_r$ is large.  In this section, we strengthen \cref{treewidth_1_bounded_degree} by showing that the result holds even if we allow the degree $\Delta$ of $T$ to be arbitrarily large.
-
-
-\begin{lem}\label{hard_version}
-  There exists a constant $\epsilon >0$ such that, for infinitely many positive integers $n$, there exists an $n$-vertex max-degree-$5$ planar graph $G$ such that, for any tree $T$, if $G\subseteq T\boxtimes P\boxtimes K_r$ then $r\in\Omega(\log^\varepsilon n)$.
-\end{lem}
-
-\todo[inline]{This whole section could use some work.  At the very least, we probably want a lemma/observation which states that if $W_{i-1}$ crosses an edge $vw$ of $T$ then $W_i$ visits at least one of $v$ or $w$.}
-
-\begin{proof}
-  Let $G$, $P_0,\ldots,P_h$, and $d_0,\ldots,d_h$, $\rho$, and $T'$ be exactly as in the proof of \cref{easy_version}.  The same arguments used there also apply here to establish that $|V(P)|\le 2h+1$ and that $\diam(T')\in O(h/\log h)$.  However, without any bound on the maximum degree of $T$, it is no longer possible to establish a useful upper bound on $|V(T')|$.
-
-  Consider the lazy walk $W_0:=w_{0,1},\ldots,w_{0,2^h}$ in $T'$ obtained by projecting the path $P_0$ onto $T$.  Suppose that some node $x$ of $T'$ has degree $\delta$.  Then the walk $W_0$ must visit $x$ at least $\delta-1$ times.  To see why this is so, consider the components $T_1,\ldots,T_\delta$ of $T'-\{x\}$ and for each $i\in\{1,\ldots,\delta\}$ let $\tau(i)=\min\{j\in \{1,\ldots,2^h\}: w_j\in V(T_i)\}$.  Without loss of generality, we may assume that $\tau(1) < \tau(2) <\cdots < \tau(\delta)$.  In other words, $W_0$ visits some vertex of $T_i$ before visiting any vertex of $T_{i+1}$, for each $i\in\{1,\ldots,\delta-1\}$.  Since $w_{\tau(i)}$ and $w_{\tau(i+1)}$ are in different components of $T-x$, it is follows immediately that $x$ appears at least once in $w_{\tau(i)+1},\ldots,w_{\tau(i+1)-1}$ for each $i\in\{1,\ldots,\delta\}$.
-
-  Since $W_0$ visits $x$ at least $\delta-1$ times, $\rho(P_0)$ contains at least $\delta-1$ vertices in $\{x\}\times V(P)\times V(K_r)$, which implies that $\delta \le (2h+1)r + 1$.  Therefore, $T'$ is a tree of height $O(\log h/\log\log h)$ and of maximum degree $O(hr)$.
-
-  \begin{clm}\label{big_logeps_subdivision}
-    There exists a fixed constant $\epsilon >0$
-    $T'$ contains a subtree $G_h^-$ that is isomorphic to a subdivision of a complete $\lceil h^\epsilon\rceil$-ary tree of height $h'\ge\epsilon\log h/\log\log h$.
-  \end{clm}
-
-  \begin{proof}
-    Do some Kraft-like counting.
-  \end{proof}
-
-  Let $\delta:=\lceil h^{\epsilon}\rceil+1$ and say that a node $x$ of $G_h^-$ is a \defin{branching node} if it has degree $\delta$ in $G_h^-$.
-
-  \begin{clm}
-    $G_h^-$ contains a path $X_0$ such that $W_0$ visits every branching node of $G_h^--X_0$ at least $\delta$ times.
-  \end{clm}
-
-  \begin{proof}
-    Say that a branching node $x$ of $G_h^-$ is \defin{light} if $x$ appears exactly $\delta-1$ times in $W_0$. Using the notation above, $x$ is light because $W_0$ visits $x$ exactly $\delta-1$ times and then remains in $T_\delta$.  Whenever this occurs at a node $x$, \defin{direct} the edge of $G_h^-$ that joint $x$ to $T_\delta$ away from $x$. Leave all other edges undirected.  In this way, each light branching node of $G_h^-$ has exactly one of its incident edges directed away from it.  Now observe that, if $x$ and $y$ are two light nodes of $G_h^-$ resulting in directed edges $e_x$ and $e_y$, then the path $P_{xy}$ in $G_h^-$ with endpoints $x$ and $y$ contains exactly one of $e_x$ or $e_y$.  We say that $x\prec y$ if $e_x$ is in $P_{xy}$ and $y\prec x$ if $e_y$ is in $P_x$.  Then the relationship $\prec$ is a total order on the light nodes of $G_h^-$ and there is a path $X_0$ that visits all these vertices in this order.
-  \end{proof}
+% By \cref{tree_partition_theorem}, \cref{treewidth_1_bounded_degree} is equivalent to \cref{easy_version}, which states that there are planar max-degree-$5$ graphs $G$ that are not subgraphs of $T\boxtimes P\boxtimes K_r$ unless the degree $\Delta$ of $T$ is large or the order $r$ of the clique $K_r$ is large.  In this section, we strengthen \cref{treewidth_1_bounded_degree} by showing that the result holds even if we allow the degree $\Delta$ of $T$ to be arbitrarily large.
 
 
-  For each $i\in\{0,\ldots,h'\}$, let $T_i$ be the subtree of $T$ visited by $W_i$ and let $Z_i$ be the set of branching nodes in $G_h^-$ that have exactly $h-i$ branching ancestors (including themselves).
+% \begin{lem}\label{hard_version}
+%   There exists a constant $\epsilon >0$ such that, for infinitely many positive integers $n$, there exists an $n$-vertex max-degree-$5$ planar graph $G$ such that, for any tree $T$, if $G\subseteq T\boxtimes P\boxtimes K_r$ then $r\in\Omega(\log^\varepsilon n)$.
+% \end{lem}
 
-  \begin{clm}
-    For each $i\in\{0,\ldots,h\}$, $T_i$ contains every node in $\bigcup_{j=i}^{h'}Z_j$.
-  \end{clm}
+% \todo[inline]{This whole section could use some work.  At the very least, we probably want a lemma/observation which states that if $W_{i-1}$ crosses an edge $vw$ of $T$ then $W_i$ visits at least one of $v$ or $w$.}
 
-  \begin{proof}
-    The proof is by induction on $i$. In the base case $i=0$ is true by the definition of $G_h^-$.  For $i\ge 1$, the inductive hypothesis implies that $W_{i-1}$ visits all branching nodes in $Z_{i-1}$. The walk $W_{i}$ ``follows'' $W_{i-1}$ in the sense that, for each $j\in\{1,\ldots,2^{h-i}\}$, $w_{i,j}$ is ajacent to, or equal to each of $w_{i-1,2j-1}$ and $w_{i-1,2j}$.  In particular, this implies that $W_i$ contains every vertex of $Z_i$. Since $W_i$ is a (lazy) walk in $T$, and $T$ is a tree, this implies that $W_i$ contains every branching ancestor of every node in $Z_i$.  Therefore, $W_i$ contains every vertex of $\bigcup_{j=i}^{h'} Z_j$, as required.
-  \end{proof}
+% \begin{proof}
+%   Let $G$, $P_0,\ldots,P_h$, and $d_0,\ldots,d_h$, $\rho$, and $T'$ be exactly as in the proof of \cref{easy_version}.  The same arguments used there also apply here to establish that $|V(P)|\le 2h+1$ and that $\diam(T')\in O(h/\log h)$.  However, without any bound on the maximum degree of $T$, it is no longer possible to establish a useful upper bound on $|V(T')|$.
 
-  At this point we are done.  Let $i:=\lfloor h'/2\rfloor$, so $i\in\Omega(h/\log h)$.  $G_h^-$ contains $\delta^i \in 2^{\Omega(h\log\delta/\log h)}$  nodes of $Z_i$.  For each $j\in\{0,\ldots,i\}$ at most two elements of $Z_i$ are visited fewer than $\delta$ by $W_j$.  Since $2i < |Z_i|$, there exists a node $x$ in $Z_i$ that is visited at least $\delta$ times by each of $W_0,\ldots,W_i$, for a total of $i\delta \in \Omega(h^{1+\epsilon}/\log h)$ times. This implies that $\rho$ maps at least $i\delta$ vertices of $G$ onto $\{x \}\times P\times K_r$, which implies that $i\delta\le (2h+1)r$, so $r\in\Omega(h^\epsilon/\log h)$.  The result now follows by taking $\varepsilon := \epsilon/2$.
-\end{proof}
+%   Consider the lazy walk $W_0:=w_{0,1},\ldots,w_{0,2^h}$ in $T'$ obtained by projecting the path $P_0$ onto $T$.  Suppose that some node $x$ of $T'$ has degree $\delta$.  Then the walk $W_0$ must visit $x$ at least $\delta-1$ times.  To see why this is so, consider the components $T_1,\ldots,T_\delta$ of $T'-\{x\}$ and for each $i\in\{1,\ldots,\delta\}$ let $\tau(i)=\min\{j\in \{1,\ldots,2^h\}: w_j\in V(T_i)\}$.  Without loss of generality, we may assume that $\tau(1) < \tau(2) <\cdots < \tau(\delta)$.  In other words, $W_0$ visits some vertex of $T_i$ before visiting any vertex of $T_{i+1}$, for each $i\in\{1,\ldots,\delta-1\}$.  Since $w_{\tau(i)}$ and $w_{\tau(i+1)}$ are in different components of $T-x$, it is follows immediately that $x$ appears at least once in $w_{\tau(i)+1},\ldots,w_{\tau(i+1)-1}$ for each $i\in\{1,\ldots,\delta\}$.
+
+%   Since $W_0$ visits $x$ at least $\delta-1$ times, $\rho(P_0)$ contains at least $\delta-1$ vertices in $\{x\}\times V(P)\times V(K_r)$, which implies that $\delta \le (2h+1)r + 1$.  Therefore, $T'$ is a tree of height $O(\log h/\log\log h)$ and of maximum degree $O(hr)$.
+
+%   \begin{clm}\label{big_logeps_subdivision}
+%     There exists a fixed constant $\epsilon >0$
+%     $T'$ contains a subtree $\Gamma$ that is isomorphic to a subdivision of a complete $\lceil h^\epsilon\rceil$-ary tree of height $h'\ge\epsilon\log h/\log\log h$.
+%   \end{clm}
+
+%   \begin{proof}
+%     Do some Kraft-like counting.
+%   \end{proof}
+
+%   Let $\delta:=\lceil h^{\epsilon}\rceil+1$ and say that a node $x$ of $\Gamma$ is a \defin{branching node} if it has degree $\delta$ in $G_h^-$.
+
+%   \begin{clm}
+%     $G_h^-$ contains a path $X_0$ such that $W_0$ visits every branching node of $G_h^--X_0$ at least $\delta$ times.
+%   \end{clm}
+
+%   \begin{proof}
+%     Say that a branching node $x$ of $G_h^-$ is \defin{light} if $x$ appears exactly $\delta-1$ times in $W_0$. Using the notation above, $x$ is light because $W_0$ visits $x$ exactly $\delta-1$ times and then remains in $T_\delta$.  Whenever this occurs at a node $x$, \defin{direct} the edge of $G_h^-$ that joint $x$ to $T_\delta$ away from $x$. Leave all other edges undirected.  In this way, each light branching node of $G_h^-$ has exactly one of its incident edges directed away from it.  Now observe that, if $x$ and $y$ are two light nodes of $G_h^-$ resulting in directed edges $e_x$ and $e_y$, then the path $P_{xy}$ in $G_h^-$ with endpoints $x$ and $y$ contains exactly one of $e_x$ or $e_y$.  We say that $x\prec y$ if $e_x$ is in $P_{xy}$ and $y\prec x$ if $e_y$ is in $P_x$.  Then the relationship $\prec$ is a total order on the light nodes of $G_h^-$ and there is a path $X_0$ that visits all these vertices in this order.
+%   \end{proof}
+
+
+%   For each $i\in\{0,\ldots,h'\}$, let $T_i$ be the subtree of $T$ visited by $W_i$ and let $Z_i$ be the set of branching nodes in $G_h^-$ that have exactly $h-i$ branching ancestors (including themselves).
+
+%   \begin{clm}
+%     For each $i\in\{0,\ldots,h\}$, $T_i$ contains every node in $\bigcup_{j=i}^{h'}Z_j$.
+%   \end{clm}
+
+%   \begin{proof}
+%     The proof is by induction on $i$. In the base case $i=0$ is true by the definition of $G_h^-$.  For $i\ge 1$, the inductive hypothesis implies that $W_{i-1}$ visits all branching nodes in $Z_{i-1}$. The walk $W_{i}$ ``follows'' $W_{i-1}$ in the sense that, for each $j\in\{1,\ldots,2^{h-i}\}$, $w_{i,j}$ is ajacent to, or equal to each of $w_{i-1,2j-1}$ and $w_{i-1,2j}$.  In particular, this implies that $W_i$ contains every vertex of $Z_i$. Since $W_i$ is a (lazy) walk in $T$, and $T$ is a tree, this implies that $W_i$ contains every branching ancestor of every node in $Z_i$.  Therefore, $W_i$ contains every vertex of $\bigcup_{j=i}^{h'} Z_j$, as required.
+%   \end{proof}
+
+%   At this point we are done.  Let $i:=\lfloor h'/2\rfloor$, so $i\in\Omega(h/\log h)$.  $G_h^-$ contains $\delta^i \in 2^{\Omega(h\log\delta/\log h)}$  nodes of $Z_i$.  For each $j\in\{0,\ldots,i\}$ at most two elements of $Z_i$ are visited fewer than $\delta$ by $W_j$.  Since $2i < |Z_i|$, there exists a node $x$ in $Z_i$ that is visited at least $\delta$ times by each of $W_0,\ldots,W_i$, for a total of $i\delta \in \Omega(h^{1+\epsilon}/\log h)$ times. This implies that $\rho$ maps at least $i\delta$ vertices of $G$ onto $\{x \}\times P\times K_r$, which implies that $i\delta\le (2h+1)r$, so $r\in\Omega(h^\epsilon/\log h)$.  The result now follows by taking $\varepsilon := \epsilon/2$.
+% \end{proof}
 
 
 \section{An Open Problem}
