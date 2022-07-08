@@ -145,7 +145,16 @@ In this note we show that, unfortunately, the answer to this question is no, by 
 \end{proof}
 
 
-Let $b\ge 9$ be an integer.  We will construct a family $\mathcal{G}:=\{G_h:h\in\N\}$ of planar graphs with the following property:  There exists a fixed $\epsilon >0$ such that, for any tree $T$, any path $P$, $G_h\subseteq T\boxtimes P\boxtimes K_c$ implies that $c\ge h^\epsilon$.  To define $G_h$, let $G_h^-$ be an ordered complete $b$-ary tree of height $h$ and let $G_h$ be a planar supergraph of $G_h^-$ obtained by adding a path $P_i$ that contains all vertices of depth $i$, in order, for each $i\in\{1,\ldots,h\}$.   In the following, we drop the subscript $h$, so $G:=G_h$ and $\Gamma:=\Gamma_h$.
+\begin{lem}\label{percolation}
+  Let $g\ge 2$ be an integer, let $b=2g-1$, let $\Gamma$ be a complete $b$-ary tree of height $h$, and let $S$ be a $w$-vertex subset of $V(\Gamma)$.  Then there exists a vertex $v\in S$ of depth $d\le\log_g (w)$ such that such that $\Gamma-(S\setminus\{v\})$ contains a tree rooted at $v$ that contains at least $g^i$ nodes of depth $i$, for each $i\in\{0,\ldots,h-d\}$.
+\end{lem}
+
+\begin{proof}
+  The proof is by induction on $h$.  If $h=0$ then the statement is trivial.  Otherwise, let $v_0$ be the root of $\Gamma$ and let $\ell\ge 1$ be the minimum integer such that $G-(S\setminus\{v\})$ does not contain a complete $g$-ary tree of height $\ell$ rooted at $v_0$.  If $\ell=h+1$, then we can choose $v=\Gamma$ and we are done.  Otherwise, let $T$ be the tree that satisfies the requirement for $\ell-1$ and let $L_0$ denote the leaves of $T$.  The nodes in $L$ have a total of $d|L|\ge g^\ell-1$ children in the tree $\Gamma$.  At least $(d-g+1)|L|\ge g^{\ell}$ of these children must belong to $S$ since, otherwise $T$ could be extended to the first $\ell$ layers.  Each of these depth $\ell$ nodes in $S$ is the root of a subtree and one of these subtrees contains no more than $|S|/g^{\ell}$ elements of $S$. We can apply induction on this subtree to to find the required vertex $v$ at depth at most $\ell+\log_g(w/g^{\ell})=\log_g(w)$ in $\Gamma$.
+\end{proof}
+
+
+Let $b\ge 9$ be an integer.  We will construct a family $\mathcal{G}:=\{G_h:h\in\N\}$ of planar graphs with the following property:  There exists a fixed $\epsilon >0$ such that, for any tree $T$, any path $P$, $G_h\subseteq T\boxtimes P\boxtimes K_c$ implies that $c\ge h^\epsilon$.  To define $G_h$, let $\Gamma_h$ be an ordered complete $b$-ary tree of height $h$ and let $G_h$ be a planar supergraph of $\Gamma_h$ obtained by adding a path $P_i$ that contains all vertices of depth $i$, in order, for each $i\in\{1,\ldots,h\}$.   In the following, we drop the subscript $h$, so $G:=G_h$ and $\Gamma:=\Gamma_h$.
 
 We now list some properties of $G$ that will be useful.  The following observation is an immediate consequence of \cref{diameter_spread}.
 
@@ -153,24 +162,45 @@ We now list some properties of $G$ that will be useful.  The following observati
   Let $R$ be a subset of $V(P_{i+\ell})$ having a common $\Gamma$-ancestor in $V(P_i)$.  Then, for any layering $\mathcal{L}$ of $G$, there exists a layer $L\in\mathcal{L}$ such that $|R\cap L|\ge |R|/(2\ell+1)$. 
 \end{obs}
 
+We say that a set $B\subset V(\Gamma)$ is \defin{genetically independent} if the no vertex of $B$ is an ancestor of any other vertex in $B$.  The following lemma shows that any tree partition of $G$ must have a node with a large genetically independent set that is far from the leaves of $\Gamma$.
 
 \begin{lem}\label{startup}
-  For any $c>0$ there exists $\alpha,\beta>0$ such that the following is true.
-  Let $\mathcal{T}:=(B_x:x\in V(T))$ be a tree partition of $G$ width at most $ch$.  Then there exists a node $x\in V(T)$ and a subset $R_0\subseteq B_x$ such that
-  \begin{inparaenum}[(i)]
-    \item no vertex in $R_0$ is an ancestor of any vertex in $R_0$; and
-    \item $|R_0|\ge \alpha h$
-    \item Each node in $R_0$ has $\Gamma$-depth at most $(1-\beta)h$ 
-  \end{inparaenum}
-  \todo{Prove this!}
+  For any $c>0$ there exists $\alpha>0$ such that the following is true.
+  Let $\mathcal{T}:=(B_x:x\in V(T))$ be a tree partition of $G$ of width at most $ch$.  Then there exists a node $x\in V(T)$ and a subset $R_0\subseteq B_x$ such that
+  \begin{compactenum}[(i)]
+    \item $R_0$ is genetically independent;
+    \item $|R_0|\ge \alpha h/c$; and
+    \item Each node in $R_0$ has depth at most $(1-\alpha)h$ 
+  \end{compactenum}
 \end{lem}
 
-% \begin{proof}
-%   It is well-known and easy to show that there exists a node $x$ of $T$ such that $G-B_x$ has no component with more than $|G|/2$ vertices.  Since $B_x$ has size at most $ch$, there exists a subpath of $P_h$ having at least $b^h/(ch+1)-1$ vertices, so the component $C$ that contains this subpath has $b^h/(ch+1)-1\le |C|\ge |G|/2$.  We say that a vertex in $C$ is a \defin{boundary vertex} if it is adjacent to a vertex in $S$ and let $B$ be the set of boundary vertices in $C$.   We say that a vertex $v\in B$ is \defin{orphaned} if none $v$'s $\Gamma$-ancestors are in $C$ and $v$ is \defin{supervised} otherwise.  Observe that the set of orphaned vertices in $B$ satisifies requirement \label{genetically_indep}
+% \todo[inline]{Besides \cref{startup}, which can be proven using the fact that the quotient graph is $K_3$-minor free, the rest of the proof does not rely at all on the fact that $T$ is a tree.  In fact, we can rule out any $H$-partition of width $O(\log n)$ that includes even one bag with a set of vertices that satisfies the conclusion of \cref{startup}.  This gives some hope that we can rule out $\Gamma$ plus a matching on the leaves by looking for a $K_4$ in the quotient graph.}
 
-%   We claim that $|B|\ge a\log n$\todo{Specify $a$ and prove this.}  If at least $|B|/2$ vertices are orphans.
 
-% \end{proof}
+\begin{proof}
+  It is well-known and easy to show that there exists a node $x$ of $T$ such that $G-B_x$ has no component with more than $|G|/2$ vertices.  Let $Y$ be the set of nodes in $B_x$ of depth at most $(1-\alpha)h-\log_g(ch)$. 
+
+  \todo[inline]{TODO: Argue that $|Y|\ge 2\alpha h$. The idea is that a set $ch$ nodes all of depth at least $(1-\alpha)h-\log_g(ch)$ can only separate about $chd^{\alpha h}(ch)^{\log_d(g)}\ll n^{O(\alpha)}$ vertices from the rest of $G$.}
+
+  Suppose that no subset of $Y$ satisifies the conditions of the lemma, let $T_Y$ be the minimal (connected) subtree of $\Gamma$ that spans $Y$, and let $L$ the set of leaves in $T_Y$.  Since $L$ satisfies (i), it must be that $|L|<\alpha h/c$.  Let $Z$ consist of all vertices in $V(\Gamma)\setminus V(T_Y)$ whose $\Gamma$-parents are in $Y\setminus L$.   Observe that $Z$ is a genetically independent set. For each $v$ of $T_Y$, let $d_v$ denote the number of children $v$ has in $T_Y$.  Now,
+  \[
+     \sum_{v\in Y\setminus L} (d_v-1) + 1 
+     \le \sum_{v\in V(T_Y)\setminus L} (d_v-1)+1
+     = |L| \enspace ,
+  \]
+  where the second equality is a standard fact about rooted trees.
+  Therefore $\sum_{v\in Y\setminus L} {d_v} \le |Y|$.  On the other hand,
+  \[
+    |Z| = \sum_{v\in Y\setminus L} (b-d_v) \enspace .
+  \]
+  Combining these two formulas, we obtain
+  \[
+    |Z| \ge b|Y\setminus L| - |Y| = (b-1)|Y| - b|L| \ge (b-1-1/2)|Y|
+    \ge (2b - 3)\alpha h \ge \alpha h ,
+  \]
+  for $b\ge 2$.
+  For each $v\in Z$, \cref{percolation} implies that $v$ has a descendant $v'$ whose parent is in $B_x$, that has depth at most $(1-\alpha)h$ and such that $\Gamma-B_x$ contains a path $P_{v'}$ from $v'$ to a leaf descendant of $v'$.  Form the set $Z'$ by replacing each vertex $v\in Z$ with the vertex $v'$ just described.  For two vertices $v',w'\in Z'$, $G$ contains $\alpha h$ internally disjoint paths that join $P_{v'}$ to $P_{w'}$.  The $ch$ vertices in $B_x$ can therefore only partition $Z'$ among at most $ch/\alpha h+1$ distinct components of $G-B_x$.  By the pigeonhole principle at least one of these components contains a subset $R_0\subseteq Z'$ of size at least $\alpha|Z'|/c$. Since $\mathcal{T}$ is a tree partition of $G$ and every vertex of $Z'$ is adjacent to a vertex in $B_x$, this implies that some neighbour $y$ of $x$ in $T$ has a bag $B_y$ that contains $R_0$.  This completes the proof.
+\end{proof}
 
 The next lemma is a more technical result.  Given two vertices $v,w\in V(\Gamma)$ neither of which is an ancestor of the other, we say that $v$ is \defin{left} of $w$ if the leaf descendants of $v$ appear in $P_h$ before the leaf descendants of $w$.
 
@@ -229,20 +259,33 @@ For a vertex $v$ of $G$, let $N^\downarrow_{G}(v)$ denote the set of children of
 
 
 \begin{lem}
-  Let $L_0,\ldots,L_{2h}$ be any layering of $G$ and let $(B_x:x\in V(T))$ be a tree partition of $G$ of width at most $ch$.  Then there exists some $x\in V(T)$ and some $i\in\{0,\ldots,2h\}$ such that $B_x\cap L_i\ge h^{\epsilon}$.\todo{Define $\epsilon$}
+  There exists constants $\epsilon >0$ and $h_0\ge 1$ such that the following is true, for all s $h \ge h_0$.  Let $L_0,\ldots,L_{2h}$ be any layering of $G$ and let $(B_x:x\in V(T))$ be a tree partition of $G$ of width at most $ch$.  Then there exists some $x\in V(T)$ and some $i\in\{0,\ldots,2h\}$ such that $B_x\cap L_i| \ge h^{\epsilon}$.
 \end{lem}
 
 \begin{proof}
-  By \cref{startup}, $T$ contains a node $x$ such that $B_x$ contains a set $R$ of size $|R|\ge \alpha h$ where each vertex in $R$ has $\Gamma$-depth at most $(1-\beta)h$ and no vertex in $R$ is a $\Gamma$-ancestor of any other vertex in $R$.  Let $S_0:=B_x$ and $\mathcal{R}_0':=\{\{v\}:v\in R\}$.  By definition $\mathcal{R}_0'$ is a $1$-great set.
+  By \cref{startup}, $T$ contains a node $x$ such that $B_x$ contains a set $R$ of size $|R|\ge \alpha h$ where each vertex in $R$ has $\Gamma$-depth at most $(1-\alpha)h$ and no vertex in $R$ is a $\Gamma$-ancestor of any other vertex in $R$.  Let $S_0:=B_x$ and $\mathcal{R}_0':=\{\{v\}:v\in R\}$.  By definition $\mathcal{R}_0'$ is a $1$-great set.
 
   % It is well known, and easy to prove, that $T$ contains a node $x_{-1}$ such that $G-B_{x_{-1}}$ has no component of order greater than $2|V(T)|/3$.
   % Since $B_{x_{-1}}\cap V_h \le w$, there exists a subpath of $P_h$ of length at least $(b^h-w)/(w+1)$ that contains no vertices of $B_{x_{-1}}$.  Let $C$ be the component of $G-B_{x_{-1}}$ that contains this subpath.  We claim that $C$ contains $r\ge ah$ vertices $v_1,\ldots,v_r$ whose $\Gamma$ parents are in $B_{x_{-1}}$ and each having depth at most $(1-a)h$.\todo{Prove this.}  
 
   % By definition, $v_1,\ldots,v_r$ are contained in $S_0:=B_{x_0}$ for some neighbour $x_0$ of $x_{-1}$.  Also by definition, $\{\{v_1\},\ldots,\{v_r\}\}$ is a $1$-great set $\mathcal{R}_0'$ contained in $S_0$.  
 
-  Let $y:=\log_2(w)\cdot\log_3(w/(b-3))$.  By \cref{compatible_set} (applied to $\mathcal{R}_0'$ and $S_0$) $S_0$ contains a $1$-great set $\mathcal{R}_0$ that is compatible with $S_0$ and in which every vertex has $\Gamma$-depth at most $(1-a)h+y$.  
+  Let $y:=\log_2(ch)\cdot\log_3(ch/(b-3))$.  By \cref{compatible_set} (applied to $\mathcal{R}_0'$ and $S_0$) $S_0$ contains a $1$-great set $\mathcal{R}_0$ of size $r_0/2$ that is compatible with $S_0$ and in which every vertex has $\Gamma$-depth at most $(1-a)h+y$.  
 
-  For each vertex $v$ in $\mathcal{R}_0$, let $T_v$ denote the ternary tree rooted at $v$ that is guaranteed by the definition of compatibility. By \cref{subtree_splitting}, there exists $r_1\ge r/a\alpha$\todo{Check the factors here!} vertices $v$ in $\mathcal{R}_0$ and a component $C_1$ of $G-S_0$ such that the three trees in $T_v-v$ are contained in $C_1$.  Form the set $\mathcal{R}_1'$ from $\mathcal{R}_0$ by replacing each such $v$ with the three roots of $T_v-\{v\}$.   Since each vertex of $\mathcal{R}_1'$ obtained this way is in $C_1$ and is ajacent to a vertex of $S_0$, $x_0$ has a neighbour $x_1$ in $T$ such that $S_1:=B_{x_1}$ contains $\cup\mathcal{R}_1'$.  That is, $\mathcal{R}_1$ is a $3$-great set contained in $S_1$.  Now apply \cref{compatible_set} to obtain a $\lceil 3/2\rceil$-great set $\mathcal{R}_1$ that is compatible with $S_1$ and whose elements have depth at most $(1-a)h+2y$.  We can now iterate this process of obtaining $\mathcal{R}_{i+1}$ from $\mathcal{R}_i$.  After $t-1\le ah/y$ such iterations we obtain a $\lceil(3/2)^t\rceil$-great set $\mathcal{R}_t$ with at containing at least one set $R$whose elements all belong to some $S_t:=B_{x_{t}}$ for some node $x_t$ of $T$.  Furthermore, each element in $R$ has an ancestor 
+  For each vertex $v$ in $\mathcal{R}_0$, let $T_v$ denote the ternary tree rooted at $v$ that is guaranteed by the definition of compatibility. By \cref{subtree_splitting}, there exists $r_1\ge \alpha r_0/c$ vertices $v$ in $\mathcal{R}_0$ and a component $C_1$ of $G-S_0$ such that the three trees in $T_v-v$ are contained in $C_1$.  
+
+  Form the set $\mathcal{R}_1'$ from $\mathcal{R}_0$ by replacing each such $v$ with the three roots of $T_v-\{v\}$.   Since each vertex of $\mathcal{R}_1'$ obtained this way is in $C_1$ and is ajacent to a vertex of $S_0$, $x_0$ has a neighbour $x_1$ in $T$ such that $S_1:=B_{x_1}$ contains $\cup\mathcal{R}_1'$.  That is, $\mathcal{R}_1$ is a $3$-great set contained in $S_1$.  Now apply \cref{compatible_set} to obtain a $\lceil 3/2\rceil$-great set $\mathcal{R}_1$ of size at least $r_1$ that is compatible with $S_1$ and whose elements have depth at most $(1-a)h+2y$.  We can now iterate this process of obtaining $\mathcal{R}_{i+1}$ from $\mathcal{R}_i$.  After $t-1$ such iterations we obtain a $\lceil(3/2)^t\rceil$-great set $\mathcal{R}_t$ of size at least $r_t \ge r_0(\alpha/c)^t \ge 1$, provided that 
+  \[
+    t \le \min\{\alpha/y, \log_{c/\alpha} r_0\} \enspace .
+  \]
+  Let $R$ be one of the sets in $\mathcal{R}_t$.  All the elements in $R$ have a common ancestor in $\cup\mathcal{R}_0$, which is at distance at most $ty$.  Therefore, by \cref{ancestor_spread}, there exists some $L\in\mathcal{L}$ with
+  \[
+    |L\cap B_{x_t}|\ge |L\cap R| \ge \frac{|R|}{2ty+1} 
+    \ge \frac{(3/2)^t}{2ty+1}
+    = \frac{(3/2)^{\Omega(\log h)}}{2\log_2(ch)\cdot\log_3(ch/(b-3))+1}
+    = \Omega(h^\epsilon) 
+  \] 
+  for some $\epsilon >0$.
 \end{proof}
 
 
