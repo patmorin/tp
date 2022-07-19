@@ -136,6 +136,26 @@ In this note we show that, unfortunately, the answer to this question is no, by 
 \section{The New Proof}
 
 
+\subsection{Preliminaries}
+
+Let $G$ and $H$ be graphs.\footnote{Here and throughout, all graphs are simple connected and undirected}  
+% A \defin{layering} $\mathcal{L}:=\langle L_i:i\in\N\rangle$ is an ordered partition of $V(G)$, called the \defin{layers}, such that 
+% \begin{inparaenum}[(i)]
+%   \item each vertex of $G$ appears in exactly one layer; and
+%   \item if $vw$ is an edge of $G$ with $v\in L_i$ and $w\in L_j$ then $|i-j|\le 1$ (i.e., $v$ and $w$ appear in the same or in consecutive layers).
+% \end{inparaenum}
+An \defin{$H$-partition} $\mathcal{H}:=\{B_x:x\in V(H)\}$ of $G$ is a partition  of $V(G)$ into a subsets indexed by the vertices of $H$, called \defin{parts}, with the property that, if $vw$ is an edge of $G$ with $v\in B_x$ and $w\in B_y$ then $x=y$ or $xy\in E(H)$.  The \defin{width} of $\mathcal{H}$ is the size of its largest part, minus one; i.e., $\max\{|B_x|:x\in V(H)\}-1$.  If $H$ comes from a class $\mathcal{G}$ of graphs then we may call $\mathcal{H}$ a $\mathcal{G}$-partition of $G$.  Specifically, if $H$ is a tree, then $\mathcal{H}$ is a \defin{tree-partition} of $G$ and if $\mathcal{H}$ is a path, then $\mathcal{H}$ is a \defin{path-partition} of $G$.
+
+% Observe that a layering of $G$ can also be viewed as a $P$-partition of $G$ where $P$ is the infinite path $0,1,2,3\ldots$ 
+
+As in previous works, we make use of the following relationship between $H$-partitions and strong products:
+
+\begin{obs}\label{layered_partitions_vs_strong_products}
+  For any graphs $G$, $H$, and $P$,  $G$ is a subgraph of $H\boxtimes P$ if and only if $G$ has an $H$-partition $\mathcal{H}:=\{B_x:x\in V(H)\}$ and a $P$-partition $\mathcal{P}:=\{P_y:y\in V(P)\}$ such that $|B_x\cap P_y|\le 1$, for any $(x,y)\in V(H)\boxtimes V(P)$.
+\end{obs}
+
+When $P$ is a path, then a $P$-partition $\mathcal{P}$ of $G$ is also referred to as a \defin{layering} of $G$ and the parts of $\mathcal{P}$ are referred to as \defin{layers}.\todo{Define consecutive layers}  The \defin{length} of a path $v_0,\ldots,v_r$ is the number, $r$ of edges in the path. For any two vertices $v,w\in V(G)$, $\dist_G(v,w)$ denotes the minimum length of a path in $G$ that contains $v$ and $w$. For any $R\subseteq V(G)$, the \defin{diameter} of $R$ is $\diam_G(R):=\max\{\dist_G(v,w):v,w\in R\}$.  The following observation follows immediately from these definitions:
+
 \begin{obs}\label{diameter_spread}
   Let $G$ be any graph and let $R\subseteq V(G)$ and let $\mathcal{L}$ be any layering of $G$.  Then there exist some layer $L\in\mathcal{L}$ such that $|R\cap L|\ge |R|/(\diam_G(R)+1)$.
 \end{obs}
@@ -144,29 +164,147 @@ In this note we show that, unfortunately, the answer to this question is no, by 
   By the definition of layering, the vertices in $R$ appear in at most $\diam_G(R)+1$ consecutive layers of $\mathcal{L}$. The result then follows from the pigeonhole principle.
 \end{proof}
 
+\subsection{Complete Trees}
 
-\begin{lem}\label{percolation}
-  Let $g\ge 2$ be an integer, let $b=2g-1$, let $\Gamma$ be a complete $b$-ary tree of height $h$, and let $S$ be a $w$-vertex subset of $V(\Gamma)$.  Then there exists a vertex $v\in S$ of depth $d\le\log_g (w)$ such that such that $\Gamma-(S\setminus\{v\})$ contains a tree rooted at $v$ that contains at least $g^i$ nodes of depth $i$, for each $i\in\{0,\ldots,h-d\}$.
+Let $b\ge 2$ be an integer and let $\Gamma_{b,0}$ be a graph consisting of a single node.  For $h\ge 1$, let $\Gamma_{b,h}$ be the complete $b$-ary tree of height $h$; i.e., a rooted tree with $b^h$ leaves in which each non-leaf node has exactly $b$ children.  The \defin{depth} of a node in $\Gamma_{b,h}$ is its distance to the root.  A node $a$ of $\Gamma_{b,h}$ is an \defin{ancestor} of a node $w$ (and $w$ is a \defin{descendant of $a$}) if the path in $\Gamma_{b,h}$ from $w$ to the root contains $a$. We say that a set $B\subset V(\Gamma)$ is \defin{genetically independent} if the no vertex of $B$ is an ancestor of any other vertex in $B$.  
+
+\begin{obs}\label{ancestor_spread}
+  Let $b\ge 2$ and $h\ge 0$ be integers, let $i\in\{0,\ldots,h\}$, let $\ell\in\{0,\ldots,h-i\}$, and let $R$ be a subset of $V(G_{b,h})$ containing nodes of depth $i+\ell$ and all having a common ancestor $a$ in $V(P_i)$.  Then, for any layering $\mathcal{L}$ of $G$, there exists a layer $L\in\mathcal{L}$ such that $|R\cap L|\ge |R|/(2\ell+1)$. 
+\end{obs}
+
+\begin{proof}
+  For any $v,w\in R$, $G$ contains a path of length $2\ell+1$ from $v$ to $a$ to $w$, so $\dist_G(v,w)\le 2\ell+1$ and therefore $\diam_G(R)\le 2\ell+1$. The result now follows from \cref{diameter_spread}.
+\end{proof}
+
+We will make use of the following percolation-type results. 
+
+\begin{lem}\label{one_path}
+  Let $h\ge 1$, let $T_h$ be a complete binary tree of height $h$ with root $v_0$, and let $S\subseteq V(T_h)$ with $1\le |S|< 2^h$. Then there exists a vertex $v_1$ of $T$ such that
+  \begin{compactenum}[(i)]
+    \item the depth of $v_1$ is at most $\log_2(|S|+1)$;
+    \item the parent of $v_1$ is in $S\cup\{v_0\}$; and
+    \item $T_h-S$ contains a path from $v_1$ to a leaf of $T_h$.
+  \end{compactenum} 
 \end{lem}
 
 \begin{proof}
-  The proof is by induction on $h$.  If $h=0$ then the statement is trivial.  Otherwise, let $v_0$ be the root of $\Gamma$ and let $\ell\ge 1$ be the minimum integer such that $G-(S\setminus\{v\})$ does not contain a complete $g$-ary tree of height $\ell$ rooted at $v_0$.  If $\ell=h+1$, then we can choose $v=\Gamma$ and we are done.  Otherwise, let $T$ be the tree that satisfies the requirement for $\ell-1$ and let $L_0$ denote the leaves of $T$.  The nodes in $L$ have a total of $d|L|\ge g^\ell-1$ children in the tree $\Gamma$.  At least $(d-g+1)|L|\ge g^{\ell}$ of these children must belong to $S$ since, otherwise $T$ could be extended to the first $\ell$ layers.  Each of these depth $\ell$ nodes in $S$ is the root of a subtree and one of these subtrees contains no more than $|S|/g^{\ell}$ elements of $S$. We can apply induction on this subtree to to find the required vertex $v$ at depth at most $\ell+\log_g(w/g^{\ell})=\log_g(w)$ in $\Gamma$.
+  The proof is by induction on $h$.  When $h=1$, $|S|= 1$. In particular, at least one child $v_1$ of $v_0$ is not in $S$.  The depth of $v_1$ is $1\le \log_{3/2}(2)$.  The parent of $v_1$ is $v_0\in\{S\cup\{v_0\}$.  An $T_1-S$ contains a path from $v_1$ to itself (a leaf of $T_1$).
+
+  For $h\ge 1$, let $\ell$ be the maximum integer such that $S\cup\{v_0\}$ contains all $2^\ell$ vertices of depth $\ell$.  Of course, $\ell \le \log_2 |S| < h$.  Let $L_1$ be the set of $2^{\ell+1}$ depth $\ell+1$ nodes in $T$.  By the Pigeonhole Principle some node $v\in L_1$ is the root of a complete binary tree $T'$ with root $v'$ of height $h-\ell-1$ with $|S\cap V(T')| \le |S|/2^{\ell+1} < 2^{h-\ell+1}$.  Now we can apply induction on $T$ and $S':=S\cap V(T')$ to obtain a vertex $v_1'$ of depth at most $\ell+1+\lfloor \log_2(|S'|+1)\rfloor \le \log_2(|S|+1)$ whose parent is in $S\cup\{v\}$, and such that $T_h-S$ contains a path from $v_1'$ to a leaf of $T_h$.  Thus $v_1'$ satisfies the requirements of the lemma except when the parent of $v_1'$ is $v$ and $v\not in S$.  However, in this case, $v$ satisfies the requirements of the lemma.
+\end{proof}
+
+\begin{lem}\label{two_paths}
+  Let $h\ge 2$, let $T_h$ be a complete binary tree of height $h$ with root $v_0$, and let $S\subseteq V(T_h)$ with $1\le |S|< (3/2)^h-1$. Then there exists two vertices $v_1$ and $v_2$ of $T$ such that, for each $i\in\{1,2\}$ 
+  \begin{compactenum}[(i)]
+    \item the depth of $v_i$ is at most $\log_{3/2}(|S|+1)$;
+    \item the parent of $v_i$ is in $S\cup\{v_0\}$; and
+    \item $T_h-S$ contains a path from $v_i$ to a leaf of $T_h$.
+  \end{compactenum} 
+\end{lem}
+
+\begin{proof}
+  The proof is by induction on $h$.  When $h=1$, $|S|\le\lfloor (3/2)\rfloor-1=0$. In particular, the two children $v_1$ and $v_2$ of $S$ satisfy the conditions of the lemma.
+
+  For $h\ge 1$, let $\ell$ be the maximum integer such that $S\cup\{v_0\}$ contains at least $(3/2)^\ell-1$ vertices of depth $\ell$.  Of course, $\ell \le \log_{3/2}(|S|+1) < h$.  Let $L_1$ be the set of depth $\ell+1$ nodes in $T$ whose parent is in $S$.  Then $|L_1|\ge 2|L_0| \ge 2(3/2)^\ell - 2$.  The number of nodes in $L_1$ whose subtrees contain at least $(3/2)^{\ell+1}$ nodes of $S$ is at most $|S|/(3/2)^{\ell+1}$.  In particular, there are at least $|L_1|- 2|L_0|/(3/2)^{\ell} > (1/2)(3/2)^\ell$
+
+
+
+  Let $x$ be the number of nodes in $L_1$ whose subtrees contain at most 
+
+
+
+  By the Pigeonhole Principle some node $v\in L_1$ is the root of a complete binary tree $T'$ with root $v'$ of height $h-\ell-1$ with $|S\cap V(T')| \le |S|/2^{\ell+1} < 2^{h-\ell+1}$.  Now we can apply induction on $T$ and $S':=S\cap V(T')$ to obtain a vertex $v_1'$ of depth at most $\ell+1+\lfloor \log_2(|S'|+1)\rfloor \le \log_2(|S|+1)$ whose parent is in $S\cup\{v\}$, and such that $T_h-S$ contains a path from $v_1'$ to a leaf of $T_h$.  Thus $v_1'$ satisfies the requirements of the lemma except when the parent of $v_1'$ is $v$ and $v\not in S$.  However, in this case, $v$ satisfies the requirements of the lemma.
 \end{proof}
 
 
-Let $b\ge 9$ be an integer.  We will construct a family $\mathcal{G}:=\{G_h:h\in\N\}$ of planar graphs with the following property:  There exists a fixed $\epsilon >0$ such that, for any tree $T$, any path $P$, $G_h\subseteq T\boxtimes P\boxtimes K_c$ implies that $c\ge h^\epsilon$.  To define $G_h$, let $\Gamma_h$ be an ordered complete $b$-ary tree of height $h$ and let $G_h$ be a planar supergraph of $\Gamma_h$ obtained by adding a path $P_i$ that contains all vertices of depth $i$, in order, for each $i\in\{1,\ldots,h\}$.   In the following, we drop the subscript $h$, so $G:=G_h$ and $\Gamma:=\Gamma_h$.
 
-We now list some properties of $G$ that will be useful.  The following observation is an immediate consequence of \cref{diameter_spread}.
 
-\begin{obs}\label{ancestor_spread}
-  Let $R$ be a subset of $V(P_{i+\ell})$ having a common $\Gamma$-ancestor in $V(P_i)$.  Then, for any layering $\mathcal{L}$ of $G$, there exists a layer $L\in\mathcal{L}$ such that $|R\cap L|\ge |R|/(2\ell+1)$. 
-\end{obs}
+\begin{lem}\label{one_path}
+  Let $b\ge 2$, $h\ge 1$ be integers, let $v_0$ be the root of $\Gamma_{b,h}$, and let $S\subseteq V(G_{b,h})$ have size $2\le |S| < b^h$.  Then there exists $v_1\in V(G_{b,h})\setminus S$ such that, for each $i\in\{1,\ldots,g\}$, 
+  \begin{compactenum}[(i)]
+    \item the depth of $v_1$ is at most $\lceil \log_b|S|\rceil$;
+    \item the parent of $v_1$ is in $S\cup\{v_0\}$; and
+    \item $G_{b,h}-S$ contains a path from $v_1$ to a leaf of $G_{b,h}$.
+  \end{compactenum} 
+\end{lem}
 
-We say that a set $B\subset V(\Gamma)$ is \defin{genetically independent} if the no vertex of $B$ is an ancestor of any other vertex in $B$.  The following lemma shows that any tree partition of $G$ must have a node with a large genetically independent set that is far from the leaves of $\Gamma$.
+\begin{proof}
+  The proof is by induction on $h$.  When $h=1$, $|S|< b$, so at least one child, $v_1$ of $v_0$ is not in $S$. The node $v_1$ has depth $1 = \lceil \log_b 2\rceil = \lceil\log_b|S|\rceil$.  The node $v_1$ has parent $v_0\in S\cup\{v_0\}$.  There is a length-$0$ path from $v_1$ to a leaf of $G_{b,h}$. Thus, $v_1$ satisfies the requirements of the lemma.
+
+  If $h>1$, then let $\ell$ be the maximum integer such that $G_{b,h}[S]$ contains a complete $b$-ary tree $T_0$ of height $\ell$ rooted at $v_0$.  Since $v_0\in S$, $\ell\ge 0$.  Since $|S|< b^h$, $\ell < h$. Let $L_0$ be the set of $b^\ell$ leaves in $T_0$ and let $L_1$ be the set of $b^{\ell+1}$ nodes in $G_{b,h}$ whose parent is in $L_0$.  By the Pigeonhole Principle some node $v$ in $L_1$ is the root of a complete $b$-ary subtree $T_1$ of height $h-\ell-1$ with $|V(T_1)\cap S|\le |S|/b^{\ell+1} < b^{h-\ell-1}$ vertices in $S$.  Now apply induction on $T_1$ and $S\cap V(T_1)$ to find a node $v_1'$ of depth at most $\ell+\ceil\log_b(|S\cap V(T_1)|)\rceil \le \lceil\log_b |S|\rceil$ whose parent is in $S\cup\{v\}$ and such that $G_{b,h}-S$ contains a path from $v_1'$.  Thus, $v_1'$ satisfies the requirements of the lemma except that, possibly the parent of $v_1'$ is but $v\not\in S\cup\{v_0\}$.  However, in this case, $v$ satisifies the requirements of the lemma.
+\end{proof}
+
+
+
+
+\begin{lem}\label{g_paths}
+  Let $b\ge 2$ and $h\ge 1$ be integers, let $v_0$ be the root of $\Gamma_{b,h}$ and let $S\subseteq V(G_{b,h})$ have size $2\le |S|< (b/2)^h$.  Then there exists a genetically independent pair $v_1,\ldots,v_g\in V(G_{b,h})\setminus S$ such that, for each $i\in\{1,\ldots,g\}$, 
+  \begin{compactenum}[(i)]
+    \item the depth of $v_i$ is at most $\lceil \log_g|S|\rceil$;
+    \item the parent of $v_i$ is in $S\cup\{v_0\}$;
+    \item $G_{b,h}-S$ contains a path from $v_i$ to a leaf of $G_{b,h}$.
+  \end{compactenum} 
+\end{lem}
+
+\begin{proof}
+  First observe that $b-g+1=g$.  The proof is by induction on $h$.  When $h=1$, $|S|< g$, so $S$ contains at most $g-1$ children of $v_0$, so at least $b-(g-1)=g$ children, $v_1,\ldots,v_g$ of $v_0$ are not in $S$.  The nodes $v_1,\ldots,v_g$ each have depth $1 \le\lceil \log_g 2\rceil \lceil\log_g|S|\rceil$.  Each of these nodes has parent $v_0\in S\cup\{v_0\}$.  Each  of these nodes is a path from itself to a leaf of $G_{b,h}$. Thus, $v_1,\ldots,v_g$ satisfy the requirements of the lemma.
+
+
+  If $h>1$, then let $\ell$ be the maximum integer such that $S\cup\{v_0\}$ contains at least $g^\ell$ nodes of depth $\ell$. Since $|S|< g^h$, $\ell\in\{0,\ldots,h-1\}$.  Let $L_0$ be the nodes of $S$ having depth $\ell$ and let $L_1$ be the set of nodes in $G_{b,h}$ whose parents are in $L_0$.  Then $|L_1| = b|L_0| \ge bg^{\ell+1}$.
+
+  Let $L_0$ be the set of $g^\ell$ leaves in $T_0$. and let $L_1$ be the set of $bg^\ell$ nodes in $G_{b,h}$ whose parents are in $L_0$.
+
+
+
+    By the pigeonhole principle, at least one node of $L_0$ is the root, in $\Gamma_{b,h}$, of a complete $b$-ary subtree $T_1$ of $G_{b,h}$ of height $h-\ell$ that contains at most $|S|/g^\ell \le g^{h-\ell}$ 
+
+\end{proof}
+
+
+  % \not\in S$, but the parent of $v_i$ is in $S$.
+
+
+
+%    $S$ contains a node $v$ of depth at most $\log_g|S|$ that has $g$ children $v_1,\ldots,v_g$ such that $\Gamma_{b,h}-S$ contains a path from $v_i$ to a leaf of $G_{b,h}$, for each $i\in\{1,\ldots,g\}$.
+% \end{lem}
+
+% \begin{lem}\label{percolation}
+%   Let $h\ge 1$, $g\ge 2$, and $w\ge 1$ be integers, let $b=2g-1$, and let $S$ be a set of $w\le g^h$ vertices of \Gamma_{b,h}$ that contains the root of $\Gamma_{b,h}$.  Then there exists a vertex $v\in S$ of depth $d\le\log_g (w)$ such that such that $\Gamma_{b,h}-S$ contains at least $g$ children of $v$, each of which is the root of a subtree that contains at least $g^{i-d-1}$ nodes of depth $i$, for each $i\in\{d+1,\ldots,h\}$.
+% \end{lem}
+
+% \begin{proof}
+%   The proof is by induction on $h$.  If $h=1$, then we choose $v$ to be the root of $\Gamma_{b,h}$, in which case $d=0$.  Since $|S|\le g^h = g$ and $S$ contains the root of $G_{b,h}$, $S$ contains at most $g-1$ children $v$, so at least $b-(g-1)$ \ge g$ children of $v$ are not contained in $S$.  Each of these children is the root of a subtree that contains $g^0=1$ nodes of depth $0$, as required.
+
+%   If $h\ge 2$, then let $v_0$ be the root of $\Gamma_{b,h}$ and let $\ell$ be the maximum integers such that $\Gamma_{b,h}-(S\setminus v_0)$ contains a complete $g$-ary tree $T_0$ of height $\ell$ rooted at $v_0$.    Since $v_0\not\in S\setminus\{v_0\}$, $\ell\ge 0$.  If $\ell=h$, then $v_0$ satisfies the requirements of the lemma and we are done.  Let $L_0$ be the $g^\ell$ leaves of $T_0$.  
+
+
+%   The nodes in $L_0$ have a total of $b|L_0|\ge g^\ell-1$ children in $\Gamma_{b,h}$.  At least $(b-g+1)|L|\ge g^{\ell}$ of these children must belong to $S$ since, otherwise $T$ could be extended to the first $\ell$ layers.  Each of these depth $\ell$ nodes in $S$ is the root of a subtree and one of these subtrees contains no more than $|S|/g^{\ell}$ elements of $S$. We can apply induction on this subtree to to find the required vertex $v$ at depth at most $\ell+\log_g(w/g^{\ell})=\log_g(w)$ in $\Gamma$.
+% \end{proof}
+
+
+\subsection{The Construction}
+
+
+Let $b\ge 9$ be an integer.  We will construct a family $\mathcal{G}:=\{G_{b,h}:h\in\N\}$ of planar graphs with the following property:  There exists a fixed $\epsilon >0$ such that, for any tree $T$, any path $P$, $G_{b,h}\subseteq T\boxtimes P\boxtimes K_c$ implies that $c\ge h^\epsilon$.  Each graph $G_{b,h}$ is a planar supergraph of $\Gamma_{b,h}$ obtained by adding a path $P_i$ that contains all vertices of depth $i$, in order, for each $i\in\{1,\ldots,h\}$.   In the following, we drop the subscripts $b$ and $h$, so $G:=G_{b,h}$ and $\Gamma:=\Gamma_{b,h}$.  We now list some properties of $G$ that will be useful.  Since $\Gamma$ is a spanning subgraph of $G$, the \defin{depth} of a node $v$ in $G$ refers to the depth of $v$ in $\Gamma$.  In the following, we are mainly concerned with asymptotic behaviour as $h$ becomes arbitrarily large and $b$ is fixed.
+% The following observation is an immediate consequence of \cref{diameter_spread}.
+
+Our first lemma shows that if $S$ is a small balanced separator of $G$ then $S$ contains many nodes of small depth.
+
+\begin{lem}\label{small_depth_separator}
+  There exists $a >0$ such that the following is true, for any $c>0$.
+  If $S\subseteq V(G)$ has size $|S|\le ch$ and $G-S$ has no component with more than $|V(G)|/2$ vertices, then $S$ contains at least $ah/c$ nodes of depth at most $(1-a)h$. 
+\end{lem}
+
+\begin{proof}
+  TODO. The idea is that a set $ch$ nodes all of depth at least $(1-\alpha)h-\log_g(ch)$ can only separate about $chd^{\alpha h}(ch)^{\log_d(g)}\ll n^{O(\alpha)}$ vertices from the rest of $G$.
+\end{proof}
+
+
+The following lemma shows that any tree partition of $G$ must have a node with a large genetically independent set that is far from the leaves of $\Gamma$.
 
 \begin{lem}\label{startup}
   For any $c>0$ there exists $\alpha>0$ such that the following is true.
-  Let $\mathcal{T}:=(B_x:x\in V(T))$ be a tree partition of $G$ of width at most $ch$.  Then there exists a node $x\in V(T)$ and a subset $R_0\subseteq B_x$ such that
+  Let $\mathcal{T}:=\{B_x:x\in V(T)\}$ be a tree partition of $G$ of width at most $ch-1$.  Then there exists a node $x\in V(T)$ and a subset $R_0\subseteq B_x$ such that
   \begin{compactenum}[(i)]
     \item $R_0$ is genetically independent;
     \item $|R_0|\ge \alpha h/c$; and
@@ -178,11 +316,10 @@ We say that a set $B\subset V(\Gamma)$ is \defin{genetically independent} if the
 
 
 \begin{proof}
-  It is well-known and easy to show that there exists a node $x$ of $T$ such that $G-B_x$ has no component with more than $|G|/2$ vertices.  Let $Y$ be the set of nodes in $B_x$ of depth at most $(1-\alpha)h-\log_g(ch)$. 
+  It is well-known and easy to show that there exists a node $x$ of $T$ such that $G-B_x$ has no component with more than $|G|/2$ vertices.  Let $Y$ be the set of nodes in $B_x$ of depth at most $(1-\alpha)h-\log_g(ch)$. By \cref{small_depth_separator}, $|Y|\ge (1-a)h$.  Observe that, if $\alpha \le a-\log_g(ch)/h = a-o(1)$ and $\alpha \le a/2$ then $|Y|\ge 2\alpha h/c$.
 
-  \todo[inline]{TODO: Argue that $|Y|\ge 2\alpha h$. The idea is that a set $ch$ nodes all of depth at least $(1-\alpha)h-\log_g(ch)$ can only separate about $chd^{\alpha h}(ch)^{\log_d(g)}\ll n^{O(\alpha)}$ vertices from the rest of $G$.}
 
-  Suppose that no subset of $Y$ satisifies the conditions of the lemma, let $T_Y$ be the minimal (connected) subtree of $\Gamma$ that spans $Y$, and let $L$ the set of leaves in $T_Y$.  Since $L$ satisfies (i), it must be that $|L|<\alpha h/c$.  Let $Z$ consist of all vertices in $V(\Gamma)\setminus V(T_Y)$ whose $\Gamma$-parents are in $Y\setminus L$.   Observe that $Z$ is a genetically independent set. For each $v$ of $T_Y$, let $d_v$ denote the number of children $v$ has in $T_Y$.  Now,
+  Suppose that no subset of $Y$ satisifies the conditions of the lemma, let $T_Y$ be the minimal (connected) subtree of $\Gamma$ that spans $Y$, and let $L$ the set of leaves in $T_Y$.  Observe that $L\subseteq Y$ is a genetically independent set. Therefore, $L$ satisfies (i) and, by definition, $L$ satisfies (iii).  Therefore, it must be that $|L|<\alpha h/c$.  Let $Z$ consist of all vertices in $V(\Gamma)\setminus V(T_Y)$ whose $\Gamma$-parents are in $Y\setminus L$.   Observe that $Z$ is a genetically independent set. For each $v$ of $T_Y$, let $d_v$ denote the number of children $v$ has in $T_Y$.  Now,
   \[
      \sum_{v\in Y\setminus L} (d_v-1) + 1 
      \le \sum_{v\in V(T_Y)\setminus L} (d_v-1)+1
@@ -225,11 +362,13 @@ A set $\mathcal{R}:=\{R_1,\ldots,R_r\}$ of subsets of $V(\Gamma)$ is \defin{$(k,
 For a subset $S\subseteq V(\Gamma)$ and a depth-$d$ vertex $v\in S$, we say that $v$ is \defin{$g$-compatible} with $S$ if the component of $\Gamma-(S\setminus\{v\})$ contains at least $g$ distinct paths that begin at $v$ and end at a leaf of $\Gamma$.  
 
 \begin{lem}\label{compatible_set}
-  For any $(k,\ell)$-great set $\mathcal{R}:=\{R_1,\ldots,R_r\}$ and any $S\supseteq \cup\mathcal{R}$, there exists a $(k,\ell')$-great set $\mathcal{R}':=\{R_1,\ldots,R_r\}$ that is $g$-compatible with $S$ and with $\ell'\le \ell+\log_g|S|)$.
+  For any $(k,\ell)$-great set $\mathcal{R}:=\{R_1,\ldots,R_r\}$ and any $S\supseteq \cup\mathcal{R}$, there exists a $(k,\ell')$-great set $\mathcal{R}':=\{R_1',\ldots,R_r'\}$ that is $g$-compatible with $S$ and with $\ell'\le \ell+\log_g|S|)$.
 \end{lem}
 
 \begin{proof}
-  For each $i\in\{1,\ldots,r\}$ and each $v\in R_i$, replace $v$ with the vertex $v'$ described in \cref{percolation}.
+  For each $i\in\{1,\ldots,r\}$ and each $v\in R_i$, replace $v$ with the vertex descendant $v'$ of $v$ described in \cref{percolation} and call the resulting set $R_i'$.   Then $|R_i'|=|R_i|\ge k$.  For each $i\in\{1,\ldots,r\}$ and each $v\in R_i$ The depth of $v'$ exceeds the depth of $v$ by at most $\log_g|S|$, so $\dist(v',a_i)\le \dist(v,a_i)+\log_g|S|\le \ell+\log_g|S|$. Since $\cup\mathcal{R}$ is a genetically indepenent set, so is $\cup\mathcal{R}'$.  Therefore $\mathcal{R}'$ is a $(k,\ell')$-great set with $\ell'\le \ell+\log_g|S|$.
+
+  By\cref{percolation}, for each $v'\in \cup\mathcal{R}'$, $G-(S\setminus\{v'\})$ contains a subtree rooted at $v$ 
 \end{proof}
 %   If each $R_i$ contains a subset $R_i'$ of at least $\lceil k/2\rceil$ vertices that are compatible with $S$, then there is nothing to prove.  Suppose, therefore, that some $R_i$ contains fewer than $\lceil k/2\rceil$ vertices that are compatible with $S$.  Since $|R_i|\ge k$, this implies that more than $|R_i|/2$ vertices of $R_i$ are not compatible with $S$. Let $d_i$ be the depth of the nodes in $R_i$.  
 
