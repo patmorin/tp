@@ -8,9 +8,10 @@
 \usepackage{skull}
 \usepackage{paralist}
 \usepackage{graphicx}
-\usepackage[noend]{algorithmic}
-\usepackage{bbm}  % needed for \mathbbm{1}
-\usepackage{listings}
+\usepackage{amssymb}
+% \usepackage[noend]{algorithmic}
+% \usepackage{bbm}  % needed for \mathbbm{1}
+% \usepackage{listings}
 
 \usepackage[normalem]{ulem}
 \usepackage{cancel}
@@ -84,7 +85,7 @@
 \author{%
   Vida Dujmović\thanks{Department of Computer Science and Electrical Engineering, University of Ottawa, Ottawa, Canada.}\, \thanks{Research partly supported by NSERC.} \quad
   Gwenaël Joret\thanks{Affilation/funding} \quad
-  Nina Kam\v{c}ev\thanks{Affiliation/fuding} \\[1ex]
+  % Nina Kam\v{c}ev\thanks{Affiliation/fuding} \\[1ex]
   Piotr Micek\thanks{Affilation/funding}\quad
   Pat Morin\thanks{School of Computer Science, Carleton University, Ottawa, Canada}\, \footnotemark[2] \quad
   David R. Wood\thanks{School of Mathematics, Monash University, Melbourne, Australia (\texttt{david.wood@monash.edu}). Research supported by the Australian Research Council.}
@@ -204,7 +205,7 @@ The following important result of \citet{ding.oporowski:some} (see also \citet{w
 {\color{red}
 \noindent\framebox{
 \begin{minipage}{.9\textwidth}
-If we use $G\subseteq A$ to mean that $G$ is isomorphic to a subgraph of $A$ then why do we use $G\cong A$ to mean that $G$ is isomorphic to $A$?  Why don't we use $G\scong A$?
+If we use $G\cong A$ to denote that $G$ is isomorphic to $A$ then why don't we use $G\scong A$ to denote that $G$ is isomorphic to a subgraph of $A$?
 \end{minipage}
 }
 }
@@ -282,13 +283,13 @@ The $x\times y$ grid $G_{x\times y}$ is the graph with vertex set $V(G_{x\times 
 \subsection{The Construction}
 
 
-We will construct a family $\mathcal{G}:=\{G_{h}:h\in\N\}$ of planar graphs with the following property:  There exists a fixed $\epsilon >0$ such that, for any tree $T$, any path $P$, $G_{h}\subseteq T\boxtimes P\boxtimes K_c$ implies that $c\ge h^\epsilon$.  Each graph $G_{h}$ is the planar supergraph of $T_h$ obtained by adding a path $P_i$ that contains all vertices of depth $i$, in left-to-right order, for each $i\in\{1,\ldots,h\}$.   Since $T_h$ is a spanning subgraph of $G_h$, the \defin{depth} of a vertex $v$ in $G_h$ refers to the depth of $v$ in $T_h$.  The \defin{height} of a depth-$d$ vertex of $T_h$ is $h-d$.
+We will construct a family $\mathcal{G}:=\{G_{h}:h\in\N\}$ of planar graphs with the following property:  There exists a fixed $\epsilon >0$ such that, for any tree $T$, any path $P$, $G_{h}\subseteq T\boxtimes P\boxtimes K_c$ implies that $c\ge \delta h^\epsilon$ for some $\epsilon,\delta >0$.  By \cref{tree_thingy}, this is enough to prove \cref{main_thm}.  Each graph $G_{h}$ is the planar supergraph of $T_h$ obtained by adding a path $P_i$ that contains all vertices of depth $i$, in left-to-right order, for each $i\in\{1,\ldots,h\}$.   Since $T_h$ is a spanning subgraph of $G_h$, the \defin{depth} of a vertex $v$ in $G_h$ refers to the depth of $v$ in $T_h$.  The \defin{height} of a depth-$d$ vertex of $T_h$ is $h-d$.
 
-\todo[inline]{This is probably the place to write a proof outline.}
-% Our strategy is to first show that in any tree partition of $G_h$ some node contains a unrelated set of size at least $\alpha h$ for some fixed $\alpha >0$.  Next,
+% \todo[inline]{This is probably the place to write a proof outline.}
 
-We now list some properties of $G_h$ that will be useful.
-Our first lemma shows that if $S$ is a small balanced separator of $G$ then $S$ contains many nodes of small depth.
+We now outline our strategy for proving \cref{main_thm}.  Recall \cref{partitions_vs_products} which states that if $G_h\subseteq T\boxtimes P\boxtimes K_c$ then $G_h$ has a tree partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ and a path partition (i.e., layering) $\mathcal{P}:=\{P_y:y\in V(P)\}$ with $|B_x\cap P_y|\le c$ for each $(x,y)\in V(T)\times V(P)$. Our strategy is to first show that $\mathcal{T}$ has some part $B_{x_1}$ that contains an unrelated set $\mathcal{R}_1$ of small depth and size at least $\alpha h$ for some constant $\alpha >0$.  Next we show that $x_1$ has a neighbour $x_2$ that contains an unrelated set $\mathcal{R}_2$ that is smaller than $\mathcal{R}_1$ by a factor of at most $b/2$ (for some small $b>2$), but whose elements can be paired off so that each pair has a common ancestor in $R_1$ that is of distance at most $a$ from both vertices in the pair (for some small $a>0$).  By iterating this argument $t$ times, we obtain a sequence of unrelated sets $\mathcal{R}_1,\ldots,\mathcal{R}_{t+1}$ where the elements in each $\mathcal{R}_i$ are partitioned into groups of size $2^{i-1}$ so that each group $R$ has a common ancestor in $\mathcal{R}_1$ that is of distance at most $a(i-1)$ from all elements in $R$.  Therefore $\mathcal{R}_t\subseteq B_{x_{t+1}}$ contains an unrelated set of size $2^{t}$ whose diameter is at most $2at$.  \cref{diameter_spread} then implies that $|B_{x_{t+1}}\cap P_y|\ge 2^{t}/2at$ where $t\approx\log_b |R_1|\ge \log_{b}(\alpha h)$, for some $y\in V(P)$. Therefore, $c\ge |B_{x_{t+1}}\cap P_y|\gtrapprox 2^{\log_{b}(\alpha h)}/2a(\log_{b}(\alpha h))=h^{\alpha/\log b-o(1)}$.
+
+We now proceed with the details of the strategy outlined above.  The next two lemmas will be used to obtain the set $\mathcal{R}_1$ that allows us to start the argument.
 
 \begin{lem}\label{small_depth_separator}
   There exists $a,h_0 >0$ such that the following is true, for any $0 < c < 2^{h/2}$ and any $h\ge h_0$.
@@ -300,7 +301,7 @@ Our first lemma shows that if $S$ is a small balanced separator of $G$ then $S$ 
 \end{proof}
 
 
-The following lemma shows that any tree partition of $G$ must have a node with a large unrelated set that is far from the leaves of $\Gamma$.
+The following lemma shows that any tree partition of $G_h$ must have a part with a large unrelated set that is far from the leaves of $T_h$.
 
 \begin{lem}\label{startup}
   There exists $\alpha >0$ and $h_0:\N\to\N$ such that the following is true, for any $1\le c\le 2^{h/2}$ and any integer $h\ge h_0(c)$.  Let $\mathcal{T}:=\{B_x:x\in V(T)\}$ be a tree partition of $G_h$ of width less than $ch$.  Then there exists a node $x\in V(T)$ and a subset $R\subseteq B_x$ such that
@@ -366,7 +367,7 @@ We say that a vertex $v$ of $T_h$ is \defin{compatible} with $S\subseteq V(T_h)$
 
 The next lemma completes the proof of \cref{main_thm}.
 \begin{lem}\label{big_lemma}
-  There exists constants $\epsilon,\delta, h_0 >0$ such that the following is true for all integers $h\ge h_0$. Let $(B_x:x\in V(T))$ be a tree-partition of $G_h$ and let $\mathcal{P}:=\{P_y:y\in V(P)\}$ be a path partition of $G_h$.  Then there exists $(x,y)\in V(T)\times V(P)$ such that $|B_x\cap P_y| \ge \delta h^\epsilon$.
+  There exists constants $\epsilon,\delta, h_0 >0$ such that the following is true for all integers $h\ge h_0$. Let $\mathcal{T}:=\{B_x:x\in V(T)\}$ be a tree-partition of $G_h$ and let $\mathcal{P}:=\{P_y:y\in V(P)\}$ be a path partition of $G_h$.  Then there exists $(x,y)\in V(T)\times V(P)$ such that $|B_x\cap P_y| \ge \delta h^\epsilon$.
 \end{lem}
 
 \begin{proof}
@@ -376,12 +377,12 @@ The next lemma completes the proof of \cref{main_thm}.
 
   By \cref{compatible_set} (applied to $\mathcal{R}_1'$ and $B_{x_1}$), $T_h$ contains a $(2,\log_2(ch)+2,r_1)$-great set $\mathcal{R}_1$ of size $r_1$ that is compatible with $B_{x_1}$.  Let $h_2:=h_1-\lfloor\log_2(ch)\rfloor -2$.  For each $v\in\cup\mathcal{R}_1$, $T_h-S_1$ contains a path $P_v$ from $v$ to a leaf of $T_h$.  The union of the paths in $P_{h-h_2},\ldots,P_{h}$ and the paths in $\mathcal{C}_1:=\{P_v:v\in\cup\mathcal{R}_1\}$ contains a subgraph isomorphic to a graph that can be obtained from $G_{2r_1\times (h-d_1)}$ by subdividing horizontal edges.  Therefore, by \cref{grid_connectivity}, some component of $G-S_1$ contains at least $2r_1/c$ of the paths in $\mathcal{C}_1$.  Furthermore, these paths are consecutive in the left-to-righting of $\mathcal{C}_1$.  This implies that there is a subset $\mathcal{R}_2'\subseteq \mathcal{R}_1$ of size $r_2\ge r_1/c$ that is contained in a single component of $G-S_1=G-B_{x_1}$. By \cref{tree_thingy}, there is a neighbour $x_2$ of $x_1$ in $T$ with $\cup\mathcal{R}_2'\subseteq B_{x_2}$.
 
-  We can now iterate this process of obtaining $\mathcal{R}_{i+1}'\subseteq B_{x_{i+1}}$ from $\mathcal{R}_i'\subseteq B_{x_i}$. Let $t:= \lfloor \min\{\log_{2c} r_1,\alpha h/(2\log_2(ch)+4)\}\rfloor$. Then after $t-1$ such iterations we obtain a $(2^t,t(\log_2(ch)+2),r_1)$-great set $\mathcal{R}_t'\subseteq B_{x_t}$ of size at least $r_t \ge r_1\alpha/(2c)^t \ge 1$.
+  We can now iterate this process of obtaining $\mathcal{R}_{i+1}'\subseteq B_{x_{i+1}}$ from $\mathcal{R}_i'\subseteq B_{x_i}$. Let $t:= \lfloor \min\{\log_{2c} r_1,\alpha h/(2\log_2(ch)+4)\}\rfloor$. Then after $t$ such iterations we obtain a $(2^t,t(\log_2(ch)+2),r_1)$-great set $\mathcal{R}_{t+1}'\subseteq B_{x_t}$ of size at least $r_t \ge r_1\alpha/(2c)^t \ge 1$.
 
-  Let $R$ be one of the sets in $\mathcal{R}_t$.  Since $\mathcal{R}_t$ is $(2^t,t(\log_2(ch)+2))$-great, $|R|\ge 2^t$ and all elements in $R$ have a common ancestor $a$ whose distance to each element of $R$ is at most $t(\log_2(ch)+2)$.  Therefore, $\diam_{G_h}(R)\le\diam_{T_h}(R)\le 2t(\log_2(ch)+2)+1$. By \cref{diameter_spread}, there exists some $L\in\mathcal{L}$ with
+  Let $R$ be one of the sets in $\mathcal{R}_{t+1}'$.  Since $\mathcal{R}_{t+1}'$ is $(2^t,t(\log_2(ch)+2))$-great, $|R|\ge 2^t$ and all vertices in $R$ have a common ancestor $a$ whose distance to each element of $R$ is at most $t(\log_2(ch)+2)$.  Therefore, $\diam_{G_h}(R)\le\diam_{T_h}(R)\le 2t(\log_2(ch)+2)$. By \cref{diameter_spread}, there exists some $P_y\in\mathcal{P}$ with
   \begin{align*}
-    |L\cap B_{x_t}|
-    & \ge |L\cap R|
+    |B_{x_t}\cap P_y|
+    & \ge |R\cap P_y|
     \ge \frac{|R|}{2t(\log_2(ch)+2)+1}
     \ge \frac{2^t}{2t(\log_2(ch)+2)+1}
     = \frac{2^{\Omega(\log h)}}{O(\log^2 h)}
@@ -408,6 +409,17 @@ We know that every planar graph $G$ is contained in a product of the form $H\box
   \item Is every planar graph $G$ of maximum degree $\Delta$ contained in a product of the form $H\boxtimes P\boxtimes K_c$ where the treewidth of $H$ is $2$, $P$ is path, and $c$ is some function of $\Delta$?
 \end{enumerate}
 
+\cref{two_tree} shows that $G_h$ is a subgraph of $H\boxtimes P$ where $H$ has treewidth $2$ (and is even outerplanar) and $P$ is a path. Our proof breaks down in this case because, unlike tree partitions, outerplanar partitions do not satisfy \cref{tree_thingy}.
+
+\begin{figure}
+  \begin{center}
+    \begin{tabular}{cc}
+      \includegraphics[scale=.7]{figs/g_6-2} & \includegraphics[scale=.7]{figs/g_6-3}
+    \end{tabular}
+  \end{center}
+  \caption{An outerplanar partition $\mathcal{H}$ and a path partition $\mathcal{P}$ of $G_6$ for which $|B\cap P|\le 1$ for each $B\in\mathcal{H}$ and $P\in\mathcal{P}$.}
+  \label{two_tree}
+\end{figure}
 
 \bibliographystyle{plainurlnat}
 \bibliography{tp}

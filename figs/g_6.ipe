@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70218" creator="Ipe 7.2.24">
-<info created="D:20220720145104" modified="D:20220720145113"/>
+<info created="D:20220720145104" modified="D:20220721092933"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -309,10 +309,231 @@ h
 <tiling name="falling" angle="-60" step="4" width="1"/>
 <tiling name="rising" angle="30" step="4" width="1"/>
 </ipestyle>
+<ipestyle name="brew">
+<color name="aliceblue" value="0.941 0.973 1"/>
+<color name="brew1" value="0.552 0.827 0.78"/>
+<color name="brew2" value="1 1 0.701"/>
+<color name="brew3" value="0.745 0.729 0.854"/>
+<color name="brew4" value="0.984 0.501 0.447"/>
+<color name="brew5" value="0.501 0.694 0.827"/>
+<color name="brew6" value="0.992 0.705 0.384"/>
+<color name="brew7" value="0.701 0.87 0.411"/>
+<color name="brew8" value="0.988 0.803 0.898"/>
+</ipestyle>
+<ipestyle>
+<opacity name="10%" value="0.1"/>
+<opacity name="20%" value="0.2"/>
+<opacity name="30%" value="0.3"/>
+<opacity name="40%" value="0.4"/>
+<opacity name="50%" value="0.5"/>
+<opacity name="60%" value="0.6"/>
+<opacity name="70%" value="0.7"/>
+<opacity name="80%" value="0.8"/>
+<opacity name="90%" value="0.9"/>
+</ipestyle>
 <page>
 <layer name="T_h"/>
 <layer name="paths"/>
+<layer name="alpha"/>
+<layer name="beta"/>
 <view layers="T_h paths" active="paths"/>
+<view layers="T_h paths alpha" active="beta"/>
+<view layers="T_h paths beta" active="beta"/>
+<path layer="beta" matrix="1.26985 0 0 1.0265 -68.9268 -65.3857" stroke="black" fill="brew4">
+149.041 622.632
+156.267 618.403
+219.185 618.755
+283.688 619.46
+348.192 619.108
+355.771 621.751
+355.771 631.092
+282.455 627.215
+220.242 628.096
+151.861 630.739 u
+</path>
+<path matrix="1.24474 0 0 1.0265 -62.1083 -48.4665" stroke="black" fill="brew4">
+149.041 622.632
+156.267 618.403
+219.185 618.755
+283.688 619.46
+348.192 619.108
+355.771 621.751
+355.771 631.092
+282.455 627.215
+220.242 628.096
+151.861 630.739 u
+</path>
+<path matrix="1.155 0 0 1 -41.2381 -16.39" stroke="black" fill="brew4">
+149.041 622.632
+156.267 618.403
+219.185 618.755
+283.688 619.46
+348.192 619.108
+355.771 621.751
+355.771 631.092
+282.455 627.215
+220.242 628.096
+151.861 630.739 u
+</path>
+<path stroke="black" fill="brew4">
+149.041 622.632
+156.267 618.403
+219.185 618.755
+283.688 619.46
+348.192 619.108
+355.771 621.751
+355.771 631.092
+282.455 627.215
+220.242 628.096
+151.861 630.739 u
+</path>
+<path stroke="black" fill="brew4">
+251.789 645.672
+177.239 646.201
+177.063 632.102
+250.908 636.508
+331.855 635.098
+332.331 646.201 u
+</path>
+<path stroke="black" fill="brew4">
+245.621 660.653
+246.502 650.431
+258.134 652.369
+259.015 660.3 u
+</path>
+<path layer="alpha" matrix="1 0 0 1 208.516 1.10535" stroke="black" fill="brew3">
+153.095 594.915
+145.516 599.321
+138.114 569.36
+145.34 565.836 u
+</path>
+<path matrix="1 0 0 1 192.302 1.10535" stroke="black" fill="brew3">
+153.095 594.915
+145.516 599.321
+138.114 569.36
+145.34 565.836 u
+</path>
+<path matrix="1 0 0 1 160.05 1.81031" stroke="black" fill="brew3">
+153.095 594.915
+145.516 599.321
+138.114 569.36
+145.34 565.836 u
+</path>
+<path matrix="1 0 0 1 128.503 1.10535" stroke="black" fill="brew3">
+153.095 594.915
+145.516 599.321
+138.114 569.36
+145.34 565.836 u
+</path>
+<path matrix="1 0 0 1 80.213 1.28159" stroke="black" fill="brew3">
+153.095 594.915
+145.516 599.321
+138.114 569.36
+145.34 565.836 u
+</path>
+<path matrix="1 0 0 1 63.9989 1.98655" stroke="black" fill="brew3">
+153.095 594.915
+145.516 599.321
+138.114 569.36
+145.34 565.836 u
+</path>
+<path matrix="1 0 0 1 32.8044 0.752873" stroke="black" fill="brew3">
+153.095 594.915
+145.516 599.321
+138.114 569.36
+145.34 565.836 u
+</path>
+<path matrix="1 0 0 1 0.2 0.4" stroke="black" fill="brew3">
+153.095 594.915
+145.516 599.321
+138.114 569.36
+145.34 565.836 u
+</path>
+<path matrix="1 0 0 1 160.084 0.00031181" stroke="black" fill="brew3">
+172.481 615.007
+167.546 608.662
+158.558 589.275
+153.623 570.242
+162.788 568.479
+166.841 590.862
+178.826 611.129 u
+</path>
+<path matrix="1 0 0 1 128.656 0.705272" stroke="black" fill="brew3">
+172.481 615.007
+167.546 608.662
+158.558 589.275
+153.623 570.242
+162.788 568.479
+166.841 590.862
+178.826 611.129 u
+</path>
+<path matrix="1 0 0 1 31.981 -0.175928" stroke="black" fill="brew3">
+172.481 615.007
+167.546 608.662
+158.558 589.275
+153.623 570.242
+162.788 568.479
+166.841 590.862
+178.826 611.129 u
+</path>
+<path stroke="black" fill="brew3">
+172.481 615.007
+167.546 608.662
+158.558 589.275
+153.623 570.242
+162.788 568.479
+166.841 590.862
+178.826 611.129 u
+</path>
+<path matrix="-1 0 0 1 503.578 0.352231" stroke="black" fill="brew3">
+291.267 628.225
+281.926 630.163
+261.306 608.662
+254.785 591.567
+251.965 575.881
+253.551 569.889
+259.015 568.655
+267.651 602.846
+290.914 621.527 u
+</path>
+<path stroke="black" fill="brew3">
+291.267 628.225
+281.926 630.163
+261.306 608.662
+254.785 591.567
+251.965 575.881
+253.551 569.889
+259.015 568.655
+267.651 602.846
+290.914 621.527 u
+</path>
+<path stroke="black" fill="brew3">
+306.247 645.496
+319.818 644.967
+353.832 626.991
+369.165 609.543
+378.505 592.095
+381.678 572.533
+372.161 568.655
+366.874 591.567
+359.119 605.666
+342.553 622.056
+309.419 637.565
+309.419 637.565 u
+</path>
+<path stroke="black" fill="brew3">
+193.806 649.373
+150.098 628.225
+133.708 609.896
+118.728 575.705
+127.892 564.778
+135.647 586.279
+147.984 613.949
+187.461 634.217
+214.25 643.734
+265.712 652.017
+258.31 664.354 u
+</path>
 <use layer="T_h" name="mark/disk(sx)" pos="128 576" size="large" stroke="black"/>
 <use name="mark/disk(sx)" pos="136 576" size="large" stroke="black"/>
 <use name="mark/disk(sx)" pos="132 592" size="large" stroke="black"/>
