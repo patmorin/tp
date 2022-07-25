@@ -297,7 +297,22 @@ We now proceed with the details of the strategy outlined above.  The next two le
 \end{lem}
 
 \begin{proof}
-  TODO. The idea is that a set of $ch$ nodes all of depth at least $(1-\alpha)h-\log_g(ch)$ can only separate about $ch2^{\alpha h}\ll n^{O(\alpha)}$ vertices from the rest of $G$.
+  Let $C$ be the vertex set of a component of $G_h-S$ that contains the largest number of leaves of $T_h$.  For each $i\in\{0,\ldots,h\}$, let $C_i:=C\cap V(P_i)$. We will show that, for some $i\in O(\log ch)$ and for each $i\in\{i_0,\ldots,h\}$, $0< |C_i| < 2^i$, so that $S\cap V(P_i)\supset N_G(C_i)\cap V(P_i)\neq\emptyset$.
+  
+  For each $i\in\{1,\ldots,h\}$, the vertices in $C_{i}$ are adjacent to at least $|C_i|/2$ vertices of $P_{i-1}$, so $ch \ge |S| \ge |N_G(C_i)\setminus C_{i-1}| \ge |C_i|/2 - |C_{i-1}|$ and therefore, $|C_{i-1}| \ge |C_i|/2 - ch$.  Similarly, the vertices in $C_i$ are adjacent to at least $2|C_i|$ vertices in $P_{i+1}$, so $|C_i|\le (|C_{i+1}| + ch)/2$.  Applying these inequalities repeatedly now shows that
+  \[  
+    |C_h|/2^{h-i} - 2ch \le C_{i} \le |C_h|/2^{h-i} + ch   \enspace ,
+  \]  
+  for each $i\in\{1,\ldots,h-1\}$.
+
+  By definition, $2^h >|V(G)|/2 \ge |C| := \sum_{i=0}^h |C_h| \ge 2|C_h|-ch^2-1$, therefore $|C_h| < 2^{h-1} + ch^2/2 + 1/2$.  Finally, the at most $ch$ vertices of $S$ partition $V(P_h)\setminus S$ into at most $ch+1$ different connected components, so $|C_h| \ge (2^h-ch)/(ch+1) \ge 2^{h}/(ch+1) - 1$.  Therefore,
+  
+  \[ 
+      2^{i-O(\log ch)} = \frac{2^h/(ch+1)-1}{2^{h-i}} - 2ch \le |C_i| 
+      \le \frac{2^{h-1}+ch^2/2 + 1/2}{2^{h-1}} + ch = 2^{i-1-O(\log ch)}
+      \enspace .
+  \]
+  In particular, $0 < |C_i| < 2^i$ for $i\ge A \log ch$ for some fixed constant $A>0$.
 \end{proof}
 
 
