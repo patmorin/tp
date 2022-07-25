@@ -292,12 +292,11 @@ We now outline our strategy for proving \cref{main_thm}.  Recall \cref{partition
 We now proceed with the details of the strategy outlined above.  The next two lemmas will be used to obtain the set $\mathcal{R}_1$ that allows us to start the argument.
 
 \begin{lem}\label{small_depth_separator}
-  There exists $a,h_0 >0$ such that the following is true, for any $0 < c < 2^{h/2}$ and any $h\ge h_0$.
-  If $S\subseteq V(G_h)$ has size $|S|\le ch$ and $G_h-S$ has no component with more than $|V(G)|/2$ vertices, then $S$ contains at least $ah$ nodes of height at least $ah$.
+  There exists a function $i_0:\R_{>0}\to\N\in O(\log n)$ such that the following is true, for any $h\in\N$.  Let $S\subseteq V(G_h)$ have $|S|\le ch$ and $G_h-S$ have no component with more than $|V(G_h)|/2$ vertices.  Then, for each $i\in\{i_0(ch+1),\ldots,h\}$, $S$ contains at least one vertex of depth $i$.
 \end{lem}
 
 \begin{proof}
-  Let $C$ be the vertex set of a component of $G_h-S$ that contains the largest number of leaves of $T_h$.  For each $i\in\{0,\ldots,h\}$, let $C_i:=C\cap V(P_i)$. We will show that, for some $i\in O(\log ch)$ and for each $i\in\{i_0,\ldots,h\}$, $0< |C_i| < 2^i$, so that $S\cap V(P_i)\supset N_G(C_i)\cap V(P_i)\neq\emptyset$.
+  Let $C$ be the vertex set of a component of $G_h-S$ that contains the largest number of leaves of $T_h$.  For each $i\in\{0,\ldots,h\}$, let $C_i:=C\cap V(P_i)$. We will show that, for each $i\in\{i_0(ch+1),\ldots,h\}$, $0< |C_i| < 2^i$, so that $S\cap V(P_i)\supset N_G(C_i)\cap V(P_i)\neq\emptyset$.
   
   For each $i\in\{1,\ldots,h\}$, the vertices in $C_{i}$ are adjacent to at least $|C_i|/2$ vertices of $P_{i-1}$, so $ch \ge |S| \ge |N_G(C_i)\setminus C_{i-1}| \ge |C_i|/2 - |C_{i-1}|$ and therefore, $|C_{i-1}| \ge |C_i|/2 - ch$.  Similarly, the vertices in $C_i$ are adjacent to at least $2|C_i|$ vertices in $P_{i+1}$, so $|C_i|\le (|C_{i+1}| + ch)/2$.  Applying these inequalities repeatedly now shows that
   \[  
@@ -305,33 +304,34 @@ We now proceed with the details of the strategy outlined above.  The next two le
   \]  
   for each $i\in\{1,\ldots,h-1\}$.
 
-  By definition, $2^h >|V(G)|/2 \ge |C| := \sum_{i=0}^h |C_h| \ge 2|C_h|-ch^2-1$, therefore $|C_h| < 2^{h-1} + ch^2/2 + 1/2$.  Finally, the at most $ch$ vertices of $S$ partition $V(P_h)\setminus S$ into at most $ch+1$ different connected components, so $|C_h| \ge (2^h-ch)/(ch+1) \ge 2^{h}/(ch+1) - 1$.  Therefore,
-  
+  By definition, $2^h >|V(G)|/2 \ge |C| := \sum_{i=0}^h |C_h| \ge 2|C_h|-ch^2-1$, therefore $|C_h| < 2^{h-1} + ch^2/2 + 1/2$.  Next, the at most $ch$ vertices of $S$ partition $V(P_h)\setminus S$ into at most $ch+1$ different connected components, so $|C_h| \ge (2^h-ch)/(ch+1) \ge 2^{h}/(ch+1) - 1$.  Therefore,
   \[ 
-      2^{i-O(\log ch)} = \frac{2^h/(ch+1)-1}{2^{h-i}} - 2ch \le |C_i| 
-      \le \frac{2^{h-1}+ch^2/2 + 1/2}{2^{h-1}} + ch = 2^{i-1-O(\log ch)}
+      2^{i-\log(ch+1)} - O(ch^2) \le \frac{2^h/(ch+1)-1}{2^{h-i}} - 2ch \le |C_i| 
+      \le \frac{2^{h-1}+ch^2/2 + 1/2}{2^{h-i}} + ch \le 2^{i-1} + O(ch)
       \enspace .
   \]
-  In particular, $0 < |C_i| < 2^i$ for $i\ge A \log ch$ for some fixed constant $A>0$.
+  In particular, $0 < |C_i| < 2^i$ for $i\ge i_0(ch+1)= \log (ch+1) + \log(2ch)+O(1)$.
 \end{proof}
 
 
 The following lemma shows that any tree partition of $G_h$ must have a part with a large unrelated set that is far from the leaves of $T_h$.
 
 \begin{lem}\label{startup}
-  There exists $\alpha >0$ and $h_0:\N\to\N$ such that the following is true, for any $1\le c\le 2^{h/2}$ and any integer $h\ge h_0(c)$.  Let $\mathcal{T}:=\{B_x:x\in V(T)\}$ be a tree partition of $G_h$ of width less than $ch$.  Then there exists a node $x\in V(T)$ and a subset $R\subseteq B_x$ such that
+  For any $\alpha < 1/4$, there exists $h_0$ such that the following is true, for all integers $h\ge  h_0$.  Let $\mathcal{T}:=\{B_x:x\in V(T)\}$ be a tree partition of $G_h$ of width less than $ch$, for some $1\le c\le h$.  Then there exists a node $x\in V(T)$ and a subset $R\subseteq B_x$ such that
   \begin{compactenum}[(i)]
     \item $R$ is unrelated;
-    \item $|R|\ge \alpha h$; and
+    \item $|R|\ge \alpha h/c$; and
     \item Each vertex in $R_0$ has height at least $\alpha h$
   \end{compactenum}
 \end{lem}
 
 
 \begin{proof}
-  It is well-known and easy to show that there exists a node $x$ of $T$ such that $G-B_x$ has no component with more than $|V(G_h)|/2$ vertices.  Let $Y$ be the set of nodes in $B_x$ of height at least $\alpha h+\log_2(ch)+2$. By \cref{small_depth_separator}, $|Y|\ge ah$ for any $\alpha\le a$.  Observe that, if $\alpha \le a-(\log_2(ch)-2)/h$\todo{Explain role of $h_0$ here.} and $\alpha \le a/3$ then $|Y|\ge 3\alpha h$.
+  It is well-known and easy to show that there exists a node $x$ of $T$ such that $G-B_x$ has no component with more than $|V(G_h)|/2$ vertices. Let $Y$ be the set of nodes in $B_x$ that have height at least $h/4$.  By \cref{small_depth_separator}, $|Y|\ge 3h/4 - O(\log (ch+1))$.
 
-  Suppose that no subset of $Y$ satisifies the conditions of the lemma, let $T_Y$ be the minimal (connected) subtree of $T_h$ that spans $Y$, and let $L$ the set of leaves in $T_Y$.  Observe that $L\subseteq Y$ is a unrelated set. Therefore, $L$ satisfies (i) and, by definition, $L$ satisfies (iii).  Therefore, it must be that $|L|<\alpha h/c\le\alpha h$.  Let $Z$ consist of all vertices in $V(T_h)\setminus V(T_Y)$ whose parents are in $Y\setminus L$.   Observe that $Z$ is a unrelated set. For each $v$ of $T_Y$, let $d_v$ denote the number of children $v$ has in $T_Y$.  Then,
+  Let $T_Y$ be the minimal (connected) subtree of $T_h$ that spans $Y$, and let $L$ the set of leaves in $T_Y$.  Observe that $L\subseteq Y$ is a unrelated set. Therefore, $L$ satisfies (i) and, by definition, each vertex in $L$ has height at least $h/4 > \alpha h$, so $L$ satisfies (iii).  If $|L|\ge \alpha h \ge \alpha h/c$ then $L$ also satisfies (ii).  In this case, we can take $R:=L$ and we are done.  Therefore, we may assume that $|L|< \alpha h$.
+  
+  Let $Z$ consist of all vertices in $V(T_h)\setminus V(T_Y)$ whose parents are in $Y\setminus L$.   Observe that $Z$ is a unrelated set of vertices each having height at least $h/4-1$. For each $v$ of $T_Y$, let $d_v$ denote the number of children $v$ has in $T_Y$.  Then,
   \[
      \sum_{v\in Y\setminus L} (d_v-1)
      \le \sum_{v\in V(T_Y)\setminus L} (d_v-1)
@@ -344,10 +344,12 @@ The following lemma shows that any tree partition of $G_h$ must have a part with
   \]
   Combining these two formulas, we obtain
   \[
-    |Z| \ge 2|Y\setminus L| - |Y| = |Y| - 2|L| \ge
-     3\alpha h - 2\alpha h = \alpha h \enspace .
+    |Z| \ge 2|Y\setminus L| - |Y| = |Y| - 2|L| 
+    \ge 3h/4-O(\log(ch+1)) - 2\alpha h 
+    % = (3/4-2\alpha)h - O(\log(ch+1)) 
+    \ge h/4-O(\log(ch+1)) \enspace .
   \]
-  Refer to \cref{paths}.  For each $v\in Z$, \cref{one_path} implies that $v$ has a descendant $v'$ whose parent is in $B_x$, that has height at least at most $\alpha h$ and such that $T_h-B_x$ contains a path $P_{v'}$ from $v'$ to a leaf descendant of $v'$.  Form the set $Z'$ by replacing each vertex $v\in Z$ with the vertex $v'$ just described.  Again, $Z'$ is a unrelated set.
+  Refer to \cref{paths}.  For each $v\in Z$, \cref{one_path} implies that $v$ has a descendant $v'$ whose parent is in $B_x$, that has height at least at least $h/4-O(\log(ch+1))$ and such that $T_h-B_x$ contains a path $P_{v'}$ from $v'$ to a leaf descendant of $v'$.  Form the set $Z'$ by replacing each vertex $v\in Z$ with the vertex $v'$ just described.  Again, $Z'$ is a unrelated set.  Since $\alpha < 1/4$, for sufficiently large $h$, $|Z'|\ge h/4 - O(\log(ch+1)) \ge \alpha h$ and each vertex in $Z$ has height at least $h/4 - 1 - O(\log(ch+1)) \ge \alpha h$.
 
   \begin{figure}
     \begin{center}
@@ -357,7 +359,7 @@ The following lemma shows that any tree partition of $G_h$ must have a part with
     \label{paths}
   \end{figure}
 
-  Now observe that the union of that paths in  $\{P_{v'}:v'\in Z'\}$ and the paths $P_{h-\lceil\alpha h\rceil+1},\ldots,P_{h}$ contains a subgraph $G'$ isomorphic to a graph that can be obtained from the grid $G_{\lceil\alpha h\rceil\times\lceil\alpha h\rceil}$ by subdividing horizontal edges.  Since $S$ does not contain any vertex of $P_{v'}$ for any $v'\in Z'$,  $S\cap V(G')$ contains only vertices corresponding to subdivision vertices.  Therefore, by \cref{grid_connectivity}, some component of $G-B_x$ contains a subset $R\subseteq Z'$ of size at least $\alpha h/c$.  Each element in $R$ has a parent in $B_x$ so, by \cref{tree_thingy} some neighbour $y$ of $x$ in $T$ has a bag $B_y$ that contains all of $R$.  This completes the proof.
+  Now observe that the union of that paths in  $\{P_{v'}:v'\in Z'\}$ and the paths $P_{h-\lceil\alpha h\rceil+1},\ldots,P_{h}$ contains a subgraph $G'$ isomorphic to a graph that can be obtained from the grid $G_{\lceil \alpha h\rceil\times\lceil \alpha h\rceil}$ by subdividing horizontal edges.  Since $S$ does not contain any vertex of $P_{v'}$ for any $v'\in Z'$,  $S\cap V(G')$ contains only vertices corresponding to subdivision vertices.  Therefore, by \cref{grid_connectivity}, some component of $G-B_x$ contains a subset $R\subseteq Z'$ of size at least $\alpha h/c$.  Each element in $R$ has a parent in $B_x$ so, by \cref{tree_thingy} some neighbour $y$ of $x$ in $T$ has a bag $B_y$ that contains all of $R$.  This completes the proof.
 \end{proof}
 
 
