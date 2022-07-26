@@ -119,7 +119,7 @@
 
 
 \begin{abstract}
-  We describe an infinite family $\mathcal{G}$ of planar graphs of maximum degree $5$ such that, if an $n$-vertex member of $\mathcal{G}$ is a subgraph of the strong product of a graph $H$ of treewidth $t$ and maximum-degree $\Delta$, a path $P$ and a clique $K$ of order $c$ then $t\Delta c \in \Omega(\log^\epsilon n)$ for some fixed $\epsilon >0$.
+  We describe an infinite family $\mathcal{G}$ of planar graphs of maximum degree $5$ such that, if an $n$-vertex member of $\mathcal{G}$ is a subgraph of the strong product of a graph $H$ of treewidth $t$ and maximum-degree $\Delta$, a path $P$ and a clique $K$ of order $c$ then $t\Delta c \ge 2^{\Omega(\sqrt{\log\log n})}$.
 \end{abstract}
 
 \section{Introduction}
@@ -138,7 +138,7 @@ The \defin{width} of such a tree decomposition is $\max\{|B_x|:x\in V(T)\}-1$. T
 }
 This is typically written as $G\subsetcong H\boxtimes P\boxtimes K_c$, where the notation $G_1\subsetcong G_2$ is used to mean that $G_1$ is isomorphic to some subgraph of $G_2$.  See references \cite{dujmovic.joret.ea:planar,dujmovic.morin.ea:structure,krauthgamer.lee:intrinsic,ueckerdt.wood.ea:improved,bose.morin.ea:optimal,campbell.clinch.ea:product,illingworth.scott.ea:alon} for examples.
 
-In some applications of these product structure theorems, it is helpful if, in addition to having treewidth $t$, the graph $H$ has additional useful properties, possibly inherited from $G$.  For example, one very useful version of the planar graph product structure theorem states that for every planar graph $G$ there exists a \emph{planar} graph $H$ of treewidth $3$ and a path $P$ such that $G\subsetcong H\boxtimes P\boxtimes K_3$.  The planarity of $H$ in this result has been leveraged to obtain better constants and even asymptotic improvements for graph colouring and layout problems, including queue number \cite{dujmovic.joret.ea:planar}, $p$-centered colouring \cite{debski.felsner.ea:improved}, and $\ell$-vertex ranking \cite{bose.dujmovic.ea:asymptotically}.
+In some applications of product structure theorems, it is helpful if, in addition to having treewidth $t$, the graph $H$ has additional properties, possibly inherited from $G$.  For example, one very useful version of the planar graph product structure theorem states that for every planar graph $G$ there exists a \emph{planar} graph $H$ of treewidth $3$ and a path $P$ such that $G\subsetcong H\boxtimes P\boxtimes K_3$.  The planarity of $H$ in this result has been leveraged to obtain better constants and even asymptotic improvements for graph colouring and layout problems, including queue number \cite{dujmovic.joret.ea:planar}, $p$-centered colouring \cite{debski.felsner.ea:improved}, and $\ell$-vertex ranking \cite{bose.dujmovic.ea:asymptotically}.
 
 In this vein, the authors have been repeatedly asked the following question, which asks if $H$ can inherit bounded-degree from $G$:
 \begin{quote}
@@ -147,71 +147,57 @@ In this vein, the authors have been repeatedly asked the following question, whi
 In this note we show that the answer to this question is no, even when $\Delta=5$.
 
 \begin{thm}\label{main_thm}
-  There exists $\epsilon > 0$ such that, for infinitely many integers $n\ge 1$, there exists an $n$-vertex planar graph $G$ of maximum degree $5$ such that, for any graph $H$ of treewidth $t$ and maximum degree $\Delta$, any path $P$, and any integer $c$, $G\subsetcong H\boxtimes P\boxtimes K_c$ implies $t\Delta c\in\Omega(\log^\epsilon n)$.
+  There exists $\epsilon > 0$ such that, for infinitely many integers $n\ge 1$, there exists an $n$-vertex planar graph $G$ of maximum degree $5$ such that, for any graph $H$ of treewidth $t$ and maximum degree $\Delta$, any path $P$, and any integer $c$, $G\subsetcong H\boxtimes P\boxtimes K_c$ implies $t\Delta c \ge 2^{\Omega(\sqrt{\log\log n})}$.
 \end{thm}
 
-The graph family $\mathcal{G}:=\{G_h:h\in\N\}$ that establishes \cref{main_thm} consists of complete binary trees of height $h$ augmented with edges to form, for each $i\in\{1,\ldots,h\}$, a path that contains all vertices of depth $i$.  See \cref{g_6}.
+The graph family $\mathcal{G}:=\{G_h:h\in\N\}$ that establishes \cref{main_thm} consists of complete binary trees of height $h$ augmented with edges to form, for each $i\in\{1,\ldots,h\}$, a path that contains all vertices of depth $i$.  See \cref{G_5}.
 
 \begin{figure}
   \begin{center}
-    \includegraphics{figs/g_6}
+    \includegraphics{figs/g_5}
   \end{center}
-  \caption{The graph $G_6$ from the graph family $\{G_h:h\in\N\}$ that establishes \cref{main_thm}.}
-  \label{g_6}
+  \caption{The graph $G_5$ from the graph family $\{G_h:h\in\N\}$ that establishes \cref{main_thm}.}
+  \label{G_5}
 \end{figure}
-
-% \todo[inline]{Maybe it's worth pointing out that the graphs in \cref{main_thm} can be triangulated so that they have maximum degree $7$?  I don't want to get into a race to the bottom, since I suspect some variation on our graph can be triangulated to have maximum degree $6$.}
 
 \section{Proof of \cref{main_thm}}
 
-
-% \subsection{Prelsiminaries}
-
-Throughout this paper, all graphs $G$ are simple and undirected with vertex set $V(G)$ and edge set $E(G)$.  For a set $S$, $G[S]$ denotes the subgraph of $G$ induced by $S\cap V(G)$ and $G-S:=G[V(G)\setminus S]$.  For any $v\in V(G)$, let $N_G(v):=\{w:vw\in E(G)\}$ and for any $S\subsetcong V(G)$, let $N_G(S):=\bigcup_{v\in S} N_G(v)\setminus S$.
+Throughout this paper, all graphs $G$ are simple and undirected with vertex set $V(G)$ and edge set $E(G)$.  For a set $S$, $G[S]$ denotes the subgraph of $G$ induced by $S\cap V(G)$ and $G-S:=G[V(G)\setminus S]$.  For any $v\in V(G)$, let $N_G(v):=\{w:vw\in E(G)\}$ and for any $S\subseteq V(G)$, let $N_G(S):=\bigcup_{v\in S} N_G(v)\setminus S$.  We write $G_1\cong G_2$ if $G_1$ and $G_2$ are isomorphic and $G_1\subsetcong G_2$ if $G_1$ is isomorphic to some subgraph of $G_2$.
 
 \subsection{Partitions}
 
-Let $G$ and $H$ be graphs.  An \defin{$H$-partition} $\mathcal{H}:=\{B_x:x\in V(H)\}$ of $G$ is a partition  of $V(G)$ into a subsets indexed by the vertices of $H$, called \defin{parts}, with the property that, if $vw$ is an edge of $G$ with $v\in B_x$ and $w\in B_y$ then $x=y$ or $xy\in E(H)$.  The \defin{width} of $\mathcal{H}$ is the size of its largest part; i.e., $\max\{|B_x|:x\in V(H)\}$.
+Let $G$ and $H$ be graphs.  An \defin{$H$-partition} $\mathcal{H}:=\{B_x:x\in V(H)\}$ of $G$ is a partition of $V(G)$ whose parts are indexed by the vertices of $H$ with the property that, if $vw$ is an edge of $G$ with $v\in B_x$ and $w\in B_y$ then $x=y$ or $xy\in E(H)$.  The \defin{width} of $\mathcal{H}$ is the size of its largest part; i.e., $\max\{|B_x|:x\in V(H)\}$.
 
-If $H$ is in a class $\mathcal{G}$ of graphs then we may call $\mathcal{H}$ a $\mathcal{G}$-partition of $G$.  Specifically, if $H$ is a tree, then $\mathcal{H}$ is a \defin{tree-partition} of $G$ and if $\mathcal{H}$ is a path, then $\mathcal{H}$ is a \defin{path-partition} of $G$.  A path-partition $\mathcal{P}:=\{P_x:x\in V(P)\}$ of $G$ is also referred to as a \defin{layering} of $G$ and the parts of $\mathcal{P}$ are referred to as \defin{layers}.  A set of layers $\{P_{x_1},\ldots,P_{x_r}\}\subsetcong\mathcal{P}$ is \defin{consecutive} if $P[\{x_1,\ldots,x_r\}]$ is connected.
+If $H$ is in a class $\mathcal{G}$ of graphs then we may call $\mathcal{H}$ a $\mathcal{G}$-partition of $G$.  Specifically, if $H$ is a tree, then $\mathcal{H}$ is a \defin{tree-partition} of $G$ and if $\mathcal{H}$ is a path, then $\mathcal{H}$ is a \defin{path-partition} of $G$.  A path-partition $\mathcal{P}:=\{P_x:x\in V(P)\}$ of $G$ is also referred to as a \defin{layering} of $G$ and the parts of $\mathcal{P}$ are referred to as \defin{layers}.  A set of layers $\{P_{x_1},\ldots,P_{x_q}\}\subseteq\mathcal{P}$ is \defin{consecutive} if $P[\{x_1,\ldots,x_q\}]$ is connected.
 
 As in previous works, we make use of the following relationship between $H$-partitions and strong products, which follows immediately from the preceding definitions.
 
 \begin{obs}\label{partitions_vs_products}
-  For any integer $c\ge 1$, and any graphs $G$, $H$, and $P$,  $G$ is a subgraph of $H\boxtimes P\boxtimes K_c$ if and only if $G$ has an $H$-partition $\mathcal{H}:=\{B_x:x\in V(H)\}$ and a $P$-partition $\mathcal{P}:=\{P_y:y\in V(P)\}$ such that $|B_x\cap P_y|\le c$, for each $(x,y)\in V(H)\times V(P)$.
+  For any integer $c\ge 1$, and any graphs $G$, $H$, and $P$,  $G\subsetcong H\boxtimes P\boxtimes K_c$ if and only if $G$ has an $H$-partition $\mathcal{H}:=\{B_x:x\in V(H)\}$ and a $P$-partition $\mathcal{P}:=\{P_y:y\in V(P)\}$ such that $|B_x\cap P_y|\le c$, for each $(x,y)\in V(H)\times V(P)$.
 \end{obs}
 
-The following important result of \citet{ding.oporowski:some} (see also \citet{wood:on}) allows us to focus on the case where the first factor in our product is a tree.
+The following important result of \citet{ding.oporowski:on} (see also \citet{wood:on}) allows us to focus on the case where the first factor in our product is a tree.
 
-\begin{thm}[\citet{ding.oporowski:some}]\label{dingy}
+\begin{thm}[\citet{ding.oporowski:on}]\label{dingy}
   If $H$ is a graph with maximum-degree $\Delta$ and treewidth $t$, then $H$ has a tree partition of width at most $24\Delta t$.
 \end{thm}
 
-\begin{cor}
+\begin{cor}\label{ding_translation}
   If $G\subsetcong H\boxtimes P\boxtimes K_c$ where $H$ has treewidth $t$ and maximum degree $\Delta$ then there exists a tree $T$ such that $G\subsetcong T\boxtimes P\boxtimes K_{24c\Delta t}$.
 \end{cor}
 
 \begin{proof}
-  By \cref{dingy}, $H$ has a tree-partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ of width at most $24\Delta t$ so, by \cref{partitions_vs_products}, $H \subsetcong T\boxtimes K_{24\Delta t}$.  Therefore, $H\subsetcong T\boxtimes K_{24\Delta t}\boxtimes P\boxtimes K_c \cong T\boxtimes P\boxtimes K_{24c\Delta t}$.\footnote{Here and throughout we write $G_1\cong G_2$ to indicate that the graphs $G_1$ and $G_2$ are isomorphic.}
+  By \cref{dingy}, $H$ has a tree-partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ of width at most $24\Delta t$ so, by \cref{partitions_vs_products}, $H \subsetcong T\boxtimes K_{24\Delta t}$.  Therefore, $G\subsetcong T\boxtimes K_{24\Delta t}\boxtimes P\boxtimes K_c \cong T\boxtimes P\boxtimes K_{24c\Delta t}$.
 \end{proof}
 
-% {\color{red}
-% \noindent\framebox{
-% \begin{minipage}{.9\textwidth}
-% If we use $G\cong A$ to denote that $G$ is isomorphic to $A$ then why don't we use $G\scong A$ to denote that $G$ is isomorphic to a subgraph of $A$?
-% \end{minipage}
-% }
-% }
-
-The \defin{length} of a path $v_0,\ldots,v_r$ is the number, $r$ of edges in the path. For any two vertices $v,w\in V(G)$, $\dist_G(v,w)$ denotes the minimum length of a path in $G$ that contains $v$ and $w$, or $\dist_G(v,w):=\infty$ if $v$ and $w$ are different connected components of $G$. For any $R\subsetcong V(G)$, the \defin{diameter} of $R$ is $\diam_G(R):=\max\{\dist_G(v,w):v,w\in R\}$.
-% The following observation follows immediately from these definitions:
+The \defin{length} of a path $v_0,\ldots,v_q$ is the number, $r$ of edges in the path. For any two vertices $v,w\in V(G)$, $\dist_G(v,w)$ denotes the minimum length of a path in $G$ that contains $v$ and $w$, or $\dist_G(v,w):=\infty$ if $v$ and $w$ are different connected components of $G$. For any $R\subsetcong V(G)$, the \defin{diameter} of $R$ is $\diam_G(R):=\max\{\dist_G(v,w):v,w\in R\}$.
 
 \begin{obs}\label{diameter_spread}
-  Let $G$ be any graph, let $R\subsetcong V(G)$, and let $\mathcal{L}$ be any layering of $G$.  Then there exist some layer $L\in\mathcal{L}$ such that $|R\cap L|\ge |R|/(\diam_G(R)+1)$.
+  Let $G$ be any graph, let $R\subseteq V(G)$, and let $\mathcal{L}$ be any layering of $G$.  Then there exist some layer $L\in\mathcal{L}$ such that $|R\cap L|\ge |R|/(\diam_G(R)+1)$.
 \end{obs}
 
 \begin{proof}
-  By the definition of layering, the vertices in $R$ are contained in a set of at most $\diam_G(R)+1$ consecutive layers of $\mathcal{L}$. The result then follows from the pigeonhole principle.
+  By the definition of layering, the vertices in $R$ are contained in a set of at most $\diam_G(R)+1$ consecutive layers of $\mathcal{L}$. The result then follows from the Pigeonhole Principle.
 \end{proof}
 
 
@@ -222,51 +208,51 @@ We also make use of the following basic fact about tree partitions:
 \end{obs}
 
 \begin{proof}
-  Suppose that $v\in B_y$ and $w\in B_z$ for some $y,z\in V(T)$.  Since $v,w\in N_G(B_x)$, $T$ contains the edges $xy$ and $xz$.  All that remains to is to show that $y=z$ so, for the purpose of contradiction, assume $y\neq z$.  Since $v$ and $w$ are in the same component of $G-B_x$, $G$ contains a path from $v$ to $w$ that avoids all vertices in $B_x$, which implies that $T$ contains a path $P_{yz}$ from $y$ to $z$ that does not include $x$.  But this is a contradiction since then $P_{yz}$ and the edges $xy$ and $yz$ form a cycle in $T$.
+  Suppose that $v\in B_y$ and $w\in B_z$ for some $y,z\in V(T)$.  Since $v,w\in N_G(B_x)$, $T$ contains the edges $xy$ and $xz$.  All that remains to is to show that $y=z$ so, for the purpose of contradiction, assume $y\neq z$.  Since $v$ and $w$ are in the same component of $G-B_x$, $G$ contains a path from $v$ to $w$ that avoids all vertices in $B_x$, which implies that $T$ contains a path $P_{yz}$ from $y$ to $z$ that does not include $x$.  This is a contradiction since then $P_{yz}$ and the edges $xy$ and $yz$ form a cycle in $T$, but $T$ is a tree.
 \end{proof}
 
 \subsection{Percolation in Binary Trees}
 
 
-<<<<<<< Updated upstream
-The \defin{depth} of a node $v$ in a rooted tree $T$ is the length of the path $P_T(v)$ from $v$ to the root of $T$.  Each node $a\in V(P_T(w))$ is an \defin{ancestor} of $v$, and $v$ is a \defin{descendant} of each node in $V(P_T(w))$.  We say that a set $B\subset V(T)$ is \defin{unrelated} if the no vertex of $B$ is an ancestor of any other vertex in $B$.  For each $h\in\N$, let $T_h$ denote the complete binary tree of height $h$; i.e., the rooted ordered tree with $2^h$ leaves, each having depth $h$ and in which each non-leaf node has exactly two children.  Note that the ordering of $T_h$ induces an ordering on any unrelated set $B\subseteq V(T_h)$, which we refer to as the \defin{left-to-right ordering}.
-=======
-The \defin{depth} of a node $v$ in a rooted tree $T$ is the length of the path $P_T(v)$ from $v$ to the root of $T$.  Each node $a\in V(P_T(w))$ is an \defin{ancestor} of $v$, and $v$ is a \defin{descendant} of each node in $V(P_T(w))$.  We say that a set $B\subset V(T)$ is \defin{unrelated} if the no vertex of $B$ is an ancestor of any other vertex in $B$.  For each $h\in\N$, let $T_h$ denote the complete binary tree of height $h$; i.e., the rooted ordered tree with $2^h$ leaves, each having depth $h$ and in which each non-leaf node has exactly two children.  Note that the ordering of $T_h$ induces an ordering on any unrelated set $B\subsetcong V(T_h)$, which we refer to as the left-to-right ordering.
->>>>>>> Stashed changes
+The \defin{depth} of a vertex $v$ in a rooted tree $T$ is the length of the path $P_T(v)$ from $v$ to the root of $T$.  Each vertex $a\in V(P_T(w))$ is an \defin{ancestor} of $v$, and $v$ is a \defin{descendant} of each vertex in $V(P_T(w))$.  We say that a set $B\subset V(T)$ is \defin{unrelated} if the no vertex of $B$ is an ancestor of any other vertex in $B$.  For each $h\in\N$, let $T_h$ denote the complete binary tree of height $h$; i.e., the rooted ordered tree with $2^h$ leaves, each having depth $h$ and in which each non-leaf vertex has exactly two children.  Note that the ordering of $T_h$ induces an ordering on any unrelated set $B\subseteq V(T_h)$, which we refer to as the \defin{left-to-right ordering}.
 
 We use the following two percolation-type results for $T_h$.
 
 \begin{lem}\label{one_path}
-  Let $h\ge 1$, let $T_h$ be a complete binary tree of height $h$ with root $v_0$, and let $S\subsetcong V(T_h)$ with $1\le |S|< 2^h$. Then there exists a vertex $v_1$ of $T_h$ such that
+  Let $h\ge 1$
+  % let $T_h$ be a complete binary tree of height $h$ with root $r$,
+  and let $S\subseteq V(T_h)$ with $1\le |S|< 2^h$. Then there exists a vertex $v$ of $T_h$ such that
   \begin{compactenum}[(i)]
-    \item the depth of $v_1$ is at most $\log_2(|S|)+1$;
-    \item the parent of $v_1$ is in $S\cup\{v_0\}$; and
-    \item $T_h-S$ contains a path from $v_1$ to a leaf of $T_h$.
-  \end{compactenum}\todo{David suggests $v_0\rightarrow r$, $v_1\rightarrow v$}
+    \item the depth of $v$ is at most $\log_2|S|+1$;
+    \item the parent of $v$ is in $S\cup\{r\}$; and
+    \item $T_h-S$ contains a path from $v$ to a leaf of $T_h$.
+  \end{compactenum}
 \end{lem}
 
 \begin{proof}
-  The proof is by induction on $h$.  When $h=1$, $|S|\le 1$. In particular, at least one child $v_1$ of $v_0$ is not in $S$.  The depth of $v_1$ is $1\le \log_2(|S|)+1$, so $v_1$ satisfies (i).  The parent of $v_1$ is $v_0\in S\cup\{v_0\}$, so $v_1$ satisifies (ii).  $T_1-S$ contains a path from $v_1$ to itself (a leaf of $T_1$), so $v_1$ satisfies (iii).
+  The proof is by induction on $h$.  When $h=1$, $|S|\le 1$. In particular, at least one child $v$ of $r$ is not in $S$.  The depth of $v$ is $1\le \log_2|S|+1$, so $v$ satisfies (i).  The parent of $v$ is $r\in S\cup\{r\}$, so $v$ satisifies (ii).  $T_1-S$ contains a length-$0$ path from $v$ to itself (a leaf of $T_1$), so $v$ satisfies (iii).
 
-  For $h\ge 2$, let $\ell$ be the maximum integer such that $S\cup\{v_0\}$ contains all $2^\ell$ vertices of depth $\ell$.  Observe that $2^\ell \le |S|$, so $\ell \le \log_2 |S| < h$.  Let $L$ be the set of $2^{\ell+1}$ depth-$(\ell+1)$ vertices in $T_h$.  By the Pigeonhole Principle some vertex $v_0'\in L$ is the root of a complete binary tree $T'$ with root $v'$ of height $h-\ell$ with $|S\cap V(T')| \le |S|/2^{\ell+1} < 2^{h-\ell+1}$.  Applying induction on $T'$ and $S':=S\cap V(T')$ we obtain a vertex $v_1'$ of depth at most $\ell+1+\log_2(|S'|)+1 \le \log_2(|S|)+1$ whose parent is in $S\cup\{v_0'\}$, and such that $T_h-S$ contains a path from $v_1'$ to a leaf of $T_h$.  Thus $v_1'$ satisfies requirements (i) and (iii).  If the parent of $v_1'$ is in $S$ then $v_1'$ also satisfies requirement (ii).  Otherwise, the parent of $v_1'$ is $v_0'$, in which case $v_0'$ satisfies requirements (i)--(iii).
+  For $h\ge 2$, let $\ell$ be the maximum integer such that $S\cup\{r\}$ contains all $2^\ell$ vertices of depth $\ell$.  Observe that $2^\ell \le |S|$, so $\ell \le \log_2 |S| < h$.  Let $L$ be the set of $2^{\ell+1}$ depth-$(\ell+1)$ vertices in $T_h$.  By the Pigeonhole Principle some vertex $r'\in L$ is the root of a complete binary tree $T'$ with root $r'$ of height $h-\ell$ with $|S\cap V(T')| \le |S|/2^{\ell+1} < 2^{h-\ell+1}$.  Applying induction on $T'$ and $S':=S\cap V(T')$ we obtain a vertex $v'$ of depth at most $\ell+1+\log_2(|S'|)+1 \le \log_2|S|+1$ whose parent is in $S\cup\{r'\}$, and such that $T_h-S$ contains a path from $v'$ to a leaf of $T_h$.  Thus $v'$ satisfies requirements (i) and (iii).  If the parent of $v'$ is in $S$ then $v'$ also satisfies requirement (ii) and the lemma is proven, with $v:=v'$.  Otherwise, the parent of $v'$ is $r'$, in which case $r'$ satisfies requirements (i)--(iii) and we are done, with $v:=r'$.
 \end{proof}
 
 \begin{lem}\label{two_paths}
-  Let $h\ge 2$, let $T_h$ be a complete binary tree of height $h$ with root $v_0$, and let $S\subsetcong V(T_h)$ with $1\le |S|< 2^{h-1}$. Then there exists two vertices $v_1$ and $v_2$ of $T$ such that, for each $i\in\{1,2\}$
+  Let $h\ge 2$
+  % let $T_h$ be a complete binary tree of height $h$ with root $r$,
+  and let $S\subseteq V(T_h)$ with $1\le |S|< 2^{h-1}$. Then there exists two unrelated vertices $v_1$ and $v_2$ of $T_h$ such that, for each $i\in\{1,2\}$
   \begin{compactenum}[(i)]
-    \item the depth of $v_i$ is at most $\log_2(|S|)+2$;
-    \item the parent of $v_i$ is in $S\cup\{v_0\}$; and
+    \item the depth of $v_i$ is at most $\log_2|S|+2$;
+    \item the parent of $v_i$ is in $S\cup\{r\}$; and
     \item $T_h-S$ contains a path from $v_i$ to a leaf of $T_h$.
   \end{compactenum}
 \end{lem}
 
 \begin{proof}
-  Let $T_1$ and $T_2$ be the two maximal subtrees of $T_h$ rooted at the children $v_1'$ and $v_2'$, respectively of $v_0$. (Each of $T_1$ and $T_2$ is a complete binary tree of height $h-1$.)  For each $i\in\{1,2\}$, let $S_i:=S\cap V(T_i)$.  Since $|S_i|\le |S|< 2^{h-1}$, we can apply \cref{one_path} to $T_i$ and $S_i$ to obtain a vertex $v_i$ of depth at most $1+\log_2|S_i|+1 \le \log_2 |S| + 2$ and such that $T_h-S$ contains a path from $v_i$ to a leaf of $T_h$.  Therefore, $v_i$ satisfies (i) and (iii).  Furthermore, the parent of $v_i$ is in $S\cup\{v_i'\}$.  If the parent of $v_i$ is in $S$, then $v_i$ also satisfies (ii).  If the parent of $v_i$ is not in $S$, then the parent of $v_i$ is $v_i'\not\in S$ and $v_i'$ satisfies (i)--(iii).
+  Let $T_1$ and $T_2$ be the two maximal subtrees of $T_h$ rooted at the children $r_1$ and $r_2$, respectively of $r$. (Each of $T_1$ and $T_2$ is a complete binary tree of height $h-1$.)  For each $i\in\{1,2\}$, let $S_i:=S\cap V(T_i)$.  Since $|S_i|\le |S|< 2^{h-1}$, we can apply \cref{one_path} to $T_i$ and $S_i$ to obtain a vertex $v_i'\in V(T_i)$ of depth at most $1+\log_2|S_i|+1 \le \log_2 |S| + 2$ and such that $T_h-S$ contains a path from $v_i'$ to a leaf of $T_h$.  Therefore, $v_i'$ satisfies (i) and (iii).  Furthermore, the parent of $v_i'$ is in $S\cup\{r_i\}$.  If the parent of $v_i'$ is in $S$, then $v_i'$ also satisfies (ii), so we set $v_i:=v_i'$.  If the parent of $v_i'$ is not in $S$, then the parent of $v_i'$ is $r_i\not\in S$ and $r_i$ satisfies (i)--(iii), so we set $v_i:=r_i$.  Finally, since $v_1\in V(T_1)$ and $v_2\in V(T_2)$, $v_1$ and $v_2$ are unrelated.
 \end{proof}
 
 \subsection{A Connectivity Lemma}
 
-The $x\times y$ grid $G_{x\times y}$ is the graph with vertex set $V(G_{x\times y}):=\{1,\ldots,x\}\times\{1,\ldots,y\}$ and that contains an edge with endpoints $(x_1,y_1)$ and $(x_2,y_2)$ if and only if $|x_1-x_1|+|y_1-y_2|=1$.  An edge of $G_{x\times y}$ is \defin{horizontal} if its two endpoints agree in the second (y) coordinate.  For each $i\in\{1,\ldots,x\}$, $\{i\}\times\{1,\ldots,y\}$ is \defin{column $i$} of $G_{x\times y}$.  A set $C$ of columns is \defin{consecutive} if $G_{x\times y}[\cup C]$ is connected.
+The \defin{$x\times y$ grid} $G_{x\times y}$ is the graph with vertex set $V(G_{x\times y}):=\{1,\ldots,x\}\times\{1,\ldots,y\}$ and that contains an edge with endpoints $(x_1,y_1)$ and $(x_2,y_2)$ if and only if $|x_1-x_1|+|y_1-y_2|=1$.  An edge of $G_{x\times y}$ is \defin{horizontal} if its two endpoints agree in the second (y) coordinate.  For each $i\in\{1,\ldots,x\}$, $\{i\}\times\{1,\ldots,y\}$ is called \defin{column $i$} of $G_{x\times y}$.  A set $C$ of columns is \defin{consecutive} if $G_{x\times y}[\cup C]$ is connected.
 
 
 \begin{lem}\label{grid_connectivity}
@@ -274,45 +260,40 @@ The $x\times y$ grid $G_{x\times y}$ is the graph with vertex set $V(G_{x\times 
 \end{lem}
 
 \begin{proof}
-  For each $i\in\{1,\ldots,x-1\}$, in order to separate column $i$ from column $i+1$, $S$ must contain at least $y$ subdivision vertices on horizontal edges between columns $i$ and $i+1$.  Since $|S|< py$, this implies that there are at most $p-1$ values of $i\in\{1,\ldots,x-1\}$ for which columns $i$ and $i+1$ are in different components of $G-S$. These at most $p-1$ values of $i$ partition $\{1,\ldots,x\}$ into at most $p$ intervals, one of which contains at least $x/p$ consecutive columns that are contained in a single component of $G-S$.
+  For each $i\in\{1,\ldots,x-1\}$, in order to separate column $i$ from column $i+1$, $S$ must contain at least $y$ subdivision vertices on the horizontal edges between columns $i$ and $i+1$.  Since $|S|< py$, this implies that there are at most $p-1$ values of $i\in\{1,\ldots,x-1\}$ for which columns $i$ and $i+1$ are in different components of $G-S$. These at most $p-1$ values of $i$ partition $\{1,\ldots,x\}$ into at most $p$ intervals, one of which contains at least $x/p$ consecutive columns that are contained in a single component of $G-S$.
 \end{proof}
 
-\subsection{The Construction}
+\subsection{The Proof}
 
 
-We will construct a family $\mathcal{G}:=\{G_{h}:h\in\N\}$ of planar graphs with the following property:  There exists a fixed $\epsilon >0$ such that, for any tree $T$, any path $P$, $G_{h}\subsetcong T\boxtimes P\boxtimes K_c$ implies that $c\ge \delta h^\epsilon$ for some $\epsilon,\delta >0$.  By \cref{tree_thingy}, this is enough to prove \cref{main_thm}.  Each graph $G_{h}$ is the planar supergraph of $T_h$ obtained by adding a path $P_i$ that contains all vertices of depth $i$, in left-to-right order, for each $i\in\{1,\ldots,h\}$.   Since $T_h$ is a spanning subgraph of $G_h$, the \defin{depth} of a vertex $v$ in $G_h$ refers to the depth of $v$ in $T_h$.  The \defin{height} of a depth-$d$ vertex of $T_h$ is $h-d$.
+% We will construct a family $\mathcal{G}:=\{G_{h}:h\in\N\}$ of planar graphs with the following property:
+
+
+We are now ready to show that for any tree $T$, any path $P$, $G_{h}\subsetcong T\boxtimes P\boxtimes K_c$ implies that $c\ge 2^{\Omega(\log h)}$.  By \cref{ding_translation}, this is enough to prove \cref{main_thm}.  Recall that each graph $G_{h}$ is the planar supergraph of $T_h$ obtained by adding the edges of a path $P_i$ that contains all vertices of depth $i$, in left-to-right order, for each $i\in\{1,\ldots,h\}$.   Since $T_h$ is a spanning subgraph of $G_h$, the \defin{depth} of a vertex $v$ in $G_h$ refers to the depth of $v$ in $T_h$.  The \defin{height} of a depth-$d$ vertex of $T_h$ is $h-d$.
 
 % \todo[inline]{This is probably the place to write a proof outline.}
 
-<<<<<<< Updated upstream
-We now outline our strategy for proving \cref{main_thm}.  Recall \cref{partitions_vs_products} which states that if $G_h\subseteq T\boxtimes P\boxtimes K_c$ then $G_h$ has a tree partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ and a path partition (i.e., layering) $\mathcal{P}:=\{P_y:y\in V(P)\}$ with $|B_x\cap P_y|\le c$ for each $(x,y)\in V(T)\times V(P)$. Our strategy is to first show that $\mathcal{T}$ has some part $B_{x_1}$ that contains an unrelated set $\mathcal{R}_1$ of small depth and size at least $\alpha h$ for some constant $\alpha >0$.  Next we show that $x_1$ has a neighbour $x_2$ that contains an unrelated set $\mathcal{R}_2$ that is smaller than $\mathcal{R}_1$ by a factor of at most $b/2$ (for some small $b>2$), but whose elements can be paired off so that each pair has a common ancestor in $R_1$ that is of distance at most $a$ from both vertices in the pair (for some small $a>0$).  By iterating this argument $t$ times, we obtain a sequence of unrelated sets $\mathcal{R}_1,\ldots,\mathcal{R}_{t+1}$ where the elements in each $\mathcal{R}_i$ are partitioned into groups of size $2^{i-1}$ so that each group $R$ has a common ancestor in $\mathcal{R}_1$ that is of distance at most $a(i-1)$ from all elements in $R$.  Therefore $\mathcal{R}_{t+1}\subseteq B_{x_{t+1}}$ contains an unrelated set of size $2^{t}$ whose diameter is at most $2at$.  \cref{diameter_spread} then implies that $|B_{x_{t+1}}\cap P_y|\ge 2^{t}/2at$ where $t\approx\log_b |R_1|\ge \log_{b}(\alpha h)$, for some $y\in V(P)$. Therefore, $c\ge |B_{x_{t+1}}\cap P_y|\gtrapprox 2^{\log_{b}(\alpha h)}/2a(\log_{b}(\alpha h))=h^{\alpha/\log b-o(1)}$.
-=======
-We now outline our strategy for proving \cref{main_thm}.  Recall \cref{partitions_vs_products} which states that if $G_h\subsetcong T\boxtimes P\boxtimes K_c$ then $G_h$ has a tree partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ and a path partition (i.e., layering) $\mathcal{P}:=\{P_y:y\in V(P)\}$ with $|B_x\cap P_y|\le c$ for each $(x,y)\in V(T)\times V(P)$. Our strategy is to first show that $\mathcal{T}$ has some part $B_{x_1}$ that contains an unrelated set $\mathcal{R}_1$ of small depth and size at least $\alpha h$ for some constant $\alpha >0$.  Next we show that $x_1$ has a neighbour $x_2$ that contains an unrelated set $\mathcal{R}_2$ that is smaller than $\mathcal{R}_1$ by a factor of at most $b/2$ (for some small $b>2$), but whose elements can be paired off so that each pair has a common ancestor in $R_1$ that is of distance at most $a$ from both vertices in the pair (for some small $a>0$).  By iterating this argument $t$ times, we obtain a sequence of unrelated sets $\mathcal{R}_1,\ldots,\mathcal{R}_{t+1}$ where the elements in each $\mathcal{R}_i$ are partitioned into groups of size $2^{i-1}$ so that each group $R$ has a common ancestor in $\mathcal{R}_1$ that is of distance at most $a(i-1)$ from all elements in $R$.  Therefore $\mathcal{R}_t\subsetcong B_{x_{t+1}}$ contains an unrelated set of size $2^{t}$ whose diameter is at most $2at$.  \cref{diameter_spread} then implies that $|B_{x_{t+1}}\cap P_y|\ge 2^{t}/2at$ where $t\approx\log_b |R_1|\ge \log_{b}(\alpha h)$, for some $y\in V(P)$. Therefore, $c\ge |B_{x_{t+1}}\cap P_y|\gtrapprox 2^{\log_{b}(\alpha h)}/2a(\log_{b}(\alpha h))=h^{\alpha/\log b-o(1)}$.
->>>>>>> Stashed changes
+We now outline our proof strategy.  Recall \cref{partitions_vs_products} which states that if $G_h\subseteq T\boxtimes P\boxtimes K_c$ then $G_h$ has a tree partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ and a path partition (i.e., layering) $\mathcal{P}:=\{P_y:y\in V(P)\}$ with $|B_x\cap P_y|\le c$ for each $(x,y)\in V(T)\times V(P)$. Our strategy is to first show that $\mathcal{T}$ has some part $B_{x_1}$ that contains an unrelated set $\mathcal{R}_1$ of small depth and size at least $\alpha h$ for some constant $\alpha >0$.  Next we show that $x_1$ has a neighbour $x_2$ that contains an unrelated set $\mathcal{R}_2$ that is smaller than $\mathcal{R}_1$ by a factor of at most $b/2$ (for some small $b>2$), but whose elements can be paired off so that each pair has a common ancestor in $R_1$ that is of distance at most $a$ from both vertices in the pair (for some small $a>0$).  By iterating this argument $t$ times, we obtain a sequence of unrelated sets $\mathcal{R}_1,\ldots,\mathcal{R}_{t+1}$ where the elements in each $\mathcal{R}_i$ are partitioned into groups of size $2^{i-1}$ so that each group $R$ has a common ancestor in $\mathcal{R}_1$ that is of distance at most $a(i-1)$ from all elements in $R$.  Therefore $\mathcal{R}_{t+1}\subseteq B_{x_{t+1}}$ contains an unrelated set of size $2^{t}$ whose diameter is at most $2at$.  \cref{diameter_spread} then implies that $|B_{x_{t+1}}\cap P_y|\ge 2^{t}/2at$ for some $y\in V(P)$.  By choosing  $t\approx\log_b |R_1|\ge \log_{b}(\alpha h)$, this implies that $c\ge |B_{x_{t+1}}\cap P_y|\gtrapprox 2^{\log_{b}(\alpha h)}/2a(\log_{b}(\alpha h))=h^{\alpha/\log b-o(1)}$.
 
 We now proceed with the details of the strategy outlined above.  The next two lemmas will be used to obtain the set $\mathcal{R}_1$ that allows us to start the argument.
 
 \begin{lem}\label{small_depth_separator}
-<<<<<<< Updated upstream
   There exists a function $i_0:\R_{>0}\to\N\in O(\log n)$ such that for all $h\in\N$: If $S\subseteq V(G_h)$ with $|S|\le ch$ and such that $G_h-S$ have no component with more than $|V(G_h)|/2$ vertices then, for each $i\in\{i_0(ch+1),\ldots,h\}$, $S$ contains at least one vertex of depth $i$.
-=======
-  There exists $a,h_0 >0$ such that the following is true, for any $0 < c < 2^{h/2}$ and any $h\ge h_0$.
-  If $S\subsetcong V(G_h)$ has size $|S|\le ch$ and $G_h-S$ has no component with more than $|V(G)|/2$ vertices, then $S$ contains at least $ah$ nodes of height at least $ah$.
->>>>>>> Stashed changes
 \end{lem}
 
 \begin{proof}
-  Let $C$ be the vertex set of a component of $G_h-S$ that contains the largest number of leaves of $T_h$.  For each $i\in\{0,\ldots,h\}$, let $C_i:=C\cap V(P_i)$. We will show that, for each $i\in\{i_0(ch+1),\ldots,h\}$, $C_i$ is non-empty but does not contain all vertices of depth $i$.  Therefore $S\cap V(P_i)\supset N_G(C_i)\cap V(P_i)\neq\emptyset$, i.e., $S$ contains at least one vertex of depth $i$.
-  
-  For each $i\in\{0,\ldots,h-1\}$, the vertices in $C_{i+1}$ are adjacent to at least $|C_{i+1}|/2$ vertices of $P_{i}$, so $ch \ge |S| \ge |N_G(C_{i+1})\setminus C_{i}| \ge |C_{i+1}|/2 - |C_{i}|$ and therefore, $|C_{i}| \ge |C_{i+1}|/2 - ch$.  Similarly, the vertices in $C_i$ are adjacent to at least $2|C_i|$ vertices in $P_{i+1}$, so $|C_i|\le (|C_{i+1}| + ch)/2$.  Iterating these inequalities with $i=h-1,h-2,\ldots,0$ shows that 
-  \[  
+  Let $C$ be the vertex set of a component of $G_h-S$ that contains the largest number of leaves of $T_h$.  For each $i\in\{0,\ldots,h\}$, let $C_i:=C\cap V(P_i)$. We will show that, for each $i\in\{i_0(ch+1),\ldots,h\}$, $C_i$ is non-empty but does not contain all $2^i$ vertices of depth $i$.  Therefore $S\cap V(P_i)\supset N_G(C_i)\cap V(P_i)\neq\emptyset$, i.e., $S$ contains at least one vertex of depth $i$.
+
+  For each $i\in\{0,\ldots,h-1\}$, the vertices in $C_{i+1}$ are adjacent to at least $|C_{i+1}|/2$ vertices of $P_{i}$, so $ch \ge |S| \ge |N_G(C_{i+1})\cap V(P_i)\setminus C_{i}| \ge |C_{i+1}|/2 - |C_{i}|$ and therefore, $|C_{i}| \ge |C_{i+1}|/2 - ch$.  Similarly, the vertices in $C_i$ are adjacent to at least $2|C_i|$ vertices in $P_{i+1}$, so $|C_i|\le (|C_{i+1}| + ch)/2$.  Iterating these these two inequalities with $i=h-1,h-2,\ldots,0$ gives the upper and lower bounds
+  \begin{equation}
     |C_h|/2^{h-i} - 2ch \le C_{i} \le |C_h|/2^{h-i} + ch   \enspace ,
-  \]  
+    \label{C_i_bounds}
+  \end{equation}
   for each $i\in\{0,\ldots,h-1\}$.
 
-  By definition, $2^h >|V(G)|/2 \ge |C| := \sum_{i=0}^h |C_h| \ge 2|C_h|-ch^2-1$, therefore $|C_h| < 2^{h-1} + ch^2/2 + 1/2$.  Next, the at most $ch$ vertices of $S$ partition $V(P_h)\setminus S$ into at most $ch+1$ different connected components, so $|C_h| \ge (2^h-ch)/(ch+1) \ge 2^{h}/(ch+1) - 1$.  Therefore,
-  \[ 
-      2^{i-\log(ch+1)} - O(ch^2) \le \frac{2^h/(ch+1)-1}{2^{h-i}} - 2ch \le |C_i| 
+  By definition, $2^h >|V(G)|/2 \ge |C| := \sum_{i=0}^h |C_h| \ge 2|C_h|-ch^2-1$, therefore $|C_h| < 2^{h-1} + ch^2/2 + 1/2$.  Next, the at most $ch$ vertices of $S$ partition $V(P_h)\setminus S$ into at most $ch+1$ different connected components, so $|C_h| \ge (2^h-ch)/(ch+1) \ge 2^{h}/(ch+1) - 1$.  Therefore, by \cref{C_i_bounds}
+  \[
+      2^{i-\log(ch+1)} - O(ch^2) \le \frac{2^h/(ch+1)-1}{2^{h-i}} - 2ch \le |C_i|
       \le \frac{2^{h-1}+ch^2/2 + 1/2}{2^{h-i}} + ch \le 2^{i-1} + O(ch)
       \enspace .
   \]
@@ -323,47 +304,39 @@ We now proceed with the details of the strategy outlined above.  The next two le
 The following lemma shows that any tree partition of $G_h$ must have a part with a large unrelated set that is far from the leaves of $T_h$.
 
 \begin{lem}\label{startup}
-<<<<<<< Updated upstream
-  For any $\alpha < 1/4$, there exists $h_0$ such that the following is true, for all integers $h\ge  h_0$.  Let $\mathcal{T}:=\{B_x:x\in V(T)\}$ be a tree partition of $G_h$ of width less than $ch$, for some $1\le c\le h$.  Then there exists a node $x\in V(T)$ and a subset $R\subseteq B_x$ such that
-=======
-  There exists $\alpha >0$ and $h_0:\N\to\N$ such that the following is true, for any $1\le c\le 2^{h/2}$ and any integer $h\ge h_0(c)$.  Let $\mathcal{T}:=\{B_x:x\in V(T)\}$ be a tree partition of $G_h$ of width less than $ch$.  Then there exists a node $x\in V(T)$ and a subset $R\subsetcong B_x$ such that
->>>>>>> Stashed changes
+  For any $\alpha\in(0,1/4)$, there exists $h_0$ such that the following is true, for all integers $h\ge  h_0$ and all $c\in[1,h]$.  If $\mathcal{T}:=\{B_x:x\in V(T)\}$ is a tree partition of $G_h$ of width less than $ch$ then there exists a node $x\in V(T)$ and a subset $R\subseteq B_x$ such that
   \begin{compactenum}[(i)]
     \item $R$ is unrelated;
     \item $|R|\ge \alpha h/c$; and
-    \item Each vertex in $R_0$ has height at least $\alpha h$
+    \item Each vertex in $R$ has height at least $\alpha h$
   \end{compactenum}
 \end{lem}
 
 
 \begin{proof}
-  It is well-known and easy to show that there exists a node $x$ of $T$ such that $G-B_x$ has no component with more than $|V(G_h)|/2$ vertices. Let $Y$ be the set of nodes in $B_x$ that have height at least $h/4$.  By \cref{small_depth_separator}, $|Y|\ge 3h/4 - O(\log (ch+1))$.
+  It is well-known and easy to show that there exists a node $x$ of $T$ such that $G-B_x$ has no component with more than $|V(G_h)|/2$ vertices. Let $Y$ be the set of vertices in $B_x$ that have height at least $h/4$.  By \cref{small_depth_separator}, $|Y|\ge 3h/4 - O(\log (ch+1))$.
 
-<<<<<<< Updated upstream
-  Let $T_Y$ be the minimal (connected) subtree of $T_h$ that spans $Y$, and let $L$ the set of leaves in $T_Y$.  Observe that $L\subseteq Y$ is a unrelated set. Therefore, $L$ satisfies (i) and, by definition, each vertex in $L$ has height at least $h/4 > \alpha h$, so $L$ satisfies (iii).  If $|L|\ge \alpha h \ge \alpha h/c$ then $L$ also satisfies (ii).  In this case, we can take $R:=L$ and we are done.  Therefore, we may assume that $|L|< \alpha h$.
-  
-  Let $Z$ consist of all vertices in $V(T_h)\setminus V(T_Y)$ whose parents are in $Y\setminus L$.   Observe that $Z$ is a unrelated set of vertices each having height at least $h/4-1$. For each $v$ of $T_Y$, let $d_v$ denote the number of children $v$ has in $T_Y$.  Then,
-=======
-  Suppose that no subset of $Y$ satisifies the conditions of the lemma, let $T_Y$ be the minimal (connected) subtree of $T_h$ that spans $Y$, and let $L$ the set of leaves in $T_Y$.  Observe that $L\subsetcong Y$ is a unrelated set. Therefore, $L$ satisfies (i) and, by definition, $L$ satisfies (iii).  Therefore, it must be that $|L|<\alpha h/c\le\alpha h$.  Let $Z$ consist of all vertices in $V(T_h)\setminus V(T_Y)$ whose parents are in $Y\setminus L$.   Observe that $Z$ is a unrelated set. For each $v$ of $T_Y$, let $d_v$ denote the number of children $v$ has in $T_Y$.  Then,
->>>>>>> Stashed changes
+  Let $T_Y$ be the minimal (connected) subtree of $T_h$ that spans $Y$, and let $L$ the set of leaves of $T_Y$.  Observe that $L\subseteq Y$ is a unrelated set. Therefore, $L$ satisfies (i) and, by definition, each vertex in $L$ has height at least $h/4 > \alpha h$, so $L$ satisfies (iii).  If $|L|\ge \alpha h \ge \alpha h/c$ then $L$ also satisfies (ii).  In this case, we can take $R:=L$ and we are done.  We now assume that $|L|< \alpha h$.
+
+  Let $Z$ consist of all vertices in $V(T_h)\setminus V(T_Y)$ whose parents are in $Y\setminus L$.   Observe that $Z$ is a unrelated set of vertices each having height at least $h/4$. For each $v$ of $T_Y$, let $d_v$ denote the number of children $v$ has in $T_Y$.  Then,
   \[
      \sum_{v\in Y\setminus L} (d_v-1)
      \le \sum_{v\in V(T_Y)\setminus L} (d_v-1)
      = |L|-1 \enspace ,
   \]
   where the second equality is a standard fact about rooted trees.
-  Rewriting this, we get $\sum_{v\in Y\setminus L} {d_v} \le |Y\setminus L| + |L| = |Y|$.  On the other hand, each $v\in Y\setminus L$ contributes $2-d_v$ vertices to $Z$, so
+  Rewriting this, we get $\sum_{v\in Y\setminus L} {d_v} < |Y\setminus L| + |L| = |Y|$.  On the other hand, each $v\in Y\setminus L$ contributes $2-d_v$ vertices to $Z$, so
   \[
     |Z| = \sum_{v\in Y\setminus L} (2-d_v) \enspace .
   \]
   Combining these two formulas, we obtain
   \[
-    |Z| \ge 2|Y\setminus L| - |Y| = |Y| - 2|L| 
-    \ge 3h/4-O(\log(ch+1)) - 2\alpha h 
-    % = (3/4-2\alpha)h - O(\log(ch+1)) 
+    |Z| \ge 2|Y\setminus L| - |Y| = |Y| - 2|L|
+    \ge 3h/4-O(\log(ch+1)) - 2\alpha h
+    % = (3/4-2\alpha)h - O(\log(ch+1))
     \ge h/4-O(\log(ch+1)) \enspace .
   \]
-  Refer to \cref{paths}.  For each $v\in Z$, \cref{one_path} implies that $v$ has a descendant $v'$ whose parent is in $B_x$, that has height at least at least $h/4-O(\log(ch+1))$ and such that $T_h-B_x$ contains a path $P_{v'}$ from $v'$ to a leaf descendant of $v'$.  Form the set $Z'$ by replacing each vertex $v\in Z$ with the vertex $v'$ just described.  Again, $Z'$ is a unrelated set.  Since $\alpha < 1/4$, for sufficiently large $h$, $|Z'|\ge h/4 - O(\log(ch+1)) \ge \alpha h$ and each vertex in $Z$ has height at least $h/4 - 1 - O(\log(ch+1)) \ge \alpha h$.
+  Refer to \cref{paths}.  For each $r\in Z$, \cref{one_path} implies that $r$ has a descendant $v$ whose parent is in $B_x$, that has height at least at least $h/4-O(\log(ch+1))$ and such that $T_h-B_x$ contains a path $P_{v}$ from $v$ to a leaf of $T_h$.  Form the set $Z'$ by replacing each vertex $r\in Z$ with the vertex $v$ just described.  Again, $Z'$ is a unrelated set.  Since $\alpha < 1/4$, for sufficiently large $h$, $|Z'|\ge h/4 - O(\log(ch+1)) \ge \alpha h$ and each vertex in $Z$ has height at least $h/4 - O(\log(ch+1)) \ge \alpha h$.
 
   \begin{figure}
     \begin{center}
@@ -373,63 +346,66 @@ The following lemma shows that any tree partition of $G_h$ must have a part with
     \label{paths}
   \end{figure}
 
-<<<<<<< Updated upstream
-  Now observe that the union of that paths in  $\{P_{v'}:v'\in Z'\}$ and the paths $P_{h-\lceil\alpha h\rceil+1},\ldots,P_{h}$ contains a subgraph $G'$ isomorphic to a graph that can be obtained from the grid $G_{\lceil \alpha h\rceil\times\lceil \alpha h\rceil}$ by subdividing horizontal edges.  Since $S$ does not contain any vertex of $P_{v'}$ for any $v'\in Z'$,  $S\cap V(G')$ contains only vertices corresponding to subdivision vertices.  Therefore, by \cref{grid_connectivity}, some component of $G-B_x$ contains a subset $R\subseteq Z'$ of size at least $\alpha h/c$.  Each element in $R$ has a parent in $B_x$ so, by \cref{tree_thingy} some neighbour $y$ of $x$ in $T$ has a bag $B_y$ that contains all of $R$.  This completes the proof.
-=======
-  Now observe that the union of that paths in  $\{P_{v'}:v'\in Z'\}$ and the paths $P_{h-\lceil\alpha h\rceil+1},\ldots,P_{h}$ contains a subgraph $G'$ isomorphic to a graph that can be obtained from the grid $G_{\lceil\alpha h\rceil\times\lceil\alpha h\rceil}$ by subdividing horizontal edges.  Since $S$ does not contain any vertex of $P_{v'}$ for any $v'\in Z'$,  $S\cap V(G')$ contains only vertices corresponding to subdivision vertices.  Therefore, by \cref{grid_connectivity}, some component of $G-B_x$ contains a subset $R\subsetcong Z'$ of size at least $\alpha h/c$.  Each element in $R$ has a parent in $B_x$ so, by \cref{tree_thingy} some neighbour $y$ of $x$ in $T$ has a bag $B_y$ that contains all of $R$.  This completes the proof.
->>>>>>> Stashed changes
+  Now observe that the union of the paths in  $\{P_{v}:v\in Z'\}$ and the paths $P_{h-\lceil\alpha h\rceil+1},\ldots,P_{h}$ contains a subgraph $G'$ isomorphic to a graph that can be obtained from the grid $G_{\lceil \alpha h\rceil\times\lceil \alpha h\rceil}$ by subdividing horizontal edges.  Since $S$ does not contain any vertex of $P_{v}$ for any $v\in Z'$,  $S\cap V(G')$ contains only vertices corresponding to subdivision vertices.  Therefore, by \cref{grid_connectivity}, some component of $G-B_x$ contains a subset $R\subseteq Z'$ of size at least $\alpha h/c$.  Each element in $R$ has a parent in $B_x$ so, by \cref{tree_thingy} some neighbour $y$ of $x$ in $T$ has a bag $B_y$ that contains all of $R$.  This completes the proof.
 \end{proof}
 
 
-A set $\mathcal{R}:=\{R_1,\ldots,R_r\}$ of subsets of $V(T_h)$ is \defin{$(k,\ell,m)$-great}\todo{pick a better name} if it has the following properties:
+A set $\mathcal{R}:=\{R_1,\ldots,R_q\}$ of subsets of $V(T_h)$ is \defin{$(k,\ell,m)$-great}\todo{pick a better name} if it has the following properties:
 
 \begin{compactenum}
-  \item For each $i\in\{1,\ldots,r\}$, $|R_i|\ge k$.
-  \item For each $i\in\{1,\ldots,r\}$ there exists a common ancestor $a_i$ of $R_i$ such that $\dist_T(v,a_i)\le\ell$ for each $v\in R_i$.
-  \item $a_1,\ldots,a_r$ are unrelated and each has height at least $m$.
+  \item For each $i\in\{1,\ldots,q\}$, $|R_i|\ge k$.
+  \item For each $i\in\{1,\ldots,q\}$ there exists a common ancestor $a_i$ of $R_i$ such that $\dist_T(v,a_i)\le\ell$ for each $v\in R_i$.
+  \item $a_1,\ldots,a_q$ are unrelated and each has height at least $m$.
 \end{compactenum}
 
-We say that a vertex $v$ of $T_h$ is \defin{compatible} with $S\subsetcong V(T_h)$ if the parent of $v$ is in $S$ and $T_h-S$ contains a path from $v$ to a leaf of $T_h$.
+We say that a vertex $v$ of $T_h$ is \defin{compatible} with $S\subseteq V(T_h)$ if the parent of $v$ is in $S$ and $T_h-S$ contains a path from $v$ to a leaf of $T_h$.
 
 
 \begin{lem}\label{compatible_set}
-  Let $\mathcal{R}:=\{R_1,\ldots,R_r\}$ be a $(k,\ell,m)$-great set,  and let $S\supseteq \cup\mathcal{R}$ have size $1\le |S|< 2^{m-\ell-2}$.  Then, there exists a $(2k,\ell + \log_2(|S|)+2,m)$-great set $\mathcal{R}':=\{R_1',\ldots,R_r'\}$ that is compatible with $S$.
+  Let $\mathcal{R}:=\{R_1,\ldots,R_q\}$ be a $(k,\ell,m)$-great set,  and let $S\supseteq \cup\mathcal{R}$ have size $1\le |S|< 2^{m-\ell-2}$.  Then, there exists a $(2k,\ell + \log_2|S|+2,m)$-great set $\mathcal{R}':=\{R_1',\ldots,R_q'\}$ that is compatible with $S$.
 \end{lem}
 
 \begin{proof}
-  For each $i\in\{1,\ldots,r\}$ and each $v_0\in R_i$, replace $v_0$ with the descendants $v_1$ and $v_2$ of $v_0$ described in \cref{two_paths} and call the resulting set $R_i'$.   Then $|R_i'|=2|R_i|\ge 2k$ and $\dist_{T_h}(v,a_i)\le \ell+\log_2(|S|)+2$ for each $v\in R_i$.  Therefore $\mathcal{R}'$ is a $(2k,\ell + \log_2(|R|)+2,m)$-great set.
+  For each $i\in\{1,\ldots,r\}$ and each $r\in R_i$, replace $r$ with the descendants $v_1$ and $v_2$ of $r$ described in \cref{two_paths} and call the resulting set $R_i'$.   Then $|R_i'|=2|R_i|\ge 2k$ and $\dist_{T_h}(v,a_i)\le \ell+\log_2|S|+2$ for each $v\in R_i'$.  Therefore $\mathcal{R}':=\{R_1',\ldots,R_q'\}$ is a $(2k,\ell + \log_2(|R|)+2,m)$-great set.
 \end{proof}
 
-The next lemma completes the proof of \cref{main_thm}.
+The next lemma is the last ingredient in the proof of \cref{main_thm}.
 \begin{lem}\label{big_lemma}
-  There exists constants $\epsilon,\delta, h_0 >0$ such that the following is true for all integers $h\ge h_0$. Let $\mathcal{T}:=\{B_x:x\in V(T)\}$ be a tree-partition of $G_h$ and let $\mathcal{P}:=\{P_y:y\in V(P)\}$ be a path partition of $G_h$.  Then there exists $(x,y)\in V(T)\times V(P)$ such that $|B_x\cap P_y| \ge \delta h^\epsilon$.
+  Let $\mathcal{T}:=\{B_x:x\in V(T)\}$ be a tree-partition of $G_h$ and let $\mathcal{P}:=\{P_y:y\in V(P)\}$ be a path partition of $G_h$.  Then there exists $(x,y)\in V(T)\times V(P)$ such that $|B_x\cap P_y| \ge 2^{\Omega(\sqrt{\log h})}$.
 \end{lem}
 
 \begin{proof}
-  Let $x\in V(T)$ be a node that maximizes $|B_x|$.  Then $\diam_{G_h}(B_x)\le\diam_{T_h}(B_x) \le 2h+1$ so, by \cref{diameter_spread}, $|B_x\cap P_y|\ge |B_x|/(2h+1)$.  If $|B_x|\ge h^{1+\epsilon}$ then we are already done, so we may assume that $|B_x| < ch$ for some $c \le h^{\epsilon}$.
+  Let $x\in V(T)$ be a node that maximizes $|B_x|$.  Then $\diam_{G_h}(B_x)\le\diam_{T_h}(B_x) \le 2h+1$ so, by \cref{diameter_spread}, $|B_x\cap P_y|\ge |B_x|/(2h+1)$.  If $|B_x|\ge h2^{\sqrt{\log h}}$ then there is nothing more to prove, so we may assume that $|B_x| < ch$ for some $c\le 2^{\sqrt{\log h}}$.
 
-  By \cref{startup}, $T$ contains a node $x_1$ such that $B_{x_1}$ contains a unrelated set $R$ of size $r_1:=|R|\ge \alpha h/c$ where each vertex in $R$ has height at least $h_1:=\alpha h$.  Let  $\mathcal{R}_1':=\{\{v\}:v\in R\}$.  By definition $\mathcal{R}_1'$ is a $(1,0,r_1)$-great set.
+  By \cref{startup}, $T$ contains a node $x_1$ such that $B_{x_1}$ contains a unrelated set $R$ of size $q_1:=|R|\ge \alpha h/c$ where each vertex in $R$ has height at least $m:=m_1:=\alpha h$.  Let  $\mathcal{R}_1':=\{\{v\}:v\in R\}$.  By definition $\mathcal{R}_1'$ is a $(1,0,m)$-great set.
 
-  By \cref{compatible_set} (applied to $\mathcal{R}_1'$ and $B_{x_1}$), $T_h$ contains a $(2,\log_2(ch)+2,r_1)$-great set $\mathcal{R}_1$ of size $r_1$ that is compatible with $B_{x_1}$.  Let $h_2:=h_1-\lfloor\log_2(ch)\rfloor -2$.  For each $v\in\cup\mathcal{R}_1$, $T_h-S_1$ contains a path $P_v$ from $v$ to a leaf of $T_h$.  The union of the paths in $P_{h-h_2},\ldots,P_{h}$ and the paths in $\mathcal{C}_1:=\{P_v:v\in\cup\mathcal{R}_1\}$ contains a subgraph isomorphic to a graph that can be obtained from $G_{2r_1\times (h-d_1)}$ by subdividing horizontal edges.  Therefore, by \cref{grid_connectivity}, some component of $G-S_1$ contains at least $2r_1/c$ of the paths in $\mathcal{C}_1$.  Furthermore, these paths are consecutive in the left-to-righting of $\mathcal{C}_1$.  This implies that there is a subset $\mathcal{R}_2'\subsetcong \mathcal{R}_1$ of size $r_2\ge r_1/c$ that is contained in a single component of $G-S_1=G-B_{x_1}$. By \cref{tree_thingy}, there is a neighbour $x_2$ of $x_1$ in $T$ with $\cup\mathcal{R}_2'\subsetcong B_{x_2}$.
+  By \cref{compatible_set} (applied to $\mathcal{R}_1'$ and $B_{x_1}$), $T_h$ contains a $(2,\log_2(ch)+2,m)$-great set $\mathcal{R}_1$ of size $q_1$ that is compatible with $B_{x_1}$.  Let $m_2:=m_1-\lfloor\log_2(ch)\rfloor -2$.  For each $v\in\cup\mathcal{R}_1$, $T_h-B_{x_1}$ contains a path $P_v$ from $v$ to a leaf of $T_h$.  The union of the paths in $P_{h-m_2+1},\ldots,P_{h}$ and the paths in $\mathcal{C}_1:=\{P_v:v\in\cup\mathcal{R}_1\}$ contains a subgraph isomorphic to a graph that can be obtained from $G_{2q_1\times m_2}$ by subdividing horizontal edges.  Therefore, by \cref{grid_connectivity}, some component of $G-S_1$ contains at least $2q_1m_2/ch$ of the paths in $\mathcal{C}_1$.  Furthermore, these paths are consecutive in the left-to-right ordering of $\mathcal{C}_1$.  This implies that there is a subset $\mathcal{R}_2'\subseteq \mathcal{R}_1$ of size $q_2\ge \lfloor(2q_1m_2/ch-1)/2\rfloor$ that is contained in a single component of $G-B_{x_1}$. By \cref{tree_thingy}, there is a neighbour $x_2$ of $x_1$ in $T$ with $\cup\mathcal{R}_2'\subsetcong B_{x_2}$.
 
-  We can now iterate this process of obtaining $\mathcal{R}_{i+1}'\subsetcong B_{x_{i+1}}$ from $\mathcal{R}_i'\subsetcong B_{x_i}$. Let $t:= \lfloor \min\{\log_{2c} r_1,\alpha h/(2\log_2(ch)+4)\}\rfloor$. Then after $t$ such iterations we obtain a $(2^t,t(\log_2(ch)+2),r_1)$-great set $\mathcal{R}_{t+1}'\subsetcong B_{x_t}$ of size at least $r_t \ge r_1\alpha/(2c)^t \ge 1$.
+  The bound on the size $q_2$ of $\mathcal{R}_2'$ is awkward, so we simplify it as follows:
+  \[
+    q_2 \ge \left\lfloor\left(\frac{2q_1m_2}{ch} - 1\right) /2 \right\rfloor
+        \ge \frac{q_1m_2}{ch} - 1 \ge \frac{\alpha q_2}{2c} - 1
+  \]
+  provided that $m_2 \ge\alpha h/2$.  This latter condition is true for any fixed $\alpha$ and all sufficiently large $h$, since $m_2 = m_1 - O(\log h) \ge \alpha h - O(\log h)$.
 
-  Let $R$ be one of the sets in $\mathcal{R}_{t+1}'$.  Since $\mathcal{R}_{t+1}'$ is $(2^t,t(\log_2(ch)+2))$-great, $|R|\ge 2^t$ and all vertices in $R$ have a common ancestor $a$ whose distance to each element of $R$ is at most $t(\log_2(ch)+2)$.  Therefore, $\diam_{G_h}(R)\le\diam_{T_h}(R)\le 2t(\log_2(ch)+2)$. By \cref{diameter_spread}, there exists some $P_y\in\mathcal{P}$ with
+  We can now iterate this process of obtaining $\mathcal{R}_{i+1}'\subseteq B_{x_{i+1}}$ from $\mathcal{R}_i'\subseteq B_{x_i}$. Let $t:= \lfloor \min\{\log_{2c/\alpha} q_1-2,\alpha h/(2\log_2(ch)+4)-2\}\rfloor$.\footnote{The second term in definition of $t$ ensures that $q_{i+1}\ge \alpha q_i/2c-1$ for each $i\in\{1,\ldots,t\}$.}   Then after $t$ such iterations we obtain a $(2^t,t(\log_2(ch)+2),r_1)$-great set $\mathcal{R}_{t+1}'\subseteq B_{x_t}$ of size at least $q_{t+1} \ge q_1(\alpha/2c)^t-2 \ge 1$.\footnote{$q_{t+1} \ge q_t(\alpha/2c) - 1 \ge q_1(\alpha/2c)^t - \sum_{i=0}^t (\alpha/2c)^i \ge q_1(\alpha/2c)^t - 2$ for $c\ge 1$}
+
+  Let $R$ be one of the sets in $\mathcal{R}_{t+1}'$.  Since $\mathcal{R}_{t+1}'$ is $(2^t,t(\log_2(ch)+2),m)$-great, $|R|\ge 2^t$ and all vertices in $R$ have a common ancestor $a$ whose distance to each element of $R$ is at most $t(\log_2(ch)+2)$.  Therefore, $\diam_{G_h}(R)\le\diam_{T_h}(R)\le 2t(\log_2(ch)+2)$. By \cref{diameter_spread}, there exists some $P_y\in\mathcal{P}$ with
   \begin{align*}
     |B_{x_t}\cap P_y|
-    & \ge |R\cap P_y|
-    \ge \frac{|R|}{2t(\log_2(ch)+2)+1}
-    \ge \frac{2^t}{2t(\log_2(ch)+2)+1}
-    = \frac{2^{\Omega(\log h)}}{O(\log^2 h)}
+    & \ge |R\cap P_y| \\
+    & \ge \frac{|R|}{\diam_{T_h}(R)} \\
+    & \ge \frac{2^t}{2t(\log_2(ch)+2)+1} \\
+    & = \frac{2^{\Omega(\log_{c} h)}}{O(\log^2 h)} \\
+    & = \frac{2^{\Omega(\sqrt{\log h})}}{O(\log^2 h)} \\
     % & \text{(recall that $c\le h^{\epsilon}$)} \\
-    \in \Omega(h^\epsilon)
+    & \ge 2^{\Omega(\sqrt{\log h})} . \qedhere
   \end{align*}
-  for some fixed $\epsilon >0$.
 \end{proof}
 
 
 \begin{proof}[Proof of \cref{main_thm}]
-  Let $n:=|V(G_h)|=2^{h+1}-1$.  Suppose that $G_h\subsetcong H\boxtimes P\boxtimes K_c$ for some graph $H$ of treewidth $t$ and maximum-degree $\Delta$, some path $P$ and some integer $c$.  Then, by \cref{dingy,partitions_vs_products}, $G\subsetcong T\boxtimes P\boxtimes K_{24t\Delta c}$ for some tree $T$.  By \cref{partitions_vs_products}, $G$ has a $T$-partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ and a path-partition $\mathcal{P}:=\{P_y:y\in V(P)\}$ such that $|B_x\cap P_y|\le 24t\Delta c$ for each $(x,y)\in V(T)\times V(P)$.  By \cref{big_lemma}, there exists some $(x,y)\in V(T)\times V(P)$ such that $|B_x\cap P_y| \ge \delta h^\epsilon$.  Combining these latter two equations implies that $t\Delta c\ge \delta h^\epsilon/116 \in \Omega(\log^\epsilon n)$.
+  Let $n:=|V(G_h)|=2^{h+1}-1$.  Suppose that $G_h\subsetcong H\boxtimes P\boxtimes K_c$ for some graph $H$ of treewidth $t$ and maximum-degree $\Delta$, some path $P$ and some integer $c$.  Then, by \cref{dingy,partitions_vs_products}, $G\subsetcong T\boxtimes P\boxtimes K_{24t\Delta c}$ for some tree $T$.  By \cref{partitions_vs_products}, $G$ has a $T$-partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ and a path-partition $\mathcal{P}:=\{P_y:y\in V(P)\}$ such that $|B_x\cap P_y|\le 24t\Delta c$ for each $(x,y)\in V(T)\times V(P)$.  By \cref{big_lemma}, there exists some $(x,y)\in V(T)\times V(P)$ such that $|B_x\cap P_y| \ge \delta 2^{\log h}$.  Combining these latter two equations implies that $t\Delta c\ge 2^{\Omega(\sqrt{\log h})} = 2^{\Omega(\sqrt{\log\log n})}$.
 \end{proof}
 
 
@@ -449,10 +425,10 @@ We know that every planar graph $G$ is contained in a product of the form $H\box
 \begin{figure}
   \begin{center}
     \begin{tabular}{cc}
-      \includegraphics[scale=.7]{figs/g_6-2} & \includegraphics[scale=.7]{figs/g_6-3}
+      \includegraphics[scale=.7]{figs/g_5-2} & \includegraphics[scale=.7]{figs/g_5-3}
     \end{tabular}
   \end{center}
-  \caption{An outerplanar partition $\mathcal{H}$ and a path partition $\mathcal{P}$ of $G_6$ for which $|B\cap P|\le 1$ for each $B\in\mathcal{H}$ and $P\in\mathcal{P}$.}
+  \caption{An outerplanar partition $\mathcal{H}$ and a path partition $\mathcal{P}$ of $G_5$ for which $|B\cap P|\le 1$ for each $B\in\mathcal{H}$ and $P\in\mathcal{P}$.}
   \label{two_tree}
 \end{figure}
 
