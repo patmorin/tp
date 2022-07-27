@@ -150,7 +150,7 @@ As in previous works, we make use of the following relationship between $H$-part
 The following important result of \citet{ding.oporowski:some} (see also \citet{wood:on}) allows us to focus on the case where the first factor in our product is a tree.
 
 \begin{thm}[\citet{ding.oporowski:some}]\label{dingy}
-  If $H$ is a graph with maximum degree $\Delta$ and treewidth $t$, then $H$ has a tree-partition of width at most $24\Delta t$.\todo{DW suggests writing "treewidth less than $t$" here, but that's not accurate. If you mean "treewidth at most $t$", that seems redundant}
+  If $H$ is a graph with maximum degree $\Delta$ and treewidth $t$,\todo{DW suggests writing "treewidth less than $t$" here, but that's not accurate. If he means "treewidth at most $t$", that seems redundant} then $H$ has a tree-partition of width at most $24\Delta t$.
 \end{thm}
 
 \begin{cor}\label{ding_translation}
@@ -321,7 +321,7 @@ The following lemma shows that any tree-partition of $G_h$ must have a part with
 \end{proof}
 
 
-A set $\mathcal{R}:=\{R_1,\ldots,R_q\}$ of subsets of $V(T_h)$ is \defin{$(k,\ell,m)$-great}\todo{pick a better name} if it has the following properties:
+A set $\mathcal{R}:=\{R_1,\ldots,R_q\}$ of subsets of $V(T_h)$ is \defin{$(k,\ell,m)$-great}\todo{pick a better name. DW suggests "rich"} if it has the following properties:
 
 \begin{compactenum}
   \item For each $i\in\{1,\ldots,q\}$, $|R_i|\ge k$.
@@ -393,6 +393,7 @@ We know that every planar graph $G$ is contained in a product of the form $H\box
 
 \cref{two_tree} shows that $G_h$ is a subgraph of $H\boxtimes P$ where $H$ has treewidth $2$ (and is even outerplanar) and $P$ is a path. Our proof breaks down in this case because, unlike tree-partitions, outerplanar partitions do not satisfy \cref{tree_thingy}.
 
+
 \begin{figure}
   \begin{center}
     \begin{tabular}{cc}
@@ -402,6 +403,8 @@ We know that every planar graph $G$ is contained in a product of the form $H\box
   \caption{An outerplanar partition $\mathcal{H}$ and a path partition $\mathcal{P}$ of $G_5$ for which $|B\cap P|\le 1$ for each $B\in\mathcal{H}$ and $P\in\mathcal{P}$.}
   \label{two_tree}
 \end{figure}
+
+\todo[inline]{DW asks why arxiv identifiers appear twice. Each paper has standard bibliographic information followed by one or more hyperlinks.}
 
 \bibliographystyle{plainurlnat}
 \bibliography{tp}
