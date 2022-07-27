@@ -30,7 +30,6 @@
 \setlength{\linenumbersep}{2em}
 % \linenumbers
 % \rightlinenumbers
-% \linenumbers
 \newcommand*\patchAmsMathEnvironmentForLineno[1]{%
  \expandafter\let\csname old#1\expandafter\endcsname\csname #1\endcsname
  \expandafter\let\csname oldend#1\expandafter\endcsname\csname end#1\endcsname
@@ -49,77 +48,49 @@
 \patchBothAmsMathEnvironmentsForLineno{multline}%
 }
 
-\newcommand{\vol}[1]{\boxplus_{#1}}
-
-
-\DeclareMathOperator{\interior}{Int}
-
 % Taken from
 % https://tex.stackexchange.com/questions/42726/align-but-show-one-equation-number-at-the-end
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 
-\definecolor{brightmaroon}{rgb}{0.76, 0.13, 0.28}
-\definecolor{linkblue}{rgb}{0, 0.337, 0.227}
-\newcommand{\defin}[1]{\emph{\color{brightmaroon}#1}}
+
 \setlength{\parskip}{1ex}
 
 % Document-specific commands and math operators
 \DeclareMathOperator{\depth}{depth}
 \DeclareMathOperator{\tw}{tw}
-\DeclareMathOperator{\td}{td}
-\DeclareMathOperator{\chicen}{\chi_{\mathrm{cen}}}
-\DeclareMathOperator{\chilin}{\chi_{\mathrm{lin}}}
 \DeclareMathOperator{\dist}{dist}
 \DeclareMathOperator{\diam}{diam}
-\DeclareMathOperator{\vor}{Vor}
 
-
-\title{\MakeUppercase{Bad News for Product Structure of Bounded-Degree Graphs}}
-\author{%
-  Vida Dujmović\thanks{Department of Computer Science and Electrical Engineering, University of Ottawa, Ottawa, Canada.}\, \thanks{Research partly supported by NSERC.} \quad
-  Gwenaël Joret\thanks{Affilation/funding} \quad
-  % Nina Kam\v{c}ev\thanks{Affiliation/fuding} \\[1ex]
-  Piotr Micek\thanks{Affilation/funding}\quad
-  Pat Morin\thanks{School of Computer Science, Carleton University, Ottawa, Canada}\, \footnotemark[2] \quad
-  David R. Wood\thanks{School of Mathematics, Monash University, Melbourne, Australia (\texttt{david.wood@monash.edu}). Research supported by the Australian Research Council.}
-}
-
-\DeclareMathOperator{\VE}{\mathit{VE}}
-
-\usepackage{amsmath}
-
-
-\renewcommand{\le}{\leqslant}
-\renewcommand{\ge}{\geqslant}
-
-\date{}
-
-% Making a point
+% A version of \subseteq with a ~ on top
 \newcommand\subsetcong{\mathrel{\text{%
     \setbox0\hbox{$\subseteq$}%
     \rlap{\hbox to \wd0{\hss\hss\hss\raisebox{1.5\height}{$\sim$}\hss}}\box0
 }}}
 
-% \newcommand\sseqcong{\mathrel{%
-%     \mathchoice{\qmf}{\qmf}{\scriptsize\qmf}{\tiny\qmf}%
-% }}
-% \newcommand\xcong{{%
-%     \setbox0\hbox{$\subsetcong$}%
-%     \rlap{\hbox to \wd0{\hss\hss\hss\raisebox{1.5\height}{$\sim$}\hss}}\box0
-% }}
 
+% Some people prefer these (Pat doesn't)
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+
+\title{\MakeUppercase{Bad News for Product Structure of Bounded-Degree Graphs}}
+
+\author{%
+  Vida Dujmović\thanks{Department of Computer Science and Electrical Engineering, University of Ottawa, Ottawa, Canada.}\, \thanks{Research partly supported by NSERC.} \quad
+  Gwenaël Joret\thanks{Affilation/funding} \quad
+  Piotr Micek\thanks{Affilation/funding}\quad
+  Pat Morin\thanks{School of Computer Science, Carleton University, Ottawa, Canada}\, \footnotemark[2] \quad
+  David R. Wood\thanks{School of Mathematics, Monash University, Melbourne, Australia (\texttt{david.wood@monash.edu}). Research supported by the Australian Research Council.}
+}
+
+\date{}
 
 
 \begin{document}
-
-
 \maketitle
-\renewcommand{\E}{\mathbb{E}}
-\renewcommand{\Pr}{\mathbb{P}}
 
 
 \begin{abstract}
-  We describe an infinite family $\mathcal{G}$ of planar graphs of maximum degree $5$ such that, if an $n$-vertex member of $\mathcal{G}$ is a subgraph of the strong product of a graph $H$ of treewidth $t$ and maximum-degree $\Delta$, a path $P$ and a clique $K$ of order $c$ then $t\Delta c \ge 2^{\Omega(\sqrt{\log\log n})}$.
+  We describe an infinite family $\mathcal{G}$ of planar graphs of maximum degree $5$ such that, if an $n$-vertex member of $\mathcal{G}$ is a subgraph of the strong product of a graph $H$ of treewidth $t$ and maximum degree $\Delta$, a path $P$ and a clique $K$ of order $c$, then $t\Delta c \ge 2^{\Omega(\sqrt{\log\log n})}$.
 \end{abstract}
 
 \section{Introduction}
@@ -140,7 +111,7 @@ This is typically written as $G\subsetcong H\boxtimes P\boxtimes K_c$, where the
 
 In some applications of product structure theorems, it is helpful if, in addition to having treewidth $t$, the graph $H$ has additional properties, possibly inherited from $G$.  For example, one very useful version of the planar graph product structure theorem states that for every planar graph $G$ there exists a \emph{planar} graph $H$ of treewidth $3$ and a path $P$ such that $G\subsetcong H\boxtimes P\boxtimes K_3$.  The planarity of $H$ in this result has been leveraged to obtain better constants and even asymptotic improvements for graph colouring and layout problems, including queue number \cite{dujmovic.joret.ea:planar}, $p$-centered colouring \cite{debski.felsner.ea:improved}, and $\ell$-vertex ranking \cite{bose.dujmovic.ea:asymptotically}.
 
-In this vein, the authors have been repeatedly asked the following question, which asks if $H$ can inherit bounded-degree from $G$:
+In this vein, the authors have been repeatedly asked the following question, which asks if $H$ can have bounded degree whenever $G$ does:
 \begin{quote}
   Let $\mathcal{G}_\Delta$ be the family of planar graphs of maximum degree $\Delta$.  Do there exist functions $t:\N\to\N$, $d:\N\to\N$, and $c:\N\to\N$ such that, for each $G\in\mathcal{G}_\Delta$ there exists a graph $H$ of treewidth $t(\Delta)$ and maximum degree $d(\Delta)$ such that $G\subsetcong H\boxtimes P\boxtimes K_{c(\Delta)}$?
 \end{quote}
@@ -166,20 +137,20 @@ Throughout this paper, all graphs $G$ are simple and undirected with vertex set 
 
 \subsection{Partitions}
 
-Let $G$ and $H$ be graphs.  An \defin{$H$-partition} $\mathcal{H}:=\{B_x:x\in V(H)\}$ of $G$ is a partition of $V(G)$ whose parts are indexed by the vertices of $H$ with the property that, if $vw$ is an edge of $G$ with $v\in B_x$ and $w\in B_y$ then $x=y$ or $xy\in E(H)$.  The \defin{width} of $\mathcal{H}$ is the size of its largest part; i.e., $\max\{|B_x|:x\in V(H)\}$.
+Let $G$ and $H$ be graphs.  An \defin{$H$-partition} $\mathcal{H}:=\{B_x:x\in V(H)\}$ of $G$ is a partition of $V(G)$ whose parts are indexed by the vertices of $H$ with the property that, if $vw$ is an edge of $G$ with $v\in B_x$ and $w\in B_y$ then $x=y$ or $xy\in E(H)$.  The \defin{width} of $\mathcal{H}$ is the size of its largest part; that is, $\max\{|B_x|:x\in V(H)\}$.
 
 If $H$ is in a class $\mathcal{G}$ of graphs then we may call $\mathcal{H}$ a $\mathcal{G}$-partition of $G$.  Specifically, if $H$ is a tree, then $\mathcal{H}$ is a \defin{tree-partition} of $G$ and if $\mathcal{H}$ is a path, then $\mathcal{H}$ is a \defin{path-partition} of $G$.  A path-partition $\mathcal{P}:=\{P_x:x\in V(P)\}$ of $G$ is also referred to as a \defin{layering} of $G$ and the parts of $\mathcal{P}$ are referred to as \defin{layers}.  A set of layers $\{P_{x_1},\ldots,P_{x_q}\}\subseteq\mathcal{P}$ is \defin{consecutive} if $P[\{x_1,\ldots,x_q\}]$ is connected.
 
 As in previous works, we make use of the following relationship between $H$-partitions and strong products, which follows immediately from the preceding definitions.
 
 \begin{obs}\label{partitions_vs_products}
-  For any integer $c\ge 1$, and any graphs $G$, $H$, and $P$,  $G\subsetcong H\boxtimes P\boxtimes K_c$ if and only if $G$ has an $H$-partition $\mathcal{H}:=\{B_x:x\in V(H)\}$ and a $P$-partition $\mathcal{P}:=\{P_y:y\in V(P)\}$ such that $|B_x\cap P_y|\le c$, for each $(x,y)\in V(H)\times V(P)$.
+  For any integer $c\ge 1$, and any graphs $G$, $H$, and $J$,  $G\subsetcong H\boxtimes J\boxtimes K_c$ if and only if $G$ has an $H$-partition $\mathcal{H}:=\{B_x:x\in V(H)\}$ and a $J$-partition $\mathcal{J}:=\{C_y:y\in V(J)\}$ such that $|B_x\cap C_y|\le c$, for each $(x,y)\in V(H)\times V(J)$.
 \end{obs}
 
-The following important result of \citet{ding.oporowski:on} (see also \citet{wood:on}) allows us to focus on the case where the first factor in our product is a tree.
+The following important result of \citet{ding.oporowski:some} (see also \citet{wood:on}) allows us to focus on the case where the first factor in our product is a tree.
 
-\begin{thm}[\citet{ding.oporowski:on}]\label{dingy}
-  If $H$ is a graph with maximum-degree $\Delta$ and treewidth $t$, then $H$ has a tree partition of width at most $24\Delta t$.
+\begin{thm}[\citet{ding.oporowski:some}]\label{dingy}
+  If $H$ is a graph with maximum degree $\Delta$ and treewidth $t$, then $H$ has a tree-partition of width at most $24\Delta t$.\todo{DW suggests writing "treewidth less than $t$" here, but that's not accurate. If you mean "treewidth at most $t$", that seems redundant}
 \end{thm}
 
 \begin{cor}\label{ding_translation}
@@ -190,10 +161,10 @@ The following important result of \citet{ding.oporowski:on} (see also \citet{woo
   By \cref{dingy}, $H$ has a tree-partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ of width at most $24\Delta t$ so, by \cref{partitions_vs_products}, $H \subsetcong T\boxtimes K_{24\Delta t}$.  Therefore, $G\subsetcong T\boxtimes K_{24\Delta t}\boxtimes P\boxtimes K_c \cong T\boxtimes P\boxtimes K_{24c\Delta t}$.
 \end{proof}
 
-The \defin{length} of a path $v_0,\ldots,v_q$ is the number, $r$ of edges in the path. For any two vertices $v,w\in V(G)$, $\dist_G(v,w)$ denotes the minimum length of a path in $G$ that contains $v$ and $w$, or $\dist_G(v,w):=\infty$ if $v$ and $w$ are different connected components of $G$. For any $R\subsetcong V(G)$, the \defin{diameter} of $R$ is $\diam_G(R):=\max\{\dist_G(v,w):v,w\in R\}$.
+The \defin{length} of a path is the number of edges in it. For any two vertices $v,w\in V(G)$, $\dist_G(v,w)$ denotes the minimum length of a path in $G$ that contains $v$ and $w$, or $\dist_G(v,w):=\infty$ if $v$ and $w$ are in different connected components of $G$. For any $R\subsetcong V(G)$, the \defin{diameter} of $R$ is $\diam_G(R):=\max\{\dist_G(v,w):v,w\in R\}$.
 
 \begin{obs}\label{diameter_spread}
-  Let $G$ be any graph, let $R\subseteq V(G)$, and let $\mathcal{L}$ be any layering of $G$.  Then there exist some layer $L\in\mathcal{L}$ such that $|R\cap L|\ge |R|/(\diam_G(R)+1)$.
+  Let $G$ be any graph, let $R\subseteq V(G)$, and let $\mathcal{L}$ be any layering of $G$.  Then there exist a layer $L\in\mathcal{L}$ such that $|R\cap L|\ge |R|/(\diam_G(R)+1)$.
 \end{obs}
 
 \begin{proof}
@@ -201,10 +172,10 @@ The \defin{length} of a path $v_0,\ldots,v_q$ is the number, $r$ of edges in the
 \end{proof}
 
 
-We also make use of the following basic fact about tree partitions:
+We also make use of the following basic fact about tree-partitions:
 
 \begin{obs}\label{tree_thingy}
-  Let $G$ be a graph, let $\mathcal{T}:=(B_x:x\in V(T))$ be a tree partition of $G$, let $x\in V(T)$, and let $v,w\in N_G(B_x)$ be in the same component of $G-B_x$.  Then $T$ contains an edge $xy$ with $v,w\in B_y$.
+  Let $G$ be a graph, let $\mathcal{T}:=(B_x:x\in V(T))$ be a tree-partition of $G$, let $x\in V(T)$, and let $v,w\in N_G(B_x)$ be in the same component of $G-B_x$.  Then $T$ contains an edge $xy$ with $v,w\in B_y$.
 \end{obs}
 
 \begin{proof}
@@ -252,11 +223,11 @@ We use the following two percolation-type results for $T_h$.
 
 \subsection{A Connectivity Lemma}
 
-The \defin{$x\times y$ grid} $G_{x\times y}$ is the graph with vertex set $V(G_{x\times y}):=\{1,\ldots,x\}\times\{1,\ldots,y\}$ and that contains an edge with endpoints $(x_1,y_1)$ and $(x_2,y_2)$ if and only if $|x_1-x_1|+|y_1-y_2|=1$.  An edge of $G_{x\times y}$ is \defin{horizontal} if its two endpoints agree in the second (y) coordinate.  For each $i\in\{1,\ldots,x\}$, $\{i\}\times\{1,\ldots,y\}$ is called \defin{column $i$} of $G_{x\times y}$.  A set $C$ of columns is \defin{consecutive} if $G_{x\times y}[\cup C]$ is connected.
+The \defin{$x\times y$ grid} $G_{x\times y}$ is the graph with vertex set $V(G_{x\times y}):=\{1,\ldots,x\}\times\{1,\ldots,y\}$ and that contains an edge with endpoints $(x_1,y_1)$ and $(x_2,y_2)$ if and only if $|x_1-x_1|+|y_1-y_2|=1$.  An edge of $G_{x\times y}$ is \defin{horizontal} if its two endpoints agree in the second (y) coordinate.  For each $i\in\{1,\ldots,x\}$, the vertex set $\{i\}\times\{1,\ldots,y\}$ is called \defin{column $i$} of $G_{x\times y}$.  A set $C$ of columns is \defin{consecutive} if $G_{x\times y}[\cup C]$ is connected.
 
 
 \begin{lem}\label{grid_connectivity}
-  Let $x,y,p\ge 1$ be integers, let $G$ be a graph obtained by subdividing horizontal edges of $G_{x\times y}$, and let $S\subsetcong V(G-G_{x\times y})$ be a set of subdivision vertices of size $|S|< py$.  Then some component of $G-S$ contains at least $x/p$ consecutive columns of $G_{x\times y}$.
+  Let $x,y,p\ge 1$ be integers, let $G$ be a graph obtained by subdividing horizontal edges of $G_{x\times y}$, and let $S\subsetcong V(G)\setminus V(G_{x\times y})$ be a set of subdivision vertices of size $|S|< py$.  Then some component of $G-S$ contains at least $x/p$ consecutive columns of $G_{x\times y}$.
 \end{lem}
 
 \begin{proof}
@@ -269,11 +240,11 @@ The \defin{$x\times y$ grid} $G_{x\times y}$ is the graph with vertex set $V(G_{
 % We will construct a family $\mathcal{G}:=\{G_{h}:h\in\N\}$ of planar graphs with the following property:
 
 
-We are now ready to show that for any tree $T$, any path $P$, $G_{h}\subsetcong T\boxtimes P\boxtimes K_c$ implies that $c\ge 2^{\Omega(\log h)}$.  By \cref{ding_translation}, this is enough to prove \cref{main_thm}.  Recall that each graph $G_{h}$ is the planar supergraph of $T_h$ obtained by adding the edges of a path $P_i$ that contains all vertices of depth $i$, in left-to-right order, for each $i\in\{1,\ldots,h\}$.   Since $T_h$ is a spanning subgraph of $G_h$, the \defin{depth} of a vertex $v$ in $G_h$ refers to the depth of $v$ in $T_h$.  The \defin{height} of a depth-$d$ vertex of $T_h$ is $h-d$.
+Recall that, for each $h\in\N$, $G_{h}$ is the planar supergraph of the complete binary tree $T_h$ of height $h$ obtained by adding the edges of a path $P_i$ that contains all vertices of depth $i$, in left-to-right order, for each $i\in\{1,\ldots,h\}$.   Since $T_h$ is a spanning subgraph of $G_h$, the \defin{depth} of a vertex $v$ in $G_h$ refers to the depth of $v$ in $T_h$.  The \defin{height} of a depth-$d$ vertex of $T_h$ is $h-d$.\todo{DW asks if we need both depth and height. No, but without it we get $h-d$ appearing more often than I'd like.}  We are now ready to show that for any tree $T$, any path $P$, $G_{h}\subsetcong T\boxtimes P\boxtimes K_c$ implies that $c\ge 2^{\Omega(\log h)}$.  By \cref{ding_translation}, this is enough to prove \cref{main_thm}.  
 
 % \todo[inline]{This is probably the place to write a proof outline.}
 
-We now outline our proof strategy.  Recall \cref{partitions_vs_products} which states that if $G_h\subseteq T\boxtimes P\boxtimes K_c$ then $G_h$ has a tree partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ and a path partition (i.e., layering) $\mathcal{P}:=\{P_y:y\in V(P)\}$ with $|B_x\cap P_y|\le c$ for each $(x,y)\in V(T)\times V(P)$. Our strategy is to first show that $\mathcal{T}$ has some part $B_{x_1}$ that contains an unrelated set $\mathcal{R}_1$ of small depth and size at least $\alpha h$ for some constant $\alpha >0$.  Next we show that $x_1$ has a neighbour $x_2$ that contains an unrelated set $\mathcal{R}_2$ that is smaller than $\mathcal{R}_1$ by a factor of at most $b/2$ (for some small $b>2$), but whose elements can be paired off so that each pair has a common ancestor in $R_1$ that is of distance at most $a$ from both vertices in the pair (for some small $a>0$).  By iterating this argument $t$ times, we obtain a sequence of unrelated sets $\mathcal{R}_1,\ldots,\mathcal{R}_{t+1}$ where the elements in each $\mathcal{R}_i$ are partitioned into groups of size $2^{i-1}$ so that each group $R$ has a common ancestor in $\mathcal{R}_1$ that is of distance at most $a(i-1)$ from all elements in $R$.  Therefore $\mathcal{R}_{t+1}\subseteq B_{x_{t+1}}$ contains an unrelated set of size $2^{t}$ whose diameter is at most $2at$.  \cref{diameter_spread} then implies that $|B_{x_{t+1}}\cap P_y|\ge 2^{t}/2at$ for some $y\in V(P)$.  By choosing  $t\approx\log_b |R_1|\ge \log_{b}(\alpha h)$, this implies that $c\ge |B_{x_{t+1}}\cap P_y|\gtrapprox 2^{\log_{b}(\alpha h)}/2a(\log_{b}(\alpha h))=h^{\alpha/\log b-o(1)}$.
+We now outline our proof strategy.  Recall \cref{partitions_vs_products} which states that if $G_h\subseteq T\boxtimes P\boxtimes K_c$ then $G_h$ has a tree-partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ and a path partition (i.e., layering) $\mathcal{P}:=\{P_y:y\in V(P)\}$ with $|B_x\cap P_y|\le c$ for each $(x,y)\in V(T)\times V(P)$. Our strategy is to first show that $\mathcal{T}$ has some part $B_{x_1}$ that contains an unrelated set $\mathcal{R}_1$ of small depth and size at least $\alpha h$ for some constant $\alpha >0$.  Next we show that $x_1$ has a neighbour $x_2$ that contains an unrelated set $\mathcal{R}_2$ that is smaller than $\mathcal{R}_1$ by a factor of at most $b/2$ (for some small $b>2$), but whose elements can be paired off so that each pair has a common ancestor in $R_1$ that is of distance at most $a$ from both vertices in the pair (for some small $a>0$).  By iterating this argument $t$ times, we obtain a sequence of unrelated sets $\mathcal{R}_1,\ldots,\mathcal{R}_{t+1}$ where the elements in each $\mathcal{R}_i$ are partitioned into groups of size $2^{i-1}$ so that each group $R$ has a common ancestor in $\mathcal{R}_1$ that is of distance at most $a(i-1)$ from all elements in $R$.  Therefore $\mathcal{R}_{t+1}\subseteq B_{x_{t+1}}$ contains an unrelated set of size $2^{t}$ whose diameter is at most $2at$.  \cref{diameter_spread} then implies that $|B_{x_{t+1}}\cap P_y|\ge 2^{t}/2at$ for some $y\in V(P)$.  By choosing  $t\approx\log_b |R_1|\ge \log_{b}(\alpha h)$, this implies that $c\ge |B_{x_{t+1}}\cap P_y|\gtrapprox 2^{\log_{b}(\alpha h)}/2a(\log_{b}(\alpha h))=h^{\alpha/\log b-o(1)}$.
 
 We now proceed with the details of the strategy outlined above.  The next two lemmas will be used to obtain the set $\mathcal{R}_1$ that allows us to start the argument.
 
@@ -301,10 +272,10 @@ We now proceed with the details of the strategy outlined above.  The next two le
 \end{proof}
 
 
-The following lemma shows that any tree partition of $G_h$ must have a part with a large unrelated set that is far from the leaves of $T_h$.
+The following lemma shows that any tree-partition of $G_h$ must have a part with a large unrelated set that is far from the leaves of $T_h$.
 
 \begin{lem}\label{startup}
-  For any $\alpha\in(0,1/4)$, there exists $h_0$ such that the following is true, for all integers $h\ge  h_0$ and all $c\in[1,h]$.  If $\mathcal{T}:=\{B_x:x\in V(T)\}$ is a tree partition of $G_h$ of width less than $ch$ then there exists a node $x\in V(T)$ and a subset $R\subseteq B_x$ such that
+  For any $\alpha\in(0,1/4)$, there exists $h_0$ such that the following is true, for all integers $h\ge  h_0$ and all $c\in[1,h]$.  If $\mathcal{T}:=\{B_x:x\in V(T)\}$ is a tree-partition of $G_h$ of width less than $ch$ then there exists a node $x\in V(T)$ and a subset $R\subseteq B_x$ such that
   \begin{compactenum}[(i)]
     \item $R$ is unrelated;
     \item $|R|\ge \alpha h/c$; and
@@ -405,14 +376,14 @@ The next lemma is the last ingredient in the proof of \cref{main_thm}.
 
 
 \begin{proof}[Proof of \cref{main_thm}]
-  Let $n:=|V(G_h)|=2^{h+1}-1$.  Suppose that $G_h\subsetcong H\boxtimes P\boxtimes K_c$ for some graph $H$ of treewidth $t$ and maximum-degree $\Delta$, some path $P$ and some integer $c$.  Then, by \cref{dingy,partitions_vs_products}, $G\subsetcong T\boxtimes P\boxtimes K_{24t\Delta c}$ for some tree $T$.  By \cref{partitions_vs_products}, $G$ has a $T$-partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ and a path-partition $\mathcal{P}:=\{P_y:y\in V(P)\}$ such that $|B_x\cap P_y|\le 24t\Delta c$ for each $(x,y)\in V(T)\times V(P)$.  By \cref{big_lemma}, there exists some $(x,y)\in V(T)\times V(P)$ such that $|B_x\cap P_y| \ge \delta 2^{\log h}$.  Combining these latter two equations implies that $t\Delta c\ge 2^{\Omega(\sqrt{\log h})} = 2^{\Omega(\sqrt{\log\log n})}$.
+  Let $n:=|V(G_h)|=2^{h+1}-1$.  Suppose that $G_h\subsetcong H\boxtimes P\boxtimes K_c$ for some graph $H$ of treewidth $t$ and maximum degree $\Delta$, some path $P$ and some integer $c$.  Then, by \cref{dingy,partitions_vs_products}, $G\subsetcong T\boxtimes P\boxtimes K_{24t\Delta c}$ for some tree $T$.  By \cref{partitions_vs_products}, $G$ has a $T$-partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ and a path-partition $\mathcal{P}:=\{P_y:y\in V(P)\}$ such that $|B_x\cap P_y|\le 24t\Delta c$ for each $(x,y)\in V(T)\times V(P)$.  By \cref{big_lemma}, there exists some $(x,y)\in V(T)\times V(P)$ such that $|B_x\cap P_y| \ge \delta 2^{\log h}$.  Combining these latter two equations implies that $t\Delta c\ge 2^{\Omega(\sqrt{\log h})} = 2^{\Omega(\sqrt{\log\log n})}$.
 \end{proof}
 
 
 
 \section{Open Problems}
 
-We know that every planar graph $G$ is contained in a product of the form $H\boxtimes P\boxtimes K_3$ where $\tw(H)\le 3$ \cite{dujmovic.joret.ea:planar}. \cref{main_thm} states that, for any $c$, there exists a planar graph that is not contained in any product of the form $T\boxtimes P\boxtimes K_c$ where $T$ is a tree and $P$ is a path.  This leaves a few open problems:
+We know that every planar graph $G$ is contained in a product of the form $H\boxtimes P\boxtimes K_3$ where $\tw(H)\le 3$ \cite{dujmovic.joret.ea:planar}. \cref{main_thm} states that, for any $c$, there exists a planar graph that is not contained in any product of the form $T\boxtimes P\boxtimes K_c$ where $T$ is a tree and $P$ is a path.  This leaves the following open problems:
 
 \begin{enumerate}
   \item For each $\Delta\in\{3,4\}$, is every planar graph $G$ of maximum degree $\Delta$ contained in a product of the form $T\boxtimes P\boxtimes K_c$ where $T$ is a tree, $P$ is a path, and $c$ is an absolute constant?
@@ -420,7 +391,7 @@ We know that every planar graph $G$ is contained in a product of the form $H\box
   \item Is every planar graph $G$ of maximum degree $\Delta$ contained in a product of the form $H\boxtimes P\boxtimes K_c$ where the treewidth of $H$ is $2$, $P$ is path, and $c$ is some function of $\Delta$?
 \end{enumerate}
 
-\cref{two_tree} shows that $G_h$ is a subgraph of $H\boxtimes P$ where $H$ has treewidth $2$ (and is even outerplanar) and $P$ is a path. Our proof breaks down in this case because, unlike tree partitions, outerplanar partitions do not satisfy \cref{tree_thingy}.
+\cref{two_tree} shows that $G_h$ is a subgraph of $H\boxtimes P$ where $H$ has treewidth $2$ (and is even outerplanar) and $P$ is a path. Our proof breaks down in this case because, unlike tree-partitions, outerplanar partitions do not satisfy \cref{tree_thingy}.
 
 \begin{figure}
   \begin{center}
