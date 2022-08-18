@@ -156,15 +156,17 @@ As in previous works, we make use of the following relationship between $H$-part
 The following important result of \citet{ding.oporowski:some} (see also \citet{wood:on}) allows us to focus on the case where the first factor in our product is a tree.
 
 \begin{thm}[\citet{ding.oporowski:some}]\label{dingy}
-  If $H$ is a graph with maximum degree $\Delta$ and treewidth $t$,\todo{DW suggests writing "treewidth less than $t$" here, but that's not accurate. If he means "treewidth at most $t$", that seems redundant} then $H$ has a tree-partition of width at most $24\Delta t$.
+  If $H$ is a graph with maximum degree $\Delta$ and treewidth $t$,
+  % \todo{DW suggests writing "treewidth less than $t$" here, but that's not accurate. If he means "treewidth at most $t$", that seems redundant}
+  then $H$ has a tree-partition of width at most $24\Delta(t+1)$.
 \end{thm}
 
 \begin{cor}\label{ding_translation}
-  If $G\subsetcong H\boxtimes P\boxtimes K_c$ where $H$ has treewidth $t$ and maximum degree $\Delta$ then there exists a tree $T$ such that $G\subsetcong T\boxtimes P\boxtimes K_{24c\Delta t}$.
+  If $G\subsetcong H\boxtimes P\boxtimes K_c$ where $H$ has treewidth $t$ and maximum degree $\Delta$ then there exists a tree $T$ such that $G\subsetcong T\boxtimes P\boxtimes K_{24c\Delta (t+1)}$.
 \end{cor}
 
 \begin{proof}
-  By \cref{dingy}, $H$ has a tree-partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ of width at most $24\Delta t$. By \cref{partitions_vs_products}, $H \subsetcong T\boxtimes K_{24\Delta t}$.  Therefore, $G\subsetcong T\boxtimes K_{24\Delta t}\boxtimes P\boxtimes K_c \cong T\boxtimes P\boxtimes K_{24c\Delta t}$.
+  By \cref{dingy}, $H$ has a tree-partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ of width at most $24\Delta (t+1)$. By \cref{partitions_vs_products}, $H \subsetcong T\boxtimes K_{24\Delta (t+1)}$.  Therefore, $G\subsetcong T\boxtimes K_{24\Delta (t+1)}\boxtimes P\boxtimes K_c \cong T\boxtimes P\boxtimes K_{24c\Delta (t+1)}$.
 \end{proof}
 
 The \defin{length} of a path is the number of edges in it. For any two vertices $v,w\in V(G)$, $\dist_G(v,w)$ denotes the minimum length of a path in $G$ that contains $v$ and $w$, or $\dist_G(v,w):=\infty$ if $v$ and $w$ are in different connected components of $G$. For any $R\subseteq V(G)$, the \defin{diameter} of $R$ is $\diam_G(R):=\max\{\dist_G(v,w):v,w\in R\}$.
@@ -257,20 +259,20 @@ We now outline our proof strategy.  Recall \cref{partitions_vs_products} which s
 We now proceed with the details of the strategy outlined above.  The next two lemmas will be used to obtain the set $\mathcal{R}_1$ that allows us to start the argument.
 
 \begin{lem}\label{small_depth_separator}
-  For all $h\in\N$, if $S\subseteq V(G_h)$ is such that $G_h-S$ has no component with more than $|V(G_h)|/2$ vertices then, for each $i\in\{i_0,\ldots,h\}$, $S$ contains at least one vertex of depth $i$, where $i_0=\ceil{\max\{2\log|S|+2, \log(2+(h+1)|S|)-1}$.
+  Let $h\in\N$, $S\subseteq V(G_h)$, and let $i_0:=\ceil{\max\{2\log|S|+2, \log(2+(h+1)|S|)-1}$.  If $G_h-S$ has no component with more than $|V(G_h)|/2$ vertices then $S\cap V(P_i)\neq\emptyset$, for each $i\in\{i_0,\ldots,h\}$.
 \end{lem}
 
 \begin{proof}
-  Let $C$ be the vertex set of a component of $G_h-S$ that maximizes $C\cap V(P_h)$. For each $i\in\{0,\ldots,h\}$, let $C_i:=C\cap V(P_i)$ and let $S_i:=S\cap V(P_i)$. We will show that, for each $i\ge i_0$, $C_i$ is non-empty but does not contain all $2^i$ vertices in $P_i$.  Therefore $S_i\supseteq N_G(C_i)\cap V(P_i)\neq\emptyset$ for each $i\in\{\ceil{\gamma(1+h\log|S|)},\ldots,h\}$.
+  Let $C$ be the vertex set of a component of $G_h-S$ that maximizes $C\cap V(P_h)$. For each $i\in\{0,\ldots,h\}$, let $C_i:=C\cap V(P_i)$ and let $S_i:=S\cap V(P_i)$. We will show that, for each $i\ge i_0$, $C_i$ is non-empty but does not contain all $2^i$ vertices in $P_i$.  Therefore $S_i\supseteq N_G(C_i)\cap V(P_i)\neq\emptyset$ for each $i\in\{i_0,\ldots,h\}$.
 
-  For each $i\in\{0,\ldots,h-1\}$, the vertices in $C_{i+1}$ are adjacent to at least $|C_{i+1}|/2$ vertices of $P_{i}$, so $|C_i|\ge |C_{i+1}|/2 - |S_i|$.  Iterating this inequality $h-i$ times gives $|C_i|\ge |C_h|/2^{h-i}-\sum_{j=i}^{h-1}|S_j|\ge |C_h|/2^{h-i}-|S|$.  The vertices of $|S|$ partition $V(P_h)\setminus S$ into at most $|S|+1$ connected components.  Since $C$ is chosen to maximize $|C_h|$, $|C_h| \ge (2^h-|S|)/(|S|+1) > 2^{h}/(|S|+1) - 1$.  Therefore,
+  For each $i\in\{0,\ldots,h-1\}$, the vertices in $C_{i+1}$ are adjacent to at least $|C_{i+1}|/2$ vertices of $P_{i}$, so $|C_i|\ge |N_{G_h}(C_{i+1})\cap V(P_i)\setminus S_i| \ge |C_{i+1}|/2 - |S_i|$.  Iterating this inequality $h-i$ times gives $|C_i|\ge |C_h|/2^{h-i}-\sum_{j=i}^{h-1}|S_j|\ge |C_h|/2^{h-i}-|S|$.  The vertices of $|S|$ partition $V(P_h)\setminus S$ into at most $|S|+1$ connected components.  Since $C$ is chosen to maximize $|C_h|$, $|C_h| \ge (2^h-|S|)/(|S|+1) > 2^{h}/(|S|+1) - 1$.  Therefore,
   \begin{equation}
     |C_i|\ge \frac{|C_h|}{2^{h-i}} - |S| > \frac{2^h/(|S|+1)-1}{2^{h-i}} - |S|
-    \ge 2^{i-\log(|S|+1)}-|S|-1
+    \ge 2^{i-\log(|S|+1)}-|S|-1 \ge 0
   \end{equation}
-  for all $i\in\{0,\ldots,h\}$.  This establishes that $|C_i|>0$ for all $i\ge 2\log |S|+2$.
+  for $i\ge 2\log |S|+2$.
 
-  For each $i\in\{0,\ldots,h-1\}$, the vertices in $C_i$ are adjacent to at least $2|C_i|$ vertices of $P_{i+1}$, so $|C_{i+1}|\ge 2|C_i|-|S_{i+1}|$.  Iterating this $h-1$ times gives:
+  For each $i\in\{0,\ldots,h-1\}$, the vertices in $C_i$ are adjacent to at least $2|C_i|$ vertices of $P_{i+1}$, so $|C_{i+1}|\ge 2|C_i|-|S_{i+1}|$.  Iterating this $h-i$ times gives:
   \begin{equation}
     |C_h| \ge 2^{h-i}|C_i| - \sum_{j=i+1}^h 2^{h-j}|S_j| \ge 2^{h-i}|C_i| - 2^{h-i-1}|S| \enspace . \label{ch_lower_bound}
   \end{equation}
@@ -281,7 +283,7 @@ We now proceed with the details of the strategy outlined above.  The next two le
        = 2|C_h| - 1 -(h+1)|S|
        \ge 2^{h+1}-2^{h-i^*}|S|-1 - (h+1)|S| \enspace . \numberthis \label{crux}
   \end{equation}
-  However, $2^h > |V(G_h)|/2 \ge |C| \ge (\ref{crux})$.  Rearranging terms and using the fact that $i^*\le h$, shows that \cref{crux} can only be satisified when $i^* < \log((h+2)|S|)$.  Therefore, $|C_i|< 2^i$ for all $i \ge \log((h+2)|S|)$. \qedhere
+  However, $2^h > |V(G_h)|/2 \ge |C| \ge (\ref{crux})$.  Rearranging terms and using the fact that $i^*\le h$, shows that the inequality $2^h > (\ref{crux})$ can only be satisified when $i^* < \log((h+2)|S|)$.  Therefore, $|C_i|< 2^i$ for all $i \ge \log((h+2)|S|)$. \qedhere
   %
   %     \frac{2^h-2^{h-i^*-1}|S|}{2^{h-i}} - |S|
   % \]
@@ -342,9 +344,9 @@ The following lemma shows that any tree-partition of $G_h$ must have a part with
 
 
 \begin{proof}
-  It is well-known and easy to show that there exists a node $x$ of $T$ such that $G-B_x$ has no component with more than $|V(G_h)|/2$ vertices. Let $Y$ be the set of vertices in $B_x$ that have height at least $h/4$.  By \cref{small_depth_separator}, $|Y|\ge 3h/4 - O(\log (ch+1))$.
+  It is well-known and easy to show that there exists a node $x$ of $T$ such that $G-B_x$ has no component with more than $|V(G_h)|/2$ vertices \cite[(2.6)]{robertson.seymour:graph}. Let $Y$ be the set of vertices in $B_x$ that have height at least $h/4$.  By \cref{small_depth_separator}, $|Y|\ge 3h/4 - O(\log (ch+1))$.
 
-  Let $T_Y$ be the minimal (connected) subtree of $T_h$ that spans $Y$, and let $L$ the set of leaves of $T_Y$.  Observe that $L\subseteq Y$ is an unrelated set. Therefore, $L$ satisfies (i) and, by definition, each vertex in $L$ has height at least $h/4 > \alpha h$, so $L$ satisfies (iii).  If $|L|\ge \alpha h \ge \alpha h/c$ then $L$ also satisfies (ii).  In this case, we can take $R:=L$ and we are done.  We now assume that $|L|< \alpha h$.
+  Let $T_Y$ be the minimal (connected) subtree of $T_h$ that spans $Y$, and let $L$ be the set of leaves of $T_Y$.  Observe that $L\subseteq Y$ is an unrelated set. Therefore, $L$ satisfies (i) and, by definition, each vertex in $L$ has height at least $h/4 > \alpha h$, so $L$ satisfies (iii).  If $|L|\ge \alpha h \ge \alpha h/c$ then $L$ also satisfies (ii).  In this case, we can take $R:=L$ and we are done.  We now assume that $|L|< \alpha h$.
 
   Let $Z$ consist of all vertices in $V(T_h)\setminus V(T_Y)$ whose parents are in $Y\setminus L$.   Observe that $Z$ is a unrelated set of vertices each having height at least $h/4$. For each $v$ of $T_Y$, let $d_v$ denote the number of children of $v$ in $T_Y$.  Then,
   \[
@@ -364,7 +366,13 @@ The following lemma shows that any tree-partition of $G_h$ must have a part with
     % = (3/4-2\alpha)h - O(\log(ch+1))
     \ge h/4-O(\log(ch+1)) \enspace .
   \]
-  Refer to \cref{paths}.  For each $r\in Z$, \cref{one_path} implies that $r$ has a descendant $v$ whose parent is in $B_x$, that has height at least at least $h/4-O(\log(ch+1))$ and such that $T_h-B_x$ contains a path $P_{v}$ from $v$ to a leaf of $T_h$.  Form the set $Z'$ by replacing each vertex $r\in Z$ with the vertex $v$ just described.  Again, $Z'$ is a unrelated set.  Since $\alpha < 1/4$, for sufficiently large $h$, $|Z'|\ge h/4 - O(\log(ch+1)) \ge \alpha h$ and each vertex in $Z$ has height at least $h/4 - O(\log(ch+1)) \ge \alpha h$.
+  Refer to \cref{paths}.  For each $r\in Z$, \cref{one_path} implies that $r$ has a descendant $v$ such that
+  \begin{inparaenum}[(a)]
+    \item the parent of $v$ is in $B_x$;
+    \item the height of $v$ is at least $h/4-O(\log(ch+1))$; and
+    \item $T_h-B_x$ contains a path $P_{v}$ from $v$ to a leaf of $T_h$.
+  \end{inparaenum}
+  Form the set $Z'$ by replacing each vertex $r\in Z$ with the vertex $v$ just described.  Since $Z$ is an unrelated set and $Z'$ is obtained by replacing each vertex in $Z$ with one of its descendants, $Z'$ is an unrelated set.  Since $\alpha < 1/4$, for sufficiently large $h$, $|Z'|\ge h/4 - O(\log(ch+1)) \ge \alpha h$ and each vertex in $Z$ has height at least $h/4 - O(\log(ch+1)) \ge \alpha h$.
 
   \begin{figure}
     \begin{center}
@@ -374,7 +382,7 @@ The following lemma shows that any tree-partition of $G_h$ must have a part with
     \label{paths}
   \end{figure}
 
-  Now observe that the union of the paths in  $\{P_{v}:v\in Z'\}$ and the paths $P_{h-\lceil\alpha h\rceil+1},\ldots,P_{h}$ contains a subgraph $G'$ isomorphic to a graph that can be obtained from the grid $G_{\lceil \alpha h\rceil\times\lceil \alpha h\rceil}$ by subdividing horizontal edges.  Since $S$ does not contain any vertex of $P_{v}$ for any $v\in Z'$,  $S\cap V(G')$ contains only vertices corresponding to subdivision vertices.  Therefore, by \cref{grid_connectivity}, some component of $G-B_x$ contains a subset $R\subseteq Z'$ of size at least $\alpha h/c$.  Each element in $R$ has a parent in $B_x$ so, by \cref{tree_thingy} some neighbour $y$ of $x$ in $T$ has a bag $B_y$ that contains all of $R$.  This completes the proof.
+  Now observe that the union of the paths in  $\{P_{v}:v\in Z'\}$ and the paths $P_{h-\lceil\alpha h\rceil+1},\ldots,P_{h}$ contains a subgraph $G'$ isomorphic to a graph that can be obtained from the grid $G_{\lceil \alpha h\rceil\times\lceil \alpha h\rceil}$ by subdividing horizontal edges.  Since $S$ does not contain any vertex of $P_{v}$ for any $v\in Z'$,  $S\cap V(G')$ contains only vertices corresponding to subdivision vertices.  Therefore, by \cref{grid_connectivity}, some component of $G-B_x$ contains a subset $R\subseteq Z'$ of size at least $\alpha h/c$.  Each element in $R$ has a parent in $B_x$.  By \cref{tree_thingy} some neighbour $y$ of $x$ in $T$ has a bag $B_y$ that contains all of $R$.  This completes the proof.
 \end{proof}
 
 
@@ -407,7 +415,7 @@ The next lemma is the last ingredient in the proof of \cref{main_thm}.
 
   By \cref{startup}, $T$ contains a node $x_1$ such that $B_{x_1}$ contains a unrelated set $R$ of size $q_1:=|R|\ge \alpha h/c$ where each vertex in $R$ has height at least $m:=m_1:=\alpha h$.  Let  $\mathcal{R}_1':=\{\{v\}:v\in R\}$.  By definition $\mathcal{R}_1'$ is a $(1,0,m)$-compact set.
 
-  By \cref{compatible_set} (applied to $\mathcal{R}_1'$ and $B_{x_1}$), $T_h$ contains a $(2,\log_2(ch)+2,m)$-compact set $\mathcal{R}_1$ of size $q_1$ that is compatible with $B_{x_1}$.  Let $m_2:=m_1-\lfloor\log_2(ch)\rfloor -2$.  For each $v\in\cup\mathcal{R}_1$, $T_h-B_{x_1}$ contains a path $P_v$ from $v$ to a leaf of $T_h$.  The union of the paths in $P_{h-m_2+1},\ldots,P_{h}$ and the paths in $\mathcal{C}_1:=\{P_v:v\in\cup\mathcal{R}_1\}$ contains a subgraph isomorphic to a graph that can be obtained from $G_{2q_1\times m_2}$ by subdividing horizontal edges.  Therefore, by \cref{grid_connectivity}, some component of $G-S_1$ contains at least $2q_1m_2/ch$ of the paths in $\mathcal{C}_1$.  Furthermore, these paths are consecutive in the left-to-right ordering of $\mathcal{C}_1$.  This implies that there is a subset $\mathcal{R}_2'\subseteq \mathcal{R}_1$ of size $q_2\ge \lfloor(2q_1m_2/ch-1)/2\rfloor$ that is contained in a single component of $G-B_{x_1}$. By \cref{tree_thingy}, there is a neighbour $x_2$ of $x_1$ in $T$ with $\cup\mathcal{R}_2'\subsetcong B_{x_2}$.
+  By \cref{compatible_set} (applied to $\mathcal{R}_1'$ and $B_{x_1}$), $T_h$ contains a $(2,\log_2(ch)+2,m)$-compact set $\mathcal{R}_1$ of size $q_1$ that is compatible with $B_{x_1}$.  Let $m_2:=m_1-\lfloor\log_2(ch)\rfloor -2$.  For each $v\in\cup\mathcal{R}_1$, $T_h-B_{x_1}$ contains a path $P_v$ from $v$ to a leaf of $T_h$.  The union of the paths in $P_{h-m_2+1},\ldots,P_{h}$ and the paths in $\mathcal{C}_1:=\{P_v:v\in\cup\mathcal{R}_1\}$ contains a subgraph isomorphic to a graph that can be obtained from $G_{2q_1\times m_2}$ by subdividing horizontal edges.  Therefore, by \cref{grid_connectivity}, some component of $G-B_{x_1}$ contains at least $2q_1m_2/ch$ of the paths in $\mathcal{C}_1$.  Furthermore, these paths are consecutive in the left-to-right ordering of $\mathcal{C}_1$.  This implies that there is a subset $\mathcal{R}_2'\subseteq \mathcal{R}_1$ of size $q_2\ge \lfloor(2q_1m_2/ch-1)/2\rfloor$ that is contained in a single component of $G-B_{x_1}$. By \cref{tree_thingy}, there is a neighbour $x_2$ of $x_1$ in $T$ with $\cup\mathcal{R}_2'\subsetcong B_{x_2}$.
 
   The bound on the size $q_2$ of $\mathcal{R}_2'$ is awkward, so we simplify it as follows:
   \[
@@ -416,13 +424,13 @@ The next lemma is the last ingredient in the proof of \cref{main_thm}.
   \]
   provided that $m_2 \ge\alpha h/2$.  This latter condition is true for any fixed $\alpha$ and all sufficiently large $h$, since $m_2 = m_1 - O(\log h) \ge \alpha h - O(\log h)$.
 
-  We can now iterate this process of obtaining $\mathcal{R}_{i+1}'\subseteq B_{x_{i+1}}$ from $\mathcal{R}_i'\subseteq B_{x_i}$. Let $t:= \lfloor \min\{\log_{2c/\alpha} q_1-2,\alpha h/(2\log_2(ch)+4)-2\}\rfloor$.\footnote{The second term in the definition of $t$ ensures that $q_{i+1}\ge \alpha q_i/2c-1$ for each $i\in\{1,\ldots,t\}$.}   Then after $t$ such iterations we obtain a $(2^t,t(\log_2(ch)+2),r_1)$-compact set $\mathcal{R}_{t+1}'\subseteq B_{x_t}$ of size at least $q_{t+1} \ge q_1(\alpha/2c)^t-2 \ge 1$.\footnote{$q_{t+1} \ge q_t(\alpha/2c) - 1 \ge q_1(\alpha/2c)^t - \sum_{i=0}^t (\alpha/2c)^i \ge q_1(\alpha/2c)^t - 2$ for $c\ge 1$}
+  We can now iterate this process of obtaining $\mathcal{R}_{i+1}'\subseteq B_{x_{i+1}}$ from $\mathcal{R}_i'\subseteq B_{x_i}$. Let $t:= \lfloor \min\{\log_{2c/\alpha} q_1-2,\alpha h/(2\log_2(ch)+4)-2\}\rfloor$.\footnote{The second term in the definition of $t$ ensures that $q_{i+1}\ge \alpha q_i/2c-1$ for each $i\in\{1,\ldots,t\}$.}\todo{$t$ is a bad choice of notation here. Pick something else.}   Then after $t$ such iterations we obtain a $(2^t,t(\log_2(ch)+2),r_1)$-compact set $\mathcal{R}_{t+1}'\subseteq B_{x_t}$ of size at least $q_{t+1} \ge q_1(\alpha/2c)^t-2 \ge 1$.\footnote{$q_{t+1} \ge q_t(\alpha/2c) - 1 \ge q_1(\alpha/2c)^t - \sum_{i=0}^t (\alpha/2c)^i \ge q_1(\alpha/2c)^t - 2$ for $c\ge 1$}
 
   Let $R$ be one of the sets in $\mathcal{R}_{t+1}'$.  Since $\mathcal{R}_{t+1}'$ is $(2^t,t(\log_2(ch)+2),m)$-compact, $|R|\ge 2^t$ and all vertices in $R$ have a common ancestor $a$ whose distance to each element of $R$ is at most $t(\log_2(ch)+2)$.  Therefore, $\diam_{G_h}(R)\le\diam_{T_h}(R)\le 2t(\log_2(ch)+2)$. By \cref{diameter_spread}, there exists some $P_y\in\mathcal{P}$ with
   \begin{align*}
     |B_{x_t}\cap P_y|
     & \ge |R\cap P_y| \\
-    & \ge \frac{|R|}{\diam_{T_h}(R)} \\
+    & \ge \frac{|R|}{\diam_{G_h}(R)+1} \\
     & \ge \frac{2^t}{2t(\log_2(ch)+2)+1} \\
     & = \frac{2^{\Omega(\log_{c} h)}}{O(\log^2 h)} \\
     & = \frac{2^{\Omega(\sqrt{\log h})}}{O(\log^2 h)} \\
@@ -433,7 +441,7 @@ The next lemma is the last ingredient in the proof of \cref{main_thm}.
 
 
 \begin{proof}[Proof of \cref{main_thm}]
-  Let $n:=|V(G_h)|=2^{h+1}-1$.  Suppose that $G_h\subsetcong H\boxtimes P\boxtimes K_c$ for some graph $H$ of treewidth $t$ and maximum degree $\Delta$, some path $P$ and some integer $c$.  Then, by \cref{dingy,partitions_vs_products}, $G\subsetcong T\boxtimes P\boxtimes K_{24t\Delta c}$ for some tree $T$.  By \cref{partitions_vs_products}, $G$ has a $T$-partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ and a path-partition $\mathcal{P}:=\{P_y:y\in V(P)\}$ such that $|B_x\cap P_y|\le 24t\Delta c$ for each $(x,y)\in V(T)\times V(P)$.  By \cref{big_lemma}, there exists some $(x,y)\in V(T)\times V(P)$ such that $|B_x\cap P_y| \ge \delta 2^{\log h}$.  Combining these latter two equations implies that $t\Delta c\ge 2^{\Omega(\sqrt{\log h})} = 2^{\Omega(\sqrt{\log\log n})}$.
+  Let $n:=|V(G_h)|=2^{h+1}-1$.  Suppose that $G_h\subsetcong H\boxtimes P\boxtimes K_c$ for some graph $H$ of treewidth $t$ and maximum degree $\Delta$, some path $P$ and some integer $c$.  Then, by \cref{dingy,partitions_vs_products}, $G\subsetcong T\boxtimes P\boxtimes K_{24 c \Delta (t+1)}$ for some tree $T$.  By \cref{partitions_vs_products}, $G$ has a $T$-partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ and a path-partition $\mathcal{P}:=\{P_y:y\in V(P)\}$ such that $|B_x\cap P_y|\le 24 c \Delta (t+1)$ for each $(x,y)\in V(T)\times V(P)$.  By \cref{big_lemma}, there exists some fixed $\delta>0$ such that, for some $(x,y)\in V(T)\times V(P)$, $|B_x\cap P_y| \ge \delta 2^{\log h}$.  Combining these latter two equations implies that $c\Delta(t+1)\ge 2^{\Omega(\sqrt{\log h})} = 2^{\Omega(\sqrt{\log\log n})}$.
 \end{proof}
 
 
@@ -461,7 +469,7 @@ We know that every planar graph $G$ is contained in a product of the form $H\box
   \label{two_tree}
 \end{figure}
 
-\todo[inline]{DW asks why arxiv identifiers appear twice. Each paper has standard bibliographic information followed by one or more hyperlinks.}
+% \todo[inline]{DW asks why arxiv identifiers appear twice. Each paper has standard bibliographic information followed by one or more hyperlinks.}
 
 \bibliographystyle{plainurlnat}
 \bibliography{tp}
