@@ -76,11 +76,12 @@
 \renewcommand{\le}{\leqslant}
 \renewcommand{\ge}{\geqslant}
 
-\title{\MakeUppercase{Bad News for Product Structure of Bounded-Degree Graphs}}
+\title{\MakeUppercase{Bad News for Product Structure \newline of Bounded-Degree Planar Graphs}}
 
 \author{%
   Vida Dujmović\thanks{Department of Computer Science and Electrical Engineering, University of Ottawa, Ottawa, Canada.}\, \thanks{Research partly supported by NSERC.} \quad
-  Gwenaël Joret\thanks{D\'epartement d'Informatique, Universit\'e Libre de Bruxelles, Brussels, Belgium.} \quad
+  Gwenaël Joret\thanks{D\'epartement d'Informatique, Universit\'e Libre de Bruxelles, Brussels, Belgium.
+  Supported by a CDR grant and a PDR grant from the Belgian National Fund for Scientific Research (FNRS).} \quad
   Piotr Micek\thanks{Theoretical Computer Science Department, Faculty of Mathematics and Computer Science, Jagiellonian University, Krak\'ow, Poland.}\quad
   Pat Morin\thanks{School of Computer Science, Carleton University, Ottawa, Canada}\, \footnotemark[2] \quad
   David R. Wood\thanks{School of Mathematics, Monash University, Melbourne, Australia.
@@ -96,7 +97,7 @@
 
 
 \begin{abstract}
-  We describe an infinite family $\mathcal{G}$ of planar graphs of maximum degree $5$ such that, if an $n$-vertex member of $\mathcal{G}$ is a subgraph of the strong product of a graph $H$ of treewidth $t$ and maximum degree $\Delta$, a path $P$ and a clique $K$ of order $c$, then $t\Delta c \ge 2^{\Omega(\sqrt{\log\log n})}$.
+   Planar Product Structure Theorems are a collection of recent results that have been used to resolve a number of longstanding open problems on planar graphs.  One particularly useful version states that any planar graph $G$ is contained in the strong product of a $3$-tree $H$, a path $P$, and a $3$-cycle $K_3$; written as $G\subsetcong H\boxtimes P\boxtimes K_3$.  A number of researchers have asked if this theorem can be strengthened so that the maximum degree in $H$ can be bounded by a function of the maximum degree in $G$.  In this note we show that no such strengthening is possible.  Specifically, we describe an infinite family $\mathcal{G}$ of planar graphs of maximum degree $5$ such that, if an $n$-vertex member $G$ of $\mathcal{G}$ is isomorphic to a subgraph of $H\boxtimes P\boxtimes K_c$ where $H$ is a maximum degree $\Delta$ graph of treewidth $t$ and $P$ is a path, then $t\Delta c \ge 2^{\Omega(\sqrt{\log\log n})}$.
 \end{abstract}
 
 \section{Introduction}
@@ -115,11 +116,11 @@ The \defin{width} of such a tree decomposition is $\max\{|B_x|:x\in V(T)\}-1$. T
 }
 This is typically written as $G\subsetcong H\boxtimes P\boxtimes K_c$, where the notation $G_1\subsetcong G_2$ is used to mean that $G_1$ is isomorphic to some subgraph of $G_2$.  See references \cite{dujmovic.joret.ea:planar,dujmovic.morin.ea:structure,krauthgamer.lee:intrinsic,ueckerdt.wood.ea:improved,bose.morin.ea:optimal,campbell.clinch.ea:product,illingworth.scott.ea:alon,distel.hickingbotham.ea:improved} for examples.
 
-In some applications of product structure theorems, it is helpful if, in addition to having treewidth $t$, the graph $H$ has additional properties, possibly inherited from $G$.  For example, one very useful version of the planar graph product structure theorem states that for every planar graph $G$ there exists a \emph{planar} graph $H$ of treewidth $3$ and a path $P$ such that $G\subsetcong H\boxtimes P\boxtimes K_3$.  The planarity of $H$ in this result has been leveraged to obtain better constants and even asymptotic improvements for graph colouring and layout problems, including queue number \cite{dujmovic.joret.ea:planar}, $p$-centered colouring \cite{debski.felsner.ea:improved}, and $\ell$-vertex ranking \cite{bose.dujmovic.ea:asymptotically}.
+In some applications of product structure theorems, it is helpful if, in addition to having treewidth $t$, the graph $H$ has additional properties, possibly inherited from $G$.  For example, one very useful version of the planar graph product structure theorem states that for every planar graph $G$ there exists a \emph{planar} graph $H$ of treewidth $3$ and a path $P$ such that $G\subsetcong H\boxtimes P\boxtimes K_3$ \cite[Threorem~36(b)]{dujmovic.joret.ea:planar}.  The planarity of $H$ in this result has been leveraged to obtain better constants and even asymptotic improvements for graph colouring and layout problems, including queue number \cite{dujmovic.joret.ea:planar}, $p$-centered colouring \cite{debski.felsner.ea:improved}, and $\ell$-vertex ranking \cite{bose.dujmovic.ea:asymptotically}.
 
 In this vein, the authors have been repeatedly asked the following question, which asks if $H$ can have bounded degree whenever $G$ does:
 \begin{quote}
-  Let $\mathcal{G}_\Delta$ be the family of planar graphs of maximum degree $\Delta$.  Do there exist functions $t:\N\to\N$, $d:\N\to\N$, and $c:\N\to\N$ such that, for each $G\in\mathcal{G}_\Delta$ there exists a graph $H$ of treewidth $t(\Delta)$ and maximum degree $d(\Delta)$ such that $G\subsetcong H\boxtimes P\boxtimes K_{c(\Delta)}$?
+  Let $\mathcal{G}_\Delta$ be the family of planar graphs of maximum degree $\Delta$.  Do there exist functions $t:\N\to\N$, $d:\N\to\N$, and $c:\N\to\N$ such that, for each $G\in\mathcal{G}_\Delta$ there exists a graph $H$ of treewidth at most $t(\Delta)$ and maximum degree $d(\Delta)$ such that $G\subsetcong H\boxtimes P\boxtimes K_{c(\Delta)}$?
 \end{quote}
 In this note we show that the answer to this question is no, even when $\Delta=5$.
 
@@ -145,7 +146,7 @@ Throughout this paper, all graphs $G$ are simple and undirected with vertex set 
 
 Let $G$ and $H$ be graphs.  An \defin{$H$-partition} $\mathcal{H}:=\{B_x:x\in V(H)\}$ of $G$ is a partition of $V(G)$ whose parts are indexed by the vertices of $H$ with the property that, if $vw$ is an edge of $G$ with $v\in B_x$ and $w\in B_y$ then $x=y$ or $xy\in E(H)$.  The \defin{width} of $\mathcal{H}$ is the size of its largest part; that is, $\max\{|B_x|:x\in V(H)\}$.
 
-If $H$ is in a class $\mathcal{G}$ of graphs then we may call $\mathcal{H}$ a $\mathcal{G}$-partition of $G$.  Specifically, if $H$ is a tree, then $\mathcal{H}$ is a \defin{tree-partition} of $G$ and if $\mathcal{H}$ is a path, then $\mathcal{H}$ is a \defin{path-partition} of $G$.  A path-partition $\mathcal{P}:=\{P_x:x\in V(P)\}$ of $G$ is also referred to as a \defin{layering} of $G$ and the parts of $\mathcal{P}$ are referred to as \defin{layers}.  A set of layers $\{P_{x_1},\ldots,P_{x_q}\}\subseteq\mathcal{P}$ is \defin{consecutive} if $P[\{x_1,\ldots,x_q\}]$ is connected.
+If $H$ is in a class $\mathcal{G}$ of graphs then we may call $\mathcal{H}$ a $\mathcal{G}$-partition of $G$.  Specifically, if $H$ is a tree, then $\mathcal{H}$ is a \defin{tree-partition} of $G$ and if $H$ is a path, then $\mathcal{H}$ is a \defin{path-partition} of $G$.  A path-partition $\mathcal{P}:=\{P_x:x\in V(P)\}$ of $G$ is also referred to as a \defin{layering} of $G$ and the parts of $\mathcal{P}$ are referred to as \defin{layers}.  A set of layers $\{P_{x_1},\ldots,P_{x_q}\}\subseteq\mathcal{P}$ is \defin{consecutive} if $P[\{x_1,\ldots,x_q\}]$ is connected.
 
 As in previous works, we make use of the following relationship between $H$-partitions and strong products, which follows immediately from the preceding definitions.
 
@@ -193,7 +194,9 @@ We also make use of the following basic fact about tree-partitions:
 \subsection{Percolation in Binary Trees}
 
 
-The \defin{depth} of a vertex $v$ in a rooted tree $T$ is the length of the path $P_T(v)$ from $v$ to the root of $T$.  Each vertex $a\in V(P_T(w))$ is an \defin{ancestor} of $v$, and $v$ is a \defin{descendant} of each vertex in $V(P_T(w))$.  We say that a set $B\subset V(T)$ is \defin{unrelated} if no vertex of $B$ is an ancestor of any other vertex in $B$.  For each $h\in\N$, let $T_h$ denote the complete binary tree of height $h$; i.e., the rooted ordered tree with $2^h$ leaves, each having depth $h$ and in which each non-leaf vertex has exactly two children.  Note that the ordering of $T_h$ induces an ordering on any unrelated set $B\subseteq V(T_h)$, which we refer to as the \defin{left-to-right ordering}.
+The \defin{depth} of a vertex $v$ in a rooted tree $T$ is the length of the path $P_T(v)$ from $v$ to the root of $T$.  Each vertex $a\in V(P_T(w))$ is an \defin{ancestor} of $v$, and $v$ is a \defin{descendant} of each vertex in $V(P_T(w))$.  We say that a set $B\subseteq V(T)$ is \defin{unrelated} if no vertex of $B$ is an ancestor of any other vertex in $B$.
+
+For each $h\in\N$, let $T_h$ denote the complete binary tree of height $h$ with root $r$; i.e., the rooted ordered tree with $2^h$ leaves, each having depth $h$ and in which each non-leaf vertex has exactly two children, one \defin{left child} and one \defin{right child}.  Note that the ordering of $T_h$ induces an ordering on any unrelated set $B\subseteq V(T_h)$, which we refer to as the \defin{left-to-right ordering}.  Specifically, $v$ appears before $w$ in the left-to-right ordering of $B$ if and only there exists a common ancestor $a$ of both $v$ and $w$ such that the path from $a$ to $v$ contains the left child of $a$ and the path from $a$ to $w$ contains the right child of $a$.
 
 We use the following two percolation-type results for $T_h$.
 
@@ -211,7 +214,9 @@ We use the following two percolation-type results for $T_h$.
 \begin{proof}
   The proof is by induction on $h$.  When $h=1$, $|S|\le 1$. In particular, at least one child $v$ of $r$ is not in $S$.  The depth of $v$ is $1\le \log_2|S|+1$, so $v$ satisfies (i).  The parent of $v$ is $r\in S\cup\{r\}$, so $v$ satisifies (ii).  $T_1-S$ contains a length-$0$ path from $v$ to itself (a leaf of $T_1$), so $v$ satisfies (iii).
 
-  For $h\ge 2$, let $\ell$ be the maximum integer such that $S\cup\{r\}$ contains all $2^\ell$ vertices of depth $\ell$.  Observe that $2^\ell \le |S|$, so $\ell \le \log_2 |S| < h$.  Let $L$ be the set of $2^{\ell+1}$ depth-$(\ell+1)$ vertices in $T_h$.  By the Pigeonhole Principle some vertex $r'\in L$ is the root of a complete binary tree $T'$ with root $r'$ of height $h-\ell$ with $|S\cap V(T')| \le |S|/2^{\ell+1} < 2^{h-\ell+1}$.  Applying induction on $T'$ and $S':=S\cap V(T')$ we obtain a vertex $v'$ of depth at most $\ell+1+\log_2(|S'|)+1 \le \log_2|S|+1$ whose parent is in $S\cup\{r'\}$, and such that $T_h-S$ contains a path from $v'$ to a leaf of $T_h$.  Thus $v'$ satisfies requirements (i) and (iii).  If the parent of $v'$ is in $S$ then $v'$ also satisfies requirement (ii) and the lemma is proven, with $v:=v'$.  Otherwise, the parent of $v'$ is $r'$, in which case $r'$ satisfies requirements (i)--(iii) and we are done, with $v:=r'$.
+  For $h\ge 2$, let $\ell$ be the maximum integer such that $S\cup\{r\}$ contains all $2^\ell$ vertices of depth $\ell$.  Observe that $2^\ell \le |S|$, so $\ell \le \log_2 |S| < h$.  Let $L$ be the set of $2^{\ell+1}$ depth-$(\ell+1)$ vertices in $T_h$.  By the Pigeonhole Principle some vertex $r'\in L$ is the root of a complete binary tree $T'$ with root $r'$ of height $h-\ell-1$ with $|S\cap V(T')| \le |S|/2^{\ell+1} < 2^{h-\ell-1}$.
+
+  If $V(T')\cap S=\emptyset$ then setting $v:=r'$ satisfies the requirements of the lemma.  Otherwise, by applying induction on $T'$ and $S':=S\cap V(T')$ we obtain a vertex $v'$ of depth at most $\ell+1+\log_2(|S'|)+1 \le \log_2|S|+1$ whose parent is in $S\cup\{r'\}$, and such that $T_h-S$ contains a path from $v'$ to a leaf of $T_h$.  Thus $v'$ satisfies requirements (i) and (iii).  If the parent of $v'$ is in $S$ then $v'$ also satisfies requirement (ii) and the lemma is proven, with $v:=v'$.  Otherwise, the parent of $v'$ is $r'$, in which case $r'$ satisfies requirements (i)--(iii) and we are done, with $v:=r'$.
 \end{proof}
 
 \begin{lem}\label{two_paths}
@@ -231,15 +236,15 @@ We use the following two percolation-type results for $T_h$.
 
 \subsection{A Connectivity Lemma}
 
-The \defin{$x\times y$ grid} $G_{x\times y}$ is the graph with vertex set $V(G_{x\times y}):=\{1,\ldots,x\}\times\{1,\ldots,y\}$ and that contains an edge with endpoints $(x_1,y_1)$ and $(x_2,y_2)$ if and only if $|x_1-x_1|+|y_1-y_2|=1$.  An edge of $G_{x\times y}$ is \defin{horizontal} if its two endpoints agree in the second (y) coordinate.  For each $i\in\{1,\ldots,x\}$, the vertex set $\{i\}\times\{1,\ldots,y\}$ is called \defin{column $i$} of $G_{x\times y}$.  A set $C$ of columns is \defin{consecutive} if $G_{x\times y}[\cup C]$ is connected.
+The \defin{$x\times y$ grid} $G_{x\times y}$ is the graph with vertex set $V(G_{x\times y}):=\{1,\ldots,x\}\times\{1,\ldots,y\}$ and that contains an edge with endpoints $(x_1,y_1)$ and $(x_2,y_2)$ if and only if $|x_1-x_2|+|y_1-y_2|=1$.  An edge of $G_{x\times y}$ is \defin{horizontal} if its two endpoints agree in the second (y) coordinate.  For each $i\in\{1,\ldots,x\}$, the vertex set $\{i\}\times\{1,\ldots,y\}$ is called \defin{column $i$} of $G_{x\times y}$.  A set $C$ of columns is \defin{consecutive} if $G_{x\times y}[\cup C]$ is connected.
 
 
 \begin{lem}\label{grid_connectivity}
-  Let $x,y,p\ge 1$ be integers, let $G$ be a graph obtained by subdividing horizontal edges of $G_{x\times y}$, and let $S\subsetcong V(G)\setminus V(G_{x\times y})$ be a set of subdivision vertices of size $|S|< py$.  Then some component of $G-S$ contains at least $x/p$ consecutive columns of $G_{x\times y}$.
+  Let $x,y,p\ge 1$ be integers, let $G$ be a graph obtained by subdividing horizontal edges of $G_{x\times y}$, and let $S\subseteq V(G)\setminus V(G_{x\times y})$ be a set of subdivision vertices of size $|S|< py$.  Then some component of $G-S$ contains at least $x/p$ consecutive columns of $G_{x\times y}$.
 \end{lem}
 
 \begin{proof}
-  For each $i\in\{1,\ldots,x-1\}$, in order to separate column $i$ from column $i+1$, $S$ must contain at least $y$ subdivision vertices on the horizontal edges between columns $i$ and $i+1$.  Since $|S|< py$, this implies that there are at most $p-1$ values of $i\in\{1,\ldots,x-1\}$ for which columns $i$ and $i+1$ are in different components of $G-S$. These at most $p-1$ values of $i$ partition $\{1,\ldots,x\}$ into at most $p$ intervals, one of which contains at least $x/p$ consecutive columns that are contained in a single component of $G-S$.
+  For each $i\in\{1,\ldots,x-1\}$, in order to separate column $i$ from column $i+1$, $S$ must contain at least $y$ subdivision vertices on the horizontal edges between columns $i$ and $i+1$.  Since $|S|< py$, this implies that there are at most $p-1$ values of $i\in\{1,\ldots,x-1\}$ for which columns $i$ and $i+1$ are in different components of $G-S$. These at most $p-1$ values of $i$ partition $\{1,\ldots,x\}$ into at most $p$ intervals, at least one of which contains at least $x/p$ consecutive columns that are contained in a single component of $G-S$.
 \end{proof}
 
 \subsection{The Proof}
@@ -254,18 +259,18 @@ We are now ready to show that for any tree $T$ and any path $P$, if $G_{h}\subse
 
 % \todo[inline]{This is probably the place to write a proof outline.}
 
-We now outline our proof strategy.  Recall \cref{partitions_vs_products} which states that if $G_h\subsetcong T\boxtimes P\boxtimes K_c$ then $G_h$ has a tree-partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ and a path-partition (i.e., layering) $\mathcal{P}:=\{P_y:y\in V(P)\}$ with $|B_x\cap P_y|\le c$ for each $(x,y)\in V(T)\times V(P)$. Our strategy is to first show that $\mathcal{T}$ has some part $B_{x_1}$ that contains an unrelated set $\mathcal{R}_1$ of small depth and size at least $\alpha h$ for some constant $\alpha >0$.  Next we show that $x_1$ has a neighbour $x_2$ that contains an unrelated set $\mathcal{R}_2$ that is smaller than $\mathcal{R}_1$ by a factor of at most $b/2$ (for some small $b>2$), but whose elements can be paired off so that each pair has a common ancestor in $R_1$ that is of distance at most $a$ from both vertices in the pair (for some small $a>0$).  By iterating this argument $t$ times, we obtain a sequence of unrelated sets $\mathcal{R}_1,\ldots,\mathcal{R}_{t+1}$ where the elements in each $\mathcal{R}_i$ are partitioned into groups of size $2^{i-1}$ so that each group $R$ has a common ancestor in $\mathcal{R}_1$ that is of distance at most $a(i-1)$ from all elements in $R$.  Therefore $\mathcal{R}_{t+1}\subseteq B_{x_{t+1}}$ contains an unrelated set of size $2^{t}$ whose diameter is at most $2at$.  \cref{diameter_spread} then implies that $|B_{x_{t+1}}\cap P_y|\ge 2^{t}/2at$ for some $y\in V(P)$.  By choosing  $t\approx\log_b |R_1|\ge \log_{b}(\alpha h)$, this implies that $c\ge |B_{x_{t+1}}\cap P_y|\gtrapprox 2^{\log_{b}(\alpha h)}/2a(\log_{b}(\alpha h))=h^{\alpha/\log b-o(1)}$.
+We now outline our proof strategy.  Recall \cref{partitions_vs_products} which states that if $G_h\subsetcong T\boxtimes P\boxtimes K_c$ then $G_h$ has a tree-partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ and a path-partition (i.e., layering) $\mathcal{P}:=\{P_y:y\in V(P)\}$ with $|B_x\cap P_y|\le c$ for each $(x,y)\in V(T)\times V(P)$. Our strategy is to first show that $\mathcal{T}$ has some part $B_{x_1}$ that contains an unrelated set $\mathcal{R}_1$ of small depth and size at least $\alpha h$ for some constant $\alpha >0$.  Next we show that $x_1$ has a neighbour $x_2$ such that $B_{x_2}$ contains an unrelated set $\mathcal{R}_2$ that is smaller than $\mathcal{R}_1$ by a factor of at most $b/2$ (for some small $b>2$), but whose elements can be paired off so that each pair has a common ancestor in $\mathcal{R}_1$ that is at distance at most $a$ from both vertices in the pair (for some small $a>0$).  By iterating this argument $t$ times, we obtain a sequence of unrelated sets $\mathcal{R}_1,\ldots,\mathcal{R}_{t+1}$ where the elements in each $\mathcal{R}_i$ are partitioned into parts of size $2^{i-1}$ so that each part $R$ has a common ancestor in $\mathcal{R}_1$ that is at distance at most $a(i-1)$ from all elements in $R$.\todo{$R$ is a part in the partition of $\mathcal{R}_i$}  Therefore $\mathcal{R}_{t+1}\subseteq B_{x_{t+1}}$ contains an unrelated set of size $2^{t}$ whose diameter is at most $2at$.  \cref{diameter_spread} then implies that $|B_{x_{t+1}}\cap P_y|\ge 2^{t}/2at$ for some $y\in V(P)$.  By choosing  $t\approx\log_b |R_1|\ge \log_{b}(\alpha h)$, this implies that $c\ge |B_{x_{t+1}}\cap P_y|\gtrapprox 2^{\log_{b}(\alpha h)}/2a(\log_{b}(\alpha h))=h^{\alpha/\log b-o(1)}$.\todo{Verify that this last sentence still agrees with the current proof.}
 
 We now proceed with the details of the strategy outlined above.  The next two lemmas will be used to obtain the set $\mathcal{R}_1$ that allows us to start the argument.
 
 \begin{lem}\label{small_depth_separator}
-  Let $h\in\N$, $S\subseteq V(G_h)$, and let $i_0:=\ceil{\max\{2\log|S|+2, \log(2+(h+1)|S|)-1}$.  If $G_h-S$ has no component with more than $|V(G_h)|/2$ vertices then $S\cap V(P_i)\neq\emptyset$, for each $i\in\{i_0,\ldots,h\}$.
+  Let $h\in\N$, let $S\subseteq V(G_h)$, $S\neq\emptyset$, and let $i_0:=\ceil{\max\{2\log|S|+2, \log(2+(h+1)|S|)-1\}}$.  If $G_h-S$ has no component with more than $|V(G_h)|/2$ vertices then $S\cap V(P_i)\neq\emptyset$, for each $i\in\{i_0,\ldots,h\}$.
 \end{lem}
 
 \begin{proof}
-  Let $C$ be the vertex set of a component of $G_h-S$ that maximizes $C\cap V(P_h)$. For each $i\in\{0,\ldots,h\}$, let $C_i:=C\cap V(P_i)$ and let $S_i:=S\cap V(P_i)$. We will show that, for each $i\ge i_0$, $C_i$ is non-empty but does not contain all $2^i$ vertices in $P_i$.  Therefore $S_i\supseteq N_G(C_i)\cap V(P_i)\neq\emptyset$ for each $i\in\{i_0,\ldots,h\}$.
+  Let $C$ be the vertex set of a component of $G_h-S$ that maximizes $C\cap V(P_h)$. For each $i\in\{0,\ldots,h\}$, let $C_i:=C\cap V(P_i)$ and let $S_i:=S\cap V(P_i)$. We will show that, for each $i\ge i_0$, $C_i$ is non-empty but does not contain all $2^i$ vertices in $P_i$.  Therefore $S_i\supseteq N_{G_h}(C_i)\cap V(P_i)\neq\emptyset$ for each $i\in\{i_0,\ldots,h\}$.
 
-  For each $i\in\{0,\ldots,h-1\}$, the vertices in $C_{i+1}$ are adjacent to at least $|C_{i+1}|/2$ vertices of $P_{i}$, so $|C_i|\ge |N_{G_h}(C_{i+1})\cap V(P_i)\setminus S_i| \ge |C_{i+1}|/2 - |S_i|$.  Iterating this inequality $h-i$ times gives $|C_i|\ge |C_h|/2^{h-i}-\sum_{j=i}^{h-1}|S_j|\ge |C_h|/2^{h-i}-|S|$.  The vertices of $|S|$ partition $V(P_h)\setminus S$ into at most $|S|+1$ connected components.  Since $C$ is chosen to maximize $|C_h|$, $|C_h| \ge (2^h-|S|)/(|S|+1) > 2^{h}/(|S|+1) - 1$.  Therefore,
+  For each $i\in\{0,\ldots,h-1\}$, the vertices in $C_{i+1}$ are adjacent to at least $|C_{i+1}|/2$ vertices of $P_{i}$, so $|C_i|\ge |N_{G_h}(C_{i+1})\cap V(P_i)\setminus S_i| \ge |C_{i+1}|/2 - |S_i|$.\todo{I didn't add parentheses to $N_{G_h}(C_{i+1})\cap V(P_i)\setminus S_i$ because they're not necessary.}  Iterating this inequality $h-i$ times gives $|C_i|\ge |C_h|/2^{h-i}-\sum_{j=i}^{h-1}|S_j|\ge |C_h|/2^{h-i}-|S|$.  The vertices in $S$ partition $V(P_h)\setminus S$ into at most $|S|+1$ connected components.  Since $C$ is chosen to maximize $|C_h|$, $|C_h| \ge (2^h-|S|)/(|S|+1) > 2^{h}/(|S|+1) - 1$.  Therefore,
   \begin{equation}
     |C_i|\ge \frac{|C_h|}{2^{h-i}} - |S| > \frac{2^h/(|S|+1)-1}{2^{h-i}} - |S|
     \ge 2^{i-\log(|S|+1)}-|S|-1 \ge 0
@@ -280,56 +285,23 @@ We now proceed with the details of the strategy outlined above.  The next two le
   \begin{equation}
       |C|
          =\sum_{i=0}^h |C_i| \ge \sum_{i=0}^h\left(\frac{|C_h|}{2^{h-i}} - |S|\right)
-       = 2|C_h| - 1 -(h+1)|S|
+       > 2|C_h| - 1 -(h+1)|S|
        \ge 2^{h+1}-2^{h-i^*}|S|-1 - (h+1)|S| \enspace . \numberthis \label{crux}
   \end{equation}
-  However, $2^h > |V(G_h)|/2 \ge |C| \ge (\ref{crux})$.  Rearranging terms and using the fact that $i^*\le h$, shows that the inequality $2^h > (\ref{crux})$ can only be satisified when $i^* < \log((h+2)|S|)$.  Therefore, $|C_i|< 2^i$ for all $i \ge \log((h+2)|S|)$. \qedhere
-  %
-  %     \frac{2^h-2^{h-i^*-1}|S|}{2^{h-i}} - |S|
-  % \]
-  %
-  %   Therefore, if $|C_i|=2^i$ then
-  %
-  %
-  %
-  %
-  %   Therefore, $|C_i|\le (|C_{i+1}| + |S_{i+1}|)/2$.  Iterating this $h-i$ times gives $|C_i|\le |C_h|/2^{h-i} + \sum_{j=i+1}^{h}|S_{j}| \le |C_h|/2^{h-i} + |S|/2$.
-  % Therefore,
-  % \begin{equation}
-  %   \frac{|C_h|}{2^{h-i}} - |S|
-  %   % \le \frac{|C_h|}{2^{h-i}} - ch(h-i)
-  %   \le C_{i}
-  %   % \le \frac{|C_h|}{2^{h-i}} + ch(h-i)/2
-  %   \le \frac{|C_h|}{2^{h-i}} + |S|/2   \enspace ,
-  %   \label{C_i_bounds}
-  % \end{equation}
-  % for each $i\in\{0,\ldots,h-1\}$.
-  %
-  % Since $|C|\le |V(G)|/2 < 2^h$, we get
-  % \[
-  % Therefore, $|C| = \sum_{i=0}^h |C_i| \le \sum_{i=0}^h (|C_h|/2^{h-i} + |S|/2) = 2|C_h|+(h+1)|S|/2-1$.
-  % % Since $|C|\le |V(G)|/2$< 2^h$,
-  % % \]
-  % $|C_h| < 2^{h-1} + (h+1)|S|/2+1/2$. Therefore,
-  % \begin{equation}
-  %   |C_i| \le \frac{|C_h|}{2^{h-i}} + |S|/2 = \frac{2^{h-1}+(h+1)|S|/2 + 1/2}{2^{h-i}} + |S|/2 \le 2^{i-1} + \left(h+3\right)|S|
-  % \end{equation}
-  % for each $i\in\{0,\ldots,h\}$.  In particular, $|C_i|< 2^i$ for all $i> \log((h+3)|S|)$.
+  However, $2^h > |V(G_h)|/2 \ge |C|$.  Therefore,
+  \begin{align*}
+      % & 2^h > (\ref{crux}) \\
+      & 2^h > 2^{h+1} - 2^{h-i^*}|S|-1-(h+1)|S| \\
+      \Leftrightarrow & 0 > 2^{h} - 2^{h-i^*}|S|-1-(h+1)|S| & \text{(subtract $2^h$)}\\
+      \Leftrightarrow & 2^h < 2^{h-i^*}|S|+1+(h+1)|S| & \text{(rearrange)}\\
+      \Leftrightarrow & 1 < 2^{-i^*}|S|+2^{-h}(1+(h+1)|S|) & \text{(divide by $2^h$)}\\
+      \Rightarrow & 1 < 2^{-i^*}|S|+2^{-i^*}(1+(h+1)|S|) & \text{(since $i^* \le h$ so $2^{-i^*} \ge 2^{-h}$)}\\
+      \Leftrightarrow & 1 < 2^{-i^*}(1+(h+2)|S|) & \text{(rearrange)} \\
+      \Leftrightarrow & 2^{i^*} < 2+(h+1)|S| & \text{(multiply by $2^{i^*+1}$)} \\
+      \Leftrightarrow & i^* < \log(2+(h+1)|S|) &
+  \end{align*}
+  Therefore, $|C_i|< 2^i$ for all $i \ge \log((h+2)|S|)$.\todo{Continue here.}\qedhere
 \end{proof}
-
-\todo[inline]{
-Derivation:
-\begin{align*}
-    & 2^h > (\ref{crux}) \\
-    \Leftrightarrow & 2^h > 2^{h+1} - 2^{h-i^*}|S|-1-(h+1)|S| \\
-    \Leftrightarrow & 0 > 2^{h} - 2^{h-i^*}|S|-1-(h+1)|S| & \text{(subtract $2^h$)}\\
-    \Leftrightarrow & 2^h < 2^{h-i^*}|S|+1+(h+1)|S| & \text{(rearrange)}\\
-    \Leftrightarrow & 1 < 2^{-i^*}|S|+2^{-h}(1+(h+1)|S|) & \text{(divide by $2^h$)}\\
-    \Rightarrow & 1 < 2^{-i^*}(2+(h+1)|S|) & \text{(since $2^{-i^*-1} \ge 2^{-h}$)} \\
-    \Leftrightarrow & 2^{i^*} < 2+(h+1)|S| & \text{(multiply by $2^{i^*+1}$)} \\
-    \Leftrightarrow & i^* < \log(2+(h+1)|S|) &
-\end{align*}
-}
 
 The following lemma shows that any tree-partition of $G_h$ must have a part with a large unrelated set that is far from the leaves of $T_h$.
 
@@ -468,6 +440,11 @@ We know that every planar graph $G$ is contained in a product of the form $H\box
   \caption{An outerplanar partition $\mathcal{H}$ and a path-partition $\mathcal{P}$ of $G_5$ for which $|B\cap P|\le 1$ for each $B\in\mathcal{H}$ and $P\in\mathcal{P}$.}
   \label{two_tree}
 \end{figure}
+
+\section*{Acknowledgements}
+
+Much of this research was done during the First Adriatic Workshop on Graphs and Probability, June 5--10, in Hvar, Croatia.  The authors would are grateful to the organizers and other workshop participants for providing an optimal working environment.  The authors would especially like to thank Nina~Kamčev for helpful discussions.
+
 
 % \todo[inline]{DW asks why arxiv identifiers appear twice. Each paper has standard bibliographic information followed by one or more hyperlinks.}
 
