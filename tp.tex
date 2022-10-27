@@ -264,7 +264,7 @@ We now outline our proof strategy.  Recall \cref{partitions_vs_products} which s
 We now proceed with the details of the strategy outlined above.  The next two lemmas will be used to obtain the set $\mathcal{R}_1$ that allows us to start the argument.
 
 \begin{lem}\label{small_depth_separator}
-  Let $h\in\N$, let $S\subseteq V(G_h)$, $S\neq\emptyset$, and let $i_0:=\ceil{\max\{2\log|S|+2, \log(2+(h+1)|S|)-1\}}$.  If $G_h-S$ has no component with more than $|V(G_h)|/2$ vertices then $S\cap V(P_i)\neq\emptyset$, for each $i\in\{i_0,\ldots,h\}$.
+  Let $h\in\N$, let $S\subseteq V(G_h)$, $S\neq\emptyset$, and let $i_0:=\ceil{\max\{2\log|S|+2, \log(1+(h+2)|S|)-1\}}$.  If $G_h-S$ has no component with more than $|V(G_h)|/2$ vertices then $S\cap V(P_i)\neq\emptyset$, for each $i\in\{i_0,\ldots,h\}$.
 \end{lem}
 
 \begin{proof}
@@ -297,8 +297,8 @@ We now proceed with the details of the strategy outlined above.  The next two le
       \Leftrightarrow & 1 < 2^{-i^*}|S|+2^{-h}(1+(h+1)|S|) & \text{(divide by $2^h$)}\\
       \Rightarrow & 1 < 2^{-i^*}|S|+2^{-i^*}(1+(h+1)|S|) & \text{(since $i^* \le h$ so $2^{-i^*} \ge 2^{-h}$)}\\
       \Leftrightarrow & 1 < 2^{-i^*}(1+(h+2)|S|) & \text{(rearrange)} \\
-      \Leftrightarrow & 2^{i^*} < 2+(h+1)|S| & \text{(multiply by $2^{i^*+1}$)} \\
-      \Leftrightarrow & i^* < \log(2+(h+1)|S|) &
+      \Leftrightarrow & 2^{i^*} < 1+(h+2)|S| & \text{(multiply by $2^{i^*+1}$)} \\
+      \Leftrightarrow & i^* < \log(1+(h+2)|S|) &
   \end{align*}
   Therefore, $|C_i|< 2^i$ for all $i \ge \log((h+2)|S|)$.\todo{Continue here.}\qedhere
 \end{proof}
