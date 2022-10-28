@@ -279,7 +279,7 @@ The number of parts in $\mathcal{R}_{t+1}$ is at least
 \end{align*}
 for some appropriately chosen $t\in \Theta(\sqrt{\log h})$.  Therefore $\mathcal{R}_{t+1}$ contains at least one part $R$. By \cref{diameter_spread}, there exists some $y \in V(P)$ such that
 \[
-  |R\cap P_y| \ge \frac{|R|}{\diam_G(R)+1} = \frac{2^t}{O(t\log(ch))}
+  |R\cap P_y| \ge \frac{|R|}{\diam_{G_h}(R)+1} = \frac{2^t}{O(t\log(ch))}
   = 2^{t-\log_2(t\log(ch))-O(1)} = 2^{\Omega(t)} = 2^{\Omega(\sqrt{\log h})} \enspace .
 \]
 Since $R\subseteq B_{x_{t+1}}$, $|B_{t+1}\cap P_y|\ge 2^{\Omega(\sqrt{\log h})}$.  Since $c\ge \max\{|B_x\cap P_y|:(x,y)\in V(T)\times V(P)\}$, the assumption that $c\le 2^{\sqrt{\log h}}$ therefore leads to the conclusion that $c\ge 2^{\Omega(\sqrt{\log h})}$, which establishes \cref{main_thm}.
