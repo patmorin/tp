@@ -98,7 +98,7 @@
 
 
 \begin{abstract}
-   Planar Product Structure Theorems are a collection of recent results that have been used to resolve a number of longstanding open problems on planar graphs.  One particularly useful version states that any planar graph $G$ is contained in the strong product of a $3$-tree $H$, a path $P$, and a $3$-cycle $K_3$; written as $G\subsetcong H\boxtimes P\boxtimes K_3$.  A number of researchers have asked if this theorem can be strengthened so that the maximum degree in $H$ can be bounded by a function of the maximum degree in $G$.  In this note we show that no such strengthening is possible.  Specifically, we describe an infinite family $\mathcal{G}$ of planar graphs of maximum degree $5$ such that, if an $n$-vertex member $G$ of $\mathcal{G}$ is isomorphic to a subgraph of $H\boxtimes P\boxtimes K_c$ where $H$ is a maximum degree $\Delta$ graph of treewidth $t$ and $P$ is a path, then $t\Delta c \ge 2^{\Omega(\sqrt{\log\log n})}$.
+   Planar Product Structure Theorems are a collection of recent results that have been used to resolve a number of longstanding open problems on planar graphs.  One particularly useful version states that any planar graph $G$ is contained in the strong product of a $3$-tree $H$, a path $P$, and a $3$-cycle $K_3$; written as $G\subsetcong H\boxtimes P\boxtimes K_3$.  A number of researchers have asked if this theorem can be strengthened so that the maximum degree in $H$ can be bounded by a function of the maximum degree in $G$.  In this note we show that no such strengthening is possible.  Specifically, we describe an infinite family $\mathcal{G}$ of planar graphs of maximum degree $5$ such that, if an $n$-vertex member $G$ of $\mathcal{G}$ is isomorphic to a subgraph of $H\boxtimes P\boxtimes K_c$ where $P$ is a path and $H$ is a graph of maximum degree $\Delta$ and treewidth $t$, then $t\Delta c \ge 2^{\Omega(\sqrt{\log\log n})}$.
 \end{abstract}
 
 \section{Introduction}
@@ -121,7 +121,7 @@ In some applications of product structure theorems, it is helpful if, in additio
 
 In this vein, the authors have been repeatedly asked the following question, which asks if $H$ can have bounded degree whenever $G$ does:
 \begin{quote}
-  Let $\mathcal{G}_\Delta$ be the family of planar graphs of maximum degree $\Delta$.  Do there exist functions $t:\N\to\N$, $d:\N\to\N$, and $c:\N\to\N$ such that, for each $G\in\mathcal{G}_\Delta$ there exists a graph $H$ of treewidth at most $t(\Delta)$ and maximum degree $d(\Delta)$ such that $G\subsetcong H\boxtimes P\boxtimes K_{c(\Delta)}$?
+  For each $\Delta\in\N$, let $\mathcal{G}_\Delta$ be the family of planar graphs of maximum degree $\Delta$.  Do there exist functions $t:\N\to\N$, $d:\N\to\N$, and $c:\N\to\N$ such that, for each $\Delta\in\N$ and each $G\in\mathcal{G}_\Delta$ there exists a graph $H$ of treewidth at most $t(\Delta)$ and maximum degree $d(\Delta)$ such that $G\subsetcong H\boxtimes P\boxtimes K_{c(\Delta)}$?
 \end{quote}
 In this note we show that the answer to this question is no, even when $\Delta=5$.
 
