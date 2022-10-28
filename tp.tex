@@ -366,11 +366,11 @@ We now proceed with the details of the proof outlined above.  The next two lemma
 The following lemma shows that any tree-partition of $G_h$ must have a part with a large unrelated set that is far from the leaves of $T_h$ and will be used to obtain our first set $\mathcal{R}_1$.
 
 \begin{lem}\label{startup}
-  There exists $h_0\in\N$ such that the following is true, for all integers $h\ge  h_0$ and all $c\in[1,h]$.  If $\mathcal{T}:=\{B_x:x\in V(T)\}$ is a tree-partition of $G_h$ of width less than $ch$ then there exists a node $x\in V(T)$ and a subset $R\subseteq B_x$ such that
+  For any $\alpha\in(0,1/4)$, there exists $h_0$ such that the following is true, for all integers $h\ge  h_0$ and all $c\in[1,h]$.  If $\mathcal{T}:=\{B_x:x\in V(T)\}$ is a tree-partition of $G_h$ of width less than $ch$ then there exists a node $x\in V(T)$ and a subset $R\subseteq B_x$ such that
   \begin{compactenum}[(i)]
     \item $R$ is unrelated;
-    \item $|R|\ge h/5c$; and
-    \item Each vertex in $R$ has height at least $h/5$
+    \item $|R|\ge \alpha^2 h/c$; and
+    \item Each vertex in $R$ has height at least $\alpha h$
   \end{compactenum}
 \end{lem}
 
@@ -378,7 +378,7 @@ The following lemma shows that any tree-partition of $G_h$ must have a part with
 \begin{proof}
   It is well-known and easy to show that there exists a node $x$ of $T$ such that $G-B_x$ has no component with more than $|V(G_h)|/2$ vertices \cite[(2.6)]{robertson.seymour:graph}. Let $Y$ be the set of vertices in $B_x$ that have height at least $h/4$.  By \cref{small_depth_separator}, $|Y|\ge 3h/4 - O(\log (ch+1))$.
 
-  Let $T_Y$ be the minimal (connected) subtree of $T_h$ that spans $Y$, and let $L$ be the set of leaves of $T_Y$.  Observe that $L\subseteq Y$ is an unrelated set. Therefore, $L$ satisfies (i) and, by definition, each vertex in $L$ has height at least $h/4 > h/5$, so $L$ satisfies (iii).  If $|L|\ge h/5 \ge h/5c$ then $L$ also satisfies (ii).  In this case, we can take $R:=L$ and we are done.  We now assume that $|L|< h/5$.
+  Let $T_Y$ be the minimal (connected) subtree of $T_h$ that spans $Y$, and let $L$ be the set of leaves of $T_Y$.  Observe that $L\subseteq Y$ is an unrelated set. Therefore, $L$ satisfies (i) and, by definition, each vertex in $L$ has height at least $h/4 > \alpha h$, so $L$ satisfies (iii).  If $|L|\ge \alpha h \ge \alpha h/c$ then $L$ also satisfies (ii).  In this case, we can take $R:=L$ and we are done.  We now assume that $|L|< \alpha h$.
 
   Let $Z$ consist of all vertices in $V(T_h)\setminus V(T_Y)$ whose parents are in $Y\setminus L$.   Observe that $Z$ is an unrelated set of vertices each having height at least $h/4$. For each $v$ of $T_Y$, let $d_v$ denote the number of children of $v$ in $T_Y$.  Then,
   \[
@@ -394,9 +394,9 @@ The following lemma shows that any tree-partition of $G_h$ must have a part with
   Combining these two formulas, we obtain
   \[
     |Z| \ge 2|Y\setminus L| - |Y| = |Y| - 2|L|
-    \ge 3h/4-O(\log(ch+1)) - 2h/4
+    \ge 3h/4-O(\log(ch+1)) - 2\alpha h
     % = (3/4-2\alpha)h - O(\log(ch+1))
-    = h/4-O(\log(ch+1)) \ge h/5 \enspace .
+    \ge h/4-O(\log(ch+1)) \enspace .
   \]
   Refer to \cref{paths}.  For each $r\in Z$, \cref{one_path} applied to the subtree of $T_h$ rooted at $r$ with $S=B_x$ implies that $r$ has a descendant $v$ such that
   \begin{inparaenum}[(a)]
@@ -405,7 +405,7 @@ The following lemma shows that any tree-partition of $G_h$ must have a part with
     \item $T_h-B_x$ contains a path $P_{v}$ from $v$ to a leaf of $T_h$.
   \end{inparaenum}
 
-  Form the set $Z'$ using the following rule for each $r\in Z$: If the vertex $v$ just described in the prececeding paragraph is a child of $r$ then place $r$ in $Z'$, otherwise place $v$ in $Z'$. Since each $r\in Z$ is a child of some vertex in $Y\subseteq B_x$, this ensures that parent of $v$ is in $B_x$ for each $v\in Z'$.  Since $Z$ is an unrelated set and $Z'$ is obtained by replacing each vertex in $Z$ with one of its descendants, $Z'$ is an unrelated set.  Now $|Z'|=|Z|\ge h/5$ and each vertex in $Z$ has height at least $h/4 - O(\log(ch+1)) \ge h/5$.
+  Form the set $Z'$ using the following rule for each $r\in Z$: If the vertex $v$ just described in the prececeding paragraph is a child of $r$ then place $r$ in $Z'$, otherwise place $v$ in $Z'$. Since each $r\in Z$ is a child of some vertex in $Y\subseteq B_x$, this ensures that parent of $v$ is in $B_x$ for each $v\in Z'$.  Since $Z$ is an unrelated set and $Z'$ is obtained by replacing each vertex in $Z$ with one of its descendants, $Z'$ is an unrelated set.  Since $\alpha < 1/4$, for sufficiently large $h$, $|Z'|\ge h/4 - O(\log(ch+1)) \ge \alpha h$ and each vertex in $Z$ has height at least $h/4 - O(\log(ch+1)) \ge \alpha h$.
 
   \begin{figure}
     \begin{center}
@@ -415,8 +415,9 @@ The following lemma shows that any tree-partition of $G_h$ must have a part with
     \label{paths}
   \end{figure}
 
-  Now observe that the union of the paths in  $\{P_{v}:v\in Z'\}$ and the paths $P_{\floor{4h/5}+1},\ldots,P_{h}$ contains a subgraph $G'$ isomorphic to a graph that can be obtained from the grid $G_{\ceil{h/5}\times\ceil{h/5}}$ by subdividing horizontal edges.  Since $B_x$ does not contain any vertex of $P_{v}$ for any $v\in Z'$,  $B_x\cap V(G')$ contains only vertices corresponding to subdivision vertices.  Therefore, by \cref{grid_connectivity}, some component of $G-B_x$ contains a subset $R\subseteq Z'$ of size at least $h/c$.  Each element in $R$ has a parent in $B_x$.  By \cref{tree_thingy} some neighbour $y$ of $x$ in $T$ has a bag $B_y$ that contains all of $R$.  This completes the proof.
+  Now observe that the union of the paths in  $\{P_{v}:v\in Z'\}$ and the paths $P_{h-\lceil\alpha h\rceil+1},\ldots,P_{h}$ contains a subgraph $G'$ isomorphic to a graph that can be obtained from the grid $G_{\lceil \alpha h\rceil\times\lceil \alpha h\rceil}$ by subdividing horizontal edges.  Since $B_x$ does not contain any vertex of $P_{v}$ for any $v\in Z'$,  $B_x\cap V(G')$ contains only vertices corresponding to subdivision vertices.  Therefore, by \cref{grid_connectivity}, some component of $G-B_x$ contains a subset $R\subseteq Z'$ of size at least $\alpha^2 h/c$.  Each element in $R$ has a parent in $B_x$.  By \cref{tree_thingy} some neighbour $y$ of $x$ in $T$ has a bag $B_y$ that contains all of $R$.  This completes the proof.
 \end{proof}
+
 
 
 A set $\mathcal{R}:=\{R_1,\ldots,R_q\}$ of subsets of $V(T_h)$ is \defin{$(k,\ell,m)$-compact} if it has the following properties:
