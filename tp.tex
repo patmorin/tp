@@ -98,7 +98,7 @@
 
 
 \begin{abstract}
-   Product structure theorems are a collection of recent results that have been used to resolve a number of longstanding open problems on planar graphs and related graph classes.  One particularly useful version states that any planar graph $G$ is contained in the strong product of a $3$-tree $H$, a path $P$, and a $3$-cycle $K_3$; written as $G\subsetcong H\boxtimes P\boxtimes K_3$.  A number of researchers have asked if this theorem can be strengthened so that the maximum degree in $H$ can be bounded by a function of the maximum degree in $G$.  In this note we show that no such strengthening is possible.  Specifically, we describe an infinite family $\mathcal{G}$ of planar graphs of maximum degree $5$ such that, if an $n$-vertex member $G$ of $\mathcal{G}$ is isomorphic to a subgraph of $H\boxtimes P\boxtimes K_c$ where $P$ is a path and $H$ is a graph of maximum degree $\Delta$ and treewidth $t$, then $t\Delta c \ge 2^{\Omega(\sqrt{\log\log n})}$.
+   Product structure theorems are a collection of recent results that have been used to resolve a number of longstanding open problems on planar graphs and related graph classes.  One particularly useful version states that any planar graph $G$ is contained in the strong product of a $3$-tree $H$, a path $P$, and a $3$-cycle $K_3$; written as $G\subsetcong H\boxtimes P\boxtimes K_3$.  A number of researchers have asked if this theorem can be strengthened so that the maximum degree in $H$ can be bounded by a function of the maximum degree in $G$.  We show that no such strengthening is possible.  Specifically, we describe an infinite family $\mathcal{G}$ of planar graphs of maximum degree $5$ such that, if an $n$-vertex member $G$ of $\mathcal{G}$ is isomorphic to a subgraph of $H\boxtimes P\boxtimes K_c$ where $P$ is a path and $H$ is a graph of maximum degree $\Delta$ and treewidth $t$, then $t\Delta c \ge 2^{\Omega(\sqrt{\log\log n})}$.
 \end{abstract}
 
 \section{Introduction}
@@ -115,9 +115,9 @@ The \defin{width} of such a tree decomposition is $\max\{|B_x|:x\in V(T)\}-1$. T
   \item $vw\in E(G_1)$ and $xy\in E(G_2)$.
 \end{inparaenum}
 } of $H$, $P$, and a clique $K$ of order $c$.
-This is typically written as $G\subsetcong H\boxtimes P\boxtimes K_c$, where the notation $G_1\subsetcong G_2$ is used to mean that $G_1$ is isomorphic to some subgraph of $G_2$.  See references \cite{dujmovic.joret.ea:planar,dujmovic.morin.ea:structure,krauthgamer.lee:intrinsic,ueckerdt.wood.ea:improved,bose.morin.ea:optimal,campbell.clinch.ea:product,illingworth.scott.ea:alon,distel.hickingbotham.ea:improved} for examples.
+This is typically written as $G\subsetcong H\boxtimes P\boxtimes K_c$, where the notation $G_1\subsetcong G_2$ is used to mean that $G_1$ is isomorphic to some subgraph of $G_2$.  See references \cite{dujmovic.joret.ea:planar,dujmovic.morin.ea:structure,krauthgamer.lee:intrinsic,ueckerdt.wood.ea:improved,bose.morin.ea:optimal,campbell.clinch.ea:product,illingworth.scott.ea:alon,distel.hickingbotham.ea:improved,hickingbotham.jungeblut.ea:product,hickingbotham.wood:shallow,wood:product} for examples.
 
-In some applications of product structure theorems, it is helpful if, in addition to having treewidth $t$, the graph $H$ has additional properties, possibly inherited from $G$.  For example, one very useful version of the planar graph product structure theorem states that for every planar graph $G$ there exists a \emph{planar} graph $H$ of treewidth $3$ and a path $P$ such that $G\subsetcong H\boxtimes P\boxtimes K_3$ \cite[Threorem~36(b)]{dujmovic.joret.ea:planar}.  The planarity of $H$ in this result has been leveraged to obtain better constants and even asymptotic improvements for graph colouring and layout problems, including queue number \cite{dujmovic.joret.ea:planar}, $p$-centered colouring \cite{debski.felsner.ea:improved}, and $\ell$-vertex ranking \cite{bose.dujmovic.ea:asymptotically}.
+In some applications of product structure theorems, it is helpful if, in addition to having treewidth $t$, the graph $H$ has additional properties, possibly inherited from $G$.  For example, one very useful version of the planar graph product structure theorem states that for every planar graph $G$ there exists a \emph{planar} graph $H$ of treewidth $3$ and a path $P$ such that $G\subsetcong H\boxtimes P\boxtimes K_3$ \cite[Theorem~36(b)]{dujmovic.joret.ea:planar}.  The planarity of $H$ in this result has been leveraged to obtain better constants and even asymptotic improvements for graph colouring and layout problems, including queue number \cite{dujmovic.joret.ea:planar}, $p$-centered colouring \cite{debski.felsner.ea:improved}, and $\ell$-vertex ranking \cite{bose.dujmovic.ea:asymptotically}.
 
 In this vein, the authors have been repeatedly asked the following question, which asks if $H$ can have bounded degree whenever $G$ does:
 \begin{quote}
@@ -155,7 +155,7 @@ As in previous works, we make use of the following relationship between $H$-part
   For any integer $c\ge 1$, and any graphs $G$, $H$, and $J$,  $G\subsetcong H\boxtimes J\boxtimes K_c$ if and only if $G$ has an $H$-partition $\mathcal{H}:=\{B_x:x\in V(H)\}$ and a $J$-partition $\mathcal{J}:=\{C_y:y\in V(J)\}$ such that $|B_x\cap C_y|\le c$, for each $(x,y)\in V(H)\times V(J)$.
 \end{obs}
 
-The following important result of \citet{ding.oporowski:some} (see also \citet{wood:on,distel.wood:tree_partitions}) allows us to focus on the case where the first factor in our product is a tree.
+The following important result of \citet{ding.oporowski:some} (also see \cite{wood:on,distel.wood:tree_partitions}) allows us to focus on the case where the first factor in our product is a tree.
 
 \begin{thm}[\citet{ding.oporowski:some}]\label{dingy}
   If $H$ is a graph with maximum degree $\Delta$ and treewidth $t$,
@@ -213,7 +213,7 @@ We use the following two percolation-type results for $T_h$.
 \end{lem}
 
 \begin{proof}
-  The proof is by induction on $h$.  When $h=1$, $|S|\le 1$. In particular, at least one child $v$ of $r$ is not in $S$.  The depth of $v$ is $1\le \log_2|S|+1$, so $v$ satisfies (i).  The parent of $v$ is $r\in S\cup\{r\}$, so $v$ satisifies (ii).  $T_1-S$ contains a length-$0$ path from $v$ to itself (a leaf of $T_1$), so $v$ satisfies (iii).
+  The proof is by induction on $h$.  When $h=1$, $|S|\le 1$. In particular, at least one child $v$ of $r$ is not in $S$.  The depth of $v$ is $1\le \log_2|S|+1$, so $v$ satisfies (i).  The parent of $v$ is $r\in S\cup\{r\}$, so $v$ satisfies (ii).  $T_1-S$ contains a length-$0$ path from $v$ to itself (a leaf of $T_1$), so $v$ satisfies (iii).
 
   For $h\ge 2$, let $\ell$ be the maximum integer such that $S\cup\{r\}$ contains all $2^\ell$ vertices of depth $\ell$.  Observe that $2^\ell \le |S|$, so $\ell \le \log_2 |S| < h$.  Let $L$ be the set of $2^{\ell+1}$ depth-$(\ell+1)$ vertices in $T_h$.  By the Pigeonhole Principle some vertex $r'\in L$ is the root of a complete binary tree $T'$ with root $r'$ of height $h-\ell-1$ with $|S\cap V(T')| \le |S|/2^{\ell+1} < 2^{h-\ell-1}$.
 
@@ -252,9 +252,13 @@ The \defin{$x\times y$ grid} $G_{x\times y}$ is the graph with vertex set $V(G_{
 
 Recall that, for each $h\in\N$, $G_{h}$ is the planar supergraph of the complete binary tree $T_h$ of height $h$ obtained by adding the edges of a path $P_i$ that contains all vertices of depth $i$, in left-to-right order, for each $i\in\{1,\ldots,h\}$.   Since $T_h$ is a spanning subgraph of $G_h$, the \defin{depth} of a vertex $v$ in $G_h$ refers to the depth of $v$ in $T_h$.  The \defin{height} of a depth-$d$ vertex of $T_h$ is $h-d$.
 % \todo{DW asks if we need both depth and height. No, but without it we get $h-d$ appearing more often than I'd like.}
-We are now ready to show that for any tree $T$ and any path $P$, if $G_{h}\subsetcong T\boxtimes P\boxtimes K_c$ then $c\ge 2^{\Omega(\sqrt{\log h})}$.  By \cref{ding_translation}, this is enough to prove \cref{main_thm}.
+We are now ready to prove the following result that, combined with \cref{ding_translation} is sufficient to prove \cref{main_thm}:
 
-Before diving into technical details we first sketch our proof strategy.  We may assume that $c \le 2^{\sqrt{\log h}}$ since, otherwise there is nothing to prove.  Recall \cref{partitions_vs_products} which states that if $G_h\subsetcong T\boxtimes P\boxtimes K_c$ then $G_h$ has a tree-partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ and a path-partition (i.e., layering) $\mathcal{P}:=\{P_y:y\in V(P)\}$ with $|B_x\cap P_y|\le c$ for each $(x,y)\in V(T)\times V(P)$. However, since $G_h$ has diameter $2h$, \cref{diameter_spread} implies that $|B_x|\le c(2h+1)$. This upper bound on $|B_x|$ is used to establish all of the results described in the following paragraph.
+\begin{thm}\label{main_thm_tree}
+  For any $h\in\N$, any tree $T$, and any path $P$, if $G_{h}\subsetcong T\boxtimes P\boxtimes K_c$ then $c\ge 2^{\Omega(\sqrt{\log h})}$.
+\end{thm}
+
+Before diving into technical details we first sketch our strategy for proving \cref{main_thm_tree}.  We may assume that $c \le 2^{\sqrt{\log h}}$ since, otherwise there is nothing to prove.  Recall \cref{partitions_vs_products} which states that if $G_h\subsetcong T\boxtimes P\boxtimes K_c$ then $G_h$ has a tree-partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ and a path-partition (i.e., layering) $\mathcal{P}:=\{P_y:y\in V(P)\}$ with $|B_x\cap P_y|\le c$ for each $(x,y)\in V(T)\times V(P)$. However, since $G_h$ has diameter $2h$, \cref{diameter_spread} implies that $|B_x|\le c(2h+1)$. This upper bound on $|B_x|$ is used to establish all of the results described in the following paragraph.
 
 % We may therefore assume that for each $x\in V(T)$, the part $B_x$ has size at most $c(2h+1)=O(h)$ and use this to derive a contradiction.
 
@@ -267,13 +271,13 @@ Before diving into technical details we first sketch our proof strategy.  We may
 \end{figure}
 
 Refer to \cref{sketch}.
-Our strategy is to first show that $\mathcal{T}$ has some part $B_{x_1}$ that contains an unrelated set $\mathcal{R}_1$ of size $\Omega(h)$ and such that each vertex in $\mathcal{R}_1$ has height at least $\alpha h$ for some constant $\alpha>0$.  Next we show that $x_1$ has a neighbour $x_2$ such that $B_{x_2}$ contains an unrelated set $\mathcal{R}_2$ that is smaller than $\mathcal{R}_1$ by a factor of at most $\alpha/c$, but whose elements can be partitioned into pairs so that each pair has a common ancestor in $\mathcal{R}_1$ that is at distance at most $a\in O(\log(ch))$ from both vertices in the pair.  We now iterate this argument.  During each iteration, the number of parts decreases by a factor of $\alpha/c$ but the size of each surviving part doubles.  In this way, we obtain a sequence of unrelated sets $\mathcal{R}_1,\ldots,\mathcal{R}_{t+1}$. Each set $\mathcal{R}_i$ is contained in a single part $B_{x_i}$ of $\mathcal{T}$.  Each set $\mathcal{R}_i$ has at least $(\alpha/c)^{i-1}|\mathcal{R}_1|=\Omega((\alpha/c)^{i-1} h)$ parts, each of size $2^{i-1}$.   Each part $R$ of $\mathcal{R}_i$ has a common ancestor in $\mathcal{R}_1$ that is at distance at most $a(i-1)=O(i\log(ch))$ from all elements in $R$, which implies that $\diam_{G_h}(R)=O(i\log(ch))$.
+Our strategy is to first show that $\mathcal{T}$ has some part $B_{x_1}$ that contains an unrelated set $\mathcal{R}_1$ of size $\Omega(h/c)$ and such that each vertex in $\mathcal{R}_1$ has height at least $\alpha h$ for some constant $\alpha>0$.  Next we show that $x_1$ has a neighbour $x_2$ such that $B_{x_2}$ contains an unrelated set $\mathcal{R}_2$ that is smaller than $\mathcal{R}_1$ by a factor of at most $\alpha/c$, but whose elements can be partitioned into pairs so that each pair has a common ancestor in $\mathcal{R}_1$ that is at distance at most $a\in O(\log(ch))$ from both vertices in the pair.  We now iterate this argument.  During each iteration, the number of parts decreases by a factor of $\alpha/c$ but the size of each surviving part doubles.  In this way, we obtain a sequence of unrelated sets $\mathcal{R}_1,\ldots,\mathcal{R}_{t+1}$. Each set $\mathcal{R}_i$ is contained in a single part $B_{x_i}$ of $\mathcal{T}$.  Each set $\mathcal{R}_i$ has at least $(\alpha/c)^{i-1}|\mathcal{R}_1|=\Omega((\alpha/c)^{i} h)$ parts, each of size $2^{i-1}$.   Each part $R$ of $\mathcal{R}_i$ has a common ancestor in $\mathcal{R}_1$ that is at distance at most $a(i-1)=O(i\log(ch))$ from all elements in $R$, which implies that $\diam_{G_h}(R)=O(i\log(ch))$.
 
 The number of parts in $\mathcal{R}_{t+1}$ is at least
 \begin{align*}
-  \Omega((\alpha/c)^{t} h)
-  & = \exp(\log h - t\log c - O(t)) \\
-  & \ge \exp(\log h - t\sqrt{\log h} - O(t))
+  \Omega((\alpha/c)^{t+1} h)
+  & = \exp(\log h - (t+1)\log c - O(t)) \\
+  & \ge \exp(\log h - (t+1)\sqrt{\log h} - O(t))
     & \text{(since $c\le 2^{\sqrt{\log h}}$ so $\log c\le \sqrt{\log h}$)} \\
   & \ge 1
 \end{align*}
@@ -282,7 +286,7 @@ for some appropriately chosen $t\in \Theta(\sqrt{\log h})$.  Therefore $\mathcal
   |R\cap P_y| \ge \frac{|R|}{\diam_{G_h}(R)+1} = \frac{2^t}{O(t\log(ch))}
   = 2^{t-\log_2(t\log(ch))-O(1)} = 2^{\Omega(t)} = 2^{\Omega(\sqrt{\log h})} \enspace .
 \]
-Since $R\subseteq B_{x_{t+1}}$, $|B_{t+1}\cap P_y|\ge 2^{\Omega(\sqrt{\log h})}$.  Since $c\ge \max\{|B_x\cap P_y|:(x,y)\in V(T)\times V(P)\}$, the assumption that $c\le 2^{\sqrt{\log h}}$ therefore leads to the conclusion that $c\ge 2^{\Omega(\sqrt{\log h})}$, which establishes \cref{main_thm}.
+Since $R\subseteq B_{x_{t+1}}$, $|B_{x_{t+1}}\cap P_y|\ge 2^{\Omega(\sqrt{\log h})}$.  Since $c\ge \max\{|B_x\cap P_y|:(x,y)\in V(T)\times V(P)\}$, the assumption that $c\le 2^{\sqrt{\log h}}$ therefore leads to the conclusion that $c\ge 2^{\Omega(\sqrt{\log h})}$, which establishes \cref{main_thm}.
 
 
 %
@@ -405,7 +409,7 @@ The following lemma shows that any tree-partition of $G_h$ must have a part with
     \item $T_h-B_x$ contains a path $P_{v}$ from $v$ to a leaf of $T_h$.
   \end{inparaenum}
 
-  Form the set $Z'$ using the following rule for each $r\in Z$: If the vertex $v$ just described in the prececeding paragraph is a child of $r$ then place $r$ in $Z'$, otherwise place $v$ in $Z'$. Since each $r\in Z$ is a child of some vertex in $Y\subseteq B_x$, this ensures that parent of $v$ is in $B_x$ for each $v\in Z'$.  Since $Z$ is an unrelated set and $Z'$ is obtained by replacing each vertex in $Z$ with one of its descendants, $Z'$ is an unrelated set.  Since $\alpha < 1/4$, for sufficiently large $h$, $|Z'|\ge h/4 - O(\log(ch+1)) \ge \alpha h$ and each vertex in $Z$ has height at least $h/4 - O(\log(ch+1)) \ge \alpha h$.
+  Form the set $Z'$ using the following rule for each $r\in Z$: If the vertex $v$ just described in the preceding paragraph is a child of $r$ then place $r$ in $Z'$, otherwise place $v$ in $Z'$. Since each $r\in Z$ is a child of some vertex in $Y\subseteq B_x$, this ensures that parent of $v$ is in $B_x$ for each $v\in Z'$.  Since $Z$ is an unrelated set and $Z'$ is obtained by replacing each vertex in $Z$ with one of its descendants, $Z'$ is an unrelated set.  Since $\alpha < 1/4$, for sufficiently large $h$, $|Z'|\ge h/4 - O(\log(ch+1)) \ge \alpha h$ and each vertex in $Z$ has height at least $h/4 - O(\log(ch+1)) \ge \alpha h$.
 
   \begin{figure}
     \begin{center}
@@ -480,9 +484,12 @@ The next lemma is the last ingredient in the proof of \cref{main_thm}.
   \end{align*}
 \end{proof}
 
+\begin{proof}[Proof of \cref{main_thm_tree}]
+  Suppose $G_h\subsetcong T\boxtimes P\boxtimes K_c$ for some tree $T$ and some path $P$.  By \cref{partitions_vs_products}, $G_h$ has a $T$-partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ and a path-partition $\mathcal{P}:=\{P_y:y\in V(P)\}$ such that $|B_x\cap P_y|\le c$ for each $(x,y)\in V(T)\times V(P)$.  By \cref{big_lemma}, there exists $(x,y)\in V(T)\times V(P)$, such that $|B_x\cap P_y| \ge 2^{\Omega(\sqrt{\log h})}$.  Combining these upper and lower bounds on $|B_x\cap P_y|$ implies that $c\ge 2^{\Omega(\sqrt{\log h})}$.
+\end{proof}
 
 \begin{proof}[Proof of \cref{main_thm}]
-  Let $n:=|V(G_h)|=2^{h+1}-1$.  Suppose that $G_h\subsetcong H\boxtimes P\boxtimes K_c$ for some graph $H$ of treewidth $t$ and maximum degree $\Delta$, some path $P$ and some integer $c$.  Then, by \cref{dingy,partitions_vs_products}, $G\subsetcong T\boxtimes P\boxtimes K_{24 c \Delta (t+1)}$ for some tree $T$.  By \cref{partitions_vs_products}, $G$ has a $T$-partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ and a path-partition $\mathcal{P}:=\{P_y:y\in V(P)\}$ such that $|B_x\cap P_y|\le 24 c \Delta (t+1)$ for each $(x,y)\in V(T)\times V(P)$.  By \cref{big_lemma}, there exists $(x,y)\in V(T)\times V(P)$, such that $|B_x\cap P_y| \ge 2^{\Omega(\sqrt{\log h})}$.  Combining upper and lower bounds on $|B_x\cap P_y|$ implies that $c\Delta(t+1)\ge 2^{\Omega(\sqrt{\log h})} = 2^{\Omega(\sqrt{\log\log n})}$.
+  Let $n:=|V(G_h)|=2^{h+1}-1$.  Suppose that $G_h\subsetcong H\boxtimes P\boxtimes K_c$ for some graph $H$ of treewidth $t$ and maximum degree $\Delta$, some path $P$ and some integer $c$.  Then, by \cref{dingy,partitions_vs_products}, $G\subsetcong T\boxtimes P\boxtimes K_{24 c \Delta (t+1)}$ for some tree $T$.  By \cref{main_thm_tree} $24 c \Delta (t+1) \in \Omega(2^{\sqrt{h}})$, so $c\Delta t \in \Omega(2^{\sqrt{h}}) = 2^{\Omega(\sqrt{\log\log n})}$.
 \end{proof}
 
 
@@ -497,7 +504,7 @@ We know that every planar graph $G$ is contained in a product of the form $H\box
   \item Is every planar graph $G$ of maximum degree $\Delta$ contained in a product of the form $H\boxtimes P\boxtimes K_c$ where the treewidth of $H$ is $2$, $P$ is path, and $c$ is some function of $\Delta$?
 \end{enumerate}
 
-\cref{two_tree} shows that $G_h$ is a subgraph of $H\boxtimes P$ where $H$ has treewidth $2$ (and is even outerplanar) and $P$ is a path. Our proof breaks down in this case because, unlike tree-partitions, outerplanar partitions do not satisfy \cref{tree_thingy}.  Indeed, the tree-partition illustrated in \cref{two_tree} contains a part $B_x$ and a component $X$ of $G_h-B_x$ with $|N_{G_h}(B_x)\cap V(X)|=h$.  In a tree-partition this would imply that $|N_{G_h}(B_x)\cap V(X)\cap B_y|=h$ for some other part $B_y$ of the partition.  In contrast, for the outerplanar partition shown \cref{two_tree}, $|N_{G_h}(B_x)\cap V(X)\cap B_y|\le 1$ for each $y\in V(H)$.
+\cref{two_tree} and \cref{partitions_vs_products} show that $G_h$ is a subgraph of $H\boxtimes P$ where $H$ has treewidth $2$ (and is even outerplanar) and $P$ is a path. Our proof breaks down in this case because, unlike tree-partitions, outerplanar partitions do not satisfy \cref{tree_thingy}.  Indeed, the outerplanar-partition illustrated in \cref{two_tree} contains a part $B_x$ and a component $X$ of $G_h-B_x$ with $|N_{G_h}(B_x)\cap V(X)|=h$.  In a tree-partition this would imply that $|N_{G_h}(B_x)\cap V(X)\cap B_y|=h$ for some other part $B_y$ of the partition.  In contrast, for the outerplanar partition shown in \cref{two_tree}, $|N_{G_h}(B_x)\cap V(X)\cap B_y|\le 1$ for each $y\in V(H)$.
 
 
 \begin{figure}
