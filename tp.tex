@@ -118,7 +118,7 @@ This is typically written as $G\subsetcong H\boxtimes P\boxtimes K_c$, where the
 
 In some applications of product structure theorems, it is helpful if, in addition to having treewidth $t$, the graph $H$ has additional properties, possibly inherited from $G$.  For example, one very useful version of the planar graph product structure theorem states that for every planar graph $G$ there exists a \emph{planar} graph $H$ of treewidth $3$ and a path $P$ such that $G\subsetcong H\boxtimes P\boxtimes K_3$ \cite[Theorem~36(b)]{dujmovic.joret.ea:planar}.  The planarity of $H$ in this result has been leveraged to obtain better constants and even asymptotic improvements for graph colouring and layout problems, including queue number \cite{dujmovic.joret.ea:planar}, $p$-centered colouring \cite{debski.felsner.ea:improved}, and $\ell$-vertex ranking \cite{bose.dujmovic.ea:asymptotically}.
 
-In this vein, the authors have been repeatedly asked the following question, which asks if $H$ can have bounded degree whenever $G$ does:
+In this vein, the authors have been repeatedly asked if $H$ can have bounded degree whenever $G$ does:
 \begin{quote}
   For each $\Delta\in\N$, let $\mathcal{G}_\Delta$ be the family of planar graphs of maximum degree $\Delta$.  Do there exist functions $t:\N\to\N$, $d:\N\to\N$, and $c:\N\to\N$ such that, for each $\Delta\in\N$ and each $G\in\mathcal{G}_\Delta$ there exists a graph $H$ of treewidth at most $t(\Delta)$ and maximum degree $d(\Delta)$ such that $G\subsetcong H\boxtimes P\boxtimes K_{c(\Delta)}$?
 \end{quote}
@@ -467,7 +467,7 @@ The next lemma is the last ingredient in the proof of \cref{main_thm}.
 
 \section{Open Problems}
 
-We know that every planar graph $G$ is contained in a product of the form $H\boxtimes P\boxtimes K_3$ where $\tw(H)\le 3$ \cite{dujmovic.joret.ea:planar}. \cref{main_thm} states that, for any $c$, there exists a planar graph of maximum degree $5$ that is not contained in any product of the form $T\boxtimes P\boxtimes K_c$ where $T$ is a tree and $P$ is a path.  This leaves the following open problem:
+We know that every planar graph $G$ is contained in a product of the form $H\boxtimes P\boxtimes K_3$ where $\tw(H)\le 3$ \cite{dujmovic.joret.ea:planar}. \cref{main_thm_tree} states that, for any $c$, there exists a planar graph of maximum degree $5$ that is not contained in any product of the form $T\boxtimes P\boxtimes K_c$ where $T$ is a tree and $P$ is a path.  This leaves the following open problem:
 
 \begin{quote}
   % \item For each $\Delta\in\{3,4\}$, is every planar graph $G$ of maximum degree $\Delta$ contained in a product of the form $T\boxtimes P\boxtimes K_c$ where $T$ is a tree, $P$ is a path, and $c$ is an absolute constant?
