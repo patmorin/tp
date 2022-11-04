@@ -369,7 +369,7 @@ The following lemma shows that any tree-partition of $G_h$ must have a part with
     \item $T_h-B_x$ contains a path $P_{v}$ from $v$ to a leaf of $T_h$.
   \end{inparaenum}
 
-  Form the set $Z'$ using the following rule for each $r\in Z$: If the vertex $v$ just described in the preceding paragraph is a child of $r$ then place $r$ in $Z'$, otherwise place $v$ in $Z'$. Since each $r\in Z$ is a child of some vertex in $Y\subseteq B_x$, this ensures that parent of $v$ is in $B_x$ for each $v\in Z'$.  Since $Z$ is an unrelated set and $Z'$ is obtained by replacing each vertex in $Z$ with one of its descendants, $Z'$ is an unrelated set.  Since $\alpha < 1/4$, for sufficiently large $h$, $|Z'|\ge h/4 - O(\log(ch+1)) \ge \alpha h$ and each vertex in $Z$ has height at least $h/4 - O(\log(ch+1)) \ge \alpha h$.
+  Form the set $Z'$ using the following rule for each $r\in Z$: If the vertex $v$ described in the preceding paragraph is a child of $r$ then place $r$ in $Z'$, otherwise place $v$ in $Z'$. Since each $r\in Z$ is a child of some vertex in $Y\subseteq B_x$, this ensures that the parent of $v$ is in $B_x$ for each $v\in Z'$.  Since $Z$ is an unrelated set and $Z'$ is obtained by replacing each vertex in $Z$ with one of its descendants, $Z'$ is an unrelated set.  Since $\alpha < 1/4$, for sufficiently large $h$, $|Z'|\ge h/4 - O(\log(ch+1)) \ge \alpha h$ and each vertex in $Z'$ has height at least $h/4 - O(\log(ch+1)) \ge \alpha h$.
 
   \begin{figure}
     \begin{center}
@@ -416,7 +416,7 @@ The next lemma is the last ingredient in the proof of \cref{main_thm}.
 \begin{proof}
   Let $x\in V(T)$ be a node that maximizes $|B_x|$.  Then $\diam_{G_h}(B_x)\le\diam_{T_h}(B_x) \le 2h$ so, by \cref{diameter_spread}, $|B_x\cap P_y|\ge |B_x|/(2h+1)$ for some $y\in V(P)$.  If $|B_x|\ge h2^{\sqrt{\log_2 h}}$ then there is nothing more to prove, so we may assume that $|B_x| < ch$ where $c:= 2^{\sqrt{\log_2 h}}$.  Note that $c\ge 1$ for any $h\ge 1$.
 
-  By \cref{startup}, with $\alpha:= 1/5$, $T$ contains a node $x_1$ such that $B_{x_1}$ contains an unrelated set $R$ of size $q_1:=|R|\ge h/25c$ where each vertex in $R$ has height at least $m:=m_1:=h/5$.  Let  $\mathcal{R}_1:=\{\{v\}:v\in R\}$.  By definition $\mathcal{R}_1$ is a $(1,0,m)$-compact set.  $\mathcal{R}_1$ will be the first in a sequence of sets $\mathcal{R}_1,\ldots,\mathcal{R}_{t+1}$. For each $i\in\{1,\ldots,t\}$, $\mathcal{R}_i$ will satisfy the following properties:
+  By \cref{startup}, with $\alpha:= 1/5$, $T$ contains a node $x_1$ such that $B_{x_1}$ contains an unrelated set $R$ of size $q_1:=|R|\ge h/25c$ where each vertex in $R$ has height at least $m:=m_1:=h/5$.  Let  $\mathcal{R}_1:=\{\{v\}:v\in R\}$.  By definition $\mathcal{R}_1$ is a $(1,0,m)$-compact set.  $\mathcal{R}_1$ will be the first in a sequence of sets $\mathcal{R}_1,\ldots,\mathcal{R}_{t+1}$. For each $i\in\{1,\ldots,t+1\}$, $\mathcal{R}_i$ will satisfy the following properties:
   \begin{enumerate}[(a)]
      \item $\mathcal{R}_i$ is a $(2^{i-1},(i-1)(\log_2(ch)+2,m)$ compact set. \label{ri_compact}
      \item $q_i:=|\mathcal{R}_i| \ge q_1/(10c)^{i-1} - 2\sum_{j=0}^{i-2}(10c)^{-j} > q_1/(10c)^{i-1} - 3$. \label{ri_size}
@@ -424,7 +424,7 @@ The next lemma is the last ingredient in the proof of \cref{main_thm}.
      \item There exists $x_i\in V(T)$ such that $\cup\mathcal{R}_i\subseteq B_{x_i}$. \label{ri_containment}
   \end{enumerate}
   It is straightforward to verify that $\mathcal{R}_1$ satisfies (\ref{ri_compact})--(\ref{ri_containment}).
-  Let $t:= \min\{t_1,t_2\}$ where $t_1:=\floor{\log_{10c}(q_1/3)}$ and $t_2:=\floor{h/(10\log_2(ch)+2)}$. Observe that, since $c<2^{\sqrt{\log_2 h}}$,  $t_1\ge \log_{10c}(h/75c)\in\Omega(\log_c h)\subseteq \Omega(\sqrt{\log h})$ and that $t_2\ge h/10(\sqrt{\log h} + \log_2 h + 2)-1\in\Omega(h/\log h)$.  Therefore $t\in\Omega(\sqrt{\log h})$. These specific values of $t_1$ and $t_2$ are chosen for the following reasons:
+  Let $t:= \min\{t_1,t_2\}$ where $t_1:=\floor{\log_{10c}(q_1/3)}$ and $t_2:=\floor{h/(10\log_2(ch)+2)}$. Observe that, since $c<2^{\sqrt{\log_2 h}}$,  $t_1\ge \log_{10c}(h/75c)\in\Omega(\log_c h)\subseteq \Omega(\sqrt{\log h})$ and that $t_2\ge h/10(\sqrt{\log_2 h} + \log_2 h + 2)-1\in\Omega(h/\log h)$.  Therefore $t\in\Omega(\sqrt{\log h})$. These specific values of $t_1$ and $t_2$ are chosen for the following reasons:
   \begin{compactenum}[(i)]
     \item Since $t\le t_1$, $q_{t+1} > q_1/(10c)^{t_1} - 3  \ge 0$.
     \item Since $t\le t_2$, $m_i \ge h/5-t_2(\floor{\log_2(ch)}+2) \ge h/10$ for each $i\in\{2,\ldots,t+1\}$.
@@ -443,7 +443,7 @@ The next lemma is the last ingredient in the proof of \cref{main_thm}.
   \end{align*}
   We define $\mathcal{R}_{i+1}\subseteq\mathcal{R}_{i+1}^+$ as the set of parts in $\mathcal{R}_{i+1}^+$ that are completely contained in $C_1\cup\cdots\cup C_{q_i'}$.  The preceding calculation shows that $\mathcal{R}_{i+1}$ satisfies (\ref{ri_size}).  Since $\cup\mathcal{R}_{i+1}$ is contained in a single component $X$ of $G_x-B_{x_i}$ and each vertex in $\cup\mathcal{R}_{i+1}$ has a neighbour (its parent in $T$) in $B_{x_i}$, \cref{tree_thingy} implies that $T$ contains an edge $x_{i}x_{i+1}$ with $\cup\mathcal{R}_{i+1}\subseteq B_{x_{i+1}}$. Therefore $\mathcal{R}_{i+1}$ satisfies (\ref{ri_containment}).
 
-  This completes the definition of $\mathcal{R}_1,\ldots,\mathcal{R}_{t+1}$. Properties~(\ref{ri_compact})--(\ref{ri_containment}) imply that, $\mathcal{R}_{t+1}$ is a $(2^t,t(\log_2(ch)+2),m)$-compact set of size $q_{t+1} > q_1/(10c)^t-3 \ge 0$ and $\mathcal{R}_{t+1}\subseteq B_{x_t}$ for some $x_t\in V(T)$.  In particular (\ref{ri_size}) implies that $\mathcal{R}_{t+1}$ is non-empty. Let $R$ be one of the sets in $\mathcal{R}_{t+1}$.  Since $\mathcal{R}_{t+1}$ is $(2^t,t(\log_2(ch)+2),m)$-compact, $|R|\ge 2^t$ and all vertices in $R$ have a common ancestor $a$ whose distance to each element of $R$ is at most $t(\log_2(ch)+2)$.  Therefore, $\diam_{G_h}(R)\le\diam_{T_h}(R)\le 2t(\log_2(ch)+2)$. By \cref{diameter_spread}, there exists some $P_y\in\mathcal{P}$ with
+  This completes the definition of $\mathcal{R}_1,\ldots,\mathcal{R}_{t+1}$. Properties~(\ref{ri_compact})--(\ref{ri_containment}) imply that, $\mathcal{R}_{t+1}$ is a $(2^t,t(\log_2(ch)+2),m)$-compact set of size $q_{t+1} > q_1/(10c)^t-3 \ge 0$ and $\cup\mathcal{R}_{t+1}\subseteq B_{x_{t+1}}$ for some $x_{t+1}\in V(T)$.  In particular (\ref{ri_size}) implies that $\mathcal{R}_{t+1}$ is non-empty. Let $R$ be one of the sets in $\mathcal{R}_{t+1}$.  Since $\mathcal{R}_{t+1}$ is $(2^t,t(\log_2(ch)+2),m)$-compact, $|R|\ge 2^t$ and all vertices in $R$ have a common ancestor $a$ whose distance to each element of $R$ is at most $t(\log_2(ch)+2)$.  Therefore, $\diam_{G_h}(R)\le\diam_{T_h}(R)\le 2t(\log_2(ch)+2)$. By \cref{diameter_spread}, there exists some $P_y\in\mathcal{P}$ with
   \begin{align*}
     |B_{x_{t+1}}\cap P_y|
     & \ge |R\cap P_y| \\
@@ -475,7 +475,7 @@ We know that every planar graph $G$ is contained in a product of the form $H\box
   Is every planar graph $G$ of maximum degree $\Delta$ contained in a product of the form $H\boxtimes P\boxtimes K_c$ where the treewidth of $H$ is $2$, $P$ is path, and $c$ is some function of $\Delta$?
 \end{quote}
 
-\cref{two_tree} and \cref{partitions_vs_products} show that $G_h$ is a subgraph of $H\boxtimes P$ where $H$ has treewidth $2$ (and is even outerplanar) and $P$ is a path. Our proof breaks down in this case because, unlike tree-partitions, outerplanar partitions do not satisfy \cref{tree_thingy}.  Indeed, the outerplanar-partition illustrated in \cref{two_tree} contains a part $B_x$ and a component $X$ of $G_h-B_x$ with $|N_{G_h}(B_x)\cap V(X)|=h$.  In a tree-partition this would imply that $|N_{G_h}(B_x)\cap V(X)\cap B_y|=h$ for some other part $B_y$ of the partition.  In contrast, for the outerplanar partition shown in \cref{two_tree}, $|N_{G_h}(B_x)\cap V(X)\cap B_y|\le 1$ for each $y\in V(H)$.
+\cref{two_tree} and \cref{partitions_vs_products} show that $G_h$ is a subgraph of $H\boxtimes P$ where $H$ has treewidth $2$ (and is even outerplanar) and $P$ is a path. Our proof breaks down in this case because, unlike tree-partitions, outerplanar-partitions do not satisfy \cref{tree_thingy}.  Indeed, the outerplanar-partition illustrated in \cref{two_tree} contains a part $B_x$ and a component $X$ of $G_h-B_x$ with $|N_{G_h}(B_x)\cap V(X)|=h$.  In a tree-partition this would imply that $|N_{G_h}(B_x)\cap V(X)\cap B_y|=h$ for some other part $B_y$ of the partition.  In contrast, for the outerplanar-partition shown in \cref{two_tree}, $|N_{G_h}(B_x)\cap V(X)\cap B_y|\le 1$ for each $y\in V(H)$.
 
 
 \begin{figure}
@@ -484,7 +484,7 @@ We know that every planar graph $G$ is contained in a product of the form $H\box
       \includegraphics[scale=.7]{figs/g_5-2} & \includegraphics[scale=.7]{figs/g_5-3}
     \end{tabular}
   \end{center}
-  \caption{An outerplanar partition $\mathcal{H}$ and a path-partition $\mathcal{P}$ of $G_5$ for which $|B\cap P|\le 1$ for each $B\in\mathcal{H}$ and $P\in\mathcal{P}$.}
+  \caption{An outerplanar-partition $\mathcal{H}$ and a path-partition $\mathcal{P}$ of $G_5$ for which $|B\cap P|\le 1$ for each $B\in\mathcal{H}$ and $P\in\mathcal{P}$.}
   \label{two_tree}
 \end{figure}
 
