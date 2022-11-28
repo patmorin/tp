@@ -78,7 +78,7 @@
 \renewcommand{\ge}{\geqslant}
 \renewcommand{\geq}{\geqslant}
 
-\title{\MakeUppercase{Bounded-Degree Planar Graphs Don't Have Bounded-Degree Product Structure}}
+\title{\MakeUppercase{Bounded-Degree Planar Graphs Do Not Have Bounded-Degree Product Structure}}
 
 \author{%
   Vida Dujmović\thanks{Department of Computer Science and Electrical Engineering, University of Ottawa, Ottawa, Canada.}\, \thanks{Research partly supported by NSERC.} \quad
@@ -109,7 +109,7 @@ Recently, product structure theorems have been a key tool in resolving a number 
   \item for each $v\in V(H)$, the induced subgraph $T[x\in V(T):v\in B_x]$ is connected; and
   \item for each edge $vw\in E(H)$, there exists some $x\in V(T)$ with $\{v,w\}\subsetcong B_x$.
 \end{inparaenum}
-The \defin{width} of such a tree decomposition is $\max\{|B_x|:x\in V(T)\}-1$. The \defin{treewidth} of $H$ is the minimum width of any tree decomposition of $H$.} $t$ and a path $P$ such that $G$ is isomorphic to a subgraph of the strong product\footnote{The \defin{strong product} $G_1\boxtimes G_2$ of two graphs $G_1$ and $G_2$ is the graph with vertex set $V(G_1\boxtimes G_2):=V(G_1)\times V(G_2)$ and that includes the edge with endpoints $(v,x)$ and $(w,y)$ if and only if
+The \defin{width} of such a tree decomposition is $\max\{|B_x|:x\in V(T)\}-1$. The \defin{treewidth} of $H$ is the minimum width of any tree decomposition of $H$.} $t$ and a path $P$ such that $G$ is isomorphic to a subgraph of the strong product\footnote{The \defin{strong product} $G_1\boxtimes G_2$ of two graphs $G_1$ and $G_2$ is the graph with vertex-set $V(G_1\boxtimes G_2):=V(G_1)\times V(G_2)$ and that includes the edge with endpoints $(v,x)$ and $(w,y)$ if and only if
 \begin{inparaenum}[(i)]
   \item $vw\in E(G_1)$ and $x=y$;
   \item $v=w$ and $xy\in E(G_2)$; or
@@ -142,7 +142,7 @@ The graph family $\mathcal{G}:=\{G_h:h\in\N\}$ that establishes \cref{main_thm} 
 
 \section{Proof of \cref{main_thm}}
 
-Throughout this paper, all graphs $G$ are simple and undirected with vertex set $V(G)$ and edge set $E(G)$.  For a set $S$, $G[S]$ denotes the subgraph of $G$ induced by $S\cap V(G)$ and $G-S:=G[V(G)\setminus S]$.  For every $v\in V(G)$, let $N_G(v):=\{w:vw\in E(G)\}$ and for every $S\subseteq V(G)$, let $N_G(S):=\bigcup_{v\in S} N_G(v)\setminus S$.  We write $G_1\cong G_2$ if $G_1$ and $G_2$ are isomorphic and $G_1\subsetcong G_2$ if $G_1$ is isomorphic to some subgraph of $G_2$.
+Throughout this paper, all graphs $G$ are simple and undirected with vertex-set $V(G)$ and edge-set $E(G)$.  For a set $S$, $G[S]$ denotes the subgraph of $G$ induced by $S\cap V(G)$ and $G-S:=G[V(G)\setminus S]$.  For every $v\in V(G)$, let $N_G(v):=\{w:vw\in E(G)\}$ and for every $S\subseteq V(G)$, let $N_G(S):=\bigcup_{v\in S} N_G(v)\setminus S$.  We write $G_1\cong G_2$ if $G_1$ and $G_2$ are isomorphic and $G_1\subsetcong G_2$ if $G_1$ is isomorphic to some subgraph of $G_2$.
 
 \subsection{Partitions}
 
@@ -171,7 +171,7 @@ The following important result of \citet{ding.oporowski:some} (also see \cite{wo
   By \cref{dingy}, $H$ has a tree-partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ of width at most $24\Delta (t+1)$. By \cref{partitions_vs_products}, $H \subsetcong T\boxtimes K_{24\Delta (t+1)}$.  Therefore, $G\subsetcong T\boxtimes K_{24\Delta (t+1)}\boxtimes P\boxtimes K_c \cong T\boxtimes P\boxtimes K_{24c\Delta (t+1)}$.
 \end{proof}
 
-The \defin{length} of a path is the number of edges in it. Given two vertices $v,w\in V(G)$, $\dist_G(v,w)$ denotes the minimum length of a path in $G$ that contains $v$ and $w$, or $\dist_G(v,w):=\infty$ if $v$ and $w$ are in different connected components of $G$. For any $R\subseteq V(G)$, the \defin{diameter} of $R$ in $G$ is $\diam_G(R):=\max\{\dist_G(v,w):v,w\in R\}$.
+The \defin{length} of a path is the number of edges in it. Given two vertices $v,w\in V(G)$, $\dist_G(v,w)$ denotes the minimum length of a path in $G$ that contains $v$ and $w$, or $\dist_G(v,w)$ is infinite if $v$ and $w$ are in different connected components of $G$. For any $R\subseteq V(G)$, the \defin{diameter} of $R$ in $G$ is $\diam_G(R):=\max\{\dist_G(v,w):v,w\in R\}$.
 
 \begin{obs}\label{diameter_spread}
   Let $G$ be a graph, let $R\subseteq V(G)$, and let $\mathcal{L}$ be a layering of $G$.  Then there exists a layer $L\in\mathcal{L}$ such that $|R\cap L|\ge |R|/(\diam_G(R)+1)$.
@@ -197,7 +197,7 @@ We also make use of the following basic fact about tree-partitions:
 
 The \defin{depth} of a vertex $v$ in a rooted tree $T$ is the length of the path $P_T(v)$ from $v$ to the root of $T$.  Each vertex $a\in V(P_T(v))$ is an \defin{ancestor} of $v$, and $v$ is a \defin{descendant} of each vertex in $V(P_T(v))$.  We say that a set $B\subseteq V(T)$ is \defin{unrelated} if no vertex of $B$ is an ancestor of any other vertex in $B$.
 
-For each $h\in\N$, let $T_h$ denote the complete binary tree of height $h$; i.e., the rooted ordered tree with $2^h$ leaves, each having depth $h$ and in which each non-leaf vertex has exactly two children, one \defin{left child} and one \defin{right child}.  Note that the ordering of $T_h$ induces an ordering on every unrelated set $B\subseteq V(T_h)$, which we refer to as the \defin{left-to-right ordering}.  Specifically, $v\in B$ appears before $w\in B$ in the left-to-right ordering of $B$ if and only if there exists a common ancestor $a$ of both $v$ and $w$ such that the path from $a$ to $v$ contains the left child of $a$ and the path from $a$ to $w$ contains the right child of $a$.
+For each $h\in\N$, let $T_h$ denote the complete binary tree of height $h$; that is, the rooted ordered tree with $2^h$ leaves, each having depth $h$ and in which each non-leaf vertex has exactly two children, one \defin{left child} and one \defin{right child}.  Note that the ordering of $T_h$ induces an ordering on every unrelated set $B\subseteq V(T_h)$, which we refer to as the \defin{left-to-right ordering}.  Specifically, $v\in B$ appears before $w\in B$ in the left-to-right ordering of $B$ if and only if there exists a common ancestor $a$ of both $v$ and $w$ such that the path from $a$ to $v$ contains the left child of $a$ and the path from $a$ to $w$ contains the right child of $a$.
 
 We use the following two percolation-type results for $T_h$.
 
@@ -237,7 +237,7 @@ We use the following two percolation-type results for $T_h$.
 
 \subsection{A Connectivity Lemma}
 
-The \defin{$x\times y$ grid} $G_{x\times y}$ is the graph with vertex set $V(G_{x\times y}):=\{1,\ldots,x\}\times\{1,\ldots,y\}$ and that contains an edge with endpoints $(x_1,y_1)$ and $(x_2,y_2)$ if and only if $|x_1-x_2|+|y_1-y_2|=1$.  An edge of $G_{x\times y}$ is \defin{horizontal} if its two endpoints agree in the second (y) coordinate.  For each $i\in\{1,\ldots,x\}$, the vertex set $\{i\}\times\{1,\ldots,y\}$ is called \defin{column $i$} of $G_{x\times y}$.  A set $C$ of columns is \defin{consecutive} if $G_{x\times y}[\cup C]$ is connected.
+The \defin{$x\times y$ grid} $G_{x\times y}$ is the graph with vertex-set $V(G_{x\times y}):=\{1,\ldots,x\}\times\{1,\ldots,y\}$ and that contains an edge with endpoints $(x_1,y_1)$ and $(x_2,y_2)$ if and only if $|x_1-x_2|+|y_1-y_2|=1$.  An edge of $G_{x\times y}$ is \defin{horizontal} if its two endpoints agree in the second (y) coordinate.  For each $i\in\{1,\ldots,x\}$, the vertex-set $\{i\}\times\{1,\ldots,y\}$ is called \defin{column $i$} of $G_{x\times y}$.  A set $C$ of columns is \defin{consecutive} if $G_{x\times y}[\cup C]$ is connected.
 
 
 \begin{lem}\label{grid_connectivity}
@@ -260,11 +260,11 @@ We are now ready to prove the following result that, combined with \cref{ding_tr
 
 It is worth noting that, unlike \cref{main_thm}, there is no restriction on the maximum degree of the tree $T$.
 
-Before diving into technical details we first sketch our strategy for proving \cref{main_thm_tree}.  We may assume that $c \le 2^{\sqrt{\log h}}$ since, otherwise there is nothing to prove.  Recall \cref{partitions_vs_products} which states that if $G_h\subsetcong T\boxtimes P\boxtimes K_c$ then $G_h$ has a tree-partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ and a path-partition (i.e., layering) $\mathcal{P}:=\{P_y:y\in V(P)\}$ with $|B_x\cap P_y|\le c$ for each $(x,y)\in V(T)\times V(P)$. However, since $G_h$ has diameter $2h$, \cref{diameter_spread} implies that $|B_x|\le c(2h+1)$. This upper bound on $|B_x|$ is used to establish all of the results described in the following paragraph.
+Before diving into technical details we first sketch our strategy for proving \cref{main_thm_tree}.  We may assume that $c \le 2^{\sqrt{\log h}}$ since, otherwise there is nothing to prove.  Recall \cref{partitions_vs_products} which states that if $G_h\subsetcong T\boxtimes P\boxtimes K_c$ then $G_h$ has a tree-partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ and a path-partition (that is, layering) $\mathcal{P}:=\{P_y:y\in V(P)\}$ with $|B_x\cap P_y|\le c$ for each $(x,y)\in V(T)\times V(P)$. However, since $G_h$ has diameter $2h$, \cref{diameter_spread} implies that $|B_x|\le c(2h+1)$. This upper bound on $|B_x|$ is used to establish all of the results described in the following paragraph.
 
 \begin{figure}
   \begin{center}
-    \includegraphics{figs/sketch}
+    \includegraphics[width=.95\textwidth]{figs/sketch}
   \end{center}
   \caption{The proof of \cref{main_thm_tree}.}
   \label{sketch}
@@ -301,11 +301,11 @@ Since $R\subseteq B_{x_{t+1}}$, $|B_{x_{t+1}}\cap P_y|\ge 2^{\Omega(\sqrt{\log h
 We now proceed with the details of the proof outlined above.  The next two lemmas will be used to obtain the set $\mathcal{R}_1$ that allows us to start the argument.  Informally, the first lemma says that every balanced separator $S$ of $G_h$ must contain a vertex of depth $i$ for each $i\in\{i_0,\ldots,h\}$, where $i_0\in O(\log|S|)$.
 
 \begin{lem}\label{small_depth_separator}
-  Let $h\in\N$ with $h\geq 1$, let $S\subseteq V(G_h)$, $S\neq\emptyset$, and let $i_0:=\ceil{\max\{2\log|S|+2, \log(1+(h+2)|S|)-1\}}$.  If $G_h-S$ has no component with more than $|V(G_h)|/2$ vertices then $S\cap V(P_i)\neq\emptyset$, for each $i\in\{i_0,\ldots,h\}$.
+  Let $h\in\N$ with $h\geq 1$, let $S\subseteq V(G_h)$, $S\neq\emptyset$.  If $G_h-S$ has no component with more than $|V(G_h)|/2$ vertices then $S\cap V(P_i)\neq\emptyset$, for each $i\in\{i_0,\ldots,h\}$, where $i_0:=\ceil{\max\{2\log|S|+2, \log(1+(h+2)|S|)-1\}}$.
 \end{lem}
 
 \begin{proof}
-  Let $C$ be the vertex set of a component of $G_h-S$ that maximizes $C\cap V(P_h)$. For each $i\in\{0,\ldots,h\}$, let $C_i:=C\cap V(P_i)$ and let $S_i:=S\cap V(P_i)$. We will show that, for each $i\ge i_0$, $C_i$ is non-empty but does not contain all $2^i$ vertices in $P_i$.  Therefore $S_i\supseteq N_{G_h}(C_i)\cap V(P_i)\neq\emptyset$ for each $i\in\{i_0,\ldots,h\}$.
+  Let $C$ be the vertex-set of a component of $G_h-S$ that maximizes $C\cap V(P_h)$. For each $i\in\{0,\ldots,h\}$, let $C_i:=C\cap V(P_i)$ and let $S_i:=S\cap V(P_i)$. We will show that, for each $i\ge i_0$, $C_i$ is non-empty but does not contain all $2^i$ vertices in $P_i$.  Therefore $S_i\supseteq N_{G_h}(C_i)\cap V(P_i)\neq\emptyset$ for each $i\in\{i_0,\ldots,h\}$.
 
   For each $i\in\{0,\ldots,h-1\}$, the vertices in $C_{i+1}$ are adjacent to at least $|C_{i+1}|/2$ vertices of $P_{i}$, so $|C_i|\ge |N_{G_h}(C_{i+1})\cap V(P_i)\setminus S_i| \ge |C_{i+1}|/2 - |S_i|$.  Iterating this inequality $h-i$ times gives $|C_i|\ge |C_h|/2^{h-i}-\sum_{j=i}^{h-1}|S_j|/2^{h-i-1}\ge |C_h|/2^{h-i}-|S|$.  The vertices in $S$ partition $V(P_h)\setminus S$ into at most $|S|+1$ connected components.  Since $C$ is chosen to maximize $|C_h|$, $|C_h| \ge (2^h-|S|)/(|S|+1) > 2^{h}/(|S|+1) - 1$.  Therefore,
   \begin{equation}
