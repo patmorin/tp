@@ -146,7 +146,7 @@ Throughout this paper, all graphs $G$ are simple and undirected with vertex set 
 
 \subsection{Partitions}
 
-Let $G$ and $H$ be graphs.  An \defin{$H$-partition} $\mathcal{H}:=\{B_x:x\in V(H)\}$ of $G$ is a partition of $V(G)$ whose parts are indexed by the vertices of $H$ with the property that, if $vw$ is an edge of $G$ with $v\in B_x$ and $w\in B_y$ then $x=y$ or $xy\in E(H)$.  The \defin{width} of $\mathcal{H}$ is the size of its largest part; that is, $\max\{|B_x|:x\in V(H)\}$. 
+Let $G$ and $H$ be graphs.  An \defin{$H$-partition} $\mathcal{H}:=\{B_x:x\in V(H)\}$ of $G$ is a partition of $V(G)$ whose parts are indexed by the vertices of $H$ with the property that, if $vw$ is an edge of $G$ with $v\in B_x$ and $w\in B_y$ then $x=y$ or $xy\in E(H)$.  The \defin{width} of $\mathcal{H}$ is the size of its largest part; that is, $\max\{|B_x|:x\in V(H)\}$.
 If $H$ is in a class $\mathcal{G}$ of graphs then we may call $\mathcal{H}$ a $\mathcal{G}$-partition of $G$.  Specifically, if $H$ is a tree, then $\mathcal{H}$ is a \defin{tree-partition} of $G$ and if $H$ is a path, then $\mathcal{H}$ is a \defin{path-partition} of $G$.  A path-partition $\mathcal{P}:=\{P_x:x\in V(P)\}$ of $G$ is also referred to as a \defin{layering} of $G$ and the parts of $\mathcal{P}$ are referred to as \defin{layers}.  A set of layers $\{P_{x_1},\ldots,P_{x_q}\}\subseteq\mathcal{P}$ is \defin{consecutive} if $P[\{x_1,\ldots,x_q\}]$ is connected.
 
 As in previous works, we make use of the following relationship between $H$-partitions and strong products, which follows immediately from the preceding definitions.
@@ -270,23 +270,33 @@ Before diving into technical details we first sketch our strategy for proving \c
   \label{sketch}
 \end{figure}
 
-Refer to \cref{sketch}.
-Our strategy is to first show that $\mathcal{T}$ has some part $B_{x_1}$ that contains an unrelated set $\mathcal{R}_1$ of size $\Omega(h/c)$ and such that each vertex in $\mathcal{R}_1$ has height at least $\alpha h$ for some constant $\alpha>0$.  Next we show that $x_1$ has a neighbour $x_2$ in $T$ such that $B_{x_2}$ contains an unrelated set $\mathcal{R}_2$ that is of size at least $(\alpha/c)|\mathcal{R}_1|$, whose elements can be partitioned into pairs so that each pair has a common ancestor in $\mathcal{R}_1$ that is at distance at most $a\in O(\log(ch))$ from both vertices in the pair.  We now iterate this argument.  During each iteration, the number of parts decreases by a factor of $\alpha/c$ but the size of each surviving part doubles.  In this way, we obtain a sequence of unrelated sets $\mathcal{R}_1,\ldots,\mathcal{R}_{t+1}$. Each set $\mathcal{R}_i$ is contained in a single part $B_{x_i}$ of $\mathcal{T}$.  Each set $\mathcal{R}_i$ has at least $(\alpha/c)^{i-1}|\mathcal{R}_1|=\Omega((\alpha/c)^{i} h)$ parts, each of size $2^{i-1}$.   The vertices in each part $R$ of $\mathcal{R}_i$ all have a common ancestor in $\mathcal{R}_1$ that is at distance at most $(i-1)a=O(i\log(ch))$ from all elements in $R$, which implies that $\diam_{G_h}(R)=O(i\log(ch))$.
+Refer to \cref{sketch}.  We will construct a sequence of sets $\mathcal{R}_1,\ldots,\mathcal{R}_{t+1}$ and a sequence of nodes $x_1,\ldots,x_{t+1}$ of $T$, where each $\mathcal{R}_i$ is a family of unrelated sets such that $\cup\mathcal{R}_i\subseteq B_{x_i}$. The first family $\mathcal{R}_1$ has size $q_1\ge h/(25c)$ and, for each $i\in\{2,\ldots,t+1\}$, $\mathcal{R}_i$ has size $q_i\ge q_1/(10c)^{i-1}-3$. For each $\mathcal{R}_i:=\{R_{i,1},\ldots,R_{i,q_i}\}$, each $R_{i,j}\subseteq V(T)$ is an unrelated set of size $2^{i-1}$ that has a common ancestor $a_{i,j}$ of height at least $h/5$ that is at distance at most $(i-1)(\log_2(ch)+2)$ from every element in $R_{i,j}$. Furthermore, $\{a_{i,1},\ldots,a_{i,q_{i}}\}$ is an unrelated set. These properties imply that $\cup\mathcal{R}_i$ is also an unrelated set.
 
-The number of parts in $\mathcal{R}_{t+1}$ is at least
-\begin{align*}
-  \Omega((\alpha/c)^{t+1} h)
-  & = \exp(\log h - (t+1)\log c - O(t)) \\
-  & \ge \exp(\log h - (t+1)\sqrt{\log h} - O(t))
-    & \text{(since $c\le 2^{\sqrt{\log h}}$ so $\log c\le \sqrt{\log h}$)} \\
-  & \ge 1
-\end{align*}
-for some appropriately chosen $t\in \Theta(\sqrt{\log h})$.  Therefore $\mathcal{R}_{t+1}$ contains at least one part $R$. By \cref{diameter_spread}, there exists some $y \in V(P)$ such that
+We do this for some appropriately chosen integer $t\in\Theta(\sqrt{\log h})$ in order to ensure that $q_{t+1}\ge 1$, so $\mathcal{R}_{t+1}$ contains at least one part $R$ of size $2^t$.
+%
+% Each unrelated set $R\in\mathcal{R}_i$ has size at least $2^i$, $\cup\mathcal{R}_i$ is an unrelated set and all the elements in $\cup\mathcal{R}_i$ have common ancestor $a$ of height at least  $\alpha h$ and
+%
+% of size at least $q_i := (\alpha/c)^{i-1}
+% Our strategy is to first show that $\mathcal{T}$ has some part $B_{x_1}$ that contains an unrelated set $\mathcal{R}_1$ of size
+%
+%
+% $\Omega(h/c)$ and such that each vertex in $\mathcal{R}_1$ has height at least $\alpha h$ for some constant $\alpha>0$.  Next we show that $x_1$ has a neighbour $x_2$ in $T$ such that $B_{x_2}$ contains an unrelated set $\mathcal{R}_2$ that is of size at least $(\alpha/c)|\mathcal{R}_1|$, whose elements can be partitioned into pairs so that each pair has a common ancestor in $\mathcal{R}_1$ that is at distance at most $a\in O(\log(ch))$ from both vertices in the pair.  We now iterate this argument.  During each iteration, the number of parts decreases by a factor of $\alpha/c$ but the size of each surviving part doubles.  In this way, we obtain a sequence of unrelated sets $\mathcal{R}_1,\ldots,\mathcal{R}_{t+1}$. Each set $\mathcal{R}_i$ is contained in a single part $B_{x_i}$ of $\mathcal{T}$.  Each set $\mathcal{R}_i$ has at least $(\alpha/c)^{i-1}|\mathcal{R}_1|=\Omega((\alpha/c)^{i} h)$ parts, each of size $2^{i-1}$.   The vertices in each part $R$ of $\mathcal{R}_i$ all have a common ancestor in $\mathcal{R}_1$ that is at distance at most $(i-1)a=O(i\log(ch))$ from all elements in $R$, which implies that $\diam_{G_h}(R)=O(i\log(ch))$.
+%
+% The number of parts in $\mathcal{R}_{t+1}$ is at least
+% \begin{align*}
+%   \Omega((\alpha/c)^{t+1} h)
+%   & = \exp(\log h - (t+1)\log c - O(t)) \\
+%   & \ge \exp(\log h - (t+1)\sqrt{\log h} - O(t))
+%     & \text{(since $c\le 2^{\sqrt{\log h}}$ so $\log c\le \sqrt{\log h}$)} \\
+%   & \ge 1
+% \end{align*}
+% for some appropriately chosen $t\in \Theta(\sqrt{\log h})$.  Therefore $\mathcal{R}_{t+1}$ contains at least one part $R$.
+By \cref{diameter_spread}, there exists some $y \in V(P)$ such that
 \[
-  |R\cap P_y| \ge \frac{|R|}{\diam_{G_h}(R)+1} = \frac{2^t}{O(t\log(ch))}
-  = 2^{t-\log_2(t\log(ch))-O(1)} = 2^{\Omega(t)} = 2^{\Omega(\sqrt{\log h})} \enspace .
+  |R\cap P_y| \ge \frac{|R|}{\diam_{G_h}(R)+1} \ge \frac{2^t}{2(i-1)(\log(ch)+2)+1}
+  = 2^{t-\log_2(t\log(ch))-O(1)} =  2^{\Omega(t)} = 2^{\Omega(\sqrt{\log h})} \enspace .
 \]
-Since $R\subseteq B_{x_{t+1}}$, $|B_{x_{t+1}}\cap P_y|\ge 2^{\Omega(\sqrt{\log h})}$.  Since $c\ge \max\{|B_x\cap P_y|:(x,y)\in V(T)\times V(P)\}$, the assumption that $c\le 2^{\sqrt{\log h}}$ therefore leads to the conclusion that $c\ge 2^{\Omega(\sqrt{\log h})}$, which establishes \cref{main_thm}.
+Since $R\subseteq B_{x_{t+1}}$, $|B_{x_{t+1}}\cap P_y|\ge 2^{\Omega(\sqrt{\log h})}$. Since $c\ge \max\{|B_x\cap P_y|:(x,y)\in V(T)\times V(P)\}$, the assumption that $c\le 2^{\sqrt{\log h}}$ therefore leads to the conclusion that $c\ge 2^{\Omega(\sqrt{\log h})}$, which establishes \cref{main_thm}.
 
 We now proceed with the details of the proof outlined above.  The next two lemmas will be used to obtain the set $\mathcal{R}_1$ that allows us to start the argument.  Informally, the first lemma says that every balanced separator $S$ of $G_h$ must contain a vertex of depth $i$ for each $i\in\{i_0,\ldots,h\}$, where $i_0\in O(\log|S|)$.
 
@@ -419,9 +429,9 @@ The next lemma is the last ingredient in the proof of \cref{main_thm}.
 
   By \cref{startup}, with $\alpha:= 1/5$, $T$ contains a node $x_1$ such that $B_{x_1}$ contains an unrelated set $R$ of size $q_1:=|R|\ge h/25c$ where each vertex in $R$ has height at least $m:=m_1:=h/5$.  Let  $\mathcal{R}_1:=\{\{v\}:v\in R\}$.  By definition $\mathcal{R}_1$ is a $(1,0,m)$-compact set.  $\mathcal{R}_1$ will be the first in a sequence of sets $\mathcal{R}_1,\ldots,\mathcal{R}_{t+1}$, where $t$ will be fixed below. For each $i\in\{1,\ldots,t+1\}$, $\mathcal{R}_i$ will satisfy the following properties:
   \begin{enumerate}[(a)]
-     \item $\mathcal{R}_i$ is a $(2^{i-1},(i-1)(\log_2(ch)+2,m)$ compact set. \label{ri_compact}
-     \item $q_i:=|\mathcal{R}_i|$, with $q_i > q_{i-1}/(10c) - 2$ if $i\ge 2$. \label{ri_size} 
-     % \item $q_i:=|\mathcal{R}_i| \ge q_1/(10c)^{i-1} - 2\sum_{j=0}^{i-2}(10c)^{-j} > q_1/(10c)^{i-1} - 3$. \label{ri_size} 
+     \item $\mathcal{R}_i$ is a $(2^{i-1},(i-1)(\log_2(ch)+2),m)$ compact set. \label{ri_compact}
+     \item $q_i:=|\mathcal{R}_i|$, with $q_i > q_{i-1}/(10c) - 2$ if $i\ge 2$. \label{ri_size}
+     % \item $q_i:=|\mathcal{R}_i| \ge q_1/(10c)^{i-1} - 2\sum_{j=0}^{i-2}(10c)^{-j} > q_1/(10c)^{i-1} - 3$. \label{ri_size}
      % \item Each vertex in $\cup\mathcal{R}_i$ has height at least $m_i:=h/5-(i-1)(\log_2(ch)+2)$. \label{ri_height}
      \item There exists $x_i\in V(T)$ such that $\cup\mathcal{R}_i\subseteq B_{x_i}$. \label{ri_containment}
   \end{enumerate}
@@ -429,15 +439,15 @@ The next lemma is the last ingredient in the proof of \cref{main_thm}.
   \[
   q_i > q_1/(10c)^{i-1} - 3 \enspace .
   \]
-  Indeed, the base case $i=1$ holds trivially, and for the inductive case ($i\geq 2$) we have $q_i > q_{i-1}/(10c) - 2 > (q_1/(10c)^{i-2} - 3)/(10c) -2 > q_1/(10c)^{i-1} - 3$. 
+  Indeed, the base case $i=1$ holds trivially, and for the inductive case ($i\geq 2$) we have $q_i > q_{i-1}/(10c) - 2 > (q_1/(10c)^{i-2} - 3)/(10c) -2 > q_1/(10c)^{i-1} - 3$.
 
-  It is straightforward to verify that $\mathcal{R}_1$ satisfies (\ref{ri_compact})--(\ref{ri_containment}). 
+  It is straightforward to verify that $\mathcal{R}_1$ satisfies (\ref{ri_compact})--(\ref{ri_containment}).
   Let $t:= \min\{t_1,t_2\}$ where $t_1:=\floor{\log_{10c}(q_1/3)}$ and $t_2:=\floor{h/(10(\sqrt{\log_2 h} + \log_2 h) + 2)}$. Observe that, since $c=2^{\sqrt{\log_2 h}}$,  $t_1\ge \log_{10c}(h/75c)\in\Omega(\log_c h)\subseteq \Omega(\sqrt{\log h})$ and that $t_2\ge h/(10(\sqrt{\log_2 h} + \log_2 h) + 2)-1\in\Omega(h/\log h)$.  Therefore $t\in\Omega(\sqrt{\log h})$. These specific values of $t_1$ and $t_2$ are chosen for the following reasons:
   \begin{compactenum}[(i)]
     \item Since $t\le t_1$, $q_{t+1} > q_1/(10c)^{t_1} - 3  \ge 0$, so $q_{t+1}\ge 1$.
     \item Since $t\le t_2$, $m_i \ge h/5-t_2(\floor{\log_2(ch)}+2) \ge h/10$ for each $i\in\{2,\ldots,t+1\}$.
   \end{compactenum}
-  We now describe how to obtain $\mathcal{R}_{i+1}$ from $\mathcal{R}_i$ for each $i\in\{1,\ldots,t\}$.  By \cref{compatible_set} (applied to $\mathcal{R}:=\mathcal{R}_i$ and $S:=B_{x_i}$), $T_h$ contains a $(2^i,i\log_2(ch)+2,m)$-compact set $\mathcal{R}_{i+1}^+$ of size $q_i$ that is compatible with $B_{x_i}$. For each $v\in\cup\mathcal{R}_{i+1}^+$, $v$ has height at least $m_{i+1}:=m_i-(\floor{\log_2(ch)}+2)\ge h/5-i(\floor{\log_2(ch)}+2)$.  Therefore $\mathcal{R}_{i+1}^+$ satisfies (\ref{ri_compact}),% and (\ref{ri_height}),  
+  We now describe how to obtain $\mathcal{R}_{i+1}$ from $\mathcal{R}_i$ for each $i\in\{1,\ldots,t\}$.  By \cref{compatible_set} (applied to $\mathcal{R}:=\mathcal{R}_i$ and $S:=B_{x_i}$), $T_h$ contains a $(2^i,i\log_2(ch)+2,m)$-compact set $\mathcal{R}_{i+1}^+$ of size $q_i$ that is compatible with $B_{x_i}$. For each $v\in\cup\mathcal{R}_{i+1}^+$, $v$ has height at least $m_{i+1}:=m_i-(\floor{\log_2(ch)}+2)\ge h/5-i(\floor{\log_2(ch)}+2)$.  Therefore $\mathcal{R}_{i+1}^+$ satisfies (\ref{ri_compact}),% and (\ref{ri_height}),
   but does not necessarily satisfy (\ref{ri_containment}).  Next we show how to extract $\mathcal{R}_{i+1}\subseteq\mathcal{R}_{i+1}^+$ that also satisfies (\ref{ri_size}) and (\ref{ri_containment}).
 
   For each $v\in \cup\mathcal{R}_{i+1}^+$, $T_h-B_{x_i}$ contains a path $P_v$ from $v$ to a leaf of $T_h$.  The union of the paths in $P_{h-m_{i+1}},\ldots,P_{h}$ and the paths in $\mathcal{C}_i:=\{P_v:v\in\cup\mathcal{R}_{i+1}^+\}$ contains a subgraph $G'$ isomorphic to a graph that can be obtained from $G_{2^{i}q_i\times m_{i+1}}$ by subdividing horizontal edges.  By \cref{grid_connectivity} applied to $G:=G'$ with $S:=B_{x_i}$ and $p:=ch/m_{i+1}$, some component $X'$ of $G'-B_{x_i}$ contains  $q_i'\ge 2^{i}q_im_{i+1}/(ch)\ge 2^iq_i/(10c)$ consecutive columns $C_1,\ldots,C_{q_i'}$ of $G'$.  The component $X'$ is contained in some component $X$ of $G_h-B_{x_i}$.
@@ -452,8 +462,8 @@ The next lemma is the last ingredient in the proof of \cref{main_thm}.
   \end{align*}
   We define $\mathcal{R}_{i+1}\subseteq\mathcal{R}_{i+1}^+$ as the set of parts in $\mathcal{R}_{i+1}^+$ that are completely contained in $C_1\cup\cdots\cup C_{q_i'}$.  The preceding calculation shows that $\mathcal{R}_{i+1}$ satisfies (\ref{ri_size}).  Since $\cup\mathcal{R}_{i+1}$ is contained in a single component $X$ of $G_x-B_{x_i}$ and each vertex in $\cup\mathcal{R}_{i+1}$ has a neighbour (its parent in $T$) in $B_{x_i}$, \cref{tree_thingy} implies that $T$ contains an edge $x_{i}x_{i+1}$ with $\cup\mathcal{R}_{i+1}\subseteq B_{x_{i+1}}$. Therefore $\mathcal{R}_{i+1}$ satisfies (\ref{ri_containment}).
 
-  This completes the definition of $\mathcal{R}_1,\ldots,\mathcal{R}_{t+1}$. Properties~(\ref{ri_compact})--(\ref{ri_containment}) imply that, $\mathcal{R}_{t+1}$ is a $(2^t,t(\log_2(ch)+2),m)$-compact set of size $q_{t+1} \ge 1$ and $\cup\mathcal{R}_{t+1}\subseteq B_{x_{t+1}}$ for some $x_{t+1}\in V(T)$.  
-  % In particular (\ref{ri_size}) implies that $\mathcal{R}_{t+1}$ is non-empty.  
+  This completes the definition of $\mathcal{R}_1,\ldots,\mathcal{R}_{t+1}$. Properties~(\ref{ri_compact})--(\ref{ri_containment}) imply that, $\mathcal{R}_{t+1}$ is a $(2^t,t(\log_2(ch)+2),m)$-compact set of size $q_{t+1} \ge 1$ and $\cup\mathcal{R}_{t+1}\subseteq B_{x_{t+1}}$ for some $x_{t+1}\in V(T)$.
+  % In particular (\ref{ri_size}) implies that $\mathcal{R}_{t+1}$ is non-empty.
   Let $R$ be one of the sets in $\mathcal{R}_{t+1}$.  Since $\mathcal{R}_{t+1}$ is $(2^t,t(\log_2(ch)+2),m)$-compact, $|R|\ge 2^t$ and all vertices in $R$ have a common ancestor $a$ whose distance to each element of $R$ is at most $t(\log_2(ch)+2)$.  Therefore, $\diam_{G_h}(R)\le\diam_{T_h}(R)\le 2t(\log_2(ch)+2)$. By \cref{diameter_spread}, there exists some $P_y\in\mathcal{P}$ with
   \begin{align*}
     |B_{x_{t+1}}\cap P_y|
