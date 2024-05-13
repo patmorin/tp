@@ -260,7 +260,7 @@ We are now ready to prove the following result that, combined with \cref{ding_tr
 
 It is worth noting that, unlike \cref{main_thm}, there is no restriction on the maximum degree of the tree $T$.
 
-Before diving into technical details, we first sketch our strategy for proving \cref{main_thm_tree}.  We may assume that $c \le 2^{\sqrt{\log h}}$ since, otherwise there is nothing to prove.  Recall \cref{partitions_vs_products}, which states that if $G_h\subsetcong T\boxtimes P\boxtimes K_c$ then $G_h$ has a tree-partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ and a path-partition (that is, layering) $\mathcal{P}:=\{P_y:y\in V(P)\}$ with $|B_x\cap P_y|\le c$ for each $(x,y)\in V(T)\times V(P)$. However, since $G_h$ has diameter $2h$, \cref{diameter_spread} (with $R=B_x$) implies that $|B_x|\le c(2h+1)$ for each $x\in V(T)$. This upper bound on $|B_x|$ is used to establish all of the results described in the following paragraph.
+Before diving into technical details, we first sketch our strategy for proving \cref{main_thm_tree}.  We may assume that $c \le 2^{\sqrt{\log_2 h}}$ since, otherwise there is nothing to prove.  Recall \cref{partitions_vs_products}, which states that if $G_h\subsetcong T\boxtimes P\boxtimes K_c$ then $G_h$ has a tree-partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ and a path-partition (that is, layering) $\mathcal{P}:=\{P_y:y\in V(P)\}$ with $|B_x\cap P_y|\le c$ for each $(x,y)\in V(T)\times V(P)$. However, since $G_h$ has diameter $2h$, \cref{diameter_spread} (with $R=B_x$) implies that $|B_x|\le c(2h+1)$ for each $x\in V(T)$. This upper bound on $|B_x|$ is used to establish all of the results described in the following paragraph.
 
 \begin{figure}
   \begin{center}
@@ -293,15 +293,15 @@ We do this for some appropriately chosen integer $t\in\Theta(\sqrt{\log h})$ in 
 % for some appropriately chosen $t\in \Theta(\sqrt{\log h})$.  Therefore $\mathcal{R}_{t+1}$ contains at least one part $R$.
 By \cref{diameter_spread}, there exists some $y \in V(P)$ such that
 \[
-  |R\cap P_y| \ge \frac{|R|}{\diam_{G_h}(R)+1} \ge \frac{2^t}{2t(\log(ch)+2)+1}
-  = 2^{t-\log_2(t\log(ch))-O(1)} =  2^{\Omega(t)} = 2^{\Omega(\sqrt{\log h})} \enspace .
+  |R\cap P_y| \ge \frac{|R|}{\diam_{G_h}(R)+1} \ge \frac{2^t}{2t(\log_2(ch)+2)+1}
+  = 2^{t-\log_2(t\log_2(ch))-O(1)} =  2^{\Omega(t)} = 2^{\Omega(\sqrt{\log_2 h})} \enspace .
 \]
 Since $R\subseteq B_{x_{t+1}}$, $|B_{x_{t+1}}\cap P_y|\ge 2^{\Omega(\sqrt{\log h})}$. Since $c\ge \max\{|B_x\cap P_y|:(x,y)\in V(T)\times V(P)\}$, the assumption that $c\le 2^{\sqrt{\log h}}$ therefore leads to the conclusion that $c\ge 2^{\Omega(\sqrt{\log h})}$, which establishes \cref{main_thm}.
 
 We now proceed with the details of the proof outlined above.  The next two lemmas will be used to obtain the set $\mathcal{R}_1$ that allows us to start the argument.  Informally, the first lemma says that every balanced separator $S$ of $G_h$ must contain a vertex of depth $i$ for each $i\in\{i_0,\ldots,h\}$, where $i_0\in O(\log|S|)$.
 
 \begin{lem}\label{small_depth_separator}
-  Let $h\in\N$ with $h\geq 1$, let $S\subseteq V(G_h)$, $S\neq\emptyset$.  If $G_h-S$ has no component with more than $|V(G_h)|/2$ vertices then $S\cap V(D_i)\neq\emptyset$ for each $i\in\{i_0,\ldots,h\}$, where $i_0:=\ceil{\max\{2\log|S|+2, \log(1+(h+2)|S|)-1\}}$.
+  Let $h\in\N$ with $h\geq 1$, let $S\subseteq V(G_h)$, $S\neq\emptyset$.  If $G_h-S$ has no component with more than $|V(G_h)|/2$ vertices then $S\cap V(D_i)\neq\emptyset$ for each $i\in\{i_0,\ldots,h\}$, where $i_0:=\ceil{\max\{2\log_2|S|+2, \log_2(1+(h+2)|S|)-1\}}$.
 \end{lem}
 
 \begin{proof}
@@ -310,9 +310,9 @@ We now proceed with the details of the proof outlined above.  The next two lemma
   For each $i\in\{0,\ldots,h-1\}$, the vertices in $C_{i+1}$ are adjacent to at least $|C_{i+1}|/2$ vertices of $D_{i}$, so $|C_i|\ge |N_{G_h}(C_{i+1})\cap V(D_i)\setminus S_i| \ge |C_{i+1}|/2 - |S_i|$.  Iterating this inequality $h-i$ times gives $|C_i|\ge |C_h|/2^{h-i}-\sum_{j=i}^{h-1}|S_j|/2^{h-i-1}\ge |C_h|/2^{h-i}-|S|$.  The vertices in $S$ partition $V(D_h)\setminus S$ into at most $|S|+1$ connected components.  Since $C$ is chosen to maximize $|C_h|$, $|C_h| \ge (2^h-|S|)/(|S|+1) > 2^{h}/(|S|+1) - 1$.  Therefore,
   \begin{equation}
     |C_i|\ge \frac{|C_h|}{2^{h-i}} - |S| > \frac{2^h/(|S|+1)-1}{2^{h-i}} - |S|
-    \ge 2^{i-\log(|S|+1)}-|S|-1 \ge 0 \label{first}
+    \ge 2^{i-\log_2(|S|+1)}-|S|-1 \ge 0 \label{first}
   \end{equation}
-  for $i\ge 2\log |S|+2$.  Since $i_0\ge 2\log |S|+2$, this establishes that $C_i$ is non-empty for each $i\in\{i_0,\ldots,h\}$.
+  for $i\ge 2\log_2 |S|+2$.  Since $i_0\ge 2\log_2 |S|+2$, this establishes that $C_i$ is non-empty for each $i\in\{i_0,\ldots,h\}$.
 
   For each $i\in\{0,\ldots,h-1\}$, the vertices in $C_i$ are adjacent to at least $2|C_i|$ vertices of $D_{i+1}$, so $|C_{i+1}|\ge 2|C_i|-|S_{i+1}|$.  Iterating this $h-i$ times gives:
   \begin{equation}

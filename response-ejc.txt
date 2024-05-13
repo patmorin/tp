@@ -1,18 +1,13 @@
+Response to Referee:
 
-Referee:
-L190 for the Lem 11 to make sense, the layering must have at least h parts and you must tell how you index the parts
-L188 also, the informal statement talks about vertices at depth i but the lemma talks about parts in the path-partition
-L195 here you say that P_i contains 2^i vertices, which is never argued it seems that some arguments are missing here. I continue reading under the (very strong) assumption that P_i contains exactly the depth-i vertices, but this needs justification  after reading it appears that P_i indeed refers to the depth-i vertices, and not the path-partition. so please adjust accordingly.
+We have addressed all of the referee's major comments. The most important of these was the overloading of the P_x notation, which meant four different things depending on whether x was a vertex in a path P, an integer, a vertex in the tree T_h, or a vertex in some other tree T.  We have split this into three notations:
 
+- For i in {0,...,h} D_i is path that contains all vertices of depth i in the complete binary tree T_h of height h.
 
-Author response:
-Our apologies to the referee.  The confusion here is caused by the overloading of $P_x$ notation.  In the lemma and the text $P_i$, was referring to the path in $G_h$ that contains all the vertices of depth $i$. We have switched to calling this $D_i$.
+- Q_v is a path from a vertex v in T_h-S to a leaf-descendant of v
 
+- P_x is bag in the path partition {P_x : x\in V(P)}.
 
+- A_T(x) is the path from x to the root of the rooted tree T.
 
-
-
-L273 you could have introduced and used the compatible notion earlier
-
-
-L414 full first names missing
+Our apologies to the referee for this, and our thanks to the referee for pushing through the paper despite this.
