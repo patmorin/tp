@@ -118,11 +118,11 @@ The \defin{width} of such a tree decomposition is $\max\{|B_x|:x\in V(T)\}-1$. T
 } of $H$, $P$, and a clique $K$ of order $c$.
 This is typically written as $G\subsetcong H\boxtimes P\boxtimes K_c$, where the notation $G_1\subsetcong G_2$ is used to mean that $G_1$ is isomorphic to some subgraph of $G_2$.  See references \cite{dujmovic.joret.ea:planar,dujmovic.morin.ea:structure,krauthgamer.lee:intrinsic,ueckerdt.wood.ea:improved,bose.morin.ea:optimal,campbell.clinch.ea:product,illingworth.scott.ea:alon,distel.hickingbotham.ea:improved,hickingbotham.jungeblut.ea:product,hickingbotham.wood:shallow,wood:product} for examples.
 
-In some applications of product structure theorems, it is helpful if, in addition to having treewidth $t$, the graph $H$ has additional properties, possibly inherited from $G$.  For example, one very useful version of the planar graph product structure theorem states that for every planar graph $G$ there exists a \emph{planar} graph $H$ of treewidth $3$ and a path $P$ such that $G\subsetcong H\boxtimes P\boxtimes K_3$ \cite[Theorem~36(b)]{dujmovic.joret.ea:planar}.  The planarity of $H$ in this result has been leveraged to obtain better constants and even asymptotic improvements for graph colouring and layout problems, including queue number \cite{dujmovic.joret.ea:planar}, $p$-centered colouring \cite{debski.felsner.ea:improved}, and $\ell$-vertex ranking \cite{bose.dujmovic.ea:asymptotically}.
+In some applications of product structure theorems it is helpful if, in addition to having treewidth $t$, the graph $H$ has additional properties, possibly inherited from $G$.  For example, one very useful version of the planar graph product structure theorem states that for every planar graph $G$ there exists a \emph{planar} graph $H$ of treewidth $3$ and a path $P$ such that $G\subsetcong H\boxtimes P\boxtimes K_3$ \cite[Theorem~36(b)]{dujmovic.joret.ea:planar}.  The planarity of $H$ in this result has been leveraged to obtain better constants and even asymptotic improvements for graph colouring and layout problems, including queue number \cite{dujmovic.joret.ea:planar}, $p$-centered colouring \cite{debski.felsner.ea:improved}, and $\ell$-vertex ranking \cite{bose.dujmovic.ea:asymptotically}.
 
 In this vein, the authors have been repeatedly asked if $H$ can have bounded degree whenever $G$ does; that is:
 \begin{quote}
-  For each $\Delta\in\N$, let $\mathcal{G}_\Delta$ be the family of planar graphs of maximum degree $\Delta$.  Do there exist functions $t:\N\to\N$, $d:\N\to\N$, and $c:\N\to\N$ such that, for each $\Delta\in\N$ and each $G\in\mathcal{G}_\Delta$ there exists a graph $H$ of treewidth at most $t(\Delta)$ and maximum degree $d(\Delta)$ such that $G\subsetcong H\boxtimes P\boxtimes K_{c(\Delta)}$?
+  For each $\Delta\in\N$, let $\mathcal{G}_\Delta$ be the family of planar graphs of maximum degree $\Delta$.  Do there exist functions $t:\N\to\N$, $d:\N\to\N$, and $c:\N\to\N$ such that, for each $\Delta\in\N$ and each $G\in\mathcal{G}_\Delta$ there exists a graph $H$ of treewidth at most $t(\Delta)$ and maximum degree $d(\Delta)$ and a path $P$ such that $G\subsetcong H\boxtimes P\boxtimes K_{c(\Delta)}$?
 \end{quote}
 In the current paper we show that the answer to this question is no, even when $\Delta=5$.
 
@@ -130,7 +130,7 @@ In the current paper we show that the answer to this question is no, even when $
   For infinitely many integers $n\ge 1$, there exists an $n$-vertex planar graph $G$ of maximum degree $5$ such that, for every graph $H$ of treewidth $t$ and maximum degree $\Delta$, every path $P$, and every integer $c$, if $G\subsetcong H\boxtimes P\boxtimes K_c$ then $t\Delta c \ge 2^{\Omega(\sqrt{\log\log n})}$.
 \end{thm}
 
-The graph family $\mathcal{G}:=\{G_h:h\in\N\}$ that establishes \cref{main_thm} consists of complete binary trees of height $h$ augmented with edges to form, for each $i\in\{1,\ldots,h\}$, a path that contains all vertices of depth $i$.  See \cref{G_5}.
+The graph family $\mathcal{G}:=\{G_h:h\in\N\}$ that establishes \cref{main_thm} consists of complete binary trees of height $h$ augmented with edges to form, for each $i\in\{1,\ldots,h\}$, a path $D_i$ that contains all vertices of depth $i$.  See \cref{G_5}.
 
 \begin{figure}
   \begin{center}
@@ -152,7 +152,7 @@ If $H$ is in a class $\mathcal{G}$ of graphs then we may call $\mathcal{H}$ a $\
 As in previous works, we make use of the following relationship between $H$-partitions and strong products, which follows immediately from the preceding definitions.
 
 \begin{obs}\label{partitions_vs_products}
-  For every integer $c\ge 1$, and every graphs $G$, $H$, and $J$,  $G\subsetcong H\boxtimes J\boxtimes K_c$ if and only if $G$ has an $H$-partition $\mathcal{H}:=\{B_x:x\in V(H)\}$ and a $J$-partition $\mathcal{J}:=\{C_y:y\in V(J)\}$ such that $|B_x\cap C_y|\le c$, for each $(x,y)\in V(H)\times V(J)$.
+  For every integer $c\ge 1$, and all graphs $G$, $H$, and $J$,  $G\subsetcong H\boxtimes J\boxtimes K_c$ if and only if $G$ has an $H$-partition $\mathcal{H}:=\{B_x:x\in V(H)\}$ and a $J$-partition $\mathcal{J}:=\{C_y:y\in V(J)\}$ such that $|B_x\cap C_y|\le c$, for each $(x,y)\in V(H)\times V(J)$.
 \end{obs}
 
 The following important result of \citet{ding.oporowski:some} (also see \cite{wood:on,distel.wood:tree_partitions}) allows us to focus on the case where the first factor in our product is a tree.
@@ -195,7 +195,7 @@ We also make use of the following basic fact about tree-partitions:
 \subsection{Percolation in Binary Trees}
 
 
-The \defin{depth} of a vertex $v$ in a rooted tree $T$ is the length of the path $P_T(v)$ from $v$ to the root of $T$.  Each vertex $a\in V(P_T(v))$ is an \defin{ancestor} of $v$, and $v$ is a \defin{descendant} of each vertex in $V(P_T(v))$.  We say that a set $B\subseteq V(T)$ is \defin{unrelated} if no vertex of $B$ is an ancestor of any other vertex in $B$.
+The \defin{depth} of a vertex $v$ in a rooted tree $T$ is the length of the path $A_T(v)$ from $v$ to the root of $T$.  Each vertex $a\in V(A_T(v))$ is an \defin{ancestor} of $v$, and $v$ is a \defin{descendant} of each vertex in $V(A_T(v))$.  We say that a set $B\subseteq V(T)$ is \defin{unrelated} if no vertex of $B$ is an ancestor of any other vertex in $B$.
 
 For each $h\in\N$, let $T_h$ denote the complete binary tree of height $h$; that is, the rooted ordered tree with $2^h$ leaves, each having depth $h$ and in which each non-leaf vertex has exactly two children, one \defin{left child} and one \defin{right child}.  Note that the ordering of $T_h$ induces an ordering on every unrelated set $B\subseteq V(T_h)$, which we refer to as the \defin{left-to-right ordering}.  Specifically, $v\in B$ appears before $w\in B$ in the left-to-right ordering of $B$ if and only if there exists a common ancestor $a$ of both $v$ and $w$ such that the path from $a$ to $v$ contains the left child of $a$ and the path from $a$ to $w$ contains the right child of $a$.
 
@@ -260,7 +260,7 @@ We are now ready to prove the following result that, combined with \cref{ding_tr
 
 It is worth noting that, unlike \cref{main_thm}, there is no restriction on the maximum degree of the tree $T$.
 
-Before diving into technical details, we first sketch our strategy for proving \cref{main_thm_tree}.  We may assume that $c \le 2^{\sqrt{\log h}}$ since, otherwise there is nothing to prove.  Recall \cref{partitions_vs_products}, which states that if $G_h\subsetcong T\boxtimes P\boxtimes K_c$ then $G_h$ has a tree-partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ and a path-partition (that is, layering) $\mathcal{P}:=\{P_y:y\in V(P)\}$ with $|B_x\cap P_y|\le c$ for each $(x,y)\in V(T)\times V(P)$. However, since $G_h$ has diameter $2h$, \cref{diameter_spread} (with $R=B_x$) implies that $|B_x|\le c(2h+1)$. This upper bound on $|B_x|$ is used to establish all of the results described in the following paragraph.
+Before diving into technical details, we first sketch our strategy for proving \cref{main_thm_tree}.  We may assume that $c \le 2^{\sqrt{\log h}}$ since, otherwise there is nothing to prove.  Recall \cref{partitions_vs_products}, which states that if $G_h\subsetcong T\boxtimes P\boxtimes K_c$ then $G_h$ has a tree-partition $\mathcal{T}:=\{B_x:x\in V(T)\}$ and a path-partition (that is, layering) $\mathcal{P}:=\{P_y:y\in V(P)\}$ with $|B_x\cap P_y|\le c$ for each $(x,y)\in V(T)\times V(P)$. However, since $G_h$ has diameter $2h$, \cref{diameter_spread} (with $R=B_x$) implies that $|B_x|\le c(2h+1)$ for each $x\in V(T)$. This upper bound on $|B_x|$ is used to establish all of the results described in the following paragraph.
 
 \begin{figure}
   \begin{center}
@@ -270,7 +270,7 @@ Before diving into technical details, we first sketch our strategy for proving \
   \label{sketch}
 \end{figure}
 
-Refer to \cref{sketch}.  We will construct a sequence of sets $\mathcal{R}_1,\ldots,\mathcal{R}_{t+1}$ and a sequence of nodes $x_1,\ldots,x_{t+1}$ of $T$, where each $\mathcal{R}_i$ is a family of unrelated sets such that $\cup\mathcal{R}_i\subseteq B_{x_i}$. The first family $\mathcal{R}_1$ has size $q_1\ge h/(25c)$ and, for each $i\in\{2,\ldots,t+1\}$, $\mathcal{R}_i$ has size $q_i\ge q_1/(10c)^{i-1}-3$. For each $\mathcal{R}_i:=\{R_{i,1},\ldots,R_{i,q_i}\}$, each $R_{i,j}\subseteq V(T)$ is an unrelated set of size $2^{i-1}$ that has a common ancestor $a_{i,j}$ of height at least $h/5$ that is at distance at most $(i-1)(\log_2(ch)+2)$ from every element in $R_{i,j}$. Furthermore, $\{a_{i,1},\ldots,a_{i,q_{i}}\}$ is an unrelated set. These properties imply that $\cup\mathcal{R}_i$ is also an unrelated set.
+Refer to \cref{sketch}.  We will construct a sequence of sets $\mathcal{R}_1,\ldots,\mathcal{R}_{t+1}$ and a sequence of nodes $x_1,\ldots,x_{t+1}$ of $T$, where each $\mathcal{R}_i$ is a family of unrelated sets in $T_h$ such that $\cup\mathcal{R}_i\subseteq B_{x_i}$. The first family $\mathcal{R}_1$ consists of $q_1\ge h/(25c)$ singleton sets whose union is an unrelated set in $T_h$. For each $i\in\{2,\ldots,t+1\}$, $\mathcal{R}_i$ has size $q_i\ge q_1/(10c)^{i-1}-3$. For each $\mathcal{R}_i:=\{R_{i,1},\ldots,R_{i,q_i}\}$, each $R_{i,j}\subseteq V(T)$ is an unrelated set in $T_h$ of size $2^{i-1}$ that has a common ancestor $a_{i,j}$ of height at least $h/5$ that is at distance at most $(i-1)(\log_2(ch)+2)$ from every element in $R_{i,j}$. Furthermore, $\{a_{i,1},\ldots,a_{i,q_{i}}\}$ is an unrelated set. These properties imply that $\cup\mathcal{R}_i$ is also an unrelated set.
 
 We do this for some appropriately chosen integer $t\in\Theta(\sqrt{\log h})$ in order to ensure that $q_{t+1}\ge 1$, so $\mathcal{R}_{t+1}$ contains at least one part $R$ of size $2^t$.
 %
@@ -301,20 +301,20 @@ Since $R\subseteq B_{x_{t+1}}$, $|B_{x_{t+1}}\cap P_y|\ge 2^{\Omega(\sqrt{\log h
 We now proceed with the details of the proof outlined above.  The next two lemmas will be used to obtain the set $\mathcal{R}_1$ that allows us to start the argument.  Informally, the first lemma says that every balanced separator $S$ of $G_h$ must contain a vertex of depth $i$ for each $i\in\{i_0,\ldots,h\}$, where $i_0\in O(\log|S|)$.
 
 \begin{lem}\label{small_depth_separator}
-  Let $h\in\N$ with $h\geq 1$, let $S\subseteq V(G_h)$, $S\neq\emptyset$.  If $G_h-S$ has no component with more than $|V(G_h)|/2$ vertices then $S\cap V(D_i)\neq\emptyset$, for each $i\in\{i_0,\ldots,h\}$, where $i_0:=\ceil{\max\{2\log|S|+2, \log(1+(h+2)|S|)-1\}}$.
+  Let $h\in\N$ with $h\geq 1$, let $S\subseteq V(G_h)$, $S\neq\emptyset$.  If $G_h-S$ has no component with more than $|V(G_h)|/2$ vertices then $S\cap V(D_i)\neq\emptyset$ for each $i\in\{i_0,\ldots,h\}$, where $i_0:=\ceil{\max\{2\log|S|+2, \log(1+(h+2)|S|)-1\}}$.
 \end{lem}
 
 \begin{proof}
-  Let $C$ be the vertex-set of a component of $G_h-S$ that maximizes $C\cap V(P_h)$. For each $i\in\{0,\ldots,h\}$, let $C_i:=C\cap V(D_i)$ and let $S_i:=S\cap V(D_i)$. We will show that, for each $i\ge i_0$, $C_i$ is non-empty but does not contain all $2^i$ vertices in $D_i$.  Therefore $S_i\supseteq N_{G_h}(C_i)\cap V(D_i)\neq\emptyset$ for each $i\in\{i_0,\ldots,h\}$.
+  Let $C$ be the vertex set of a component of $G_h-S$ that maximizes $C\cap V(D_h)$. For each $i\in\{0,\ldots,h\}$, let $C_i:=C\cap V(D_i)$ and let $S_i:=S\cap V(D_i)$. We will show that, for each $i\ge i_0$, $C_i$ is non-empty but does not contain all $2^i$ vertices in $D_i$.  Therefore $S_i\supseteq N_{G_h}(C_i)\cap V(D_i)\neq\emptyset$ for each $i\in\{i_0,\ldots,h\}$.
 
-  For each $i\in\{0,\ldots,h-1\}$, the vertices in $C_{i+1}$ are adjacent to at least $|C_{i+1}|/2$ vertices of $P_{i}$, so $|C_i|\ge |N_{G_h}(C_{i+1})\cap V(D_i)\setminus S_i| \ge |C_{i+1}|/2 - |S_i|$.  Iterating this inequality $h-i$ times gives $|C_i|\ge |C_h|/2^{h-i}-\sum_{j=i}^{h-1}|S_j|/2^{h-i-1}\ge |C_h|/2^{h-i}-|S|$.  The vertices in $S$ partition $V(P_h)\setminus S$ into at most $|S|+1$ connected components.  Since $C$ is chosen to maximize $|C_h|$, $|C_h| \ge (2^h-|S|)/(|S|+1) > 2^{h}/(|S|+1) - 1$.  Therefore,
+  For each $i\in\{0,\ldots,h-1\}$, the vertices in $C_{i+1}$ are adjacent to at least $|C_{i+1}|/2$ vertices of $D_{i}$, so $|C_i|\ge |N_{G_h}(C_{i+1})\cap V(D_i)\setminus S_i| \ge |C_{i+1}|/2 - |S_i|$.  Iterating this inequality $h-i$ times gives $|C_i|\ge |C_h|/2^{h-i}-\sum_{j=i}^{h-1}|S_j|/2^{h-i-1}\ge |C_h|/2^{h-i}-|S|$.  The vertices in $S$ partition $V(D_h)\setminus S$ into at most $|S|+1$ connected components.  Since $C$ is chosen to maximize $|C_h|$, $|C_h| \ge (2^h-|S|)/(|S|+1) > 2^{h}/(|S|+1) - 1$.  Therefore,
   \begin{equation}
     |C_i|\ge \frac{|C_h|}{2^{h-i}} - |S| > \frac{2^h/(|S|+1)-1}{2^{h-i}} - |S|
     \ge 2^{i-\log(|S|+1)}-|S|-1 \ge 0 \label{first}
   \end{equation}
   for $i\ge 2\log |S|+2$.  Since $i_0\ge 2\log |S|+2$, this establishes that $C_i$ is non-empty for each $i\in\{i_0,\ldots,h\}$.
 
-  For each $i\in\{0,\ldots,h-1\}$, the vertices in $C_i$ are adjacent to at least $2|C_i|$ vertices of $P_{i+1}$, so $|C_{i+1}|\ge 2|C_i|-|S_{i+1}|$.  Iterating this $h-i$ times gives:
+  For each $i\in\{0,\ldots,h-1\}$, the vertices in $C_i$ are adjacent to at least $2|C_i|$ vertices of $D_{i+1}$, so $|C_{i+1}|\ge 2|C_i|-|S_{i+1}|$.  Iterating this $h-i$ times gives:
   \begin{equation}
     |C_h| \ge 2^{h-i}|C_i| - \sum_{j=i+1}^h 2^{h-j}|S_j| \ge 2^{h-i}|C_i| - 2^{h-i-1}|S| \enspace . \label{ch_lower_bound}
   \end{equation}
@@ -390,7 +390,7 @@ The following lemma shows that every tree-partition of $G_h$ must have a part wi
     \label{paths}
   \end{figure}
 
-  Now observe that the union of the paths in  $Q_{v}$ for each $v\in Z'$ and the paths $D_{h-\lceil\alpha h\rceil+1},\ldots,D_{h}$ contains a subgraph $G'$ isomorphic to a graph that can be obtained from the grid $G_{\lceil \alpha h\rceil\times\lceil \alpha h\rceil}$ by subdividing horizontal edges.  Since $B_x$ does not contain any vertex of $Q_{v}$ for each $v\in Z'$,  $B_x\cap V(G')$ contains only vertices corresponding to subdivision vertices.  Therefore, by \cref{grid_connectivity}, some component of $G-B_x$ contains a subset $R\subseteq Z'$ of size at least $\alpha^2 h/c$.  Each element in $R$ has a parent in $B_x$.  By \cref{tree_thingy} some neighbour $y$ of $x$ in $T$ has a bag $B_y$ that contains all of $R$.  This completes the proof.
+  Now observe that the union of the paths $Q_{v}$ for each $v\in Z'$ and the paths $D_{h-\lceil\alpha h\rceil+1},\ldots,D_{h}$ contains a subgraph $G'$ isomorphic to a graph that can be obtained from the grid $G_{\lceil \alpha h\rceil\times\lceil \alpha h\rceil}$ by subdividing horizontal edges.  Since $B_x$ does not contain any vertex of $Q_{v}$ for each $v\in Z'$,  $B_x\cap V(G')$ contains only vertices corresponding to subdivision vertices.  Therefore, by \cref{grid_connectivity}, some component of $G-B_x$ contains a subset $R\subseteq Z'$ of size at least $\alpha^2 h/c$.  Each element in $R$ has a parent in $B_x$.  By \cref{tree_thingy} some neighbour $y$ of $x$ in $T$ has a bag $B_y$ that contains all of $R$.  This completes the proof.
 \end{proof}
 
 
@@ -450,9 +450,9 @@ The next lemma is the last ingredient in the proof of \cref{main_thm}.
   We now describe how to obtain $\mathcal{R}_{i+1}$ from $\mathcal{R}_i$ for each $i\in\{1,\ldots,t\}$.  By \cref{compatible_set} (applied to $\mathcal{R}:=\mathcal{R}_i$ and $S:=B_{x_i}$), $T_h$ contains a $(2^i,i\log_2(ch)+2,m)$-compact set $\mathcal{R}_{i+1}^+$ of size $q_i$ that is compatible with $B_{x_i}$. For each $v\in\cup\mathcal{R}_{i+1}^+$, $v$ has height at least $m_{i+1}:=m_i-(\floor{\log_2(ch)}+2)\ge h/5-i(\floor{\log_2(ch)}+2)$.  Therefore $\mathcal{R}_{i+1}^+$ satisfies (\ref{ri_compact}), % and (\ref{ri_height}),
   but does not necessarily satisfy (\ref{ri_containment}).  Next we show how to extract $\mathcal{R}_{i+1}\subseteq\mathcal{R}_{i+1}^+$ that also satisfies (\ref{ri_size}) and (\ref{ri_containment}).
 
-  For each $v\in \cup\mathcal{R}_{i+1}^+$, $T_h-B_{x_i}$ contains a path $P_v$ from $v$ to a leaf of $T_h$.  The union of the paths in $P_{h-m_{i+1}},\ldots,P_{h}$ and the paths in $\mathcal{C}_i:=\{P_v:v\in\cup\mathcal{R}_{i+1}^+\}$ contains a subgraph $G'$ isomorphic to a graph that can be obtained from $G_{2^{i}q_i\times m_{i+1}}$ by subdividing horizontal edges.  By \cref{grid_connectivity} applied to $G:=G'$ with $S:=B_{x_i}$ and $p:=ch/m_{i+1}$, some component $X'$ of $G'-B_{x_i}$ contains  $q_i'\ge 2^{i}q_im_{i+1}/(ch)\ge 2^iq_i/(10c)$ consecutive columns $C_1,\ldots,C_{q_i'}$ of $G'$.  The component $X'$ is contained in some component $X$ of $G_h-B_{x_i}$.
+  For each $v\in \cup\mathcal{R}_{i+1}^+$, $T_h-B_{x_i}$ contains a path $Q_v$ from $v$ to a leaf of $T_h$.  The union of the paths in $D_{h-m_{i+1}},\ldots,D_{h}$ and the paths in $\mathcal{C}_i:=\{Q_v:v\in\cup\mathcal{R}_{i+1}^+\}$ contains a subgraph $G'$ isomorphic to a graph that can be obtained from $G_{2^{i}q_i\times m_{i+1}}$ by subdividing horizontal edges.  By \cref{grid_connectivity} applied to $G:=G'$ with $S:=B_{x_i}$ and $p:=ch/m_{i+1}$, some component $X'$ of $G'-B_{x_i}$ contains  $q_i'\ge 2^{i}q_im_{i+1}/(ch)\ge 2^iq_i/(10c)$ consecutive columns $C_1,\ldots,C_{q_i'}$ of $G'$.  The component $X'$ is contained in some component $X$ of $G_h-B_{x_i}$.
 
-  Since $\cup\mathcal{R}_i$ is unrelated, it has a left to-right-order. This order defines a total order $\prec$ on the paths in $\mathcal{C}_i$, in which $P_v\prec P_w$ if and only if $v$ precedes $w$ in left-to-right order. The resulting total order $(\prec,\mathcal{C}_i)$ corresponds to the order of the columns in $G'$ and each part in $\mathcal{R}_{i+1}^+$ corresponds to $2^i$ consecutive columns of $G'$. There are at most two parts $R\in\mathcal{R}_i$ such that $0 < |R\cap (C_1\cup\cdots\cup C_{q_i'})| < |R|$.  These two parts account for at most $2(2^{i}-1)$ of the columns in $C_1,\ldots, C_{q_i'}$.  Therefore, the number of parts of $\mathcal{R}_{i+1}^+$ completely contained in $C_1\cup\cdots\cup C_{q_i'}$ is at least
+  Since $\cup\mathcal{R}_i$ is unrelated, it has a left to-right-order. This order defines a total order $\prec$ on the paths in $\mathcal{C}_i$, in which $Q_v\prec Q_w$ if and only if $v$ precedes $w$ in left-to-right order. The resulting total order $(\prec,\mathcal{C}_i)$ corresponds to the order of the columns in $G'$ and each part in $\mathcal{R}_{i+1}^+$ corresponds to $2^i$ consecutive columns of $G'$. There are at most two parts $R\in\mathcal{R}_i$ such that $0 < |R\cap (C_1\cup\cdots\cup C_{q_i'})| < |R|$.  These two parts account for at most $2(2^{i}-1)$ of the columns in $C_1,\ldots, C_{q_i'}$.  Therefore, the number of parts of $\mathcal{R}_{i+1}^+$ completely contained in $C_1\cup\cdots\cup C_{q_i'}$ is at least
   \begin{align*}
      %q_{i+1} & \ge (q_i'-(2^{i+1}-2))/2^i \\
       (q_i'-(2^{i+1}-2))/2^i & > q_i/(10c) - 2 \enspace .
