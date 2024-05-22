@@ -1,4 +1,5 @@
-\documentclass{patmorin}
+\documentclass[12pt]{article}
+\usepackage[amsmath]{e-jc}
 \listfiles
 \usepackage{pat}
 \usepackage{paralist}
@@ -30,27 +31,27 @@
 
 \usepackage[longnamesfirst,numbers,sort&compress]{natbib}
 
-\usepackage[mathlines]{lineno}
-\setlength{\linenumbersep}{2em}
-\linenumbers
-% \rightlinenumbers
-\newcommand*\patchAmsMathEnvironmentForLineno[1]{%
- \expandafter\let\csname old#1\expandafter\endcsname\csname #1\endcsname
- \expandafter\let\csname oldend#1\expandafter\endcsname\csname end#1\endcsname
- \renewenvironment{#1}%
-    {\linenomath\csname old#1\endcsname}%
-    {\csname oldend#1\endcsname\endlinenomath}}%
-\newcommand*\patchBothAmsMathEnvironmentsForLineno[1]{%
- \patchAmsMathEnvironmentForLineno{#1}%
- \patchAmsMathEnvironmentForLineno{#1*}}%
-\AtBeginDocument{%
-\patchBothAmsMathEnvironmentsForLineno{equation}%
-\patchBothAmsMathEnvironmentsForLineno{align}%
-\patchBothAmsMathEnvironmentsForLineno{flalign}%
-\patchBothAmsMathEnvironmentsForLineno{alignat}%
-\patchBothAmsMathEnvironmentsForLineno{gather}%
-\patchBothAmsMathEnvironmentsForLineno{multline}%
-}
+% \usepackage[mathlines]{lineno}
+% \setlength{\linenumbersep}{2em}
+% \linenumbers
+% % \rightlinenumbers
+% \newcommand*\patchAmsMathEnvironmentForLineno[1]{%
+%  \expandafter\let\csname old#1\expandafter\endcsname\csname #1\endcsname
+%  \expandafter\let\csname oldend#1\expandafter\endcsname\csname end#1\endcsname
+%  \renewenvironment{#1}%
+%     {\linenomath\csname old#1\endcsname}%
+%     {\csname oldend#1\endcsname\endlinenomath}}%
+% \newcommand*\patchBothAmsMathEnvironmentsForLineno[1]{%
+%  \patchAmsMathEnvironmentForLineno{#1}%
+%  \patchAmsMathEnvironmentForLineno{#1*}}%
+% \AtBeginDocument{%
+% \patchBothAmsMathEnvironmentsForLineno{equation}%
+% \patchBothAmsMathEnvironmentsForLineno{align}%
+% \patchBothAmsMathEnvironmentsForLineno{flalign}%
+% \patchBothAmsMathEnvironmentsForLineno{alignat}%
+% \patchBothAmsMathEnvironmentsForLineno{gather}%
+% \patchBothAmsMathEnvironmentsForLineno{multline}%
+% }
 
 % Taken from
 % https://tex.stackexchange.com/questions/42726/align-but-show-one-equation-number-at-the-end
@@ -78,20 +79,33 @@
 \renewcommand{\ge}{\geqslant}
 \renewcommand{\geq}{\geqslant}
 
-\title{\MakeUppercase{Bounded-Degree Planar Graphs Do Not Have Bounded-Degree Product Structure}}
+\title{Bounded-Degree Planar Graphs Do Not Have Bounded-Degree Product Structure}
 
 \author{%
-  Vida Dujmović\thanks{Department of Computer Science and Electrical Engineering, University of Ottawa, Ottawa, Canada.}\, \thanks{Research partly supported by NSERC.} \quad
-  Gwenaël Joret\thanks{D\'epartement d'Informatique, Universit\'e Libre de Bruxelles, Brussels, Belgium.
-  Supported by a CDR grant and a PDR grant from the Belgian National Fund for Scientific Research (FNRS).} \quad
-  Piotr Micek\thanks{Theoretical Computer Science Department, Faculty of Mathematics and Computer Science, Jagiellonian University, Krak\'ow, Poland.}\quad
-  Pat Morin\thanks{School of Computer Science, Carleton University, Ottawa, Canada}\, \footnotemark[2] \quad
-  David R. Wood\thanks{School of Mathematics, Monash University, Melbourne, Australia.
-   % (\texttt{david.wood@monash.edu}).
-  Research supported by the Australian Research Council.}
+  Vida Dujmović\authornote{1}\authornote{2} \and
+  Gwenaël Joret\authornote{3} \and
+  Piotr Micek\authornote{4} \and
+  Pat Morin\authornote{5}\authornote{2} \and
+  David R. Wood\authornote{5}
 }
 
-\date{}
+\dateline{Dec 5, 2022}{May 18, 2024}{TBD}
+
+\MSC{05C76}
+
+\Copyright{The authors. Released under the CC BY-ND license (International 4.0).}
+
+\authortext{1}{Department of Computer Science and Electrical Engineering, University of Ottawa, Ottawa, Canada.}
+\authortext{2}{Research partly supported by NSERC.}
+\authortext{3}{D\'epartement d'Informatique, Universit\'e Libre de Bruxelles, Brussels, Belgium.
+Supported by a CDR grant and a PDR grant from the Belgian National Fund for Scientific Research (FNRS).}
+\authortext{4}{Theoretical Computer Science Department, Faculty of Mathematics and Computer Science, Jagiellonian University, Krak\'ow, Poland.}
+\authortext{5}{School of Computer Science, Carleton University, Ottawa, Canada}
+\authortext{6}{School of Mathematics, Monash University, Melbourne, Australia.
+ % (\texttt{david.wood@monash.edu}).
+Research supported by the Australian Research Council.}
+
+% \date{}
 
 
 \begin{document}
